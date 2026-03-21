@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO — seo-fundamentals skill -->
+  <meta name="description"
+    content="Cabinet Dentaire Nouri — طبيب أسنان متخصص في مكناس. تقييم 4.8/5 على Google. احجز موعدك أونلاين — فحص، تنظيف، تبييض، تقويم، طب أطفال.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Cabinet Dentaire Nouri">
+  <link rel="canonical" href="https://cabinet-nouri.ma/">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cabinet Dentaire Nouri — طبيب أسنان مكناس ⭐ 4.8">
+  <meta property="og:description"
+    content="أول عيادة أسنان رقمية في مكناس — احجز موعدك بدون اتصال. تقييم 4.8/5 على Google.">
+  <meta property="og:type" content="business.business">
+  <meta property="og:locale" content="ar_MA">
+  <meta property="og:url" content="https://cabinet-nouri.ma/">
+  <meta property="og:image" content="https://cabinet-nouri.ma/assets/hero.png">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cabinet Dentaire Nouri — طبيب أسنان مكناس">
+  <meta name="twitter:description" content="أول عيادة أسنان رقمية في مكناس. تقييم 4.8/5 على Google.">
+  <title>Cabinet Dentaire Nouri | طبيب أسنان مكناس</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/widgets.css">
+  <!-- Fonts — display=swap for CLS performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&amp;family=Tajawal:wght@400;500;700;900&amp;display=swap"
+    rel="stylesheet">
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0D9488">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
+  <!-- LocalBusiness Schema — seo-fundamentals skill -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dentist",
+      "name": "Cabinet Dentaire Nouri",
+      "image": "https://cabinet-nouri.ma/assets/hero.png",
+      "description": "عيادة أسنان عصرية في مكناس، نقدم أحدث التقنيات الطبية في بيئة مريحة واحترافية.",
+      "url": "https://cabinet-nouri.ma",
+      "telephone": "+212535402211",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "45 شارع محمد الخامس، الطابق 2",
+        "addressLocality": "مكناس",
+        "postalCode": "50000",
+        "addressCountry": "MA"
+      },
+      "openingHours": ["Mo-Sa 09:00-19:00"],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "31"
+      },
+      "currenciesAccepted": "MAD",
+      "priceRange": "$$"
+    }
+    </script>
+  <!-- ══════════════════════════════════════════════════
+       HERO REDESIGN — Background image + premium cards
+       Replaces video background. CSS-only animations.
+       ══════════════════════════════════════════════════ -->
+  <style>
+    /* 1 — Base: deep navy for hero */
+    .hero-new {
+      background: #0A1628 !important;
+    }
+
+    /* 2 — Background image layer (replaces video) */
+    .hero-bg-image {
+      position: absolute !important;
+      inset: 0;
+      z-index: 1 !important;
+      background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&q=85');
+      background-size: cover;
+      background-position: center 25%;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    /* 3 — Dark gradient overlay for text readability */
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          120deg,
+          rgba(10, 22, 40, 0.97) 0%,
+          rgba(10, 22, 40, 0.84) 42%,
+          rgba(10, 22, 40, 0.50) 100%
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(10, 22, 40, 0.25) 0%,
+          transparent 55%,
+          rgba(10, 22, 40, 0.55) 100%
+        );
+    }
+
+    /* 4 — Prevent the existing :not(.hero-video-bg) rule from
+            making hero-bg-image position:relative */
+    .hero-new > .hero-bg-image {
+      position: absolute !important;
+      z-index: 1 !important;
+    }
+
+    /* 5 — Floating card wrapper: gentle continuous float */
+    .hero-float-wrap {
+      position: relative;
+      display: block;
+      animation: heroCardFloat 7s 1.4s ease-in-out infinite;
+    }
+
+    @keyframes heroCardFloat {
+      0%,  100% { transform: translateY(0px); }
+      40%        { transform: translateY(-13px); }
+      70%        { transform: translateY(-7px); }
+    }
+
+    /* 6 — Glassmorphism Google rating pill
+            Sits below the image, right-aligned
+            (card-appt is at bottom:40px right:-30px — no conflict) */
+    .hero-glass-rating {
+      position: absolute;
+      bottom: -20px;
+      right: 28px;
+      background: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(28px) saturate(1.8);
+      -webkit-backdrop-filter: blur(28px) saturate(1.8);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      border-radius: 100px;
+      padding: 11px 22px;
+      color: rgba(255, 255, 255, 0.96);
+      font-size: 0.88rem;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+      animation: heroReveal 0.9s 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+      z-index: 12;
+      letter-spacing: 0.01em;
+    }
+
+    /* 7 — Availability pulse badge
+            Sits above the image, left-aligned
+            (card-rating is at top:40px left:-30px — no conflict) */
+    .hero-avail-badge {
+      position: absolute;
+      top: -18px;
+      left: 28px;
+      background: rgba(8, 24, 44, 0.80);
+      backdrop-filter: blur(22px) saturate(1.5);
+      -webkit-backdrop-filter: blur(22px) saturate(1.5);
+      border: 1px solid rgba(34, 197, 94, 0.45);
+      border-radius: 100px;
+      padding: 9px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.96);
+      font-size: 0.82rem;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow:
+        0 6px 28px rgba(34, 197, 94, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      animation: heroReveal 0.9s 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+      z-index: 12;
+    }
+
+    /* 8 — Animated green pulse dot */
+    .hero-pulse-dot {
+      width: 9px;
+      height: 9px;
+      min-width: 9px;
+      border-radius: 50%;
+      background: #22c55e;
+      display: inline-block;
+      animation: heroPulseDot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes heroPulseDot {
+      0%,  100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.65);
+        transform: scale(1);
+      }
+      55% {
+        box-shadow: 0 0 0 9px rgba(34, 197, 94, 0);
+        transform: scale(1.15);
+      }
+    }
+
+    /* 9 — Mobile: reposition badges inside visible image bounds
+            (hero-img-box gets overflow:hidden on mobile) */
+    @media (max-width: 768px) {
+      .hero-float-wrap {
+        animation: none;
+      }
+      .hero-glass-rating {
+        bottom: 14px;
+        right: 10px;
+        font-size: 0.74rem;
+        padding: 8px 13px;
+      }
+      .hero-avail-badge {
+        top: 12px;
+        left: 10px;
+        font-size: 0.72rem;
+        padding: 7px 11px;
+        gap: 6px;
+      }
+      .hero-bg-image {
+        background-position: 68% center;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       TESTIMONIALS GRID — dark theme redesign
+       overrides the marquee layout from main.css
+       ═══════════════════════════════════════════════ */
+
+    /* Section — dark navy matching site theme */
+    .testimonials-grid-section {
+      background:
+        linear-gradient(135deg, rgba(10,22,40,0.93) 0%, rgba(10,22,40,0.88) 100%),
+        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1400&q=60') !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-attachment: scroll !important;
+      padding: 80px 5% !important;
+      overflow: hidden !important;
+      position: relative !important;
+    }
+    /* Top fade — blends into section above */
+    .testimonials-grid-section::before {
+      content: '' !important;
+      display: block !important;
+      position: absolute !important;
+      top: 0 !important; left: 0 !important; right: 0 !important;
+      height: 120px !important;
+      background: linear-gradient(to bottom, #0A1628 0%, transparent 100%) !important;
+      z-index: 1 !important;
+      pointer-events: none !important;
+    }
+    /* Bottom fade — blends into section below */
+    .testimonials-grid-section::after {
+      content: '' !important;
+      display: block !important;
+      position: absolute !important;
+      bottom: 0 !important; left: 0 !important; right: 0 !important;
+      height: 120px !important;
+      background: linear-gradient(to top, #0A1628 0%, transparent 100%) !important;
+      z-index: 1 !important;
+      pointer-events: none !important;
+    }
+    /* Content above the fades */
+    .testimonials-grid-section .container {
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    /* Header */
+    .testimonials-grid-section .t-section-head {
+      margin-bottom: 48px;
+    }
+    .testimonials-grid-section .t-header-eyebrow {
+      color: #1E6FD9 !important;
+    }
+    .testimonials-grid-section .t-header-title {
+      color: #ffffff !important;
+    }
+
+    /* Rating pill — dark with blue border */
+    .testimonials-grid-section .t-rating-pill {
+      background: rgba(30,111,217,0.08) !important;
+      border: 1px solid rgba(30,111,217,0.3) !important;
+    }
+    .testimonials-grid-section .t-pill-score {
+      color: #ffffff !important;
+    }
+    .testimonials-grid-section .t-pill-stars {
+      color: #F5A623 !important;
+    }
+    .testimonials-grid-section .t-pill-dot {
+      color: rgba(255,255,255,0.25) !important;
+    }
+    .testimonials-grid-section .t-pill-count {
+      color: rgba(255,255,255,0.6) !important;
+    }
+
+    /* Grid — 3 cols desktop, 2 tablet, 1 mobile; equal-height rows */
+    .tg-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+    @media (max-width: 1024px) {
+      .tg-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .tg-grid { grid-template-columns: 1fr; }
+      .testimonials-grid-section { padding: 60px 5% !important; }
+    }
+
+    /* Card */
+    .tg-card {
+      position: relative;
+      background: #0F1E35;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid #1E6FD9;
+      border-radius: 16px;
+      padding: 26px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+      overflow: hidden;
+    }
+    .tg-card:hover {
+      box-shadow: 0 8px 32px rgba(30,111,217,0.2);
+      border-color: rgba(30,111,217,0.35);
+      border-top-color: #1E6FD9;
+    }
+
+    /* Decorative quote — top-right */
+    .tg-deco-quote {
+      position: absolute;
+      top: 8px;
+      right: 14px;
+      font-family: Georgia, serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(30,111,217,0.12);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Stars */
+    .tg-stars {
+      color: #F5A623;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Review text */
+    .tg-text {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.8;
+      margin: 0;
+      flex: 1;
+    }
+
+    /* Footer row */
+    .tg-foot {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      flex-shrink: 0;
+    }
+    .tg-name {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      flex: 1;
+    }
+
+    /* Avatar — circular */
+    .tg-card .t-avatar-v3 {
+      border-radius: 50% !important;
+      flex-shrink: 0;
+    }
+
+    /* Google pill on dark bg */
+    .tg-card .t-google-pill {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      color: rgba(255,255,255,0.5) !important;
+    }
+
+    /* ═══════════════════════════════════════════════
+       DOCTOR SECTION — 2-column redesign
+       ═══════════════════════════════════════════════ */
+
+    /* Override all old centered styles */
+    .doctor-redesign {
+      background:
+        linear-gradient(135deg, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.85) 100%),
+        url('https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1400&q=60') !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-attachment: scroll !important;
+      padding: 100px 5% !important;
+      text-align: right !important;
+      overflow: hidden !important;
+      position: relative !important;
+    }
+    .doctor-redesign::before {
+      content: '' !important;
+      display: block !important;
+      position: absolute !important;
+      top: 0 !important; left: 0 !important; right: 0 !important;
+      height: 120px !important;
+      background: linear-gradient(to bottom, #0A1628 0%, transparent 100%) !important;
+      z-index: 1 !important;
+      pointer-events: none !important;
+    }
+    .doctor-redesign::after {
+      content: '' !important;
+      display: block !important;
+      position: absolute !important;
+      bottom: 0 !important; left: 0 !important; right: 0 !important;
+      height: 120px !important;
+      background: linear-gradient(to top, #0A1628 0%, transparent 100%) !important;
+      z-index: 1 !important;
+      pointer-events: none !important;
+    }
+    /* Content above the fades */
+    .dr-redesign-inner { position: relative !important; z-index: 2 !important; }
+
+    /* Two-col grid — in RTL: 1fr = right (content), 420px = left (image) */
+    .dr-redesign-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* ── Content column ── */
+    .dr-redesign-label {
+      display: block;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #1E6FD9;
+      margin-bottom: 14px;
+    }
+    .dr-redesign-name {
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: #ffffff;
+      margin: 0 0 16px;
+      line-height: 1.15;
+    }
+    .dr-redesign-specialty {
+      display: inline-flex;
+      align-items: center;
+      background: transparent;
+      border: 1.5px solid #1E6FD9;
+      border-radius: 50px;
+      padding: 7px 20px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1E6FD9;
+      margin-bottom: 28px;
+    }
+    .dr-redesign-quote {
+      margin: 0 0 32px;
+      padding-right: 20px;
+      border-right: 3px solid #1E6FD9;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Stats 3-card row */
+    .dr-redesign-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .dr-redesign-stat {
+      background: #0F1E35;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dr-redesign-stat-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .dr-redesign-stat-num {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+      display: block;
+    }
+    .dr-redesign-stat-lbl {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      display: block;
+      line-height: 1.4;
+    }
+
+    /* CTA */
+    .dr-redesign-cta {
+      display: inline-block;
+      background: #1E6FD9;
+      color: #ffffff;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .dr-redesign-cta:hover {
+      background: #1659b8;
+      box-shadow: 0 8px 28px rgba(30,111,217,0.4);
+    }
+
+    /* ── Image column ── */
+    .dr-redesign-img-col {
+      display: flex;
+      justify-content: center;
+    }
+    .dr-redesign-img-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .dr-redesign-img {
+      width: 420px;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 0 60px rgba(30,111,217,0.25);
+      display: block;
+    }
+    /* Glassmorphism floating badge — bottom-right of image (faces content) */
+    .dr-redesign-float-badge {
+      position: absolute;
+      bottom: 20px;
+      right: -20px;
+      background: rgba(10,22,40,0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .dr-redesign-inner {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+      }
+      .dr-redesign-img-col { order: -1; }
+      .dr-redesign-img {
+        width: 100%;
+        max-width: 360px;
+        height: 400px;
+      }
+      .dr-redesign-float-badge { right: 10px; }
+    }
+    @media (max-width: 640px) {
+      .doctor-redesign { padding: 60px 5% !important; }
+      .dr-redesign-stats { grid-template-columns: 1fr !important; }
+      .dr-redesign-name { font-size: 1.9rem !important; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       CONTACT SECTION — redesign
+       ═══════════════════════════════════════════════ */
+
+    /* Part 1 — Background image + overlay */
+    .contact-v3 {
+      background:
+        linear-gradient(135deg, rgba(10,22,40,0.94) 0%, rgba(10,22,40,0.90) 100%),
+        url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1400&q=60') !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-attachment: scroll !important;
+      overflow: hidden !important;
+      position: relative !important;
+    }
+    .contact-v3::before {
+      content: '' !important;
+      display: block !important;
+      position: absolute !important;
+      top: 0 !important; left: 0 !important; right: 0 !important;
+      height: 120px !important;
+      background: linear-gradient(to bottom, #0A1628 0%, transparent 100%) !important;
+      z-index: 1 !important;
+      pointer-events: none !important;
+    }
+    .contact-v3::after {
+      content: '' !important;
+      display: block !important;
+      position: absolute !important;
+      bottom: 0 !important; left: 0 !important; right: 0 !important;
+      height: 120px !important;
+      background: linear-gradient(to top, #0A1628 0%, transparent 100%) !important;
+      z-index: 1 !important;
+      pointer-events: none !important;
+    }
+    /* Content above the fades */
+    .contact-v3 > .container,
+    .cv3-layout { position: relative !important; z-index: 2 !important; }
+
+    /* Part 3 — Map wrapper + dark filter */
+    .cv3-map-wrap {
+      border-radius: 20px !important;
+      overflow: hidden !important;
+      border: 2px solid rgba(30,111,217,0.4) !important;
+      box-shadow: 0 0 40px rgba(30,111,217,0.15) !important;
+      height: 420px !important;
+    }
+    .cv3-map-wrap iframe,
+    .cv3-map-wrap:hover iframe {
+      filter: invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.9) !important;
+    }
+
+    /* Part 4 — Contact info cards */
+    .cv3-card {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(30,111,217,0.25) !important;
+      border-radius: 14px !important;
+    }
+    .cv3-card:hover {
+      border-color: rgba(30,111,217,0.6) !important;
+    }
+
+    /* Icon circle — solid blue */
+    .cv3-icon-wrap {
+      background: #1E6FD9 !important;
+      border: none !important;
+      border-radius: 10px !important;
+    }
+    .cv3-icon-wrap svg path {
+      stroke: #ffffff !important;
+    }
+
+    /* Action buttons */
+    .cv3-actions .btn-primary-new {
+      background: #1E6FD9 !important;
+      border-radius: 50px !important;
+      color: #ffffff !important;
+      box-shadow: none !important;
+    }
+    .cv3-actions .btn-primary-new:hover {
+      background: #1659b8 !important;
+      box-shadow: 0 8px 28px rgba(30,111,217,0.4) !important;
+      transform: none !important;
+    }
+    .cv3-actions .btn-whatsapp-contact {
+      background: transparent !important;
+      border: 1.5px solid #25D366 !important;
+      border-radius: 50px !important;
+      color: #25D366 !important;
+    }
+    .cv3-actions .btn-whatsapp-contact:hover {
+      background: rgba(37,211,102,0.1) !important;
+      border-color: #25D366 !important;
+    }
+
+    /* Mobile — full-width buttons */
+    @media (max-width: 640px) {
+      .cv3-actions { flex-wrap: wrap !important; }
+      .cv3-actions .btn-primary-new,
+      .cv3-actions .btn-whatsapp-contact {
+        flex: 1 1 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       REMOVE SECTION BORDERS / LINES BETWEEN SECTIONS
+       ═══════════════════════════════════════════════ */
+
+    /* Strip borders, outlines, and box-shadows from all sections */
+    main > section,
+    main > div,
+    .hero-new,
+    .services-new,
+    .why-new,
+    .testimonials-new,
+    .doctor-new,
+    .contact-v3,
+    .section-reveal {
+      border: none !important;
+      border-top: none !important;
+      border-bottom: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+
+    /* Ensure no gap between stacked sections */
+    main {
+      display: flex;
+      flex-direction: column;
+    }
+    main > * {
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       HERO — Fix text/image overlap
+       .hero-left-deco is position:absolute z-index:0
+       painting over the static .hero-content-new text
+       ═══════════════════════════════════════════════ */
+
+    /* Raise text above the deco layer */
+    .hero-content-new {
+      position: relative !important;
+      z-index: 3 !important;
+      padding-left: 40px !important;  /* clearance from deco cards on physical left */
+    }
+
+    /* Keep hero-visual above deco too */
+    .hero-visual {
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    /* Hide deco completely on mobile — prevents any overlap at small sizes */
+    @media (max-width: 768px) {
+      .hero-left-deco { display: none !important; }
+      .hero-content-new { padding-left: 0 !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANIMATED SVG BACKGROUND BLOBS -->
+  <div class="blob-bg" aria-hidden="true">
+    <svg class="blob blob-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="rgba(13,148,136,0.07)" d="M47.5,-57.2C60.5,-45.5,69.2,-28.5,70.8,-11
+             C72.4,6.5,66.9,24.1,56.4,37.2C45.9,50.3,30.4,58.9,
+             13.1,63.7C-4.2,68.5,-23.3,69.5,-38.6,62
+             C-53.9,54.5,-65.4,38.5,-68.8,21.2
+             C-72.2,3.9,-67.5,-14.7,-57.5,-28.4
+             C-47.5,-42.1,-32.2,-50.9,-16.5,-57.6
+             C-0.8,-64.3,15.3,-68.9,30,-66.1
+             C44.7,-63.3,34.5,-69,47.5,-57.2Z" transform="translate(100 100)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="100 100; 110 90; 95 105; 100 100" dur="12s" repeatCount="indefinite"></animateTransform>
+      </path>
+    </svg>
+    <svg class="blob blob-2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="rgba(13,242,242,0.04)" d="M39.5,-48.1C52.3,-36.6,64.7,-25.5,67.4,-12
+             C70.1,1.5,63.1,17.4,53.3,29.5
+             C43.5,41.6,30.9,49.9,17.1,54.8
+             C3.3,59.7,-11.7,61.2,-25.8,56.2
+             C-39.9,51.2,-53.1,39.7,-59.6,25.4
+             C-66.1,11.1,-65.9,-6,-59.1,-19.4
+             C-52.3,-32.8,-38.9,-42.5,-25.7,-53.9
+             C-12.5,-65.3,0.5,-78.4,13.2,-76.5
+             C25.9,-74.6,26.7,-59.6,39.5,-48.1Z" transform="translate(100 100)">
+        <animateTransform attributeName="transform" type="translate" additive="sum"
+          values="100 100; 88 108; 105 95; 100 100" dur="16s" repeatCount="indefinite"></animateTransform>
+      </path>
+    </svg>
+  </div>
+
+  <!-- Skip link — ui-ux-designer accessibility skill -->
+  <a href="#home" class="skip-link" data-ar="تخطي إلى المحتوى الرئيسي" data-fr="Passer au contenu principal">تخطي إلى
+    المحتوى الرئيسي</a>
+
+  <!-- ANNOUNCEMENT BANNER -->
+  <div id="announceBanner"
+    style="background: linear-gradient(90deg, #0D9488, #06B6D4); color: white; text-align: center; padding: 10px 20px; font-size: 0.85rem; font-family: 'Cairo', sans-serif; position: relative; z-index: 99998; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+    <span data-ar="🦷 أول عيادة أسنان رقمية في مكناس — احجز موعدك أونلاين الآن بدون اتصال!"
+      data-fr="🦷 1er Cabinet Numérique à Meknès — Réservez en ligne !">🦷 أول عيادة أسنان رقمية في مكناس — احجز موعدك
+      أونلاين الآن بدون اتصال!</span>
+    <a href="booking.html"
+      style="background: white; color: #0D9488; padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; text-decoration: none; white-space: nowrap;"
+      data-ar="←" data-fr="←">احجز
+      الآن ←</a>
+    <button onclick="this.parentElement.style.display='none'"
+      style="background:transparent; border:none; color:rgba(255,255,255,0.8); cursor:pointer; font-size:1.1rem; line-height:1; padding: 0 4px;">✕</button>
+  </div>
+
+  <div id="scrollProgress">
+    <div id="scrollFill"></div>
+  </div>
+
+
+  <header style="position: sticky; top: 0; z-index: 9999;">
+
+    <!-- PART 7 — Navbar -->
+    <nav id="mainNav" style="position: relative; top: 0; left: 0; right: 0;">
+      <a href="index.html" class="nav-logo nav-logo-v2">
+        <div class="logo-mark">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Hexagon background -->
+            <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hexFill)" opacity="0.15"></path>
+            <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hexStroke)" stroke-width="1" fill="none"></path>
+            <!-- Cross/Plus medical symbol -->
+            <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#crossFill)"></rect>
+            <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#crossFill)"></rect>
+            <!-- Center dot -->
+            <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"></circle>
+            <defs>
+              <linearGradient id="hexFill" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0df2f2"></stop>
+                <stop offset="100%" stop-color="#0D9488"></stop>
+              </linearGradient>
+              <linearGradient id="hexStroke" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0df2f2"></stop>
+                <stop offset="100%" stop-color="#0D9488"></stop>
+              </linearGradient>
+              <linearGradient id="crossFill" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0df2f2"></stop>
+                <stop offset="100%" stop-color="white" stop-opacity="0.9"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-wordmark">
+          <span class="logo-word-top">CABINET</span>
+          <span class="logo-word-bottom">NOURI</span>
+        </div>
+      </a>
+      <button class="mobile-burger" onclick="toggleMobileMenu()" aria-label="قائمة التنقل" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links">
+        <li data-ar="الرئيسية" data-fr="Accueil"><a href="#home" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a></li>
+        <li><a href="pages/services.html" data-ar="خدماتنا" data-fr="Services">خدماتنا</a></li>
+        <li><a href="pages/gallery.html" data-ar="معرض الصور" data-fr="Galerie">معرض الصور</a></li>
+        <li><a href="pages/about.html" data-ar="من نحن" data-fr="À propos">من نحن</a></li>
+        <li data-ar="الأسئلة الشائعة" data-fr="FAQ"><a href="pages/faq.html" data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة
+            الشائعة</a></li>
+        <li data-ar="تتبع موعدك" data-fr="Suivi RDV"><a href="pages/appointment-tracking.html" data-ar="تتبع موعدك"
+            data-fr="Suivi RDV">تتبع موعدك</a></li>
+        <li><a href="javascript:void(0)" onclick="goToBooking()" class="btn-primary" style="padding: 10px 20px;"
+            data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a></li>
+        <li id="auth-links"></li>
+        <li class="lang-switcher-wrap">
+          <button class="lang-btn" id="langToggle" onclick="toggleLanguage()" aria-label="تغيير اللغة">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
+              <path
+                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                stroke="currentColor" stroke-width="1.8"></path>
+              <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+            <span id="langLabel">FR</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- CLINIC INFO BAR -->
+    <div id="clinicInfoBar"
+      style="background: rgba(13,148,136,0.06); border-bottom: 1px solid rgba(13,148,136,0.12); padding: 8px 24px; display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; font-size: 0.8rem; color: #94a3b8; font-family: 'Cairo', sans-serif; position: relative; z-index: 100;">
+      <span data-ar="📍 شارع محمد الخامس 209، الطابق 2، مكناس" data-fr="📍 209 Av Mohammed V, 2ème étage, Meknès">📍 شارع
+        الحسن الثاني 209، الطابق 2، مكناس</span>
+      <span>|</span>
+      <span>📞 <a href="tel:+212535402211" style="color:#0df2f2; text-decoration:none; font-weight:600;">0535 40 22 11</a></span>
+      <span>|</span>
+      <span data-ar="الاثنين—السبت:" data-fr="Lundi—Samedi:">🕐 الاثنين—السبت: 09:00 — 19:00</span>
+      <span>|</span>
+      <span style="color:#0df2f2; font-weight:700;">⭐ 4.8/5 Google</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-new" id="home">
+      <div class="hero-bg-image" aria-hidden="true">
+        <div class="hero-bg-overlay"></div>
+      </div>
+      <div class="ambient-glow bg-glow-1"></div>
+      <div class="ambient-glow bg-glow-2"></div>
+      <div class="ambient-bg"></div>
+      <div class="hero-container container" style="position:relative; z-index:2;">
+        <div class="hero-visual reveal-up">
+          <div class="hero-float-wrap">
+            <div class="hero-img-box">
+              <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&amp;q=85"
+                alt="عيادة الدكتور نوري - غرفة علاج عصرية" class="hero-main-img" loading="eager" width="600" height="500">
+              <div class="hero-overlay-card card-appt">
+                <span class="card-icon">✅</span>
+                <div class="card-info">
+                  <span class="card-label" data-ar="لا تأجيل الموعد" data-fr="Sans délai">لا تأجيل الموعد</span>
+                  <span class="card-value" data-ar="حجزنا 100% مضمونة" data-fr="Réservation 100% garantie">حجزنا 100%
+                    مضمونة</span>
+                </div>
+              </div>
+              <div class="hero-overlay-card card-rating">
+                <span class="card-icon">⭐</span>
+                <div class="card-info">
+                  <span class="card-label" data-ar="تقييم 4.8/5" data-fr="Note 4.8/5">تقييم 4.8/5</span>
+                  <span class="card-value">Google Maps ✅</span>
+                </div>
+              </div>
+              <!-- Glassmorphism Google rating pill — below image, right-aligned -->
+              <div class="hero-glass-rating" aria-label="تقييم 4.8/5 · +31 تقييم Google">⭐ 4.8/5 &middot; +31 تقييم Google</div>
+              <!-- Availability pulse badge — above image, left-aligned -->
+              <div class="hero-avail-badge" role="status">
+                <span class="hero-pulse-dot" aria-hidden="true"></span>
+                <span>متاح الآن — احجز أونلاين</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-left-deco" aria-hidden="true" style="pointer-events:none; z-index:0;">
+          <!-- Floating clinic images -->
+          <div class="deco-img-card deco-card-1">
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=300&amp;q=80" alt=""
+              loading="lazy">
+            <div class="deco-card-shine"></div>
+          </div>
+          <div class="deco-img-card deco-card-2">
+            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=300&amp;q=80" alt=""
+              loading="lazy">
+            <div class="deco-card-shine"></div>
+          </div>
+          <div class="deco-img-card deco-card-3">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&amp;q=80" alt=""
+              loading="lazy">
+            <div class="deco-card-shine"></div>
+          </div>
+          <!-- Animated rings -->
+          <div class="deco-ring deco-ring-1"></div>
+          <div class="deco-ring deco-ring-2"></div>
+          <div class="deco-ring deco-ring-3"></div>
+          <!-- Floating particles -->
+          <div class="deco-dot d1"></div>
+          <div class="deco-dot d2"></div>
+          <div class="deco-dot d3"></div>
+          <div class="deco-dot d4"></div>
+          <div class="deco-dot d5"></div>
+          <!-- Stats badge -->
+          <div class="deco-badge">
+            <span class="badge-icon">🦷</span>
+            <div class="badge-text">
+              <span class="badge-num">+450</span>
+              <span class="badge-label" data-ar="مريض سعيد" data-fr="Patients satisfaits">مريض سعيد</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-content-new">
+          <span class="hero-tag reveal-up" data-ar="أول عيادة أسنان رقمية في مكناس"
+            data-fr="Premier cabinet dentaire numérique à Meknès">أول عيادة أسنان رقمية في مكناس</span>
+          <h1 class="hero-title-new reveal-up" data-ar="ابتسامتك، مسؤوليتنا الأولى"
+            data-fr="Votre sourire, notre priorité absolue">
+            ابتسامتك، مسؤوليتنا الأولى
+          </h1>
+          <p class="hero-desc reveal-up"
+            data-ar="عيادة أسنان عصرية في مكناس تقدم رعاية متميزة لابتسامتك بأحدث التقنيات الرقمية المتقدمة لضمان دقة وراحة استثنائية."
+            data-fr="Cabinet dentaire moderne à Meknès offrant des soins exceptionnels pour votre sourire avec les dernières technologies numériques avancées.">
+            عيادة أسنان عصرية في مكناس تقدم رعاية متميزة لابتسامتك بأحدث التقنيات الرقمية المتقدمة لضمان دقة وراحة
+            استثنائية.</p>
+
+          <div class="hero-actions-new reveal-up">
+            <button onclick="goToBooking()" class="btn-primary-new" data-ar="احجز موعدك الآن"
+              data-fr="Prendre rendez-vous">احجز موعدك الآن</button>
+            <button class="btn-secondary-new" data-ar="مساعد؟" data-fr="Aide?">مساعد؟ <span
+                class="icon">💬</span></button>
+          </div>
+
+          <div class="hero-metrics-new reveal-up">
+            <div class="metric-block">
+              <span class="m-val">4.8</span>
+              <span class="m-label" data-ar="تقييم Google" data-fr="Note Google">تقييم Google</span>
+            </div>
+            <div class="metric-block">
+              <span class="m-val">+31</span>
+              <span class="m-label" data-ar="المراجعات" data-fr="Avis">المراجعات</span>
+            </div>
+            <div class="metric-block">
+              <span class="m-val">6</span>
+              <span class="m-label" data-ar="أيام في الأسبوع" data-fr="Jours/Semaine">أيام في الأسبوع</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-line"></div>
+        <span class="scroll-text" data-ar="مرر للأسفل" data-fr="Défiler vers le bas">مرر للأسفل</span>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services-new section-reveal" id="services">
+      <div class="container">
+        <div class="section-top reveal-up">
+          <h2 class="section-title-new" data-ar="خدماتنا الشاملة" data-fr="Nos services complets">خدماتنا الشاملة</h2>
+          <p class="section-desc-new" data-ar="رعاية متكاملة لابتسامتك" data-fr="Soins complets pour votre sourire">
+            رعاية متكاملة لابتسامتك بأحدث التقنيات الطبية</p>
+          <a href="pages/services.html" class="all-services-link" data-ar="عرض جميع الخدمات ←"
+            data-fr="Voir tous les services →">عرض جميع الخدمات ←</a>
+        </div>
+
+        <!-- SERVICES BENTO GRID -->
+        <div class="svc-bento-grid">
+
+          <!-- Card 1 — Large featured -->
+          <div class="svc-bento-card svc-featured reveal-up" onclick="goToBooking()">
+            <div class="svc-bento-img">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=85" alt="فحص الأسنان"
+                loading="lazy">
+            </div>
+            <div class="svc-bento-overlay"></div>
+            <div class="svc-bento-content">
+              <div class="svc-bento-tag" data-ar="الأكثر طلباً" data-fr="Très demandé">الأكثر طلباً</div>
+              <h3 data-ar="الفحص والتشخيص الشامل" data-fr="Examen et Diagnostic">الفحص والتشخيص الشامل</h3>
+              <p data-ar="تقييم دقيق لصحة أسنانك باستخدام أحدث تقنيات التصوير الرقمي ثلاثي الأبعاد"
+                data-fr="Évaluation précise avec les technologies d'imagerie 3D">تقييم دقيق لصحة أسنانك باستخدام أحدث
+                تقنيات التصوير الرقمي ثلاثي الأبعاد</p>
+              <div class="svc-bento-footer">
+                <div class="svc-bento-btn" data-ar="احجز ←" data-fr="Réserver ←">احجز ←</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="svc-bento-card reveal-up" style="--delay:0.1s" onclick="goToBooking()">
+            <div class="svc-bento-img">
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=85" alt="تبييض الأسنان"
+                loading="lazy">
+            </div>
+            <div class="svc-bento-overlay"></div>
+            <div class="svc-bento-content">
+              <h3 data-ar="تبييض الأسنان" data-fr="Blanchiment">تبييض الأسنان</h3>
+              <p data-ar="ابتسامة أكثر إشراقاً بتقنيات آمنة وفعالة"
+                data-fr="Sourire éclatant avec des techniques sûres">ابتسامة أكثر إشراقاً بتقنيات آمنة وفعالة</p>
+              <div class="svc-bento-footer">
+                <div class="svc-bento-btn" data-ar="←" data-fr="←">←</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="svc-bento-card reveal-up" style="--delay:0.2s" onclick="goToBooking()">
+            <div class="svc-bento-img">
+              <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=85" alt="تقويم الأسنان"
+                loading="lazy">
+            </div>
+            <div class="svc-bento-overlay"></div>
+            <div class="svc-bento-content">
+              <h3 data-ar="تقويم الأسنان" data-fr="Orthodontie">تقويم الأسنان</h3>
+              <p data-ar="محاذاة مثالية للصغار والكبار" data-fr="Alignement parfait">محاذاة مثالية للصغار والكبار</p>
+              <div class="svc-bento-footer">
+                <div class="svc-bento-btn" data-ar="←" data-fr="←">←</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="svc-bento-card reveal-up" style="--delay:0.3s" onclick="goToBooking()">
+            <div class="svc-bento-img">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=85" alt="زراعة الأسنان"
+                loading="lazy">
+            </div>
+            <div class="svc-bento-overlay"></div>
+            <div class="svc-bento-content">
+              <h3 data-ar="زراعة الأسنان" data-fr="Implants">زراعة الأسنان</h3>
+              <p data-ar="حلول دائمة للأسنان المفقودة" data-fr="Solutions durables">حلول دائمة للأسنان المفقودة</p>
+              <div class="svc-bento-footer">
+                <div class="svc-bento-btn" data-ar="←" data-fr="←">←</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="svc-bento-card reveal-up" style="--delay:0.4s" onclick="goToBooking()">
+            <div class="svc-bento-img">
+              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=85" alt="تنظيف الأسنان"
+                loading="lazy">
+            </div>
+            <div class="svc-bento-overlay"></div>
+            <div class="svc-bento-content">
+              <h3 data-ar="تنظيف وتلميع" data-fr="Détartrage">تنظيف وتلميع</h3>
+              <p data-ar="إزالة الجير وحماية اللثة" data-fr="Élimination du tartre">إزالة الجير وحماية اللثة</p>
+              <div class="svc-bento-footer">
+                <div class="svc-bento-btn" data-ar="←" data-fr="←">←</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="svc-bento-card reveal-up" style="--delay:0.5s" onclick="goToBooking()">
+            <div class="svc-bento-img">
+              <img src="https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=600&q=85"
+                alt="طب أسنان الأطفال" loading="lazy">
+            </div>
+            <div class="svc-bento-overlay"></div>
+            <div class="svc-bento-content">
+              <h3 data-ar="طب أسنان الأطفال" data-fr="Pédodontie">طب أسنان الأطفال</h3>
+              <p data-ar="بيئة ممتعة وآمنة لابتسامة طفلك" data-fr="Environnement sûr pour votre enfant">بيئة ممتعة وآمنة
+                لابتسامة طفلك</p>
+              <div class="svc-bento-footer">
+                <div class="svc-bento-btn" data-ar="←" data-fr="←">←</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US SECTION -->
+    <section class="why-us-new section-reveal reveal-up" id="about">
+      <div class="why-bg-photo">
+        <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1400&amp;q=60" alt="" loading="lazy"
+          aria-hidden="true">
+      </div>
+
+      <div class="container" style="position:relative; z-index:1;">
+
+        <div class="why-layout">
+
+          <!-- LEFT: big image column -->
+          <div class="why-visual-col reveal-up">
+            <div class="why-main-img-wrap">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=700&amp;q=85"
+                alt="تقنيات عيادة نوري" loading="lazy" class="why-main-img">
+              <div class="why-img-badge">
+                <span class="wib-num">+12</span>
+                <span class="wib-text" data-ar="سنة خبرة" data-fr="Ans d'expérience">سنة خبرة</span>
+              </div>
+              <div class="why-img-badge2">
+                <span>⭐ 4.8</span>
+                <span>Google</span>
+              </div>
+            </div>
+            <div class="why-secondary-imgs">
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=400&amp;q=80" alt="غرفة العلاج"
+                loading="lazy">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&amp;q=80" alt="الطاقم الطبي"
+                loading="lazy">
+            </div>
+          </div>
+
+          <!-- RIGHT: content column -->
+          <div class="why-content-col">
+            <div class="section-top reveal-up" style="text-align:right;">
+              <h2 class="section-title-new" data-ar="لماذا تختار عيادة نوري" data-fr="Pourquoi choisir Cabinet Nouri?">
+                لماذا تختار عيادة نوري؟</h2>
+              <p class="section-desc-new" data-ar="نجمع بين الخبرة والاحترافية لضمان أفضل رحلة علاجية"
+                data-fr="Nous allions expertise et professionnalisme">نجمع بين الخبرة والاحترافية لضمان أفضل رحلة علاجية
+              </p>
+            </div>
+
+            <div class="why-items-list reveal-stagger">
+
+              <div class="why-item-row">
+                <div class="why-item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+                    <path
+                      d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"
+                      stroke="#0df2f2" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </div>
+                <div class="why-item-text">
+                  <h4 data-ar="أحدث التقنيات الرقمية" data-fr="Dernières technologies numériques">أحدث التقنيات الرقمية
+                  </h4>
+                  <p data-ar="نستخدم أحدث الأجهزة الرقمية والتشخيصية لضمان دقة التنفيذ والراحة."
+                    data-fr="Appareils diagnostiques modernes pour la précision.">نستخدم أحدث الأجهزة الرقمية والتشخيصية
+                    لضمان دقة التنفيذ والراحة.</p>
+                </div>
+                <div class="why-item-num">01</div>
+              </div>
+
+              <div class="why-item-row">
+                <div class="why-item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+                    <path
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                      stroke="#0df2f2" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </div>
+                <div class="why-item-text">
+                  <h4 data-ar="فريق طبي محترف" data-fr="Équipe médicale professionnelle">فريق طبي محترف</h4>
+                  <p data-ar="نؤمن بأن كل مريض يستحق رعاية خاصة تليق باحتياجاته الفريدة."
+                    data-fr="Chaque patient mérite des soins personnalisés.">نؤمن بأن كل مريض يستحق رعاية خاصة تليق
+                    باحتياجاته الفريدة.</p>
+                </div>
+                <div class="why-item-num">02</div>
+              </div>
+
+              <div class="why-item-row">
+                <div class="why-item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      stroke="#0df2f2" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </div>
+                <div class="why-item-text">
+                  <h4 data-ar="مواعيد مرنة على مدار الأسبوع" data-fr="Rendez-vous flexibles toute la semaine">مواعيد
+                    مرنة على مدار الأسبوع</h4>
+                  <p data-ar="سهولة في الحجز عبر الموقع الإلكتروني أو الهاتف في أي وقت."
+                    data-fr="Réservation facile en ligne ou par téléphone.">سهولة في الحجز عبر الموقع الإلكتروني أو
+                    الهاتف في أي وقت.</p>
+                </div>
+                <div class="why-item-num">03</div>
+              </div>
+
+              <div class="why-item-row">
+                <div class="why-item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+                    <path
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                      stroke="#0df2f2" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </div>
+                <div class="why-item-text">
+                  <h4 data-ar="أسعار شفافة بدون مفاجآت" data-fr="Prix transparents sans surprises">أسعار شفافة بدون
+                    مفاجآت</h4>
+                  <p data-ar="نقدم خدماتنا بجودة عالية وتكلفة مناسبة لجميع عملائنا."
+                    data-fr="Services de haute qualité à un coût abordable.">نقدم خدماتنا بجودة عالية وتكلفة مناسبة
+                    لجميع عملائنا.</p>
+                </div>
+                <div class="why-item-num">04</div>
+              </div>
+
+            </div>
+
+            <a href="booking.html" class="why-cta-btn reveal-up" data-ar="احجز موعدك الآن"
+              data-fr="Prendre rendez-vous">
+              احجز موعدك الآن
+              <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials-new testimonials-grid-section section-reveal reveal-up">
+      <div class="container">
+        <div class="t-section-head reveal-up">
+          <span class="t-header-eyebrow" data-ar="آراء عملائنا" data-fr="Avis de nos patients">آراء عملائنا</span>
+          <h2 class="t-header-title" data-ar="ماذا يقول مرضانا؟" data-fr="Ce que disent nos patients">ماذا يقول مرضانا؟</h2>
+          <div class="t-rating-pill">
+            <span class="t-pill-stars">★★★★★</span>
+            <span class="t-pill-dot">·</span>
+            <span class="t-pill-score">4.8</span>
+            <span class="t-pill-dot">·</span>
+            <span class="t-pill-count" data-ar="+31 تقييم على Google" data-fr="+31 avis sur Google">+31 تقييم على Google</span>
+          </div>
+        </div>
+
+        <div class="tg-grid">
+
+          <!-- 1 -->
+          <div class="tg-card">
+            <span class="tg-deco-quote">"</span>
+            <div class="tg-stars">★★★★★</div>
+            <p class="tg-text">"خدمة ممتازة ودكتور نوري محترف جداً. أجريت زراعة سن وكانت التجربة أفضل مما توقعت. أنصح به بشدة!"</p>
+            <div class="tg-foot">
+              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#0D9488,#0df2f2)">ي</div>
+              <span class="tg-name">Youssef Alami</span>
+              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="tg-card">
+            <span class="tg-deco-quote">"</span>
+            <div class="tg-stars">★★★★★</div>
+            <p class="tg-text">"كنت خائفة من طبيب الأسنان لكن الدكتور نوري جعل التجربة مريحة جداً. التنظيف والتبييض أعطى نتائج رائعة."</p>
+            <div class="tg-foot">
+              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">ن</div>
+              <span class="tg-name">Nadia Benali</span>
+              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="tg-card">
+            <span class="tg-deco-quote">"</span>
+            <div class="tg-stars">★★★★★</div>
+            <p class="tg-text">"حجزت أونلاين وكان الأمر سهلاً جداً. العيادة نظيفة ومجهزة بأحدث الأجهزة. فريق ودود ومحترف."</p>
+            <div class="tg-foot">
+              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">ك</div>
+              <span class="tg-name">Karim Tahiri</span>
+              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="tg-card">
+            <span class="tg-deco-quote">"</span>
+            <div class="tg-stars">★★★★★</div>
+            <p class="tg-text">"أجريت تقويم أسنان لابنتي عند الدكتور نوري والنتيجة مذهلة. الأسعار معقولة والتعامل إنساني بامتياز."</p>
+            <div class="tg-foot">
+              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#10b981,#0D9488)">س</div>
+              <span class="tg-name">Sara Mansouri</span>
+              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="tg-card">
+            <span class="tg-deco-quote">"</span>
+            <div class="tg-stars">★★★★★</div>
+            <p class="tg-text">"علاج عصب سريع وبدون ألم تقريباً! التخدير ممتاز والدكتور نوري يتعامل باحترافية عالية جداً."</p>
+            <div class="tg-foot">
+              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ef4444,#f97316)">ع</div>
+              <span class="tg-name">Omar Filali</span>
+              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="tg-card">
+            <span class="tg-deco-quote">"</span>
+            <div class="tg-stars">★★★★★</div>
+            <p class="tg-text">"الدكتور نوري ممتاز في التعامل مع الأطفال. ابني كان يخاف من طبيب الأسنان وأصبح الآن يطلب الذهاب!"</p>
+            <div class="tg-foot">
+              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#0D9488,#0891b2)">ح</div>
+              <span class="tg-name">Hamid Berrada</span>
+              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCTOR SECTION -->
+    <section class="doctor-new doctor-redesign section-reveal reveal-up" id="team">
+      <div class="dr-redesign-inner">
+
+        <!-- Content column (RTL → renders on right) -->
+        <div class="dr-redesign-content reveal-up">
+          <span class="dr-redesign-label">طاقمنا الطبي</span>
+          <h2 class="dr-redesign-name" data-ar="د. كريم نوري" data-fr="Dr. Karim Nouri">د. كريم نوري</h2>
+          <div class="dr-redesign-specialty" data-ar="جراح أسنان - تجميل وزراعة" data-fr="Chirurgien Dentiste - Esthétique et Implants">جراح أسنان - تجميل وزراعة</div>
+          <blockquote class="dr-redesign-quote"
+            data-ar='"مهمتي هي منحك الابتسامة التي تتمناها من خلال الجمع بين الفن والعلم بأحدث الوسائل، في عيادتنا نؤمن أن رحلة علاجك يجب أن تكون مريحة وناجحة بكل المقاييس."'
+            data-fr='"Ma mission est de vous offrir le sourire dont vous rêvez en alliant art et science avec les moyens les plus modernes."'>
+            "مهمتي هي منحك الابتسامة التي تتمناها من خلال الجمع بين الفن والعلم بأحدث الوسائل، في عيادتنا نؤمن أن رحلة علاجك يجب أن تكون مريحة وناجحة بكل المقاييس."
+          </blockquote>
+
+          <div class="dr-redesign-stats">
+            <div class="dr-redesign-stat">
+              <div class="dr-redesign-stat-icon">🏥</div>
+              <div>
+                <span class="dr-redesign-stat-num">جراحة</span>
+                <span class="dr-redesign-stat-lbl" data-ar="وطب الأسنان" data-fr="Chirurgie Dentaire">وطب الأسنان</span>
+              </div>
+            </div>
+            <div class="dr-redesign-stat">
+              <div class="dr-redesign-stat-icon">🎓</div>
+              <div>
+                <span class="dr-redesign-stat-num">+12</span>
+                <span class="dr-redesign-stat-lbl" data-ar="سنة خبرة" data-fr="ans d'expérience">سنة خبرة</span>
+              </div>
+            </div>
+            <div class="dr-redesign-stat">
+              <div class="dr-redesign-stat-icon">🌐</div>
+              <div>
+                <span class="dr-redesign-stat-num">عضو</span>
+                <span class="dr-redesign-stat-lbl" data-ar="الجمعية المغربية" data-fr="Association Marocaine">الجمعية المغربية</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="dr-redesign-cta" onclick="goToBooking(); return false;" data-ar="احجز موعدك الآن" data-fr="Réserver maintenant">احجز موعدك الآن</a>
+        </div>
+
+        <!-- Image column (RTL → renders on left) -->
+        <div class="dr-redesign-img-col reveal-up">
+          <div class="dr-redesign-img-wrap">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&amp;q=85"
+              alt="الدكتور نوري - جراح أسنان متخصص في مكناس"
+              class="dr-redesign-img" loading="lazy" width="420" height="500">
+            <div class="dr-redesign-float-badge">⭐ 4.8 &middot; Google</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT & MAP SECTION -->
+    <section class="contact-v3 section-reveal" id="location">
+
+      <!-- Centered section header -->
+      <div class="container">
+        <div class="cv3-head reveal-up">
+          <span class="cv3-pill" data-ar="زورونا" data-fr="VISITEZ-NOUS">زورونا</span>
+          <h2 class="cv3-h2" data-ar="تواصل معنا وموقعنا" data-fr="Contact & Localisation">تواصل معنا وموقعنا</h2>
+          <p class="cv3-subtitle" data-ar="نحن في قلب مكناس، في انتظاركم" data-fr="Au cœur de Meknès, nous vous attendons">نحن في قلب مكناس، في انتظاركم</p>
+        </div>
+      </div>
+
+      <!-- 2-column grid -->
+      <div class="cv3-layout container">
+
+        <!-- Info column (right in RTL, ~45%) -->
+        <div class="cv3-info-col reveal-up">
+          <h3 class="cv3-col-title" data-ar="تواصل معنا" data-fr="Contactez-nous">تواصل معنا</h3>
+          <p class="cv3-col-sub" data-ar="نحن هنا للإجابة على جميع استفساراتكم" data-fr="Nous sommes là pour répondre à vos questions">نحن هنا للإجابة على جميع استفساراتكم</p>
+
+          <!-- Address card -->
+          <div class="cv3-card">
+            <div class="cv3-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                <path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke="#0df2f2" stroke-width="1.8"/>
+                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke="#0df2f2" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="cv3-card-body">
+              <span class="cv3-card-label" data-ar="عنوان العيادة" data-fr="Adresse de la clinique">عنوان العيادة</span>
+              <span class="cv3-card-val">شارع محمد الخامس، رقم 45، الطابق 2، مكناس</span>
+              <span class="cv3-card-sub-text">Rue Mohammed V, No. 45, 2ème étage, Meknès</span>
+              <a href="https://maps.google.com/?q=Cabinet+Dentaire+Nouri+Meknes" target="_blank" class="cv3-dir-link" data-ar="الحصول على الاتجاهات" data-fr="Obtenir l'itinéraire">الحصول على الاتجاهات <svg viewBox="0 0 24 24" fill="none" width="12" height="12" style="display:inline-block;vertical-align:middle"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></a>
+            </div>
+          </div>
+
+          <!-- Phone card -->
+          <div class="cv3-card">
+            <div class="cv3-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 19v1a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="#0df2f2" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="cv3-card-body">
+              <span class="cv3-card-label" data-ar="رقم الهاتف" data-fr="Numéro de téléphone">رقم الهاتف</span>
+              <span class="cv3-card-val" dir="ltr">+212 535 40 22 11</span>
+              <div class="cv3-phone-row">
+                <button class="cv3-outline-btn" onclick="var b=this,t=b.textContent.trim();navigator.clipboard.writeText('+212535402211');b.textContent='✓';setTimeout(function(){b.textContent=t;},2000)" data-ar="نسخ" data-fr="Copier">نسخ</button>
+                <a href="tel:+212535402211" class="cv3-outline-btn" data-ar="اتصل الآن" data-fr="Appeler">اتصل الآن</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Opening hours card -->
+          <div class="cv3-card">
+            <div class="cv3-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#0df2f2" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="cv3-card-body">
+              <span class="cv3-card-label" data-ar="ساعات العمل" data-fr="Horaires">ساعات العمل</span>
+              <div class="cv3-hours-grid">
+                <span class="cv3-day" data-ar="الاثنين — السبت" data-fr="Lun — Sam">الاثنين — السبت</span>
+                <span class="cv3-time">09:00 — 19:00</span>
+                <span class="cv3-day" data-ar="الأحد" data-fr="Dimanche">الأحد</span>
+                <span class="cv3-time cv3-closed" data-ar="مغلق" data-fr="Fermé">مغلق</span>
+              </div>
+              <div class="cv3-status-row">
+                <span class="status-pulse"></span>
+                <span class="status-text" id="clinicStatusText">جاري التحقق...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="cv3-actions">
+            <button onclick="goToBooking()" class="btn-primary-new" data-ar="احجز موعدك" data-fr="Prendre rendez-vous">احجز موعدك</button>
+            <a href="https://wa.me/212535402211" target="_blank" class="btn-whatsapp-contact">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/>
+              </svg>
+              واتساب
+            </a>
+          </div>
+        </div>
+
+        <!-- Map + mini cards column (left in RTL, ~55%) -->
+        <div class="cv3-map-col reveal-up">
+
+          <!-- Map with overlay badges -->
+          <div class="cv3-map-wrap">
+            <div class="cv3-opennow-badge">
+              <span class="cv3-opennow-dot"></span>
+              <span data-ar="مفتوح الآن" data-fr="OUVERT">مفتوح الآن</span>
+            </div>
+            <a href="https://maps.google.com/?q=Cabinet+Dentaire+Nouri+Meknes" target="_blank" class="cv3-map-topbtn" data-ar="الاتجاهات" data-fr="Directions">
+              <svg viewBox="0 0 24 24" fill="none" width="13" height="13">
+                <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              الاتجاهات
+            </a>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.0!2d-5.547300!3d33.893500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sCabinet+Dentaire+Nouri!5e0!3m2!1sfr!2sma!4v1234567890"
+              width="100%" height="100%"
+              style="border:0;" allowfullscreen=""
+              loading="lazy" title="موقع عيادة نوري">
+            </iframe>
+            <a href="https://maps.google.com/?q=Cabinet+Dentaire+Nouri+Meknes" target="_blank" class="cv3-open-maps-btn" data-ar="فتح في الخرائط" data-fr="Ouvrir dans Maps">
+              <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              فتح في الخرائط
+            </a>
+          </div>
+
+          <!-- 2 mini cards below map -->
+          <div class="cv3-mini-row">
+            <div class="cv3-tour-card">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=85" alt="جولة في العيادة" loading="lazy">
+              <span class="cv3-tour-label" data-ar="جولة في العيادة" data-fr="Visite virtuelle">جولة في العيادة</span>
+            </div>
+            <a href="mailto:contact@cabinet-nouri.ma" class="cv3-email-card">
+              <div class="cv3-email-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                  <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="#0df2f2" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="cv3-email-title" data-ar="راسلونا" data-fr="Écrivez-nous">راسلونا</span>
+              <span class="cv3-email-addr">contact@cabinet-nouri.ma</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER NEW -->
+  <footer class="footer-new">
+    <div class="container">
+      <div class="footer-grid-new">
+        <div class="f-brand">
+          <a href="index.html" class="nav-logo nav-logo-v2">
+            <div class="logo-mark">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Hexagon background -->
+                <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hexFill)" opacity="0.15"></path>
+                <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hexStroke)" stroke-width="1" fill="none">
+                </path>
+                <!-- Cross/Plus medical symbol -->
+                <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#crossFill)"></rect>
+                <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#crossFill)"></rect>
+                <!-- Center dot -->
+                <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"></circle>
+                <defs>
+                  <linearGradient id="hexFill" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#0df2f2"></stop>
+                    <stop offset="100%" stop-color="#0D9488"></stop>
+                  </linearGradient>
+                  <linearGradient id="hexStroke" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#0df2f2"></stop>
+                    <stop offset="100%" stop-color="#0D9488"></stop>
+                  </linearGradient>
+                  <linearGradient id="crossFill" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#0df2f2"></stop>
+                    <stop offset="100%" stop-color="white" stop-opacity="0.9"></stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="logo-wordmark">
+              <span class="logo-word-top">CABINET</span>
+              <span class="logo-word-bottom">NOURI</span>
+            </div>
+          </a>
+          <p data-ar="عيادتنا هي الرائدة في مكناس، نقدم خدمات طبية متفوقة وعناية مخصصة لابتسامتك وصحة فمك وأسنانك عبر تقنيات حديثة واحترافية."
+            data-fr="Notre cabinet est le leader à Meknès, offrant des services médicaux supérieurs et des soins personnalisés pour votre sourire et votre santé dentaire.">
+            عيادتنا هي الرائدة في مكناس، نقدم خدمات طبية متفوقة وعناية مخصصة لابتسامتك وصحة فمك وأسنانك عبر
+            تقنيات حديثة واحترافية.</p>
+        </div>
+
+        <div class="f-links">
+          <h4 data-ar="روابط سريعة" data-fr="Liens rapides">روابط سريعة</h4>
+          <ul>
+            <li><a href="#home" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a></li>
+            <li><a href="pages/services.html" data-ar="خدماتنا" data-fr="Services">خدماتنا</a></li>
+            <li><a href="pages/gallery.html" data-ar="معرض الصور" data-fr="Galerie">معرض الصور</a></li>
+            <li><a href="pages/about.html" data-ar="من نحن" data-fr="À propos">من نحن</a></li>
+            <li><a href="pages/faq.html" data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+
+        <div class="f-links">
+          <h4 data-ar="تواصل معنا" data-fr="Contactez-nous">تواصل معنا</h4>
+          <ul>
+            <li><a href="tel:+212535402211" data-ar="📞 هاتف العيادة" data-fr="📞 Tél Cabinet">📞 هاتف العيادة</a></li>
+            <li><a href="https://wa.me/212535402211" data-ar="💬 مراسلة واتساب" data-fr="💬 WhatsApp">💬 مراسلة
+                واتساب</a></li>
+            <li><a href="pages/gallery.html" data-ar="🖼️ معرض العيادة" data-fr="🖼️ Galerie du cabinet">🖼️ معرض العيادة</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-new">
+        <p data-ar="© 2026 Cabinet Dentaire Nouri. جميع الحقوق محفوظة."
+          data-fr="© 2026 Cabinet Dentaire Nouri. Tous droits réservés.">© 2026 Cabinet Dentaire Nouri. جميع الحقوق
+          محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="العودة للأعلى"
+    title="العودة للأعلى">↑</button>
+
+
+  <!-- WhatsApp Button -->
+  <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد"
+    target="_blank" aria-label="تواصل عبر واتساب">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z">
+      </path>
+    </svg>
+  </a>
+
+  <!-- Chat Widget -->
+  <div id="chatWidget">
+    <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي"
+      style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
+      <span style="font-size:1.3rem;line-height:1;">💬</span>
+      <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد"
+        data-fr="Assistant">مساعد</span>
+    </button>
+    <div id="chatWindow" class="chat-hidden">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">🦷</div>
+          <div>
+            <div class="chat-title" data-ar="مساعد Cabinet Nouri" data-fr="Assistant Cabinet Nouri">مساعد Cabinet
+              Nouri</div>
+            <div class="chat-status" data-ar="متاح الآن" data-fr="Disponible">متاح الآن</div>
+          </div>
+        </div>
+        <button class="chat-close" onclick="toggleChat()">✕</button>
+      </div>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="اكتب رسالتك..." data-placeholder-ar="اكتب رسالتك..."
+          data-placeholder-fr="Écrivez votre message..." onkeypress="handleChatKey(event)">
+        <button id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/chat.js"></script>
+  <script>
+    (function () {
+      var targets = document.querySelectorAll(
+        '.reveal-up, .reveal-stagger > *, .glass-card, ' +
+        '.service-item, .why-card-new, .testimonial-card-new, .section-reveal'
+      );
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      targets.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+  <script src="js/toasts.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      var nav = document.querySelector('.nav-links');
+      var btn = document.querySelector('.mobile-burger');
+      if (!nav || !btn) return;
+      var isOpen = nav.classList.toggle('nav-open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.classList.toggle('burger-active', isOpen);
+    }
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('#mainNav')) {
+        var nav = document.querySelector('.nav-links');
+        var btn = document.querySelector('.mobile-burger');
+        if (nav) nav.classList.remove('nav-open');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (btn) btn.classList.remove('burger-active');
+      }
+    });
+  </script>
+
+  <script>
+    // ?? Scroll Reveal Observer ??
+    (function () {
+      var els = document.querySelectorAll(
+        '.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .glass-card'
+      );
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { obs.observe(el); });
+    })();
+
+    // ?? Animated Counters ??
+    (function () {
+      function animateCounter(el) {
+        var targetValue = el.getAttribute('data-target');
+        if (!targetValue) {
+          targetValue = el.textContent.replace(/\+/g, '');
+          el.setAttribute('data-target', targetValue);
+        }
+        var target = parseFloat(targetValue);
+        var isDecimal = target % 1 !== 0;
+        var duration = 1800;
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var ease = 1 - Math.pow(1 - progress, 3);
+          var current = target * ease;
+          el.textContent = isDecimal
+            ? current.toFixed(1)
+            : Math.floor(current) + (progress < 1 ? '' : '+');
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = isDecimal ? target.toFixed(1) : (target + '+');
+        }
+        requestAnimationFrame(step);
+      }
+      var statObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            statObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.stat-number, .m-val').forEach(function (el) {
+        statObs.observe(el);
+      });
+    })();
+  </script>
+
+  <script>
+    // ── Magnetic Button Effect ──
+    (function () {
+      if (window.innerWidth < 768) return; // desktop only
+      var btns = document.querySelectorAll(
+        '.btn-primary-new, .btn-secondary-new, .btn-primary'
+      );
+      btns.forEach(function (btn) {
+        btn.style.transition = 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1)';
+        btn.style.willChange = 'transform';
+        btn.addEventListener('mousemove', function (e) {
+          var rect = btn.getBoundingClientRect();
+          var x = e.clientX - rect.left - rect.width / 2;
+          var y = e.clientY - rect.top - rect.height / 2;
+          var pull = 0.25;
+          btn.style.transform =
+            'translate(' + (x * pull) + 'px, ' + (y * pull) + 'px) scale(1.04)';
+        });
+        btn.addEventListener('mouseleave', function () {
+          btn.style.transform = 'translate(0,0) scale(1)';
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    // ── 3D Card Tilt + Spotlight ──
+    (function () {
+      if (window.innerWidth < 768) return;
+      var cards = document.querySelectorAll('.service-item, .why-card-new');
+      cards.forEach(function (card) {
+        card.style.willChange = 'transform';
+        card.addEventListener('mousemove', function (e) {
+          var rect = card.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          var y = e.clientY - rect.top;
+          var cx = rect.width / 2;
+          var cy = rect.height / 2;
+          var rotX = ((y - cy) / cy) * -8;
+          var rotY = ((x - cx) / cx) * 8;
+          card.style.transform =
+            'perspective(800px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale3d(1.03,1.03,1.03)';
+          // spotlight position
+          var spot = card.querySelector('.svc-spotlight');
+          if (spot) {
+            var pctX = (x / rect.width) * 100;
+            var pctY = (y / rect.height) * 100;
+            spot.style.setProperty('--mx', pctX + '%');
+            spot.style.setProperty('--my', pctY + '%');
+          }
+        });
+        card.addEventListener('mouseleave', function () {
+          card.style.transform =
+            'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    // ── Before/After Slider ──
+    (function () {
+      var container = document.getElementById('baContainer');
+      var before = document.getElementById('baBefore');
+      var handle = document.getElementById('baHandle');
+      if (!container || !before || !handle) return;
+      var isDragging = false;
+      var pct = 50;
+
+      function setPosition(x) {
+        var rect = container.getBoundingClientRect();
+        var relX = Math.max(5, Math.min(95,
+          ((x - rect.left) / rect.width) * 100
+        ));
+        pct = relX;
+        before.style.clipPath = 'inset(0 ' + (100 - relX) + '% 0 0)';
+        handle.style.left = relX + '%';
+      }
+
+      container.addEventListener('mousedown', function (e) {
+        isDragging = true;
+        setPosition(e.clientX);
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (!isDragging) return;
+        setPosition(e.clientX);
+      });
+      window.addEventListener('mouseup', function () { isDragging = false; });
+
+      container.addEventListener('touchstart', function (e) {
+        isDragging = true;
+        setPosition(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        setPosition(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchend', function () { isDragging = false; });
+    })();
+  </script>
+
+  <script>
+    // ── Live Clinic Status ──
+    (function () {
+      var dot = document.querySelector('.status-pulse');
+      var txt = document.getElementById('clinicStatusText');
+      if (!dot || !txt) return;
+      var now = new Date();
+      var day = now.getDay(); // 0=Sun, 6=Sat
+      var hour = now.getHours();
+      var isOpen = day >= 1 && day <= 6 && hour >= 9 && hour < 19;
+      if (isOpen) {
+        dot.classList.remove('closed');
+        txt.classList.remove('closed');
+        txt.textContent = 'مفتوح الآن';
+      } else {
+        dot.classList.add('closed');
+        txt.classList.add('closed');
+        txt.textContent = 'مغلق';
+      }
+    })();
+  </script>
+
+
+
+
+
+
+  <div id="bookingChoiceModal" class="bcm-overlay" style="display:none;" aria-modal="true" role="dialog">
+    <div class="bcm-card">
+
+      <button class="bcm-close" onclick="closeBookingChoiceModal()" aria-label="إغلاق">
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+          <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2.5" stroke-linecap="round"></path>
+        </svg>
+      </button>
+
+      <div class="bcm-logo">
+        <div class="bcm-logo-ring"></div>
+        <svg viewBox="0 0 36 36" fill="none" width="32" height="32">
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#bcmHex)" opacity="0.2"></path>
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#bcmHex)" stroke-width="1" fill="none"></path>
+          <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#bcmCross)"></rect>
+          <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#bcmCross)"></rect>
+          <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"></circle>
+          <defs>
+            <linearGradient id="bcmHex" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0df2f2"></stop>
+              <stop offset="100%" stop-color="#0D9488"></stop>
+            </linearGradient>
+            <linearGradient id="bcmCross" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0df2f2"></stop>
+              <stop offset="100%" stop-color="white"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h2 class="bcm-title" data-ar="احجز موعدك" data-fr="Réservez">احجز موعدك</h2>
+      <p class="bcm-subtitle" data-ar="اختر طريقة الحجز التي تناسبك" data-fr="Choisissez votre méthode de réservation">
+        اختر طريقة الحجز التي تناسبك</p>
+
+      <div class="bcm-options">
+
+        <a href="pages/register.html" class="bcm-opt bcm-opt-primary">
+          <div class="bcm-opt-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+              <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="bcm-opt-body">
+            <strong data-ar="إنشاء حساب مجاني" data-fr="Créer un compte gratuit">إنشاء حساب مجاني</strong>
+            <small data-ar="تتبع مواعيدك وسجلك الطبي بسهولة" data-fr="Suivez vos RDV et votre dossier médical">تتبع
+              مواعيدك وسجلك الطبي بسهولة</small>
+          </div>
+          <span class="bcm-opt-badge" data-ar="مُوصى به ✓" data-fr="Recommandé ✓">مُوصى به ✓</span>
+        </a>
+
+        <div class="bcm-sep"><span data-ar="أو المتابعة بدون حساب" data-fr="Ou continuer sans compte">أو المتابعة بدون
+            حساب</span></div>
+
+        <button class="bcm-opt bcm-opt-ghost" onclick="bookAsGuest()">
+          <div class="bcm-opt-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+              <path d="M8 7V3m8 4V3m-9 8h10M5 21h14 a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="bcm-opt-body">
+            <strong data-ar="حجز كزيارة" data-fr="Rendez-vous simple">حجز كزيارة</strong>
+            <small data-ar="بدون تسجيل — سريع وبسيط" data-fr="Sans inscription — Rapide et simple">بدون تسجيل — سريع
+              وبسيط</small>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" width="16" height="16" class="bcm-arrow">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </button>
+
+      </div>
+
+      <p class="bcm-login-line">
+        <span data-ar="لديك حساب؟" data-fr="Vous avez un compte?">لديك حساب؟</span>
+        <a href="pages/login.html" class="bcm-login-a" data-ar="تسجيل الدخول" data-fr="Se connecter">تسجيل الدخول</a>
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('bookingChoiceModal')
+      .addEventListener('click', function (e) {
+        if (e.target === this) closeBookingChoiceModal();
+      });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeBookingChoiceModal();
+    });
+  </script>
+
+
+
+  <!-- Translation engine handled by js/i18n.js -->
+  <script>
+    // ── Infinite Marquee Duplication ──
+    (function() {
+      var t1 = document.getElementById('tMarqueeTrack');
+      if (t1) t1.innerHTML = t1.innerHTML + t1.innerHTML;
+      var t2 = document.getElementById('tMarqueeTrack2');
+      if (t2) t2.innerHTML = t2.innerHTML + t2.innerHTML;
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,733 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>احجز موعدك | Cabinet Dentaire Nouri</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/widgets.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0D9488">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
+</head>
+
+<body>
+    <div id="scrollProgress">
+        <div id="scrollFill"></div>
+    </div>
+
+    <header style="position: sticky; top: 0; z-index: 9999;">
+        <nav id="mainNav">
+            <a href="index.html" class="nav-logo nav-logo-v2">
+                <div class="logo-mark">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hexagon background -->
+                        <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hexFill)" opacity="0.15" />
+                        <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hexStroke)" stroke-width="1"
+                            fill="none" />
+                        <!-- Cross/Plus medical symbol -->
+                        <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#crossFill)" />
+                        <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#crossFill)" />
+                        <!-- Center dot -->
+                        <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9" />
+                        <defs>
+                            <linearGradient id="hexFill" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#0df2f2" />
+                                <stop offset="100%" stop-color="#0D9488" />
+                            </linearGradient>
+                            <linearGradient id="hexStroke" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#0df2f2" />
+                                <stop offset="100%" stop-color="#0D9488" />
+                            </linearGradient>
+                            <linearGradient id="crossFill" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#0df2f2" />
+                                <stop offset="100%" stop-color="white" stop-opacity="0.9" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-wordmark">
+                    <span class="logo-word-top">CABINET</span>
+                    <span class="logo-word-bottom">ZOUHRI</span>
+                </div>
+            </a>
+            <button class="mobile-burger" aria-label="القائمة" aria-expanded="false" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html#home" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a></li>
+                <li><a href="index.html#services" data-ar="خدماتنا" data-fr="Nos Services">خدماتنا</a></li>
+                <li><a href="pages/faq.html" data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة الشائعة</a></li>
+                <li><a href="pages/appointment-tracking.html" data-ar="تتبع موعدك" data-fr="Suivi RDV">تتبع موعدك</a></li>
+                <li><a href="booking.html" class="btn btn-primary" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="booking-main">
+
+        <!-- Background decoration -->
+        <div class="booking-bg-deco" aria-hidden="true">
+            <div class="bg-circle bg-c1"></div>
+            <div class="bg-circle bg-c2"></div>
+            <div class="bg-circle bg-c3"></div>
+        </div>
+
+        <!-- Hours notice bar -->
+        <div class="hours-notice-bar">
+            <span data-ar="🕐 ساعات العمل:" data-fr="🕐 Heures de travail :">🕐 ساعات العمل:</span>
+            <strong data-ar="الاثنين — السبت" data-fr="Lundi — Samedi">الاثنين — السبت</strong>
+            <span data-ar="من" data-fr="De">من</span>
+            <strong data-ar="09:00 ص" data-fr="09:00">09:00 ص</strong>
+            <span data-ar="إلى" data-fr="À">إلى</span>
+            <strong data-ar="19:00 م" data-fr="19:00">19:00 م</strong>
+            <span class="notice-divider">|</span>
+            <a href="tel:+212535402211">📞 0535 40 22 11</a>
+        </div>
+
+        <div class="container">
+            <div class="booking-wrapper">
+
+
+                <!-- RIGHT SIDE — Booking form -->
+                <div class="booking-form-panel">
+
+                    <!-- Progress stepper -->
+                    <div class="progress-container">
+                        <div class="progress-step active" id="prog1">
+                            <div class="progress-step-circle">
+                                <span class="step-num">1</span>
+                                <svg class="step-check" viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span class="progress-step-label" data-ar="بياناتك" data-fr="Vos infos">بياناتك</span>
+                        </div>
+                        <div class="progress-connector" id="conn1"></div>
+                        <div class="progress-step" id="prog2">
+                            <div class="progress-step-circle">
+                                <span class="step-num">2</span>
+                                <svg class="step-check" viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span class="progress-step-label" data-ar="الخدمة والموعد" data-fr="Service & RDV">الخدمة
+                                والموعد</span>
+                        </div>
+                        <div class="progress-connector" id="conn2"></div>
+                        <div class="progress-step" id="prog3">
+                            <div class="progress-step-circle">
+                                <span class="step-num">3</span>
+                                <svg class="step-check" viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span class="progress-step-label" data-ar="التأكيد" data-fr="Confirmation">التأكيد</span>
+                        </div>
+                    </div>
+
+                    <form id="bookingForm">
+
+                        <!-- ══ STEP 1 ══ -->
+                        <div id="step1" class="step step-panel" style="display:block;">
+                            <div class="step-header">
+                                <div class="step-header-icon">👤</div>
+                                <div>
+                                    <h3 class="step-title" data-ar="بياناتك الشخصية" data-fr="Infos Personnelles">
+                                        بياناتك الشخصية</h3>
+                                    <p class="step-subtitle" data-ar="أدخل معلوماتك لنتواصل معك لتأكيد الموعد"
+                                        data-fr="Entrez vos informations pour que nous puissions confirmer le RDV">أدخل
+                                        معلوماتك لنتواصل معك لتأكيد الموعد</p>
+                                </div>
+                            </div>
+
+                            <label class="toggle-group" for="bookForOthers">
+                                <input type="checkbox" id="bookForOthers">
+                                <span data-ar="أقوم بالحجز لشخص آخر (صديق أو قريب)"
+                                    data-fr="Je réserve pour quelqu'un d'autre (ami ou proche)">أقوم بالحجز لشخص آخر
+                                    (صديق أو قريب)</span>
+                            </label>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="label-icon">👤</span>
+                                        <span data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</span> <span
+                                            class="required-star">*</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="fullName" class="form-input"
+                                            placeholder="أدخل الاسم الكامل للمريض"
+                                            data-placeholder-ar="أدخل الاسم الكامل للمريض"
+                                            data-placeholder-fr="Entrez le nom complet du patient" required>
+                                        <span class="input-focus-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="label-icon">📞</span>
+                                        <span data-ar="رقم الهاتف" data-fr="Numéro de téléphone">رقم الهاتف</span> <span
+                                            class="required-star">*</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <input type="tel" id="phone" class="form-input" placeholder="06XXXXXXXX"
+                                            required>
+                                        <span class="input-focus-bar"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span class="label-icon">✉️</span>
+                                    <span data-ar="البريد الإلكتروني" data-fr="Adresse e-mail">البريد الإلكتروني</span>
+                                    <span class="optional-tag" data-ar="اختياري" data-fr="Facultatif">اختياري</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="email" class="form-input" placeholder="example@mail.com">
+                                    <span class="input-focus-bar"></span>
+                                </div>
+                            </div>
+
+                            <div class="step-actions">
+                                <button type="button" id="nextToStep2" class="btn-next" onclick="nextStep(1)">
+                                    <span data-ar="التالي: اختر الخدمة" data-fr="Suivant : Choisir le service">التالي:
+                                        اختر الخدمة</span>
+                                    <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ══ STEP 2 ══ -->
+                        <div id="step2" class="step step-panel">
+                            <div class="step-header">
+                                <div class="step-header-icon">🗓️</div>
+                                <div>
+                                    <h3 class="step-title" data-ar="اختر الموعد والخدمة"
+                                        data-fr="Choisir le RDV et le service">اختر الموعد والخدمة</h3>
+                                    <p class="step-subtitle" data-ar="اختر التاريخ والوقت المناسب، ثم حدد نوع الخدمة"
+                                        data-fr="Choisissez la date et l'heure, puis sélectionnez le type de service">
+                                        اختر التاريخ والوقت المناسب، ثم حدد نوع الخدمة</p>
+                                </div>
+                            </div>
+
+                            <!-- 1. Date picker -->
+                            <div class="form-section-label">
+                                <span data-ar="📅 1. اختر التاريخ المناسب" data-fr="📅 1. Choisissez la date">📅 1. اختر
+                                    التاريخ المناسب</span> <span class="required-star">*</span>
+                            </div>
+                            <input type="hidden" id="preferredDate">
+                            <div class="week-date-picker" id="weekDatePicker"></div>
+
+                            <!-- 2. Time slots -->
+                            <div class="slots-section">
+                                <button type="button" id="loadSlotsBtn" class="btn-load-slots" style="display:none;"
+                                    onclick="loadAvailableSlots()">
+                                    <span data-ar="📅 عرض المواعيد المتاحة لهذا اليوم"
+                                        data-fr="📅 Voir les créneaux disponibles">📅 عرض المواعيد المتاحة لهذا
+                                        اليوم</span>
+                                </button>
+                                <div id="timeSlotsContainer"></div>
+                                <input type="hidden" id="preferredTime">
+                            </div>
+
+                            <!-- 3. Service selection -->
+                            <div class="form-section-label" style="margin-top:28px;">
+                                <span data-ar="🦷 2. نوع الخدمة المطلوبة" data-fr="🦷 2. Type de service">🦷 2. نوع
+                                    الخدمة المطلوبة</span> <span class="required-star">*</span>
+                            </div>
+                            <input type="hidden" id="service">
+                            <div class="service-cards-grid" id="serviceCardsGrid">
+
+                                <div class="service-option-card" data-value="فحص وتشخيص شامل"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">🔍</span>
+                                        <span class="svc-name" data-ar="فحص وتشخيص" data-fr="Examen et diagnostic">فحص
+                                            وتشخيص</span>
+                                        <span class="svc-price free-badge" data-ar="مجاني"
+                                            data-fr="Gratuit">مجاني</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="تنظيف وتلميع الأسنان"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">✨</span>
+                                        <span class="svc-name" data-ar="تنظيف وتلميع"
+                                            data-fr="Détartrage et polissage">تنظيف وتلميع</span>
+                                        <span class="svc-price" data-ar="150 درهم" data-fr="150 MAD">150 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="تبييض الأسنان"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">🤍</span>
+                                        <span class="svc-name" data-ar="تبييض الأسنان"
+                                            data-fr="Blanchiment dentaire">تبييض الأسنان</span>
+                                        <span class="svc-price" data-ar="من 800 درهم" data-fr="À partir de 800 MAD">من
+                                            800 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="تقويم الأسنان"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">😁</span>
+                                        <span class="svc-name" data-ar="تقويم الأسنان" data-fr="Orthodontie">تقويم
+                                            الأسنان</span>
+                                        <span class="svc-price" data-ar="من 3000 درهم" data-fr="À partir de 3000 MAD">من
+                                            3000 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="حشو الأسنان" onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">🪥</span>
+                                        <span class="svc-name" data-ar="حشو الأسنان" data-fr="Obturation (Plombage)">حشو
+                                            الأسنان</span>
+                                        <span class="svc-price" data-ar="من 300 درهم" data-fr="À partir de 300 MAD">من
+                                            300 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="خلع الأسنان" onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">🔧</span>
+                                        <span class="svc-name" data-ar="خلع الأسنان" data-fr="Extraction">خلع
+                                            الأسنان</span>
+                                        <span class="svc-price" data-ar="من 200 درهم" data-fr="À partir de 200 MAD">من
+                                            200 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="زراعة الأسنان"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">🌱</span>
+                                        <span class="svc-name" data-ar="زراعة الأسنان" data-fr="Implantologie">زراعة
+                                            الأسنان</span>
+                                        <span class="svc-price" data-ar="من 4500 درهم" data-fr="À partir de 4500 MAD">من
+                                            4500 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="تركيب التيجان والجسور"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">👑</span>
+                                        <span class="svc-name" data-ar="تيجان وجسور" data-fr="Couronnes et ponts">تيجان
+                                            وجسور</span>
+                                        <span class="svc-price" data-ar="من 1500 درهم" data-fr="À partir de 1500 MAD">من
+                                            1500 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="علاج عصب الأسنان"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">⚡</span>
+                                        <span class="svc-name" data-ar="علاج العصب" data-fr="Traitement de canal">علاج
+                                            العصب</span>
+                                        <span class="svc-price" data-ar="من 800 درهم" data-fr="À partir de 800 MAD">من
+                                            800 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="طب أسنان الأطفال"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">👶</span>
+                                        <span class="svc-name" data-ar="أسنان الأطفال"
+                                            data-fr="Dentisterie pédiatrique">أسنان الأطفال</span>
+                                        <span class="svc-price" data-ar="150 درهم" data-fr="150 MAD">150 درهم</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="طوارئ الأسنان"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">🚨</span>
+                                        <span class="svc-name" data-ar="طوارئ أسنان" data-fr="Urgence dentaire">طوارئ
+                                            أسنان</span>
+                                        <span class="svc-price urgent-badge" data-ar="عاجل" data-fr="Urgent">عاجل</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-option-card" data-value="تبييض الليزر"
+                                    onclick="selectService(this)">
+                                    <div class="svc-card-inner">
+                                        <span class="svc-icon">💫</span>
+                                        <span class="svc-name" data-ar="تبييض ليزر" data-fr="Blanchiment Laser">تبييض
+                                            ليزر</span>
+                                        <span class="svc-price" data-ar="من 1200 درهم" data-fr="À partir de 1200 MAD">من
+                                            1200 درهم</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="showMoreServices" style="margin-top:8px;">
+                                <button type="button" onclick="toggleAllServices()" id="toggleServicesBtn" style="background:none; border:1px dashed rgba(13,242,242,0.3);
+                                       border-radius:10px; padding:8px 18px; color:#0df2f2;
+                                       font-family:'Cairo',sans-serif; font-size:0.82rem;
+                                       cursor:pointer; transition:all 0.3s ease;" data-ar="＋ عرض جميع الخدمات"
+                                    data-fr="＋ Voir tous les services">
+                                    ＋ عرض جميع الخدمات
+                                </button>
+                            </div>
+
+                            <!-- Notes -->
+                            <div class="form-group" style="margin-top:20px;">
+                                <label class="form-label">
+                                    <span class="label-icon">📝</span>
+                                    <span data-ar="ملاحظات إضافية" data-fr="Notes supplémentaires">ملاحظات إضافية</span>
+                                    <span class="optional-tag" data-ar="اختياري" data-fr="Facultatif">اختياري</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <textarea id="notes" class="form-input form-textarea"
+                                        placeholder="أي معلومات إضافية تريد إخبارنا بها (ألم حاد، حساسية للأدوية...)"
+                                        data-placeholder-ar="أي معلومات إضافية تريد إخبارنا بها (ألم حاد، حساسية للأدوية...)"
+                                        data-placeholder-fr="Toute information supplémentaire (douleur aiguë, allergie...)"
+                                        rows="3"></textarea>
+                                    <span class="input-focus-bar"></span>
+                                </div>
+                            </div>
+
+                            <div class="step-actions">
+                                <button type="button" id="backToStep1" class="btn-back" onclick="prevStep(2)">
+                                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                                        <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <span data-ar="رجوع" data-fr="Retour">رجوع</span>
+                                </button>
+                                <button type="button" id="nextToStep3" class="btn-next" onclick="nextStep(2)">
+                                    <span data-ar="التالي: مراجعة الحجز" data-fr="Suivant : Révision">التالي: مراجعة
+                                        الحجز</span>
+                                    <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ══ STEP 3 ══ -->
+                        <div id="step3" class="step step-panel">
+                            <div class="step-header">
+                                <div class="step-header-icon">✅</div>
+                                <div>
+                                    <h3 class="step-title" data-ar="مراجعة وتأكيد الحجز"
+                                        data-fr="Révision et confirmation">مراجعة وتأكيد الحجز</h3>
+                                    <p class="step-subtitle" data-ar="تحقق من بياناتك قبل إرسال الطلب"
+                                        data-fr="Vérifiez vos infos avant l'envoi">تحقق من بياناتك قبل إرسال الطلب</p>
+                                </div>
+                            </div>
+
+                            <div class="review-card">
+                                <div class="review-card-header">
+                                    <span>🦷</span>
+                                    <span data-ar="ملخص الحجز" data-fr="Résumé de réservation">ملخص الحجز</span>
+                                </div>
+                                <div class="review-item">
+                                    <span class="review-label" data-ar="👤 الاسم:" data-fr="👤 Nom :">👤 الاسم:</span>
+                                    <span id="revName" class="review-value"></span>
+                                </div>
+                                <div class="review-item">
+                                    <span class="review-label" data-ar="📞 الهاتف:" data-fr="📞 Tél :">📞 الهاتف:</span>
+                                    <span id="revPhone" class="review-value"></span>
+                                </div>
+                                <div class="review-item">
+                                    <span class="review-label" data-ar="🦷 الخدمة:" data-fr="🦷 Service :">🦷
+                                        الخدمة:</span>
+                                    <span id="revService" class="review-value"></span>
+                                </div>
+                                <div class="review-item">
+                                    <span class="review-label" data-ar="📅 التاريخ:" data-fr="📅 Date :">📅
+                                        التاريخ:</span>
+                                    <span id="revDate" class="review-value"></span>
+                                </div>
+                                <div class="review-item">
+                                    <span class="review-label" data-ar="🕐 الوقت:" data-fr="🕐 Heure :">🕐 الوقت:</span>
+                                    <span id="revTime" class="review-value"></span>
+                                </div>
+                            </div>
+
+                            <div class="confirm-notice">
+                                <span>📞</span>
+                                <span data-ar="سنتصل بك على الرقم المسجل لتأكيد الموعد خلال ساعة واحدة"
+                                    data-fr="Nous vous appellerons sur le numéro enregistré pour confirmer le RDV d'ici une heure.">سنتصل
+                                    بك على الرقم المسجل لتأكيد الموعد خلال ساعة واحدة</span>
+                            </div>
+
+                            <label class="toggle-group confirm-toggle" for="confirmCheckbox">
+                                <input type="checkbox" id="confirmCheckbox">
+                                <span data-ar="أؤكد رغبتي في الحجز وأوافق على سياسة العيادة"
+                                    data-fr="Je confirme ma réservation et j'accepte la politique du cabinet.">أؤكد
+                                    رغبتي في الحجز وأوافق على سياسة العيادة</span>
+                            </label>
+
+                            <div class="step-actions">
+                                <button type="button" id="backToStep2" class="btn-back" onclick="prevStep(3)">
+                                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                                        <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <span data-ar="تعديل البيانات" data-fr="Modifier les infos">تعديل البيانات</span>
+                                </button>
+                                <button type="button" id="submitBtn" class="btn-submit" onclick="submitBooking()">
+                                    <span data-ar="✅ تأكيد الحجز وإرسال الطلب" data-fr="✅ Confirmer et envoyer">✅ تأكيد
+                                        الحجز وإرسال الطلب</span>
+                                    <div class="submit-shine"></div>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-wrap">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo nav-logo-v2">
+                        <div class="logo-mark">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <!-- Hexagon background -->
+                                <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hexFill)" opacity="0.15" />
+                                <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hexStroke)" stroke-width="1"
+                                    fill="none" />
+                                <!-- Cross/Plus medical symbol -->
+                                <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#crossFill)" />
+                                <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#crossFill)" />
+                                <!-- Center dot -->
+                                <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9" />
+                                <defs>
+                                    <linearGradient id="hexFill" x1="4" y1="2" x2="32" y2="34"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#0df2f2" />
+                                        <stop offset="100%" stop-color="#0D9488" />
+                                    </linearGradient>
+                                    <linearGradient id="hexStroke" x1="4" y1="2" x2="32" y2="34"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#0df2f2" />
+                                        <stop offset="100%" stop-color="#0D9488" />
+                                    </linearGradient>
+                                    <linearGradient id="crossFill" x1="9" y1="9" x2="27" y2="27"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#0df2f2" />
+                                        <stop offset="100%" stop-color="white" stop-opacity="0.9" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="logo-wordmark">
+                            <span class="logo-word-top">CABINET</span>
+                            <span class="logo-word-bottom">ZOUHRI</span>
+                        </div>
+                    </a>
+                    <p data-ar="عيادة أسنان متخصصة نقدم أعلى مستويات الرعاية الصحية بأحدث التقنيات الطبية لضمان راحتكم وسلامتكم."
+                        data-fr="Cabinet dentaire spécialisé, nous offrons les plus hauts niveaux de soins de santé avec les dernières technologies médicales pour assurer votre confort et votre sécurité.">
+                        عيادة أسنان متخصصة نقدم أعلى مستويات الرعاية الصحية بأحدث التقنيات الطبية لضمان راحتكم وسلامتكم.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-ar="روابط سريعة" data-fr="Liens rapides">روابط سريعة</h4>
+                    <a href="index.html" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a>
+                    <a href="index.html#services" data-ar="خدماتنا" data-fr="Nos Services">خدماتنا</a>
+                    <a href="pages/faq.html" data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة الشائعة</a>
+                    <a href="booking.html">احجز موعداً</a>
+                </div>
+                <div class="footer-col">
+                    <h4 data-ar="تواصل معنا" data-fr="Contactez-nous">تواصل معنا</h4>
+                    <a href="tel:+212535402211">📞 0535 40 22 11</a>
+                    <a href="https://wa.me/212535402211" data-ar="💬 واتساب" data-fr="💬 WhatsApp">💬 واتساب</a>
+                    <a href="#" data-ar="📍 209 شارع محمد الخامس، الطابق 2، مكناس"
+                        data-fr="📍 209 Av Mohammed V, 2ème étage, Meknès">📍 209 شارع محمد الخامس، الطابق 2، مكناس</a>
+                    <a href="#" data-ar="🕐 الاثنين—السبت: 9ص — 7م" data-fr="🕐 Lundi—Samedi : 9h — 19h">🕐
+                        الاثنين—السبت: 9ص — 7م</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-ar="© 2026 Cabinet Dentaire Nouri — مكناس. جميع الحقوق محفوظة."
+                    data-fr="© 2026 Cabinet Dentaire Nouri — Meknès. Tous droits réservés.">© 2026 Cabinet Dentaire
+                    Nouri — مكناس. جميع الحقوق محفوظة.</p>
+                <div style="display:flex; gap:20px;">
+                    <a href="#" data-ar="سياسة الخصوصية" data-fr="Politique de confidentialité">سياسة الخصوصية</a>
+                    <a href="#" data-ar="الشروط والأحكام" data-fr="Termes et conditions">الشروط والأحكام</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toastContainer"></div>
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/toasts.js"></script>
+
+    <script>
+        function toggleMobileMenu() {
+            var nav = document.querySelector('.nav-links');
+            var btn = document.querySelector('.mobile-burger');
+            if (!nav || !btn) return;
+            var isOpen = nav.classList.toggle('nav-open');
+            btn.setAttribute('aria-expanded', isOpen);
+            btn.classList.toggle('burger-active', isOpen);
+        }
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('#mainNav')) {
+                var nav = document.querySelector('.nav-links');
+                var btn = document.querySelector('.mobile-burger');
+                if (nav) nav.classList.remove('nav-open');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+                if (btn) btn.classList.remove('burger-active');
+            }
+        });
+    </script>
+
+    <script>
+        // Use standard booking logic from js/booking.js
+        document.addEventListener('DOMContentLoaded', function () {
+            initWeekPicker();
+            updateProgress(1);
+            showStep(1);
+
+            // Show first 6 services by default
+            var cards = document.querySelectorAll('.service-option-card');
+            cards.forEach(function (card, i) {
+                if (i < 6) card.classList.add('visible-card');
+            });
+        });
+    </script>
+
+    <script>
+        var servicesExpanded = false;
+        function toggleAllServices() {
+            var cards = document.querySelectorAll('.service-option-card');
+            var btn = document.getElementById('toggleServicesBtn');
+            servicesExpanded = !servicesExpanded;
+            cards.forEach(function (card, i) {
+                if (servicesExpanded || i < 6) {
+                    card.classList.add('visible-card');
+                } else {
+                    card.classList.remove('visible-card');
+                }
+            });
+            btn.textContent = servicesExpanded ? '− إخفاء الخدمات' : '＋ عرض جميع الخدمات';
+        }
+    </script>
+
+    <!-- Floating Widgets -->
+    <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد"
+        target="_blank" aria-label="تواصل عبر واتساب">
+        <svg viewBox="0 0 24 24" fill="white" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <div id="chatWidget">
+        <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي"
+            style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
+            <span style="font-size:1.3rem;line-height:1;">💬</span>
+            <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد"
+                data-fr="Assistant">مساعد</span>
+        </button>
+        <div id="chatWindow" class="chat-hidden">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar">🦷</div>
+                    <div>
+                        <div class="chat-title" data-ar="مساعد Cabinet Nouri" data-fr="Assistant Cabinet Nouri">مساعد
+                            Cabinet Nouri</div>
+                        <div class="chat-status" data-ar="متاح الآن" data-fr="Disponible">متاح الآن</div>
+                    </div>
+                </div>
+                <button class="chat-close" onclick="toggleChat()">✕</button>
+            </div>
+            <div id="chatMessages" class="chat-messages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="اكتب رسالتك..." data-placeholder-ar="اكتب رسالتك..."
+                    data-placeholder-fr="Écrivez votre message..." onkeypress="handleChatKey(event)">
+                <button id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════
+        // FULL PAGE TRANSLATION ENGINE
+        // ═══════════════════════════════════
+        (function () {
+            var currentLang = localStorage.getItem('siteLang') || 'ar';
+
+            function applyLang(lang) {
+                var isAr = lang === 'ar';
+                document.documentElement.lang = isAr ? 'ar' : 'fr';
+                document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+
+                document.querySelectorAll('[data-ar][data-fr]').forEach(function (el) {
+                    var text = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-fr');
+                    if (!text) return;
+
+                    var hasImportantChildren = el.querySelector('svg, img, button, a, input, div, span');
+                    if (hasImportantChildren) {
+                        Array.from(el.childNodes).forEach(function (node) {
+                            if (node.nodeType === 3 && node.textContent.trim()) {
+                                node.textContent = (isAr ? '' : ' ') + text + (isAr ? '' : ' ');
+                            }
+                        });
+                    } else {
+                        el.textContent = text;
+                    }
+                });
+
+                document.querySelectorAll('[data-placeholder-ar]').forEach(function (inp) {
+                    inp.placeholder = isAr ? inp.getAttribute('data-placeholder-ar') : inp.getAttribute('data-placeholder-fr');
+                });
+
+                var label = document.getElementById('langLabel');
+                if (label) label.textContent = isAr ? 'FR' : 'عر';
+
+                localStorage.setItem('siteLang', lang);
+                currentLang = lang;
+                document.dispatchEvent(new CustomEvent('languageChanged', { detail: lang }));
+            }
+
+            window.toggleLanguage = function () { applyLang(currentLang === 'ar' ? 'fr' : 'ar'); };
+            document.addEventListener('DOMContentLoaded', function () { applyLang(currentLang); });
+            if (document.readyState !== 'loading') applyLang(currentLang);
+        })();
+    </script>
+</body>
+
+</html>

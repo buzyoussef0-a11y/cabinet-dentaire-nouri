@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملفي الشخصي | Cabinet Dentaire Nouri</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <link rel="stylesheet" href="../css/widgets.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#0D9488">
+</head>
+
+<body style="padding-top: 140px; padding-bottom: 60px;">
+
+    <nav id="mainNav">
+        <a href="../index.html" class="nav-logo nav-logo-v2">
+  <div class="logo-mark">
+    <svg width="36" height="36" viewBox="0 0 36 36"
+         fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Hexagon background -->
+      <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z"
+        fill="url(#hexFill)" opacity="0.15"/>
+      <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z"
+        stroke="url(#hexStroke)" stroke-width="1"
+        fill="none"/>
+      <!-- Cross/Plus medical symbol -->
+      <rect x="16" y="9" width="4" height="18"
+        rx="2" fill="url(#crossFill)"/>
+      <rect x="9" y="16" width="18" height="4"
+        rx="2" fill="url(#crossFill)"/>
+      <!-- Center dot -->
+      <circle cx="18" cy="18" r="2.5"
+        fill="white" opacity="0.9"/>
+      <defs>
+        <linearGradient id="hexFill"
+          x1="4" y1="2" x2="32" y2="34"
+          gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#0df2f2"/>
+          <stop offset="100%" stop-color="#0D9488"/>
+        </linearGradient>
+        <linearGradient id="hexStroke"
+          x1="4" y1="2" x2="32" y2="34"
+          gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#0df2f2"/>
+          <stop offset="100%" stop-color="#0D9488"/>
+        </linearGradient>
+        <linearGradient id="crossFill"
+          x1="9" y1="9" x2="27" y2="27"
+          gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#0df2f2"/>
+          <stop offset="100%" stop-color="white"
+            stop-opacity="0.9"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div class="logo-wordmark">
+    <span class="logo-word-top">CABINET</span>
+    <span class="logo-word-bottom">NOURI</span>
+  </div>
+</a>
+        <button class="mobile-burger" onclick="toggleMobileMenu()" aria-label="قائمة التنقل">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="../index.html" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a></li>
+            <li><a href="services.html" data-ar="خدماتنا" data-fr="Services">خدماتنا</a></li>
+            <li><a href="appointment-tracking.html" data-ar="مواعيدي" data-fr="Mes rendez-vous">مواعيدي</a></li>
+            <li><button class="btn-primary" onclick="logoutUser()" style="padding: 8px 18px;" data-ar="خروج" data-fr="Quitter">خروج</button></li>
+        </ul>
+    </nav>
+
+    <div class="container" style="max-width: 800px;">
+        <div class="glass-card animate-fadeInUp" style="padding: 50px; position: relative; overflow: hidden;">
+            <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 40px;">
+                <div id="profAvatar"
+                    style="width: 100px; height: 100px; background: linear-gradient(135deg, #0D9488, #06B6D4); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">
+                    ?</div>
+                <div>
+                    <h1 id="profName" style="margin-bottom: 5px;">---</h1>
+                    <p id="profId" style="color: var(--accent); font-weight: 700;">ID: #----</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px;">
+                <div class="glass-card" style="padding: 24px; background: rgba(255,255,255,0.02); text-align: center;">
+                    <h4 style="color: var(--text-muted); margin-bottom: 5px;" data-ar="إجمالي المواعيد" data-fr="Total des RDV">إجمالي المواعيد</h4>
+                    <div id="statTotal" style="font-size: 2rem; font-weight: 900;">0</div>
+                </div>
+                <div class="glass-card" style="padding: 24px; background: rgba(255,255,255,0.02); text-align: center;">
+                    <h4 style="color: var(--text-muted); margin-bottom: 5px;" data-ar="الحالة النشطة" data-fr="Statut actif">الحالة النشطة</h4>
+                    <div id="statActive" style="font-size: 2rem; font-weight: 900;" class="text-gradient">0</div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+                <h3 style="margin-bottom: 20px;" data-ar="المعلومات الشخصية" data-fr="Infos Personnelles">المعلومات الشخصية</h3>
+                <div style="display: grid; gap: 15px;">
+                    <div
+                        style="display:flex; justify-content:space-between; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <span style="color: var(--text-muted);" data-ar="رقم الهاتف" data-fr="Numéro de téléphone">رقم الهاتف</span>
+                        <span id="profPhone">---</span>
+                    </div>
+                    <div
+                        style="display:flex; justify-content:space-between; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <span style="color: var(--text-muted);" data-ar="البريد الإلكتروني" data-fr="E-mail">البريد الإلكتروني</span>
+                        <span id="profEmail">---</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    <div id="toastContainer"></div>
+        <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+        <!-- WhatsApp Button -->
+        <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد"
+            target="_blank" aria-label="تواصل عبر واتساب">
+            <svg viewBox="0 0 24 24" fill="white" width="26" height="26">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                <path
+                    d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z" />
+            </svg>
+        </a>
+
+        <!-- Chat Widget -->
+        <div id="chatWidget">
+            <button id="chatToggle" onclick="toggleChat()"
+  aria-label="المساعد الذكي"
+  style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
+  <span style="font-size:1.3rem;line-height:1;">💬</span>
+  <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد" data-fr="Assistant">مساعد</span>
+</button>
+            <div id="chatWindow" class="chat-hidden">
+                <div class="chat-header">
+                    <div class="chat-header-info">
+                        <div class="chat-avatar">🦷</div>
+                        <div>
+                            <div class="chat-title" data-ar="مساعد Cabinet Nouri" data-fr="Assistant Cabinet Nouri">مساعد Cabinet Nouri</div>
+                            <div class="chat-status" data-ar="متاح الآن" data-fr="Disponible">متاح الآن</div>
+                        </div>
+                    </div>
+                    <button class="chat-close" onclick="toggleChat()">✕</button>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="اكتب رسالتك..." data-placeholder-ar="اكتب رسالتك..." data-placeholder-fr="Écrivez votre message..." onkeypress="handleChatKey(event)">
+                    <button id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+
+        <script>window._ROOT = '../';</script>
+    <script src="../js/auth.js"></script>
+        <script src="../js/main.js"></script>
+        <script src="../js/i18n.js"></script>
+        <script src="../js/chat.js"></script>
+        <script src="../js/toasts.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var user = null;
+                try { user = JSON.parse(localStorage.getItem('dental_current_user')); } catch (e) { }
+                if (!user) { window.location.href = 'login.html'; return; }
+
+                var first = (user.fullName || '?').charAt(0).toUpperCase();
+                document.getElementById('profAvatar').textContent = first;
+                document.getElementById('profName').textContent = user.fullName || '---';
+                document.getElementById('profId').textContent = 'ID: #' + (user.id || '----');
+                document.getElementById('profPhone').textContent = user.phone || '---';
+                document.getElementById('profEmail').textContent = user.email || '---';
+
+                try {
+                    var apps = JSON.parse(localStorage.getItem('dental_appointments') || '[]');
+                    document.getElementById('statTotal').textContent = apps.length;
+                    var active = apps.filter(function (a) { return a.status !== 'cancelled'; }).length;
+                    document.getElementById('statActive').textContent = active;
+                } catch (e) { }
+            });
+
+            function logoutUser() {
+                localStorage.removeItem('dental_current_user');
+                window.location.href = 'index.html';
+            }
+        </script>
+
+</body>
+
+</html>

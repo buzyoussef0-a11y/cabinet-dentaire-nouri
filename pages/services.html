@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدماتنا الطبية | Cabinet Dentaire Nouri — مكناس</title>
+    <meta name="description" content="اكتشف خدمات Cabinet Dentaire Nouri الشاملة في مكناس: تبييض، تقويم، زراعة، طب أطفال وأكثر من 12 خدمة متخصصة.">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#0D9488">
+</head>
+
+<body>
+
+  <!-- ANIMATED SVG BACKGROUND BLOBS -->
+  <div class="blob-bg" aria-hidden="true">
+    <svg class="blob blob-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="rgba(13,148,136,0.05)" d="M47.5,-57.2C60.5,-45.5,69.2,-28.5,70.8,-11C72.4,6.5,66.9,24.1,56.4,37.2C45.9,50.3,30.4,58.9,13.1,63.7C-4.2,68.5,-23.3,69.5,-38.6,62C-53.9,54.5,-65.4,38.5,-68.8,21.2C-72.2,3.9,-67.5,-14.7,-57.5,-28.4C-47.5,-42.1,-32.2,-50.9,-16.5,-57.6C-0.8,-64.3,15.3,-68.9,30,-66.1C44.7,-63.3,34.5,-69,47.5,-57.2Z" transform="translate(100 100)">
+        <animateTransform attributeName="transform" type="translate" additive="sum" values="100 100; 108 92; 96 106; 100 100" dur="14s" repeatCount="indefinite"/>
+      </path>
+    </svg>
+  </div>
+
+  <div id="scrollProgress"><div id="scrollFill"></div></div>
+
+  <header style="position: sticky; top: 0; z-index: 9999;">
+    <nav id="mainNav">
+      <a href="../index.html" class="nav-logo nav-logo-v2">
+        <div class="logo-mark">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hexFillS)" opacity="0.15"/>
+            <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hexStrokeS)" stroke-width="1" fill="none"/>
+            <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#crossFillS)"/>
+            <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#crossFillS)"/>
+            <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"/>
+            <defs>
+              <linearGradient id="hexFillS" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/>
+              </linearGradient>
+              <linearGradient id="hexStrokeS" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/>
+              </linearGradient>
+              <linearGradient id="crossFillS" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="white" stop-opacity="0.9"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-wordmark">
+          <span class="logo-word-top">CABINET</span>
+          <span class="logo-word-bottom">NOURI</span>
+        </div>
+      </a>
+      <button class="mobile-burger" onclick="toggleMobileMenu()" aria-label="قائمة التنقل">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a></li>
+        <li><a href="services.html" class="active" data-ar="خدماتنا" data-fr="Services">خدماتنا</a></li>
+        <li><a href="gallery.html" data-ar="معرض الصور" data-fr="Galerie">معرض الصور</a></li>
+        <li><a href="about.html" data-ar="من نحن" data-fr="À propos">من نحن</a></li>
+        <li><a href="faq.html" data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة الشائعة</a></li>
+        <li><a href="appointment-tracking.html" data-ar="تتبع موعدك" data-fr="Suivi RDV">تتبع موعدك</a></li>
+        <li><a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding: 10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a></li>
+        <li id="auth-links"></li>
+        <li class="lang-switcher-wrap">
+          <button class="lang-btn" id="langToggle" onclick="toggleLanguage()" aria-label="تغيير اللغة">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <span id="langLabel">FR</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- PAGE HERO BANNER -->
+    <div class="page-hero-banner">
+      <div class="container">
+        <div class="page-breadcrumb">
+          <a href="../index.html" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a>
+          <span>›</span>
+          <span data-ar="خدماتنا" data-fr="Services">خدماتنا</span>
+        </div>
+        <h1 class="reveal-up" data-ar="خدماتنا الطبية" data-fr="Nos Services Médicaux">خدماتنا <span class="text-gradient">الطبية</span></h1>
+        <p class="reveal-up" data-ar="رعاية شاملة لابتسامتك بأحدث التقنيات الرقمية في مكناس" data-fr="Soins complets pour votre sourire avec les dernières technologies à Meknès">
+          رعاية شاملة لابتسامتك بأحدث التقنيات الرقمية في مكناس
+        </p>
+        <div class="page-hero-stats reveal-up">
+          <div class="ph-stat">
+            <span class="ph-stat-num">+12</span>
+            <span class="ph-stat-label" data-ar="خدمة متخصصة" data-fr="Services spécialisés">خدمة متخصصة</span>
+          </div>
+          <div class="ph-stat">
+            <span class="ph-stat-num">450+</span>
+            <span class="ph-stat-label" data-ar="مريض سعيد" data-fr="Patients satisfaits">مريض سعيد</span>
+          </div>
+          <div class="ph-stat">
+            <span class="ph-stat-num">4.8★</span>
+            <span class="ph-stat-label" data-ar="تقييم Google" data-fr="Note Google">تقييم Google</span>
+          </div>
+          <div class="ph-stat">
+            <span class="ph-stat-num">+12</span>
+            <span class="ph-stat-label" data-ar="سنة خبرة" data-fr="Ans d'expérience">سنة خبرة</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES GRID SECTION -->
+    <section style="padding: 80px 0;">
+      <div class="container">
+        <div class="section-top reveal-up" style="text-align:center; margin-bottom:0;">
+          <h2 class="section-title-new" data-ar="جميع خدماتنا" data-fr="Tous nos services">جميع خدماتنا</h2>
+          <p class="section-desc-new" data-ar="اختر الخدمة المناسبة لك واحجز موعدك الآن" data-fr="Choisissez le service qui vous convient et réservez maintenant">
+            اختر الخدمة المناسبة لك واحجز موعدك الآن
+          </p>
+        </div>
+
+        <div class="services-page-grid">
+
+          <!-- 1. الفحص والتشخيص -->
+          <div class="svc-page-card reveal-up" onclick="location.href='../booking.html?service=checkup'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=85" alt="فحص الأسنان" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">🔍</div>
+              <h3 data-ar="الفحص والتشخيص الشامل" data-fr="Examen et Diagnostic">الفحص والتشخيص الشامل</h3>
+              <p data-ar="تقييم دقيق لصحة أسنانك وإعداد خطة علاج متكاملة باستخدام أحدث أجهزة التصوير الرقمي ثلاثي الأبعاد." data-fr="Évaluation précise avec les dernières technologies d'imagerie 3D.">
+                تقييم دقيق لصحة أسنانك وإعداد خطة علاج متكاملة باستخدام أحدث أجهزة التصوير الرقمي ثلاثي الأبعاد.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 2. تبييض الأسنان -->
+          <div class="svc-page-card reveal-up" style="--delay:0.05s" onclick="location.href='../booking.html?service=whitening'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=85" alt="تبييض الأسنان" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">✨</div>
+              <h3 data-ar="تبييض الأسنان" data-fr="Blanchiment Dentaire">تبييض الأسنان</h3>
+              <p data-ar="تبييض احترافي سريع وآمن بتقنيات متطورة لابتسامة أكثر بياضاً وإشراقاً بعدة درجات." data-fr="Blanchiment professionnel rapide et sûr pour un sourire éclatant.">
+                تبييض احترافي سريع وآمن بتقنيات متطورة لابتسامة أكثر بياضاً وإشراقاً بعدة درجات.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 3. تقويم الأسنان -->
+          <div class="svc-page-card reveal-up" style="--delay:0.1s" onclick="location.href='../booking.html?service=ortho'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=85" alt="تقويم الأسنان" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">😁</div>
+              <h3 data-ar="تقويم الأسنان" data-fr="Orthodontie">تقويم الأسنان</h3>
+              <p data-ar="تقويم شفاف أو معدني لمحاذاة الأسنان المثالية وتصحيح العضة للبالغين والأطفال." data-fr="Alignement transparent ou métallique pour adultes et enfants.">
+                تقويم شفاف أو معدني لمحاذاة الأسنان المثالية وتصحيح العضة للبالغين والأطفال.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 4. زراعة الأسنان -->
+          <div class="svc-page-card reveal-up" style="--delay:0.15s" onclick="location.href='../booking.html?service=implants'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=85" alt="زراعة الأسنان" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">🦷</div>
+              <h3 data-ar="زراعة الأسنان" data-fr="Implants Dentaires">زراعة الأسنان</h3>
+              <p data-ar="حلول دائمة للأسنان المفقودة بزراعة تيتانيوم عالية الجودة تدوم مدى الحياة." data-fr="Solutions permanentes avec implants en titane de haute qualité.">
+                حلول دائمة للأسنان المفقودة بزراعة تيتانيوم عالية الجودة تدوم مدى الحياة.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 5. تنظيف وتلميع -->
+          <div class="svc-page-card reveal-up" style="--delay:0.2s" onclick="location.href='../booking.html?service=cleaning'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=85" alt="تنظيف الأسنان" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">💎</div>
+              <h3 data-ar="تنظيف وتلميع" data-fr="Détartrage et Polissage">تنظيف وتلميع</h3>
+              <p data-ar="إزالة الجير والبقع وتلميع الأسنان لحماية اللثة من الالتهابات وتعزيز النظافة الفموية." data-fr="Élimination du tartre et des taches pour protéger les gencives.">
+                إزالة الجير والبقع وتلميع الأسنان لحماية اللثة من الالتهابات وتعزيز النظافة الفموية.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 6. طب أسنان الأطفال -->
+          <div class="svc-page-card reveal-up" style="--delay:0.25s" onclick="location.href='../booking.html?service=pediatric'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=600&q=85" alt="طب أسنان الأطفال" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">👶</div>
+              <h3 data-ar="طب أسنان الأطفال" data-fr="Pédodontie">طب أسنان الأطفال</h3>
+              <p data-ar="رعاية متخصصة للأطفال في بيئة مريحة ومحببة لضمان أساس صحي قوي لابتسامتهم منذ الصغر." data-fr="Soins spécialisés pour enfants dans un environnement accueillant.">
+                رعاية متخصصة للأطفال في بيئة مريحة ومحببة لضمان أساس صحي قوي لابتسامتهم منذ الصغر.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 7. علاج العصب -->
+          <div class="svc-page-card reveal-up" style="--delay:0.3s" onclick="location.href='../booking.html?service=root-canal'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=600&q=85" alt="علاج العصب" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">⚡</div>
+              <h3 data-ar="علاج قناة العصب" data-fr="Traitement Endodontique">علاج قناة العصب</h3>
+              <p data-ar="خلاص من الألم وحفظ الأسنان الطبيعية بتقنيات علاج عصب حديثة ودقيقة مع ضمان الراحة التامة." data-fr="Élimination de la douleur et préservation des dents avec des techniques modernes.">
+                خلاص من الألم وحفظ الأسنان الطبيعية بتقنيات علاج عصب حديثة ودقيقة مع ضمان الراحة التامة.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 8. تركيبات وتيجان -->
+          <div class="svc-page-card reveal-up" style="--delay:0.35s" onclick="location.href='../booking.html?service=crowns'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1581591524425-c7e0978865fc?w=600&q=85" alt="تركيبات وتيجان" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">👑</div>
+              <h3 data-ar="تركيبات وتيجان خزفية" data-fr="Couronnes et Bridges">تركيبات وتيجان خزفية</h3>
+              <p data-ar="تيجان خزفية عالية الجودة لاستعادة شكل الأسنان ووظيفتها بدقة متناهية وجماليات رائعة." data-fr="Couronnes en céramique pour restaurer la forme et la fonction des dents.">
+                تيجان خزفية عالية الجودة لاستعادة شكل الأسنان ووظيفتها بدقة متناهية وجماليات رائعة.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 9. فينيرز -->
+          <div class="svc-page-card reveal-up" style="--delay:0.4s" onclick="location.href='../booking.html?service=veneers'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=85" alt="فينيرز قشرة خزفية" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">💫</div>
+              <h3 data-ar="فينيرز — قشرة خزفية" data-fr="Facettes en Céramique">فينيرز — قشرة خزفية</h3>
+              <p data-ar="قشرة خزفية رفيعة توضع على سطح الأسنان لتغيير لونها وشكلها وتحسين الابتسامة بشكل ملحوظ." data-fr="Fines facettes en céramique pour améliorer la couleur et la forme des dents.">
+                قشرة خزفية رفيعة توضع على سطح الأسنان لتغيير لونها وشكلها وتحسين الابتسامة بشكل ملحوظ.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 10. علاج اللثة -->
+          <div class="svc-page-card reveal-up" style="--delay:0.45s" onclick="location.href='../booking.html?service=gum'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=85" alt="علاج اللثة" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">🌿</div>
+              <h3 data-ar="علاج أمراض اللثة" data-fr="Traitement Parodontal">علاج أمراض اللثة</h3>
+              <p data-ar="تشخيص وعلاج متخصص لأمراض اللثة والتهاباتها للحفاظ على أسنانك وصحة فمك على المدى البعيد." data-fr="Diagnostic et traitement spécialisé des maladies des gencives.">
+                تشخيص وعلاج متخصص لأمراض اللثة والتهاباتها للحفاظ على أسنانك وصحة فمك على المدى البعيد.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+          <!-- 11. طوارئ الأسنان -->
+          <div class="svc-page-card reveal-up" style="--delay:0.5s" onclick="location.href='../booking.html?service=emergency'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=85" alt="طوارئ الأسنان" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">🚨</div>
+              <h3 data-ar="طوارئ الأسنان" data-fr="Urgences Dentaires">طوارئ الأسنان</h3>
+              <p data-ar="استجابة سريعة لحالات الطوارئ: كسر السن، ألم حاد، خلع وغيرها. نحن هنا لمساعدتك فوراً." data-fr="Réponse rapide aux urgences: douleurs aiguës, fractures dentaires et plus.">
+                استجابة سريعة لحالات الطوارئ: كسر السن، ألم حاد، خلع وغيرها. نحن هنا لمساعدتك فوراً.
+              </p>
+              <span class="svc-page-card-cta" data-ar="اتصل بنا ←" data-fr="Appeler →">اتصل بنا ←</span>
+            </div>
+          </div>
+
+          <!-- 12. أشعة الأسنان الرقمية -->
+          <div class="svc-page-card reveal-up" style="--delay:0.55s" onclick="location.href='../booking.html?service=xray'">
+            <div class="svc-page-card-img">
+              <img src="https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=600&q=85" alt="أشعة الأسنان الرقمية" loading="lazy">
+            </div>
+            <div class="svc-page-card-body">
+              <div class="svc-page-card-icon">📡</div>
+              <h3 data-ar="أشعة الأسنان الرقمية" data-fr="Radiologie Numérique">أشعة الأسنان الرقمية</h3>
+              <p data-ar="تصوير رقمي بإشعاع منخفض لتشخيص دقيق وشامل. صور فورية عالية الدقة تتيح أفضل تخطيط للعلاج." data-fr="Imagerie numérique à faible rayonnement pour un diagnostic précis.">
+                تصوير رقمي بإشعاع منخفض لتشخيص دقيق وشامل. صور فورية عالية الدقة تتيح أفضل تخطيط للعلاج.
+              </p>
+              <span class="svc-page-card-cta" data-ar="احجز موعدك ←" data-fr="Réserver →">احجز موعدك ←</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="svc-faq-section">
+      <div class="container" style="max-width: 800px;">
+        <h2 data-ar="أسئلة شائعة حول خدماتنا" data-fr="Questions fréquentes sur nos services">أسئلة شائعة حول خدماتنا</h2>
+
+        <div class="svc-faq-item">
+          <div class="svc-faq-q" onclick="this.parentElement.classList.toggle('open')" data-ar="هل يمكنني حجز موعد عبر الإنترنت؟" data-fr="Puis-je prendre rendez-vous en ligne ?">
+            هل يمكنني حجز موعد عبر الإنترنت؟
+          </div>
+          <div class="svc-faq-a" data-ar="نعم، يمكنك حجز موعدك بسهولة من خلال موقعنا الإلكتروني على مدار الساعة. ستتلقى تأكيداً فورياً عبر رسالة نصية." data-fr="Oui, vous pouvez réserver en ligne 24h/24. Vous recevrez une confirmation immédiate.">
+            نعم، يمكنك حجز موعدك بسهولة من خلال موقعنا الإلكتروني على مدار الساعة. ستتلقى تأكيداً فورياً عبر رسالة نصية.
+          </div>
+        </div>
+
+        <div class="svc-faq-item">
+          <div class="svc-faq-q" onclick="this.parentElement.classList.toggle('open')" data-ar="كم تستغرق جلسة التبييض؟" data-fr="Combien de temps dure une séance de blanchiment ?">
+            كم تستغرق جلسة التبييض؟
+          </div>
+          <div class="svc-faq-a" data-ar="جلسة التبييض المهنية تستغرق عادةً بين 60 و90 دقيقة. ستلاحظ فرقاً ملموساً في لون أسنانك فور انتهاء الجلسة." data-fr="Une séance de blanchiment professionnel dure généralement entre 60 et 90 minutes.">
+            جلسة التبييض المهنية تستغرق عادةً بين 60 و90 دقيقة. ستلاحظ فرقاً ملموساً في لون أسنانك فور انتهاء الجلسة.
+          </div>
+        </div>
+
+        <div class="svc-faq-item">
+          <div class="svc-faq-q" onclick="this.parentElement.classList.toggle('open')" data-ar="هل زراعة الأسنان مؤلمة؟" data-fr="La pose d'implants est-elle douloureuse ?">
+            هل زراعة الأسنان مؤلمة؟
+          </div>
+          <div class="svc-faq-a" data-ar="تُجرى الزراعة تحت تخدير موضعي كامل، لذلك لن تشعر بأي ألم أثناء العملية. بعد الجلسة قد يكون هناك تورم طفيف يزول خلال يوم أو يومين." data-fr="La pose se réalise sous anesthésie locale complète, sans douleur pendant l'opération.">
+            تُجرى الزراعة تحت تخدير موضعي كامل، لذلك لن تشعر بأي ألم أثناء العملية. بعد الجلسة قد يكون هناك تورم طفيف يزول خلال يوم أو يومين.
+          </div>
+        </div>
+
+        <div class="svc-faq-item">
+          <div class="svc-faq-q" onclick="this.parentElement.classList.toggle('open')" data-ar="ما هي مدة تقويم الأسنان؟" data-fr="Quelle est la durée d'un traitement orthodontique ?">
+            ما هي مدة تقويم الأسنان؟
+          </div>
+          <div class="svc-faq-a" data-ar="تختلف المدة حسب حالة كل مريض، لكن في المتوسط تتراوح بين 12 و24 شهراً. سيقوم الدكتور نوري بتحديد المدة الدقيقة بعد الفحص الأولي." data-fr="La durée varie selon chaque patient, en moyenne entre 12 et 24 mois.">
+            تختلف المدة حسب حالة كل مريض، لكن في المتوسط تتراوح بين 12 و24 شهراً. سيقوم الدكتور نوري بتحديد المدة الدقيقة بعد الفحص الأولي.
+          </div>
+        </div>
+
+        <div class="svc-faq-item">
+          <div class="svc-faq-q" onclick="this.parentElement.classList.toggle('open')" data-ar="هل تقبلون التأمين الصحي؟" data-fr="Acceptez-vous l'assurance maladie ?">
+            هل تقبلون التأمين الصحي؟
+          </div>
+          <div class="svc-faq-a" data-ar="نعم، نقبل معظم أنواع التأمين الصحي. للمزيد من التفاصيل حول التغطية، تواصل معنا مباشرة قبل موعدك." data-fr="Oui, nous acceptons la plupart des assurances. Contactez-nous pour les détails.">
+            نعم، نقبل معظم أنواع التأمين الصحي. للمزيد من التفاصيل حول التغطية، تواصل معنا مباشرة قبل موعدك.
+          </div>
+        </div>
+
+        <div class="svc-faq-item">
+          <div class="svc-faq-q" onclick="this.parentElement.classList.toggle('open')" data-ar="كيف أستعد لأول زيارة؟" data-fr="Comment me préparer pour ma première visite ?">
+            كيف أستعد لأول زيارة؟
+          </div>
+          <div class="svc-faq-a" data-ar="لا حاجة لأي تحضير خاص. احضر مع أي سجلات طبية أو أشعة سابقة إن وجدت. سيقوم الدكتور نوري بإجراء فحص شامل وتقديم خطة علاجية كاملة." data-fr="Aucune préparation spéciale. Apportez vos anciens dossiers médicaux si disponibles.">
+            لا حاجة لأي تحضير خاص. احضر مع أي سجلات طبية أو أشعة سابقة إن وجدت. سيقوم الدكتور نوري بإجراء فحص شامل وتقديم خطة علاجية كاملة.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="page-cta-section">
+      <div class="container">
+        <h2 class="reveal-up" data-ar="جاهز لابتسامة أجمل؟" data-fr="Prêt pour un plus beau sourire ?">جاهز لابتسامة أجمل؟</h2>
+        <p class="reveal-up" data-ar="احجز موعدك الآن وسنتكفل بالباقي" data-fr="Réservez maintenant et nous nous occupons du reste">
+          احجز موعدك الآن وسنتكفل بالباقي
+        </p>
+        <div class="page-cta-btns reveal-up">
+          <a href="#" onclick="goToBooking(); return false;" class="btn-primary-new" data-ar="احجز موعدك الآن" data-fr="Réserver maintenant">احجز موعدك الآن</a>
+          <a href="tel:+212535402211" class="btn-secondary-new" data-ar="📞 0535 40 22 11" data-fr="📞 0535 40 22 11">📞 0535 40 22 11</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-new">
+    <div class="container">
+      <div class="footer-grid-new">
+        <div class="f-brand">
+          <a href="../index.html" class="nav-logo nav-logo-v2">
+            <div class="logo-mark">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hexFillSF)" opacity="0.15"/>
+                <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hexStrokeSF)" stroke-width="1" fill="none"/>
+                <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#crossFillSF)"/>
+                <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#crossFillSF)"/>
+                <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"/>
+                <defs>
+                  <linearGradient id="hexFillSF" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/>
+                  </linearGradient>
+                  <linearGradient id="hexStrokeSF" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/>
+                  </linearGradient>
+                  <linearGradient id="crossFillSF" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="white" stop-opacity="0.9"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="logo-wordmark">
+              <span class="logo-word-top">CABINET</span>
+              <span class="logo-word-bottom">NOURI</span>
+            </div>
+          </a>
+          <p data-ar="عيادة د. كريم نوري — الرائدة في مكناس. رعاية شاملة لابتسامتك بأحدث التقنيات الرقمية." data-fr="Cabinet Dr Karim Nouri — Leader à Meknès. Soins complets avec les dernières technologies.">
+            عيادة د. كريم نوري — الرائدة في مكناس. رعاية شاملة لابتسامتك بأحدث التقنيات الرقمية.
+          </p>
+        </div>
+        <div class="f-links">
+          <h4 data-ar="روابط سريعة" data-fr="Liens rapides">روابط سريعة</h4>
+          <ul>
+            <li><a href="../index.html" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a></li>
+            <li><a href="services.html" data-ar="خدماتنا" data-fr="Services">خدماتنا</a></li>
+            <li><a href="gallery.html" data-ar="معرض الصور" data-fr="Galerie">معرض الصور</a></li>
+            <li><a href="about.html" data-ar="من نحن" data-fr="À propos">من نحن</a></li>
+            <li><a href="faq.html" data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+        <div class="f-links">
+          <h4 data-ar="تواصل معنا" data-fr="Contactez-nous">تواصل معنا</h4>
+          <ul>
+            <li><a href="tel:+212535402211" data-ar="📞 هاتف العيادة" data-fr="📞 Tél Cabinet">📞 هاتف العيادة</a></li>
+            <li><a href="https://wa.me/212535402211" data-ar="💬 مراسلة واتساب" data-fr="💬 WhatsApp">💬 مراسلة واتساب</a></li>
+            <li><a href="appointment-tracking.html" data-ar="🗓️ تتبع موعدك" data-fr="🗓️ Suivi RDV">🗓️ تتبع موعدك</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-new">
+        <p data-ar="© 2026 Cabinet Dentaire Nouri. جميع الحقوق محفوظة." data-fr="© 2026 Cabinet Dentaire Nouri. Tous droits réservés.">© 2026 Cabinet Dentaire Nouri. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Widgets -->
+  <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد" target="_blank" aria-label="تواصل عبر واتساب">
+    <svg viewBox="0 0 24 24" fill="white" width="26" height="26">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/>
+    </svg>
+  </a>
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="العودة للأعلى">↑</button>
+  <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <div id="bookingChoiceModal" class="bcm-overlay" style="display:none;" aria-modal="true" role="dialog">
+    <div class="bcm-card">
+      <button class="bcm-close" onclick="closeBookingChoiceModal()" aria-label="إغلاق">
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+          <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2.5" stroke-linecap="round"></path>
+        </svg>
+      </button>
+      <div class="bcm-logo">
+        <div class="bcm-logo-ring"></div>
+        <svg viewBox="0 0 36 36" fill="none" width="32" height="32">
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#bcmHex)" opacity="0.2"></path>
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#bcmHex)" stroke-width="1" fill="none"></path>
+          <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#bcmCross)"></rect>
+          <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#bcmCross)"></rect>
+          <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"></circle>
+          <defs>
+            <linearGradient id="bcmHex" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0df2f2"></stop>
+              <stop offset="100%" stop-color="#0D9488"></stop>
+            </linearGradient>
+            <linearGradient id="bcmCross" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0df2f2"></stop>
+              <stop offset="100%" stop-color="white"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h2 class="bcm-title" data-ar="احجز موعدك" data-fr="Réservez">احجز موعدك</h2>
+      <p class="bcm-subtitle" data-ar="اختر طريقة الحجز التي تناسبك" data-fr="Choisissez votre méthode de réservation">اختر طريقة الحجز التي تناسبك</p>
+      <div class="bcm-options">
+        <a href="./register.html" class="bcm-opt bcm-opt-primary">
+          <div class="bcm-opt-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+              <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="bcm-opt-body">
+            <strong data-ar="إنشاء حساب مجاني" data-fr="Créer un compte gratuit">إنشاء حساب مجاني</strong>
+            <small data-ar="تتبع مواعيدك وسجلك الطبي بسهولة" data-fr="Suivez vos RDV et votre dossier médical">تتبع مواعيدك وسجلك الطبي بسهولة</small>
+          </div>
+          <span class="bcm-opt-badge" data-ar="مُوصى به ✓" data-fr="Recommandé ✓">مُوصى به ✓</span>
+        </a>
+        <div class="bcm-sep"><span data-ar="أو المتابعة بدون حساب" data-fr="Ou continuer sans compte">أو المتابعة بدون حساب</span></div>
+        <button class="bcm-opt bcm-opt-ghost" onclick="bookAsGuest()">
+          <div class="bcm-opt-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+              <path d="M8 7V3m8 4V3m-9 8h10M5 21h14 a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="bcm-opt-body">
+            <strong data-ar="حجز كزيارة" data-fr="Rendez-vous simple">حجز كزيارة</strong>
+            <small data-ar="بدون تسجيل — سريع وبسيط" data-fr="Sans inscription — Rapide et simple">بدون تسجيل — سريع وبسيط</small>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" width="16" height="16" class="bcm-arrow">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
+      <p class="bcm-login-line">
+        <span data-ar="لديك حساب؟" data-fr="Vous avez un compte?">لديك حساب؟</span>
+        <a href="./login.html" class="bcm-login-a" data-ar="تسجيل الدخول" data-fr="Se connecter">تسجيل الدخول</a>
+      </p>
+    </div>
+  </div>
+  <script>
+    document.getElementById('bookingChoiceModal').addEventListener('click', function(e) {
+      if (e.target === this) closeBookingChoiceModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeBookingChoiceModal();
+    });
+  </script>
+
+  <script>window._ROOT = '../';</script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/chat.js"></script>
+  <script src="../js/i18n.js"></script>
+</body>
+
+</html>
