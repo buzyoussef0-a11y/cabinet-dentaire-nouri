@@ -17,6 +17,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
+  <style>
+    #appointmentsList { min-height: 100px; width: 100%; }
+  </style>
 </head>
 
 <body>
@@ -272,6 +275,50 @@
   <script src="../js/main.js"></script>
   <script src="../js/i18n.js"></script>
   <script src="../js/tracking.js"></script>
+  <script>
+    /* ── TRACKING PAGE: empty-state guard ── */
+    (function () {
+      var _origRender = window.renderAppointments;
+
+      window.renderAppointments = async function () {
+        var list    = document.getElementById('appointmentsList');
+        var skeleton = document.getElementById('skeletonLoader');
+        var empty   = document.getElementById('noAppointments');
+
+        // Show loading immediately so the page is never blank after the skeleton hides
+        if (list) {
+          list.style.display = 'block';
+          list.innerHTML =
+            '<div style="text-align:center;padding:40px 20px;color:rgba(255,255,255,0.4);">' +
+            '<p style="margin:0;font-size:1rem;">⏳ جاري التحميل...</p>' +
+            '</div>';
+        }
+
+        // Auth check
+        var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
+
+        if (!user) {
+          // Show login prompt instead of a blank page
+          if (skeleton) skeleton.style.display = 'none';
+          if (empty)   empty.style.display   = 'none';
+          if (list) {
+            list.innerHTML =
+              '<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,0.7);">' +
+              '<div style="font-size:3rem;margin-bottom:16px;">🔒</div>' +
+              '<h3 style="color:white;margin:0 0 8px 0;">سجل دخولك أولاً</h3>' +
+              '<p style="color:rgba(255,255,255,0.5);margin:0 0 24px 0;">يجب تسجيل الدخول لعرض مواعيدك</p>' +
+              '<a href="./login.html" style="display:inline-block;background:#0D9488;color:white;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">تسجيل الدخول →</a>' +
+              '</div>';
+          }
+          return;
+        }
+
+        // Logged in — clear the loading state and let the original render run
+        if (list) list.innerHTML = '';
+        if (typeof _origRender === 'function') await _origRender();
+      };
+    }());
+  </script>
   <script src="../js/chat.js"></script>
   <script src="../js/toasts.js"></script>
   <script src="../js/modal.js"></script>
