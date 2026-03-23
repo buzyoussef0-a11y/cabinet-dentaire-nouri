@@ -46,6 +46,14 @@ function toggleChat() {
     }
 }
 
+/* ── Parse Markdown links → clickable <a> tags ── */
+function parseMarkdownLinks(text) {
+    return text.replace(
+        /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener" style="color:#00E5FF;text-decoration:underline;">$1</a>'
+    );
+}
+
 /* ── Append message bubble ── */
 function appendMsg(text, type) {
     var msgs = document.getElementById('chatMessages');
@@ -54,11 +62,17 @@ function appendMsg(text, type) {
     var div = document.createElement('div');
     div.className = type === 'bot' ? 'msg-bot' : 'msg-user';
 
-    /* Support newlines */
-    text.split('\n').forEach(function (line, i, arr) {
-        div.appendChild(document.createTextNode(line));
-        if (i < arr.length - 1) div.appendChild(document.createElement('br'));
-    });
+    if (type === 'bot') {
+        /* Bot messages: parse Markdown links, then render newlines */
+        var parsed = parseMarkdownLinks(text);
+        div.innerHTML = parsed.replace(/\n/g, '<br>');
+    } else {
+        /* User messages: plain text only (XSS-safe) */
+        text.split('\n').forEach(function (line, i, arr) {
+            div.appendChild(document.createTextNode(line));
+            if (i < arr.length - 1) div.appendChild(document.createElement('br'));
+        });
+    }
 
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
@@ -165,7 +179,9 @@ async function sendWithText(msg) {
             signal: controller.signal,
             body: JSON.stringify({
                 message: msg,
-                sessionId: chatSessionId
+                sessionId: chatSessionId,
+                userId: user ? user.id : null,
+                userName: user ? (user.user_metadata && user.user_metadata.full_name) || null : null
             })
         });
 
