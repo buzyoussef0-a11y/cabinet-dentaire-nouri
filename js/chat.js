@@ -1,8 +1,13 @@
 /* ── CHAT.JS — Cabinet Dentaire Nouri ── */
-var CHAT_WEBHOOK = 'https://youbito132.app.n8n.cloud/webhook/12da27b3-9496-4824-a194-a2d84062dd14';
+var CHAT_WEBHOOK = 'https://n8n.srv1521649.hstgr.cloud/webhook/dental-assistant';
 var chatHistory = [];
 var chatInited = false;
 var chatOpen = false;
+
+/* ── Persistent session ID across page visits ── */
+var chatSessionId = localStorage.getItem('chatSessionId') ||
+    'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+localStorage.setItem('chatSessionId', chatSessionId);
 
 /* ── Initialise on first open ── */
 async function initChat() {
@@ -160,12 +165,7 @@ async function sendWithText(msg) {
             signal: controller.signal,
             body: JSON.stringify({
                 message: msg,
-                history: chatHistory.slice(-8),
-                language: 'ar',
-                source: 'website-chat',
-                user: user
-                    ? { id: user.id, fullName: user.user_metadata?.full_name || user.id, phone: user.user_metadata?.phone || '' }
-                    : null
+                sessionId: chatSessionId
             })
         });
 
@@ -177,7 +177,7 @@ async function sendWithText(msg) {
             var ct = res.headers.get('content-type') || '';
             if (ct.includes('application/json')) {
                 var data = await res.json();
-                reply = data.reply || data.message || data.text || data.output || fallback;
+                reply = data.response || data.output || data.reply || data.message || data.text || fallback;
             } else {
                 var raw = (await res.text()).trim();
                 if (raw) reply = raw;
