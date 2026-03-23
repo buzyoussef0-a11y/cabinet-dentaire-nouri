@@ -24,12 +24,11 @@ document.addEventListener('DOMContentLoaded', function () {
 async function renderAppointments() {
   var list = document.getElementById('appointmentsList');
   var empty = document.getElementById('noAppointments');
-  var template = document.getElementById('appointmentTemplate');
 
   if (!list) return;
 
   var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
-  if (!user) return; // Should be handled by auth protection, but just in case.
+  if (!user) return;
 
   var appointments = [];
   try {
@@ -40,21 +39,17 @@ async function renderAppointments() {
       .eq('user_id', user.id)
       .order('created_at', { ascending: false });
 
-    console.log('Supabase Fetch Result:', { data, error });
+    console.log('Appointments data:', data);
+    console.log('Error:', error);
 
     if (error) {
       console.error('Error fetching appointments:', error);
-      if (typeof showToast === 'function') {
-        showToast('❌', 'خطأ في تحميل البيانات', error.message, '#EF4444');
-      }
     } else {
       appointments = data || [];
     }
   } catch (e) {
     console.error(e);
   }
-
-  // Fallback to local storage if no user logic or just merging (for legacy local storage ones, optional)
 
   if (!appointments.length) {
     if (empty) empty.style.display = 'block';
@@ -65,25 +60,6 @@ async function renderAppointments() {
   if (empty) empty.style.display = 'none';
   list.style.display = 'grid';
 
-  // Create a persistent diagnostic status message
-  list.innerHTML = '<div id="tracking-status" style="border: 1px dashed var(--accent); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.9rem; background: rgba(13, 242, 242, 0.05); color: var(--accent); text-align: center;">' +
-    '🔍 جاري التحقق من المواعيد... (User: ' + user.id.substring(0, 8) + '...)' +
-    '</div>';
-
-  console.log('Rendering appointments...', appointments);
-
-  var statusEl = document.getElementById('tracking-status');
-
-  if (appointments.length === 0) {
-    if (statusEl) statusEl.innerHTML = '⚠️ لم يتم العثور على أي مواعيد مرتبطة بهذا الحساب (' + user.id.substring(0, 8) + ') في قاعدة البيانات.';
-    if (empty) empty.style.display = 'block';
-    return;
-  }
-
-  // Update status with count
-  if (statusEl) statusEl.innerHTML = '✅ تم العثور على ' + appointments.length + ' موعد. جاري العرض المباشر...';
-
-  var appointmentsHtml = '';
   var currentLang = localStorage.getItem('siteLang') || 'ar';
   var isAr = currentLang === 'ar';
 
@@ -91,46 +67,47 @@ async function renderAppointments() {
   var statusFr = { pending: 'En attente', confirmed: 'Confirmé', cancelled: 'Annulé' };
   var statusColor = { pending: '#F59E0B', confirmed: '#10B981', cancelled: '#EF4444' };
 
+  var appointmentsHtml = '';
+
   appointments.forEach(function (apt, index) {
     try {
       var s = apt.status || 'pending';
       var sTxt = isAr ? (statusAr[s] || 'قيد المراجعة') : (statusFr[s] || 'En attente');
       var sCol = statusColor[s] || '#64748B';
-      var service = apt.service || (isAr ? 'فحص عام' : 'Consultation');
-      var date = apt.preferred_date || '-';
-      var time = apt.preferred_time || '';
+      var service = apt.service || apt.service_type || apt.treatment || (isAr ? 'فحص عام' : 'Consultation');
+      var date = apt.preferred_date || apt.appointment_date || apt.date || '-';
+      var time = apt.preferred_time || apt.appointment_time || apt.time || '';
       var ref = apt.reference_id || '-';
-      var name = apt.full_name || '-';
+      var name = apt.full_name || apt.patient_name || apt.name || '-';
+      var isCancelled = s === 'cancelled';
 
       var lblDate = isAr ? 'التاريخ:' : 'Date :';
       var lblRef = isAr ? 'الرقم المرجعي:' : 'Réf :';
       var lblName = isAr ? 'باسم:' : 'Nom :';
-
-      var btnEdit = isAr ? 'تعديل ✏️' : 'Modifier ✏️';
       var btnCancel = isAr ? 'إلغاء 🗑️' : 'Annuler 🗑️';
 
-      // Build the card HTML directly for maximum reliability
       appointmentsHtml +=
-        '<div class="appointment-item" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 16px; padding: 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom:15px;">' +
+        '<div class="appointment-item" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">' +
         '<div style="display: flex; align-items: center; gap: 20px; flex: 1; flex-direction: row-reverse;">' +
-        '<div style="width: 60px; height: 60px; background: var(--accent-subtle); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent);">🦷</div>' +
+        '<div style="width: 60px; height: 60px; background: rgba(13,242,242,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🦷</div>' +
         '<div style="text-align: right;">' +
         '<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-direction: row-reverse;">' +
-        '<span style="font-weight: 700; font-size: 1.1rem; color: var(--text);">' + service + '</span>' +
+        '<span style="font-weight: 700; font-size: 1.1rem; color: #ffffff;">' + service + '</span>' +
         '<span style="padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; color: white; background-color: ' + sCol + ';">' + sTxt + '</span>' +
         '</div>' +
-        '<div style="font-size: 0.9rem; color: var(--text-muted); display: flex; gap: 15px; flex-direction: row-reverse;">' +
-        '<span><strong style="color: var(--text);">' + lblDate + '</strong> <span>' + date + ' ' + time + '</span></span>' +
-        '<span><strong style="color: var(--text);">' + lblRef + '</strong> <span>' + ref + '</span></span>' +
+        '<div style="font-size: 0.9rem; color: rgba(255,255,255,0.6); display: flex; gap: 15px; flex-direction: row-reverse;">' +
+        '<span><strong style="color: rgba(255,255,255,0.9);">' + lblDate + '</strong> ' + date + ' ' + time + '</span>' +
+        '<span><strong style="color: rgba(255,255,255,0.9);">' + lblRef + '</strong> ' + ref + '</span>' +
         '</div>' +
-        '<div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">' +
-        '<span><strong style="color: var(--text);">' + lblName + '</strong> <span>' + name + '</span></span>' +
+        '<div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 4px;">' +
+        '<span><strong style="color: rgba(255,255,255,0.9);">' + lblName + '</strong> ' + name + '</span>' +
         '</div>' +
         '</div>' +
         '</div>' +
         '<div style="display: flex; gap: 10px; margin-right: 20px;">' +
-        '<button class="btn-ghost" onclick="showToast(\'ℹ️\', \'' + (isAr ? 'تعديل الموعد' : 'Modifier RDV') + '\', \'' + (isAr ? 'يرجى التواصل معنا لتعديل الموعد' : 'Veuillez nous contacter pour modifier') + '\', \'#06B6D4\')" style="padding: 8px 16px; font-size: 0.85rem; border-color: rgba(13, 148, 136, 0.3); color: white; cursor: pointer;">' + btnEdit + '</button>' +
-        '<button class="btn-ghost" onclick="cancelAppointment(\'' + ref + '\')" style="padding: 8px 16px; font-size: 0.85rem; color: var(--error); border-color: rgba(244, 63, 94, 0.3); cursor: pointer;" ' + (s === 'cancelled' ? 'disabled style="opacity:0.4;"' : '') + '>' + btnCancel + '</button>' +
+        '<button class="btn-ghost" onclick="cancelAppointment(\'' + ref + '\')" ' +
+        'style="padding: 8px 16px; font-size: 0.85rem; color: #EF4444; border: 1px solid rgba(244,63,94,0.3); border-radius: 8px; cursor: pointer; background: transparent;' + (isCancelled ? ' opacity: 0.4;' : '') + '"' +
+        (isCancelled ? ' disabled' : '') + '>' + btnCancel + '</button>' +
         '</div>' +
         '</div>';
 
@@ -140,9 +117,8 @@ async function renderAppointments() {
     }
   });
 
-  // Inject final HTML
-  var finalStatus = statusEl ? statusEl.outerHTML : '';
-  list.innerHTML = finalStatus + appointmentsHtml;
+  // Single innerHTML assignment — renders all cards at once
+  list.innerHTML = appointmentsHtml;
 }
 function cancelAppointment(refId) {
   if (typeof showConfirmModal !== 'function') {
