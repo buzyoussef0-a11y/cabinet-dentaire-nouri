@@ -167,11 +167,20 @@ async function sendWithText(msg) {
     var typing = showTyping();
     var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
 
+    /* Get Supabase JWT so n8n can query appointments with RLS */
+    var userToken = null;
+    try {
+        if (user && window.supabase) {
+            var sessionRes = await window.supabase.auth.getSession();
+            userToken = (sessionRes.data && sessionRes.data.session) ? sessionRes.data.session.access_token : null;
+        }
+    } catch (e) { /* silent — token stays null */ }
+
     var fallback = 'شكراً على تواصلك. 📞 للتواصل الفوري اتصل بنا على 0535 40 22 11 أو تواصل عبر واتساب.';
 
     try {
         var controller = new AbortController();
-        var timeout = setTimeout(function () { controller.abort(); }, 12000);
+        var timeout = setTimeout(function () { controller.abort(); }, 25000);
 
         var res = await fetch(CHAT_WEBHOOK, {
             method: 'POST',
@@ -180,8 +189,10 @@ async function sendWithText(msg) {
             body: JSON.stringify({
                 message: msg,
                 sessionId: chatSessionId,
-                userId: user ? user.id : null,
-                userName: user ? (user.user_metadata && user.user_metadata.full_name) || null : null
+                userId:    user ? user.id    : null,
+                userName:  user ? (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || user.email || null : null,
+                userEmail: user ? user.email : null,
+                userToken: userToken
             })
         });
 
