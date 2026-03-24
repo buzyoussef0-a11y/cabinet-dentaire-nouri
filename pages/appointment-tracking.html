@@ -276,57 +276,122 @@
   <script src="../js/i18n.js"></script>
   <script src="../js/tracking.js"></script>
   <script>
-    /* ── TRACKING PAGE: empty-state guard v2 ── */
+    /* ── TRACKING PAGE: self-contained render (replaces tracking.js version) ── */
     (function () {
-      var _origRender = window.renderAppointments;
 
+      /* Render a single appointment card */
+      function buildCard(apt, isAr) {
+        var statusAr   = { pending: 'قيد المراجعة', confirmed: 'مؤكد', cancelled: 'ملغى' };
+        var statusFr   = { pending: 'En attente',   confirmed: 'Confirmé', cancelled: 'Annulé' };
+        var statusColor= { pending: '#F59E0B',       confirmed: '#10B981',  cancelled: '#EF4444' };
+        var s    = apt.status || 'pending';
+        var sTxt = isAr ? (statusAr[s] || s) : (statusFr[s] || s);
+        var sCol = statusColor[s] || '#64748B';
+        var svc  = apt.service || apt.service_type || apt.treatment || (isAr ? 'فحص عام' : 'Consultation');
+        var date = apt.preferred_date || apt.appointment_date || apt.date || '-';
+        var time = apt.preferred_time || apt.appointment_time || apt.time || '';
+        var ref  = apt.reference_id  || apt.ref || '-';
+        var name = apt.full_name     || apt.patient_name || apt.name || '-';
+        var cancelled = s === 'cancelled';
+        return (
+          '<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);' +
+          'border-radius:16px;padding:24px;display:flex;align-items:center;' +
+          'justify-content:space-between;margin-bottom:15px;">' +
+          '<div style="display:flex;align-items:center;gap:20px;flex:1;flex-direction:row-reverse;">' +
+          '<div style="width:60px;height:60px;background:rgba(13,242,242,0.1);border-radius:12px;' +
+          'display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🦷</div>' +
+          '<div style="text-align:right;">' +
+          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-direction:row-reverse;">' +
+          '<span style="font-weight:700;font-size:1.1rem;color:#fff;">' + svc + '</span>' +
+          '<span style="padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:700;color:#fff;background:' + sCol + ';">' + sTxt + '</span>' +
+          '</div>' +
+          '<div style="font-size:0.9rem;color:rgba(255,255,255,0.6);display:flex;gap:15px;flex-direction:row-reverse;">' +
+          '<span><strong style="color:rgba(255,255,255,0.9);">' + (isAr ? 'التاريخ:' : 'Date :') + '</strong> ' + date + ' ' + time + '</span>' +
+          '<span><strong style="color:rgba(255,255,255,0.9);">' + (isAr ? 'الرقم المرجعي:' : 'Réf :') + '</strong> ' + ref + '</span>' +
+          '</div>' +
+          '<div style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:4px;">' +
+          '<span><strong style="color:rgba(255,255,255,0.9);">' + (isAr ? 'باسم:' : 'Nom :') + '</strong> ' + name + '</span>' +
+          '</div>' +
+          '</div></div>' +
+          '<div style="display:flex;gap:10px;margin-right:20px;">' +
+          '<button onclick="cancelAppointment(\'' + ref + '\')" ' +
+          'style="padding:8px 16px;font-size:0.85rem;color:#EF4444;border:1px solid rgba(244,63,94,0.3);' +
+          'border-radius:8px;cursor:pointer;background:transparent;' + (cancelled ? 'opacity:0.4;' : '') + '"' +
+          (cancelled ? ' disabled' : '') + '>' + (isAr ? 'إلغاء 🗑️' : 'Annuler 🗑️') + '</button>' +
+          '</div></div>'
+        );
+      }
+
+      /* Main render — tries multiple fetch strategies */
       window.renderAppointments = async function () {
         var list     = document.getElementById('appointmentsList');
         var skeleton = document.getElementById('skeletonLoader');
         var empty    = document.getElementById('noAppointments');
+        if (!list) return;
 
-        // Show loading immediately — stamped with data-loading so we can detect it later
-        if (list) {
-          list.style.display = 'block';
-          list.innerHTML =
-            '<div data-loading="1" style="text-align:center;padding:40px 20px;color:rgba(255,255,255,0.5);">' +
-            '<p style="margin:0;font-size:1rem;">⏳ جاري التحميل...</p>' +
-            '</div>';
-        }
+        /* Loading state */
+        list.style.display = 'block';
+        list.innerHTML =
+          '<div style="text-align:center;padding:40px 20px;color:rgba(255,255,255,0.5);">' +
+          '<p style="margin:0;">⏳ جاري التحميل...</p></div>';
 
-        // Auth check
+        /* Auth */
         var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
-
         if (!user) {
-          // Not logged in — show login prompt
           if (skeleton) skeleton.style.display = 'none';
           if (empty)    empty.style.display    = 'none';
-          if (list) {
-            list.innerHTML =
-              '<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,0.7);">' +
-              '<div style="font-size:3rem;margin-bottom:16px;">🔒</div>' +
-              '<h3 style="color:white;margin:0 0 8px 0;">سجل دخولك أولاً</h3>' +
-              '<p style="color:rgba(255,255,255,0.5);margin:0 0 24px 0;">يجب تسجيل الدخول لعرض مواعيدك</p>' +
-              '<a href="./login.html" style="display:inline-block;background:#0D9488;color:white;' +
-              'padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">تسجيل الدخول →</a>' +
-              '</div>';
-          }
+          list.innerHTML =
+            '<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,0.7);">' +
+            '<div style="font-size:3rem;margin-bottom:16px;">🔒</div>' +
+            '<h3 style="color:#fff;margin:0 0 8px 0;">سجل دخولك أولاً</h3>' +
+            '<p style="color:rgba(255,255,255,0.5);margin:0 0 24px 0;">يجب تسجيل الدخول لعرض مواعيدك</p>' +
+            '<a href="./login.html" style="display:inline-block;background:#0D9488;color:#fff;' +
+            'padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">تسجيل الدخول →</a>' +
+            '</div>';
           return;
         }
 
-        // Logged in — run original render (loading state stays until _origRender replaces it)
-        if (typeof _origRender === 'function') {
-          await _origRender();
+        /* Fetch — four strategies so we never miss a booking */
+        var appointments = [];
+        if (typeof supabase !== 'undefined') {
+          var strategies = [
+            { table: 'appointments', col: 'user_id', val: user.id },
+            { table: 'appointments', col: 'email',   val: user.email },
+            { table: 'bookings',     col: 'user_id', val: user.id },
+            { table: 'bookings',     col: 'email',   val: user.email }
+          ];
+          for (var i = 0; i < strategies.length; i++) {
+            var s = strategies[i];
+            if (!s.val) continue;
+            try {
+              var res = await supabase.from(s.table).select('*')
+                .eq(s.col, s.val).order('created_at', { ascending: false });
+              console.log('[tracking] ' + s.table + '.' + s.col + ':', res.data, res.error);
+              if (!res.error && res.data && res.data.length) {
+                appointments = res.data;
+                break;
+              }
+            } catch (e) { console.warn('[tracking] strategy ' + i + ' failed:', e); }
+          }
         }
 
-        // Safety net: if loading placeholder is still in the list after _origRender ran
-        // (it returned early due to a silent auth/fetch failure), show the empty state
-        if (list && list.querySelector('[data-loading]')) {
-          if (skeleton) skeleton.style.display = 'none';
-          if (empty)    empty.style.display    = 'block';
+        console.log('[tracking] appointments found:', appointments.length);
+        if (skeleton) skeleton.style.display = 'none';
+
+        if (!appointments.length) {
+          if (empty) empty.style.display = 'block';
           list.style.display = 'none';
+          return;
         }
+
+        if (empty) empty.style.display = 'none';
+        var isAr = (localStorage.getItem('siteLang') || 'ar') === 'ar';
+        list.style.display = 'grid';
+        list.innerHTML = appointments.map(function (apt) {
+          return buildCard(apt, isAr);
+        }).join('');
       };
+
     }());
   </script>
   <script src="../js/chat.js"></script>
