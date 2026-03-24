@@ -176,13 +176,17 @@
       currentUser = user;
 
       // Check if profile already complete
-      const { data: profile } = await window.supabase
+      const { data: profile, error: profileError } = await window.supabase
         .from('profiles')
-        .select('phone')
+        .select('full_name, phone')
         .eq('id', user.id)
         .single();
 
-      if (profile?.phone) {
+      console.log('Profile check:', profile, profileError);
+
+      // If profile exists AND has both name and phone → skip to home
+      if (profile && profile.full_name && profile.phone) {
+        console.log('Profile complete, redirecting to home');
         window.location.href = 'https://lighthearted-mooncake-e615fb.netlify.app/index.html';
         return;
       }
@@ -193,7 +197,10 @@
         avatar.src = user.user_metadata.avatar_url;
         avatar.style.display = 'block';
       }
-      document.getElementById('full-name').value = user.user_metadata?.full_name || '';
+      document.getElementById('full-name').value =
+        profile?.full_name ||
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name || '';
     }
 
     document.getElementById('complete-btn').addEventListener('click', async () => {
@@ -202,7 +209,7 @@
       const phone = document.getElementById('whatsapp').value.trim();
 
       if (!name || !phone) {
-        alert('يرجى ملء جميع الحقول');
+        alert('يرجى ملء جميع الحقول المطلوبة');
         return;
       }
 
@@ -210,16 +217,16 @@
       btn.disabled = true;
 
       try {
-        const { data: { user }, error: userError } = await window.supabase.auth.getUser();
+        const { data: { user } } = await window.supabase.auth.getUser();
 
-        if (userError || !user) {
-          alert('خطأ: المستخدم غير مسجل الدخول');
-          btn.textContent = '✅ إكمال التسجيل';
-          btn.disabled = false;
+        if (!user) {
+          alert('انتهت جلستك، يرجى تسجيل الدخول مجدداً');
+          window.location.href = './login.html';
           return;
         }
 
-        const { data, error } = await window.supabase
+        // Try upsert first
+        const { error: upsertError } = await window.supabase
           .from('profiles')
           .upsert({
             id: user.id,
@@ -228,19 +235,35 @@
             email: user.email,
             avatar_url: user.user_metadata?.avatar_url || '',
             updated_at: new Date().toISOString()
-          }, { onConflict: 'id' });
+          }, {
+            onConflict: 'id',
+            ignoreDuplicates: false
+          });
 
-        if (error) {
-          alert('خطأ في الحفظ: ' + error.message + '\nCode: ' + error.code);
-          btn.textContent = '✅ إكمال التسجيل';
-          btn.disabled = false;
-          return;
+        if (upsertError) {
+          console.error('Upsert error:', upsertError);
+          // Try update instead
+          const { error: updateError } = await window.supabase
+            .from('profiles')
+            .update({
+              full_name: name,
+              phone: phone,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', user.id);
+
+          if (updateError) {
+            alert('خطأ في الحفظ: ' + updateError.message);
+            btn.textContent = '✅ إكمال التسجيل';
+            btn.disabled = false;
+            return;
+          }
         }
 
         window.location.href = 'https://lighthearted-mooncake-e615fb.netlify.app/index.html';
 
       } catch(e) {
-        alert('خطأ غير متوقع: ' + e.message);
+        alert('خطأ: ' + e.message);
         btn.textContent = '✅ إكمال التسجيل';
         btn.disabled = false;
       }

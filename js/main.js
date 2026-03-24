@@ -87,18 +87,15 @@ async function populateNavUser() {
 }
 
 // ── goToBooking (all pages)
-function goToBooking() {
-    if (window._supabase) {
-        window._supabase.auth.getSession()
-            .then(function (res) {
-                if (res.data && res.data.session) {
-                    window.location.href = (window._ROOT || '') + 'booking.html';
-                } else {
-                    showBookingModal();
-                }
-            })
-            .catch(function () { showBookingModal(); });
-    } else {
+async function goToBooking() {
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+            window.location.href = (window._ROOT || '') + 'booking.html';
+        } else {
+            showBookingModal();
+        }
+    } catch (e) {
         showBookingModal();
     }
 }
