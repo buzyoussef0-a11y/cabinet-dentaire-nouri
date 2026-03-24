@@ -393,6 +393,11 @@
       };
 
     }());
+
+    /* Auto-call on page load */
+    document.addEventListener('DOMContentLoaded', function () {
+      renderAppointments();
+    });
   </script>
   <script src="../js/chat.js"></script>
   <script src="../js/toasts.js"></script>
