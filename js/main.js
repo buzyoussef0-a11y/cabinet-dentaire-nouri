@@ -30,61 +30,64 @@ async function populateNavUser() {
 
     if (!user && !localUser) return;
 
-    function getDisplayId(uid) {
-        var hash = 0;
-        for (var i = 0; i < uid.length; i++) {
-            hash = ((hash << 5) - hash) + uid.charCodeAt(i);
-            hash |= 0;
-        }
-        return Math.abs(hash) % 9000 + 1000;
-    }
-
     var displayName = (user?.user_metadata?.full_name || localUser?.fullName || user?.email || 'مستخدم').split(' ')[0];
-    var userId = user?.id || localUser?.id || '00000';
-    var userNumber = getDisplayId(userId);
-
+    var initial = displayName.charAt(0).toUpperCase();
     var currentLang = localStorage.getItem('siteLang') || 'ar';
     var isAr = currentLang === 'ar';
+    var profileHref = (window._ROOT || '') + 'pages/profile.html';
 
-    // index.html has auth-links slot
+    var dropdownHTML = [
+        '<div class="user-dropdown-wrapper" style="position:relative;">',
+        '<button class="user-dropdown-btn" onclick="toggleUserDropdown()" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(13,242,242,0.3);border-radius:50px;padding:6px 14px 6px 6px;cursor:pointer;color:white;font-family:Cairo,sans-serif;font-size:0.9rem;">',
+        '<div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#0df2f2,#0D9488);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;color:#0a1628;">' + initial + '</div>',
+        '<span>' + (isAr ? 'مرحباً ' : 'Bonjour ') + displayName + '</span>',
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="opacity:0.6"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+        '</button>',
+        '<div id="userDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);left:0;background:#0F1E35;border:1px solid rgba(13,242,242,0.2);border-radius:12px;padding:8px;min-width:180px;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,0.4);">',
+        '<a href="' + profileHref + '" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;color:white;text-decoration:none;font-family:Cairo,sans-serif;font-size:0.9rem;" onmouseover="this.style.background=\'rgba(13,242,242,0.1)\'" onmouseout="this.style.background=\'transparent\'">',
+        '👤 <span>' + (isAr ? 'ملفي الشخصي' : 'Mon profil') + '</span>',
+        '</a>',
+        '<div style="height:1px;background:rgba(255,255,255,0.08);margin:4px 0;"></div>',
+        '<button onclick="logoutUser()" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;color:#EF4444;background:transparent;border:none;width:100%;font-family:Cairo,sans-serif;font-size:0.9rem;cursor:pointer;text-align:right;" onmouseover="this.style.background=\'rgba(239,68,68,0.1)\'" onmouseout="this.style.background=\'transparent\'">',
+        '🚪 <span>' + (isAr ? 'تسجيل الخروج' : 'Se déconnecter') + '</span>',
+        '</button>',
+        '</div>',
+        '</div>'
+    ].join('');
+
     var authLinks = document.getElementById('auth-links');
     if (authLinks) {
-        authLinks.innerHTML =
-            '<span class="user-welcome-pill">' +
-            '  <span class="user-welcome-text" data-ar="مرحباً" data-fr="Bonjour">مرحباً</span>' +
-            '  <span class="user-first-name">' +
-            getFirstName(user || localUser || {}) +
-            '  </span>' +
-            '</span>' +
-            '<a href="' + (window._ROOT||'') + 'pages/profile.html" class="nav-user-avatar" title="' + (isAr ? 'حسابي' : 'Mon compte') + '">' +
-            '  <svg viewBox="0 0 24 24" fill="none" width="18" height="18">' +
-            '  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" ' +
-            '  stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
-            '</a>' +
-            '<a href="#" onclick="logoutUser()" class="nav-signout-btn" data-ar="خروج" data-fr="Quitter">' +
-            '  خروج' +
-            '</a>';
+        authLinks.innerHTML = dropdownHTML;
+        return;
     }
 
-    // other pages — inject before last nav-link item
+    // Fallback for pages without auth-links slot
     var navLinks = document.querySelector('.nav-links');
-    if (navLinks && !authLinks) {
+    if (navLinks) {
         var existing = navLinks.querySelector('.nav-user-info');
         if (!existing) {
             var li = document.createElement('li');
             li.className = 'nav-user-info';
-            li.innerHTML =
-                '<div class="nav-user" style="display:flex; align-items:center; gap:10px; padding: 0 15px;">' +
-                '<div class="nav-user-avatar" style="width:32px;height:32px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">' + displayName.charAt(0).toUpperCase() + '</div>' +
-                '<div style="display:flex;flex-direction:column;line-height:1.2;">' +
-                '<span style="color:#F1F5F9;font-size:.85rem;font-weight:600;">' + displayName + '</span>' +
-                '<button onclick="logoutUser()" style="background:none;border:none;color:var(--accent);font-size:.7rem;padding:0;cursor:pointer;text-align:right;">خروج</button>' +
-                '</div>' +
-                '</div>';
+            li.innerHTML = dropdownHTML;
             navLinks.insertBefore(li, navLinks.lastElementChild);
         }
     }
 }
+
+function toggleUserDropdown() {
+    var menu = document.getElementById('userDropdownMenu');
+    if (menu) {
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function (e) {
+    if (!e.target.closest('.user-dropdown-wrapper')) {
+        var menu = document.getElementById('userDropdownMenu');
+        if (menu) menu.style.display = 'none';
+    }
+});
 
 // ── goToBooking (all pages)
 async function goToBooking() {

@@ -159,6 +159,23 @@ function handleChatKey(e) {
     }
 }
 
+/* ── Get latest name from profiles table ── */
+async function getUserName(user) {
+    try {
+        var res = await window.supabase
+            .from('profiles')
+            .select('full_name')
+            .eq('id', user.id)
+            .single();
+        return (res.data && res.data.full_name) ||
+               (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) ||
+               (user.email ? user.email.split('@')[0] : null);
+    } catch (e) {
+        return (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) ||
+               (user.email ? user.email.split('@')[0] : null);
+    }
+}
+
 /* ── Core send function ── */
 async function sendWithText(msg) {
     appendMsg(msg, 'user');
@@ -166,6 +183,7 @@ async function sendWithText(msg) {
 
     var typing = showTyping();
     var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
+    var userName = user ? await getUserName(user) : null;
 
     /* Get Supabase JWT so n8n can query appointments with RLS */
     var userToken = null;
@@ -190,7 +208,7 @@ async function sendWithText(msg) {
                 message: msg,
                 sessionId: chatSessionId,
                 userId:    user ? user.id    : null,
-                userName:  user ? (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || user.email || null : null,
+                userName:  userName,
                 userEmail: user ? user.email : null,
                 userToken: userToken
             })

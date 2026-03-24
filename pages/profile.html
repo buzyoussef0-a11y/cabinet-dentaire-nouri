@@ -468,10 +468,10 @@
       <div class="profile-card fade-in" style="animation-delay:0.06s">
 
         <div class="profile-avatar" id="profAvatarInner">
-          <span id="profAvatarLetter">?</span>
+          <span id="profileAvatar">?</span>
         </div>
 
-        <h2 class="profile-display-name" id="profName">---</h2>
+        <h2 class="profile-display-name" id="profileDisplayName">---</h2>
         <p class="profile-display-email" id="profEmail">---</p>
 
         <div class="profile-membership">
@@ -634,7 +634,7 @@
 
       // Avatar: Google photo or initial letter
       var avatarInner = document.getElementById('profAvatarInner');
-      var avatarLetter = document.getElementById('profAvatarLetter');
+      var avatarLetter = document.getElementById('profileAvatar');
       var googleAvatar = user.user_metadata && user.user_metadata.avatar_url;
       if (googleAvatar) {
         var img = document.createElement('img');
@@ -666,7 +666,7 @@
 
       // Populate display
       var displayName = fullName || email.split('@')[0] || 'مستخدم';
-      document.getElementById('profName').textContent = displayName;
+      document.getElementById('profileDisplayName').textContent = displayName;
       document.getElementById('displayName').textContent = fullName || '---';
       document.getElementById('displayPhone').textContent = phone || '---';
       document.getElementById('editName').value = fullName;
@@ -756,8 +756,8 @@
 
         if (field === 'name') {
           document.getElementById('displayName').textContent = value;
-          document.getElementById('profName').textContent = value;
-          var letter = document.getElementById('profAvatarLetter');
+          document.getElementById('profileDisplayName').textContent = value;
+          var letter = document.getElementById('profileAvatar');
           if (letter && letter.parentElement.querySelector('img') === null) {
             letter.textContent = value.charAt(0).toUpperCase();
           }
