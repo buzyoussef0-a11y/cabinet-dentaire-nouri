@@ -38,7 +38,7 @@
     /* Grid: RIGHT=profile card (35%), LEFT=stats+info (65%) in RTL */
     .profile-grid {
       display: grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 300px 1fr;
       gap: 28px;
       align-items: start;
     }
@@ -56,7 +56,7 @@
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(13,242,242,0.3);
       border-radius: 20px;
-      padding: 32px 24px;
+      padding: 32px 28px;
       text-align: center;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -64,8 +64,8 @@
 
     /* Avatar */
     .profile-avatar {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       background: linear-gradient(135deg, #0df2f2, #4A6CF7);
       display: flex;
@@ -173,6 +173,7 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       transition: border-color 0.2s, transform 0.2s;
+      min-height: 160px;
     }
     .stat-card:hover {
       border-color: rgba(13,242,242,0.7);
@@ -182,7 +183,7 @@
       font-size: 1.3rem;
       color: white;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     .stat-number {
       font-size: 4rem;
