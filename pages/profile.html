@@ -321,6 +321,88 @@
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* ── Navbar auth pills override ── */
+    #auth-links {
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+      list-style: none;
+    }
+    .user-welcome-pill {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.07) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 50px !important;
+      padding: 5px 14px 5px 8px !important;
+      color: #F1F5F9 !important;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      cursor: default;
+      position: relative;
+    }
+    .user-welcome-pill::before {
+      content: attr(data-initial);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0df2f2, #4A6CF7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: white;
+      flex-shrink: 0;
+    }
+    .nav-user-avatar {
+      width: 32px !important;
+      height: 32px !important;
+      background: linear-gradient(135deg, #0df2f2, #4A6CF7) !important;
+      border-radius: 50% !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: white !important;
+      text-decoration: none !important;
+      border: none !important;
+      flex-shrink: 0;
+    }
+    .nav-user-avatar svg { stroke: white; }
+    .nav-signout-btn {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 6px;
+      background: transparent !important;
+      border: 1px solid rgba(239,68,68,0.35) !important;
+      color: #f87171 !important;
+      border-radius: 50px !important;
+      padding: 5px 14px !important;
+      font-family: 'Cairo', sans-serif !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background 0.2s !important;
+    }
+    .nav-signout-btn:hover { background: rgba(239,68,68,0.1) !important; }
+    /* Lang btn */
+    .lang-btn {
+      background: rgba(255,255,255,0.07) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 50px !important;
+      color: #F1F5F9 !important;
+      padding: 5px 12px !important;
+      gap: 6px !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      cursor: pointer;
+      transition: background 0.2s !important;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.12) !important; }
   </style>
 </head>
 
@@ -593,6 +675,10 @@
       if (!googleAvatar) {
         avatarLetter.textContent = displayName.charAt(0).toUpperCase();
       }
+
+      // Set initial letter on nav welcome pill circle
+      var pill = document.querySelector('.user-welcome-pill');
+      if (pill) pill.setAttribute('data-initial', displayName.charAt(0).toUpperCase());
 
       // Appointment stats
       const safeNum = (v) => (!v || isNaN(v)) ? 0 : v;
