@@ -52,7 +52,7 @@
       "telephone": "+212535402211",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "45 شارع محمد الخامس، الطابق 2",
+        "streetAddress": "شارع الحسن الثاني 209، الطابق 2",
         "addressLocality": "مكناس",
         "postalCode": "50000",
         "addressCountry": "MA"
@@ -888,8 +888,7 @@
     <!-- CLINIC INFO BAR -->
     <div id="clinicInfoBar"
       style="background: rgba(13,148,136,0.06); border-bottom: 1px solid rgba(13,148,136,0.12); padding: 8px 24px; display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; font-size: 0.8rem; color: #94a3b8; font-family: 'Cairo', sans-serif; position: relative; z-index: 100;">
-      <span data-ar="📍 شارع محمد الخامس 209، الطابق 2، مكناس" data-fr="📍 209 Av Mohammed V, 2ème étage, Meknès">📍 شارع
-        الحسن الثاني 209، الطابق 2، مكناس</span>
+      <span data-ar="📍 شارع الحسن الثاني 209، الطابق 2، مكناس" data-fr="📍 209 Av Hassan II, 2ème étage, Meknès">📍 شارع الحسن الثاني 209، الطابق 2، مكناس</span>
       <span>|</span>
       <span>📞 <a href="tel:+212535402211" style="color:#0df2f2; text-decoration:none; font-weight:600;">0535 40 22 11</a></span>
       <span>|</span>
@@ -1447,8 +1446,8 @@
             </div>
             <div class="cv3-card-body">
               <span class="cv3-card-label" data-ar="عنوان العيادة" data-fr="Adresse de la clinique">عنوان العيادة</span>
-              <span class="cv3-card-val">شارع محمد الخامس، رقم 45، الطابق 2، مكناس</span>
-              <span class="cv3-card-sub-text">Rue Mohammed V, No. 45, 2ème étage, Meknès</span>
+              <span class="cv3-card-val">شارع الحسن الثاني 209، الطابق 2، مكناس</span>
+              <span class="cv3-card-sub-text">Rue Hassan II, No. 209, 2ème étage, Meknès</span>
               <a href="https://maps.google.com/?q=Cabinet+Dentaire+Nouri+Meknes" target="_blank" class="cv3-dir-link" data-ar="الحصول على الاتجاهات" data-fr="Obtenir l'itinéraire">الحصول على الاتجاهات <svg viewBox="0 0 24 24" fill="none" width="12" height="12" style="display:inline-block;vertical-align:middle"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></a>
             </div>
           </div>
@@ -1886,7 +1885,7 @@
 
   <script>
     // ── Live Clinic Status ──
-    (function () {
+    function updateClinicStatus() {
       var dot = document.querySelector('.status-pulse');
       var txt = document.getElementById('clinicStatusText');
       if (!dot || !txt) return;
@@ -1897,13 +1896,15 @@
       if (isOpen) {
         dot.classList.remove('closed');
         txt.classList.remove('closed');
-        txt.textContent = 'مفتوح الآن';
+        txt.textContent = '🟢 مفتوح الآن';
       } else {
         dot.classList.add('closed');
         txt.classList.add('closed');
-        txt.textContent = 'مغلق';
+        txt.textContent = '🔴 مغلق الآن';
       }
-    })();
+    }
+    updateClinicStatus();
+    document.addEventListener('DOMContentLoaded', updateClinicStatus);
   </script>
 
 
