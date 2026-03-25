@@ -778,6 +778,14 @@
         if (saveBtn) { saveBtn.textContent = 'حفظ'; saveBtn.disabled = false; }
       }
     }
+
+    /* ── Force equal stat card heights after render ── */
+    window.addEventListener('load', function () {
+      var cards = document.querySelectorAll('.stats-row .stat-card');
+      var max = 0;
+      cards.forEach(function (c) { if (c.offsetHeight > max) max = c.offsetHeight; });
+      if (max > 0) cards.forEach(function (c) { c.style.height = max + 'px'; });
+    });
   </script>
 
 </body>
