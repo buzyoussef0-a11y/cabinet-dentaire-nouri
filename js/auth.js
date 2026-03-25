@@ -63,27 +63,75 @@ function getFirstName(user) {
     return 'مستخدم';
 }
 
-/* ── Patch navbar with latest name from profiles table ── */
-/* populateNavUser() in main.js reads user_metadata (Google name).
-   This runs 300ms later and overwrites the dropdown with the
-   up-to-date name from the profiles table. */
+/* ── Navbar: skeleton → profile name (no flash) ── */
+/* auth.js loads before main.js, so this DOMContentLoaded runs first.
+   1. Inject skeleton into #auth-links immediately (no wrong-name flash).
+   2. Override window.populateNavUser so main.js skips auth-links pages.
+   3. Fetch real name from profiles table, then render full dropdown. */
 document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(async function () {
+    var authLinks = document.getElementById('auth-links');
+    if (!authLinks) return; // pages without auth-links slot: let main.js handle it
+
+    /* Inject pulse-skeleton CSS once */
+    if (!document.getElementById('navSkeletonStyle')) {
+        var style = document.createElement('style');
+        style.id = 'navSkeletonStyle';
+        style.textContent = '@keyframes navPulse{0%,100%{opacity:0.4}50%{opacity:0.9}}';
+        document.head.appendChild(style);
+    }
+
+    /* Show skeleton immediately — prevents any wrong name from appearing */
+    authLinks.innerHTML = '<div style="width:140px;height:36px;background:rgba(255,255,255,0.08);border-radius:50px;animation:navPulse 1.5s ease-in-out infinite;"></div>';
+
+    /* Override populateNavUser so main.js doesn't replace our skeleton with wrong name */
+    window._authLinksHandled = true;
+    var _origPopulate = window.populateNavUser;
+    window.populateNavUser = async function () {
+        if (window._authLinksHandled) return; // we own auth-links
+        return _origPopulate && _origPopulate.apply(this, arguments);
+    };
+
+    /* Async: fetch real profile name and render correct dropdown */
+    (async function () {
         try {
             var user = await getCurrentUser();
-            if (!user) return;
+            if (!user) { authLinks.innerHTML = ''; return; }
+
             var { data: profile } = await supabase
                 .from('profiles')
                 .select('full_name')
                 .eq('id', user.id)
                 .single();
-            if (!profile || !profile.full_name) return;
-            var firstName = profile.full_name.split(' ')[0];
+
+            var fullName = (profile && profile.full_name) ||
+                (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) ||
+                (user.email ? user.email.split('@')[0] : 'مستخدم');
+
+            var firstName = fullName.split(' ')[0];
+            var initial = firstName.charAt(0).toUpperCase();
             var isAr = (localStorage.getItem('siteLang') || 'ar') === 'ar';
-            var nameSpan = document.querySelector('.user-dropdown-btn span');
-            var avatarDiv = document.querySelector('.user-dropdown-btn > div');
-            if (nameSpan) nameSpan.textContent = (isAr ? 'مرحباً ' : 'Bonjour ') + firstName;
-            if (avatarDiv) avatarDiv.textContent = profile.full_name.charAt(0).toUpperCase();
+            var profileHref = (window._ROOT || '') + 'pages/profile.html';
+
+            var dropdownHTML = [
+                '<div class="user-dropdown-wrapper" style="position:relative;">',
+                '<button class="user-dropdown-btn" onclick="toggleUserDropdown()" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(13,242,242,0.3);border-radius:50px;padding:6px 14px 6px 6px;cursor:pointer;color:white;font-family:Cairo,sans-serif;font-size:0.9rem;">',
+                '<div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#0df2f2,#0D9488);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;color:#0a1628;">' + initial + '</div>',
+                '<span>' + (isAr ? 'مرحباً ' : 'Bonjour ') + firstName + '</span>',
+                '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="opacity:0.6"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+                '</button>',
+                '<div id="userDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);left:0;background:#0F1E35;border:1px solid rgba(13,242,242,0.2);border-radius:12px;padding:8px;min-width:180px;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,0.4);">',
+                '<a href="' + profileHref + '" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;color:white;text-decoration:none;font-family:Cairo,sans-serif;font-size:0.9rem;" onmouseover="this.style.background=\'rgba(13,242,242,0.1)\'" onmouseout="this.style.background=\'transparent\'">',
+                '👤 <span>' + (isAr ? 'ملفي الشخصي' : 'Mon profil') + '</span>',
+                '</a>',
+                '<div style="height:1px;background:rgba(255,255,255,0.08);margin:4px 0;"></div>',
+                '<button onclick="logoutUser()" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;color:#EF4444;background:transparent;border:none;width:100%;font-family:Cairo,sans-serif;font-size:0.9rem;cursor:pointer;text-align:right;" onmouseover="this.style.background=\'rgba(239,68,68,0.1)\'" onmouseout="this.style.background=\'transparent\'">',
+                '🚪 <span>' + (isAr ? 'تسجيل الخروج' : 'Se déconnecter') + '</span>',
+                '</button>',
+                '</div>',
+                '</div>'
+            ].join('');
+
+            authLinks.innerHTML = dropdownHTML;
         } catch (e) { /* silent */ }
-    }, 300);
+    })();
 });
