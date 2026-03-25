@@ -775,6 +775,12 @@
         font-size: 2rem !important;
       }
     }
+
+    /* Image performance — prevent overflow and layout shift */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 
@@ -929,7 +935,7 @@
           <div class="hero-float-wrap">
             <div class="hero-img-box">
               <img src="./assets/pict/hero-room.png"
-                alt="عيادة الدكتور نوري - غرفة علاج عصرية" class="hero-main-img" loading="eager" width="600" height="500">
+                alt="عيادة الدكتور نوري - غرفة علاج عصرية" class="hero-main-img" loading="eager" decoding="async" width="600" height="500">
               <div class="hero-overlay-card card-appt">
                 <span class="card-icon">✅</span>
                 <div class="card-info">
@@ -960,17 +966,17 @@
           <!-- Floating clinic images -->
           <div class="deco-img-card deco-card-1">
             <img src="./assets/pict/hero-room.png" alt=""
-              loading="lazy">
+              loading="lazy" decoding="async">
             <div class="deco-card-shine"></div>
           </div>
           <div class="deco-img-card deco-card-2">
             <img src="./assets/pict/hero-dentist.png" alt=""
-              loading="lazy">
+              loading="lazy" decoding="async">
             <div class="deco-card-shine"></div>
           </div>
           <div class="deco-img-card deco-card-3">
             <img src="./assets/pict/hero-equipment.png" alt=""
-              loading="lazy">
+              loading="lazy" decoding="async">
             <div class="deco-card-shine"></div>
           </div>
           <!-- Animated rings -->
@@ -1052,8 +1058,8 @@
           <!-- Card 1 — Large featured -->
           <div class="svc-bento-card svc-featured reveal-up" onclick="goToBooking()">
             <div class="svc-bento-img">
-              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=85" alt="فحص الأسنان"
-                loading="lazy">
+              <img src="./assets/pict/service-checkup.jpeg" alt="فحص الأسنان"
+                loading="lazy" decoding="async">
             </div>
             <div class="svc-bento-overlay"></div>
             <div class="svc-bento-content">
@@ -1072,7 +1078,7 @@
           <div class="svc-bento-card reveal-up" style="--delay:0.1s" onclick="goToBooking()">
             <div class="svc-bento-img">
               <img src="./assets/pict/service-whitening.png" alt="تبييض الأسنان"
-                loading="lazy">
+                loading="lazy" decoding="async">
             </div>
             <div class="svc-bento-overlay"></div>
             <div class="svc-bento-content">
@@ -1089,7 +1095,7 @@
           <div class="svc-bento-card reveal-up" style="--delay:0.2s" onclick="goToBooking()">
             <div class="svc-bento-img">
               <img src="./assets/pict/service-braces.png" alt="تقويم الأسنان"
-                loading="lazy">
+                loading="lazy" decoding="async">
             </div>
             <div class="svc-bento-overlay"></div>
             <div class="svc-bento-content">
@@ -1105,7 +1111,7 @@
           <div class="svc-bento-card reveal-up" style="--delay:0.3s" onclick="goToBooking()">
             <div class="svc-bento-img">
               <img src="./assets/pict/service-implant.png" alt="زراعة الأسنان"
-                loading="lazy">
+                loading="lazy" decoding="async">
             </div>
             <div class="svc-bento-overlay"></div>
             <div class="svc-bento-content">
@@ -1121,7 +1127,7 @@
           <div class="svc-bento-card reveal-up" style="--delay:0.4s" onclick="goToBooking()">
             <div class="svc-bento-img">
               <img src="./assets/pict/service-cleaning.jpeg" alt="تنظيف الأسنان"
-                loading="lazy">
+                loading="lazy" decoding="async">
             </div>
             <div class="svc-bento-overlay"></div>
             <div class="svc-bento-content">
@@ -1136,8 +1142,8 @@
           <!-- Card 6 -->
           <div class="svc-bento-card reveal-up" style="--delay:0.5s" onclick="goToBooking()">
             <div class="svc-bento-img">
-              <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=600&q=85"
-                alt="طب أسنان الأطفال" loading="lazy">
+              <img src="./assets/pict/service-children.jpeg"
+                alt="طب أسنان الأطفال" loading="lazy" decoding="async">
             </div>
             <div class="svc-bento-overlay"></div>
             <div class="svc-bento-content">
@@ -1157,7 +1163,7 @@
     <!-- WHY CHOOSE US SECTION -->
     <section class="why-us-new section-reveal reveal-up" id="about">
       <div class="why-bg-photo">
-        <img src="./assets/pict/clinic-interior.png" alt="" loading="lazy"
+        <img src="./assets/pict/clinic-interior.png" alt="" loading="lazy" decoding="async"
           aria-hidden="true">
       </div>
 
@@ -1169,7 +1175,7 @@
           <div class="why-visual-col reveal-up">
             <div class="why-main-img-wrap">
               <img src="./assets/pict/clinic-interior.png"
-                alt="تقنيات عيادة نوري" loading="lazy" class="why-main-img">
+                alt="تقنيات عيادة نوري" loading="lazy" decoding="async" class="why-main-img">
               <div class="why-img-badge">
                 <span class="wib-num">+12</span>
                 <span class="wib-text" data-ar="سنة خبرة" data-fr="Ans d'expérience">سنة خبرة</span>
@@ -1180,10 +1186,10 @@
               </div>
             </div>
             <div class="why-secondary-imgs">
-              <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=400&q=80" alt="غرفة العلاج"
-                loading="lazy">
+              <img src="./assets/pict/gallery-1.jpeg" alt="غرفة العلاج"
+                loading="lazy" decoding="async">
               <img src="./assets/pict/clinic-team.png" alt="الطاقم الطبي"
-                loading="lazy">
+                loading="lazy" decoding="async">
             </div>
           </div>
 
@@ -1425,7 +1431,7 @@
           <div class="dr-redesign-img-wrap">
             <img src="./assets/pict/doctor-portrait.png"
               alt="الدكتور نوري - جراح أسنان متخصص في مكناس"
-              class="dr-redesign-img" loading="lazy" width="420" height="500">
+              class="dr-redesign-img" loading="lazy" decoding="async" width="420" height="500">
             <div class="dr-redesign-float-badge">⭐ 4.8 &middot; Google</div>
           </div>
         </div>
@@ -1552,7 +1558,7 @@
           <!-- 2 mini cards below map -->
           <div class="cv3-mini-row">
             <div class="cv3-tour-card">
-              <img src="./assets/pict/clinic-exterior.jpeg" alt="جولة في العيادة" loading="lazy">
+              <img src="./assets/pict/clinic-exterior.jpeg" alt="جولة في العيادة" loading="lazy" decoding="async">
               <span class="cv3-tour-label" data-ar="جولة في العيادة" data-fr="Visite virtuelle">جولة في العيادة</span>
             </div>
             <a href="mailto:contact@cabinet-nouri.ma" class="cv3-email-card">
