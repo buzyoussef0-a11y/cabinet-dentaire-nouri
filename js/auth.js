@@ -62,3 +62,28 @@ function getFirstName(user) {
     }
     return 'مستخدم';
 }
+
+/* ── Patch navbar with latest name from profiles table ── */
+/* populateNavUser() in main.js reads user_metadata (Google name).
+   This runs 300ms later and overwrites the dropdown with the
+   up-to-date name from the profiles table. */
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(async function () {
+        try {
+            var user = await getCurrentUser();
+            if (!user) return;
+            var { data: profile } = await supabase
+                .from('profiles')
+                .select('full_name')
+                .eq('id', user.id)
+                .single();
+            if (!profile || !profile.full_name) return;
+            var firstName = profile.full_name.split(' ')[0];
+            var isAr = (localStorage.getItem('siteLang') || 'ar') === 'ar';
+            var nameSpan = document.querySelector('.user-dropdown-btn span');
+            var avatarDiv = document.querySelector('.user-dropdown-btn > div');
+            if (nameSpan) nameSpan.textContent = (isAr ? 'مرحباً ' : 'Bonjour ') + firstName;
+            if (avatarDiv) avatarDiv.textContent = profile.full_name.charAt(0).toUpperCase();
+        } catch (e) { /* silent */ }
+    }, 300);
+});
