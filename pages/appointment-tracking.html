@@ -72,6 +72,16 @@
         <li><a href="faq.html" data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة الشائعة</a></li>
         <li><a href="appointment-tracking.html" class="active" data-ar="تتبع موعدك" data-fr="Suivi RDV">تتبع موعدك</a></li>
         <li><a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding: 10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a></li>
+        <li id="auth-links"></li>
+        <li class="lang-switcher-wrap">
+          <button class="lang-btn" id="langToggle" onclick="toggleLanguage()" aria-label="تغيير اللغة">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <span id="langLabel">FR</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -300,7 +310,7 @@
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 20px;
-            padding: 28px;
+            padding: 20px 24px;
             margin-bottom: 16px;
             transition: all 0.3s ease;
             position: relative;
@@ -316,19 +326,19 @@
               border-radius: 20px 20px 0 0;
             "></div>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-              <div style="display:flex; align-items:center; gap:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <div style="display:flex; align-items:center; gap:12px;">
                 <div style="
-                  width: 52px; height: 52px;
+                  width: 44px; height: 44px;
                   background: rgba(13,242,242,0.1);
                   border: 1px solid rgba(13,242,242,0.2);
-                  border-radius: 14px;
+                  border-radius: 12px;
                   display: flex; align-items: center; justify-content: center;
-                  font-size: 1.6rem;
+                  font-size: 1.4rem;
                 ">🦷</div>
                 <div>
-                  <div style="font-weight:800; font-size:1.1rem; color:#fff; margin-bottom:4px;">${svc}</div>
-                  <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">
+                  <div style="font-weight:800; font-size:1rem; color:#fff; margin-bottom:3px;">${svc}</div>
+                  <div style="font-size:0.78rem; color:rgba(255,255,255,0.4);">
                     ${isAr ? 'الرقم المرجعي:' : 'Réf:'} <span style="color:#0df2f2;">${ref}</span>
                   </div>
                 </div>
@@ -337,9 +347,9 @@
                 background: ${sColor}22;
                 border: 1px solid ${sColor}66;
                 color: ${sColor};
-                padding: 6px 16px;
+                padding: 5px 14px;
                 border-radius: 50px;
-                font-size: 0.8rem;
+                font-size: 0.78rem;
                 font-weight: 700;
               ">${sLabel}</span>
             </div>
@@ -347,37 +357,55 @@
             <div style="
               display: grid;
               grid-template-columns: 1fr 1fr;
-              gap: 12px;
-              margin-bottom: 20px;
+              gap: 10px;
+              margin-bottom: 16px;
             ">
-              <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px 16px;">
-                <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;">
+              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 10px 14px;">
+                <div style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-bottom:3px;">
                   📅 ${isAr ? 'التاريخ والوقت' : 'Date et heure'}
                 </div>
-                <div style="font-size:0.95rem; color:#fff; font-weight:600;">${date} ${time}</div>
+                <div style="font-size:0.9rem; color:#fff; font-weight:600;">${date} ${time}</div>
               </div>
-              <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px 16px;">
-                <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;">
+              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 10px 14px;">
+                <div style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-bottom:3px;">
                   👤 ${isAr ? 'الاسم' : 'Nom'}
                 </div>
-                <div style="font-size:0.95rem; color:#fff; font-weight:600;">${name}</div>
+                <div style="font-size:0.9rem; color:#fff; font-weight:600;">${name}</div>
               </div>
               ${phone ? `
-              <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px 16px; grid-column: span 2;">
-                <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;">
+              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 10px 14px; grid-column: span 2;">
+                <div style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-bottom:3px;">
                   📞 ${isAr ? 'رقم الهاتف' : 'Téléphone'}
                 </div>
-                <div style="font-size:0.95rem; color:#fff; font-weight:600;">${phone}</div>
+                <div style="font-size:0.9rem; color:#fff; font-weight:600;">${phone}</div>
               </div>` : ''}
             </div>
 
-            <div style="display:flex; justify-content:flex-end;">
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+              <button
+                onclick="editAppointment('${ref}')"
+                style="
+                  padding: 8px 20px;
+                  font-size: 0.82rem;
+                  color: #0df2f2;
+                  border: 1px solid rgba(13,242,242,0.4);
+                  border-radius: 10px;
+                  cursor: pointer;
+                  background: transparent;
+                  font-family: Cairo, sans-serif;
+                  transition: all 0.2s;
+                  display: flex; align-items: center; gap: 6px;
+                "
+                onmouseover="this.style.background='rgba(13,242,242,0.1)'"
+                onmouseout="this.style.background='transparent'">
+                ✏️ ${isAr ? 'تعديل' : 'Modifier'}
+              </button>
               <button
                 onclick="cancelAppointment('${ref}')"
                 ${cancelled ? 'disabled' : ''}
                 style="
-                  padding: 10px 24px;
-                  font-size: 0.85rem;
+                  padding: 8px 20px;
+                  font-size: 0.82rem;
                   color: ${cancelled ? 'rgba(239,68,68,0.4)' : '#EF4444'};
                   border: 1px solid ${cancelled ? 'rgba(239,68,68,0.2)' : 'rgba(239,68,68,0.4)'};
                   border-radius: 10px;
@@ -389,7 +417,7 @@
                 "
                 onmouseover="${cancelled ? '' : "this.style.background='rgba(239,68,68,0.1)'"}"
                 onmouseout="${cancelled ? '' : "this.style.background='transparent'"}">
-                🗑️ ${isAr ? 'إلغاء الموعد' : 'Annuler'}
+                🗑️ ${isAr ? 'إلغاء' : 'Annuler'}
               </button>
             </div>
           </div>
@@ -480,6 +508,10 @@
   <script src="../js/toasts.js"></script>
   <script src="../js/modal.js"></script>
   <script>
+    function editAppointment(ref) {
+      window.location.href = (window._ROOT || '../') + 'booking.html?ref=' + ref;
+    }
+
     function rateAppointment(ref, rating) {
       try {
         var apps = JSON.parse(localStorage.getItem('dental_appointments') || '[]');
@@ -518,12 +550,30 @@
       if (el) el.textContent = 'مرحباً ' + name + '! 👋';
     }
 
-    async function showWelcomeMessage() {
-      const name = await _fetchDisplayName();
-      const msg = name
-        ? 'مرحباً ' + name + '! 😊 أنا مساعد Cabinet Nouri. كيف أساعدك؟'
+    async function initChatWelcome() {
+      let displayName = '';
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('full_name')
+            .eq('id', user.id)
+            .single();
+          displayName = profile?.full_name ||
+                        user.user_metadata?.full_name ||
+                        user.email?.split('@')[0] || '';
+        }
+      } catch(e) {}
+
+      const greeting = displayName
+        ? `مرحباً ${displayName}! 😊 أنا مساعد Cabinet Nouri. كيف أساعدك؟`
         : 'مرحباً! 😊 أنا مساعد Cabinet Nouri. كيف أساعدك؟';
-      if (typeof appendMessage === 'function') appendMessage('assistant', msg);
+
+      if (typeof appendMessage === 'function') appendMessage('assistant', greeting);
+
+      const quickActions = document.getElementById('quickActions');
+      if (quickActions) quickActions.style.display = 'flex';
     }
 
     /* Patch toggleChat to inject personalized welcome on first open */
@@ -536,7 +586,7 @@
           _done = true;
           var msgs = document.getElementById('chatMessages');
           if (msgs) msgs.innerHTML = '';
-          showWelcomeMessage();
+          initChatWelcome();
         }
       };
     });
