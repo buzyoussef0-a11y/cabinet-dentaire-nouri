@@ -80,6 +80,7 @@
     <div class="container">
       <div class="section-header fade-in">
         <span class="section-tag" data-ar="مركز التحكم" data-fr="Tableau de Bord">مركز التحكم</span>
+        <p id="pageGreeting" style="font-size:1.05rem;color:rgba(255,255,255,0.6);margin:10px 0 4px;min-height:1.4em;"></p>
         <h1 class="section-title" data-ar="تتبع مواعيدك" data-fr="Suivi de vos rendez-vous">تتبع <span
             class="text-gradient" data-ar="مواعيدك" data-fr="rendez-vous">مواعيدك</span></h1>
         <p class="section-subtitle" data-ar="إدارة ومتابعة جميع حجوزاتك في مكان واحد بكل سهولة."
@@ -281,45 +282,118 @@
 
       /* Render a single appointment card */
       function buildCard(apt, isAr) {
-        var statusAr   = { pending: 'قيد المراجعة', confirmed: 'مؤكد', cancelled: 'ملغى' };
-        var statusFr   = { pending: 'En attente',   confirmed: 'Confirmé', cancelled: 'Annulé' };
-        var statusColor= { pending: '#F59E0B',       confirmed: '#10B981',  cancelled: '#EF4444' };
-        var s    = apt.status || 'pending';
-        var sTxt = isAr ? (statusAr[s] || s) : (statusFr[s] || s);
-        var sCol = statusColor[s] || '#64748B';
-        var svc  = apt.service || apt.service_type || apt.treatment || (isAr ? 'فحص عام' : 'Consultation');
+        var statusColors = { pending: '#F59E0B', confirmed: '#10B981', cancelled: '#EF4444', completed: '#6366F1' };
+        var statusLabelsAr = { pending: 'قيد المراجعة', confirmed: '✅ مؤكد', cancelled: '❌ ملغى', completed: '✔ مكتمل' };
+        var statusLabelsFr = { pending: 'En attente', confirmed: '✅ Confirmé', cancelled: '❌ Annulé', completed: '✔ Terminé' };
+        var s = apt.status || 'pending';
+        var sColor = statusColors[s] || '#64748B';
+        var sLabel = isAr ? (statusLabelsAr[s] || s) : (statusLabelsFr[s] || s);
+        var svc = apt.service || apt.service_type || apt.treatment || (isAr ? 'فحص عام' : 'Consultation');
         var date = apt.preferred_date || apt.appointment_date || apt.date || '-';
         var time = apt.preferred_time || apt.appointment_time || apt.time || '';
-        var ref  = apt.reference_id  || apt.ref || '-';
-        var name = apt.full_name     || apt.patient_name || apt.name || '-';
+        var ref = apt.reference_id || apt.ref || '-';
+        var name = apt.full_name || apt.patient_name || apt.name || '-';
+        var phone = apt.phone || '';
         var cancelled = s === 'cancelled';
-        return (
-          '<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);' +
-          'border-radius:16px;padding:24px;display:flex;align-items:center;' +
-          'justify-content:space-between;margin-bottom:15px;">' +
-          '<div style="display:flex;align-items:center;gap:20px;flex:1;flex-direction:row-reverse;">' +
-          '<div style="width:60px;height:60px;background:rgba(13,242,242,0.1);border-radius:12px;' +
-          'display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🦷</div>' +
-          '<div style="text-align:right;">' +
-          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-direction:row-reverse;">' +
-          '<span style="font-weight:700;font-size:1.1rem;color:#fff;">' + svc + '</span>' +
-          '<span style="padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:700;color:#fff;background:' + sCol + ';">' + sTxt + '</span>' +
-          '</div>' +
-          '<div style="font-size:0.9rem;color:rgba(255,255,255,0.6);display:flex;gap:15px;flex-direction:row-reverse;">' +
-          '<span><strong style="color:rgba(255,255,255,0.9);">' + (isAr ? 'التاريخ:' : 'Date :') + '</strong> ' + date + ' ' + time + '</span>' +
-          '<span><strong style="color:rgba(255,255,255,0.9);">' + (isAr ? 'الرقم المرجعي:' : 'Réf :') + '</strong> ' + ref + '</span>' +
-          '</div>' +
-          '<div style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:4px;">' +
-          '<span><strong style="color:rgba(255,255,255,0.9);">' + (isAr ? 'باسم:' : 'Nom :') + '</strong> ' + name + '</span>' +
-          '</div>' +
-          '</div></div>' +
-          '<div style="display:flex;gap:10px;margin-right:20px;">' +
-          '<button onclick="cancelAppointment(\'' + ref + '\')" ' +
-          'style="padding:8px 16px;font-size:0.85rem;color:#EF4444;border:1px solid rgba(244,63,94,0.3);' +
-          'border-radius:8px;cursor:pointer;background:transparent;' + (cancelled ? 'opacity:0.4;' : '') + '"' +
-          (cancelled ? ' disabled' : '') + '>' + (isAr ? 'إلغاء 🗑️' : 'Annuler 🗑️') + '</button>' +
-          '</div></div>'
-        );
+        return `
+          <div style="
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          " onmouseover="this.style.borderColor='rgba(13,242,242,0.3)';this.style.background='rgba(255,255,255,0.06)'"
+             onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.background='rgba(255,255,255,0.04)'">
+
+            <div style="
+              position: absolute;
+              top: 0; left: 0; right: 0;
+              height: 3px;
+              background: ${sColor};
+              border-radius: 20px 20px 0 0;
+            "></div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+              <div style="display:flex; align-items:center; gap:14px;">
+                <div style="
+                  width: 52px; height: 52px;
+                  background: rgba(13,242,242,0.1);
+                  border: 1px solid rgba(13,242,242,0.2);
+                  border-radius: 14px;
+                  display: flex; align-items: center; justify-content: center;
+                  font-size: 1.6rem;
+                ">🦷</div>
+                <div>
+                  <div style="font-weight:800; font-size:1.1rem; color:#fff; margin-bottom:4px;">${svc}</div>
+                  <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">
+                    ${isAr ? 'الرقم المرجعي:' : 'Réf:'} <span style="color:#0df2f2;">${ref}</span>
+                  </div>
+                </div>
+              </div>
+              <span style="
+                background: ${sColor}22;
+                border: 1px solid ${sColor}66;
+                color: ${sColor};
+                padding: 6px 16px;
+                border-radius: 50px;
+                font-size: 0.8rem;
+                font-weight: 700;
+              ">${sLabel}</span>
+            </div>
+
+            <div style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 12px;
+              margin-bottom: 20px;
+            ">
+              <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px 16px;">
+                <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;">
+                  📅 ${isAr ? 'التاريخ والوقت' : 'Date et heure'}
+                </div>
+                <div style="font-size:0.95rem; color:#fff; font-weight:600;">${date} ${time}</div>
+              </div>
+              <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px 16px;">
+                <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;">
+                  👤 ${isAr ? 'الاسم' : 'Nom'}
+                </div>
+                <div style="font-size:0.95rem; color:#fff; font-weight:600;">${name}</div>
+              </div>
+              ${phone ? `
+              <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 12px 16px; grid-column: span 2;">
+                <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:4px;">
+                  📞 ${isAr ? 'رقم الهاتف' : 'Téléphone'}
+                </div>
+                <div style="font-size:0.95rem; color:#fff; font-weight:600;">${phone}</div>
+              </div>` : ''}
+            </div>
+
+            <div style="display:flex; justify-content:flex-end;">
+              <button
+                onclick="cancelAppointment('${ref}')"
+                ${cancelled ? 'disabled' : ''}
+                style="
+                  padding: 10px 24px;
+                  font-size: 0.85rem;
+                  color: ${cancelled ? 'rgba(239,68,68,0.4)' : '#EF4444'};
+                  border: 1px solid ${cancelled ? 'rgba(239,68,68,0.2)' : 'rgba(239,68,68,0.4)'};
+                  border-radius: 10px;
+                  cursor: ${cancelled ? 'not-allowed' : 'pointer'};
+                  background: transparent;
+                  font-family: Cairo, sans-serif;
+                  transition: all 0.2s;
+                  display: flex; align-items: center; gap: 6px;
+                "
+                onmouseover="${cancelled ? '' : "this.style.background='rgba(239,68,68,0.1)'"}"
+                onmouseout="${cancelled ? '' : "this.style.background='transparent'"}">
+                🗑️ ${isAr ? 'إلغاء الموعد' : 'Annuler'}
+              </button>
+            </div>
+          </div>
+        `;
       }
 
       /* Main render — tries multiple fetch strategies */
@@ -396,7 +470,10 @@
 
     /* Auto-call on page load — 500ms delay lets Supabase restore the session first */
     document.addEventListener('DOMContentLoaded', function () {
-      setTimeout(function () { renderAppointments(); }, 500);
+      setTimeout(function () {
+        renderAppointments();
+        initPageGreeting();
+      }, 500);
     });
   </script>
   <script src="../js/chat.js"></script>
@@ -414,6 +491,55 @@
         showToast('شكراً على تقييمك! ⭐'.repeat(rating), 'success');
       } catch (e) { }
     }
+
+    /* ── FIX 1: Fetch display name from Supabase profiles ── */
+    async function _fetchDisplayName() {
+      if (typeof supabase === 'undefined') return null;
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return null;
+        let name = user.user_metadata?.full_name || user.email.split('@')[0];
+        try {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('full_name')
+            .eq('id', user.id)
+            .single();
+          if (profile?.full_name) name = profile.full_name;
+        } catch(e) {}
+        return name;
+      } catch(e) { return null; }
+    }
+
+    async function initPageGreeting() {
+      const name = await _fetchDisplayName();
+      if (!name) return;
+      const el = document.getElementById('pageGreeting');
+      if (el) el.textContent = 'مرحباً ' + name + '! 👋';
+    }
+
+    async function showWelcomeMessage() {
+      const name = await _fetchDisplayName();
+      const msg = name
+        ? 'مرحباً ' + name + '! 😊 أنا مساعد Cabinet Nouri. كيف أساعدك؟'
+        : 'مرحباً! 😊 أنا مساعد Cabinet Nouri. كيف أساعدك؟';
+      if (typeof appendMessage === 'function') appendMessage('assistant', msg);
+    }
+
+    /* Patch toggleChat to inject personalized welcome on first open */
+    window.addEventListener('load', function () {
+      var _orig = window.toggleChat;
+      var _done = false;
+      window.toggleChat = function () {
+        if (typeof _orig === 'function') _orig.call(this);
+        if (!_done) {
+          _done = true;
+          var msgs = document.getElementById('chatMessages');
+          if (msgs) msgs.innerHTML = '';
+          showWelcomeMessage();
+        }
+      };
+    });
   </script>
 
   <!-- Floating Widgets -->
