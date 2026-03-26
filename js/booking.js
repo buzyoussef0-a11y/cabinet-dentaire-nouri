@@ -1,6 +1,6 @@
 /* ── BOOKING.JS ── */
 window.submitBooking = submitBooking;
-var WEBHOOK_URL = 'https://jijiyassine.app.n8n.cloud/webhook/ac1a0ab6-6ff3-4aac-af1d-fb794a2d4d6f';
+var WEBHOOK_URL = 'https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e';
 var currentStep = 1;
 
 document.addEventListener('DOMContentLoaded', async () => {
