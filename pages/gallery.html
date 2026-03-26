@@ -13,6 +13,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#0D9488">
+    <style>
+      .gallery-grid {
+        columns: 3;
+        column-gap: 16px;
+        padding: 20px;
+      }
+      @media (max-width: 768px) {
+        .gallery-grid { columns: 2; }
+      }
+      @media (max-width: 480px) {
+        .gallery-grid { columns: 1; }
+      }
+      .gallery-item {
+        break-inside: avoid;
+        margin-bottom: 16px;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+        border-radius: 12px;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+    </style>
 </head>
 
 <body>
@@ -104,97 +135,75 @@
 
         <!-- Filter Buttons -->
         <div class="gallery-filters reveal-up">
-          <button class="gallery-filter-btn active" data-filter="all" onclick="filterGallery(this, 'all')" data-ar="الكل" data-fr="Tout">الكل</button>
-          <button class="gallery-filter-btn" data-filter="clinic" onclick="filterGallery(this, 'clinic')" data-ar="العيادة" data-fr="Cabinet">العيادة</button>
-          <button class="gallery-filter-btn" data-filter="equipment" onclick="filterGallery(this, 'equipment')" data-ar="التجهيزات" data-fr="Équipements">التجهيزات</button>
-          <button class="gallery-filter-btn" data-filter="results" onclick="filterGallery(this, 'results')" data-ar="قبل وبعد" data-fr="Avant / Après">قبل وبعد</button>
+          <button class="filter-btn active" data-filter="الكل" data-ar="الكل" data-fr="Tout">الكل</button>
+          <button class="filter-btn" data-filter="العيادة" data-ar="العيادة" data-fr="Cabinet">العيادة</button>
+          <button class="filter-btn" data-filter="التجهيزات" data-ar="التجهيزات" data-fr="Équipements">التجهيزات</button>
+          <button class="filter-btn" data-filter="قبل وبعد" data-ar="قبل وبعد" data-fr="Avant / Après">قبل وبعد</button>
         </div>
 
         <!-- Gallery Grid -->
         <div class="gallery-grid" id="galleryGrid">
 
-          <div class="gallery-item reveal-up" data-cat="clinic" onclick="openLightbox(this)">
-            <img src="../assets/pict/gallery-1.jpeg" alt="قاعة استقبال العيادة" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="قاعة الاستقبال" data-fr="Salle d'accueil">قاعة الاستقبال</span>
-            </div>
+          <!-- العيادة -->
+          <div class="gallery-item" data-category="العيادة" onclick="openLightbox(this)">
+            <img src="../assets/pict/clinic-interior.png" loading="lazy" alt="استقبال العيادة">
+          </div>
+          <div class="gallery-item" data-category="العيادة" onclick="openLightbox(this)">
+            <img src="../assets/pict/gallery-2.jpeg" loading="lazy" alt="غرفة العلاج">
+          </div>
+          <div class="gallery-item" data-category="العيادة" onclick="openLightbox(this)">
+            <img src="../assets/pict/gallery-4.jpg" loading="lazy" alt="العيادة بانوراما">
+          </div>
+          <div class="gallery-item" data-category="العيادة" onclick="openLightbox(this)">
+            <img src="../assets/pict/clinic-exterior.jpeg" loading="lazy" alt="خارج العيادة">
           </div>
 
-          <div class="gallery-item reveal-up tall" data-cat="equipment" style="--delay:0.05s" onclick="openLightbox(this)">
-            <img src="../assets/pict/gallery-2.jpeg" alt="كرسي العلاج الحديث" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="كرسي العلاج الحديث" data-fr="Fauteuil de soin moderne">كرسي العلاج الحديث</span>
-            </div>
+          <!-- التجهيزات -->
+          <div class="gallery-item" data-category="التجهيزات" onclick="openLightbox(this)">
+            <img src="../assets/pict/service-xray.jpg" loading="lazy" alt="أشعة رقمية">
+          </div>
+          <div class="gallery-item" data-category="التجهيزات" onclick="openLightbox(this)">
+            <img src="../assets/pict/gallery-5.png" loading="lazy" alt="تجهيزات متطورة">
+          </div>
+          <div class="gallery-item" data-category="التجهيزات" onclick="openLightbox(this)">
+            <img src="../assets/pict/hero-equipment.png" loading="lazy" alt="أدوات طبية">
+          </div>
+          <div class="gallery-item" data-category="التجهيزات" onclick="openLightbox(this)">
+            <img src="../assets/pict/service-implant.png" loading="lazy" alt="زراعة الأسنان">
           </div>
 
-          <div class="gallery-item reveal-up" data-cat="clinic" style="--delay:0.1s" onclick="openLightbox(this)">
-            <img src="../assets/pict/gallery-3.png" alt="غرفة العلاج" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="غرفة العلاج" data-fr="Salle de traitement">غرفة العلاج</span>
-            </div>
+          <!-- قبل وبعد -->
+          <div class="gallery-item" data-category="قبل وبعد" onclick="openLightbox(this)">
+            <img src="../assets/pict/gallery-before-after-1.jpg" loading="lazy" alt="قبل وبعد تبييض">
+          </div>
+          <div class="gallery-item" data-category="قبل وبعد" onclick="openLightbox(this)">
+            <img src="../assets/pict/gallery-before-after-3.jpg" loading="lazy" alt="قبل وبعد تقويم">
+          </div>
+          <div class="gallery-item" data-category="قبل وبعد" onclick="openLightbox(this)">
+            <img src="../assets/pict/service-veneer.jpg" loading="lazy" alt="قبل وبعد فينيرز">
+          </div>
+          <div class="gallery-item" data-category="قبل وبعد" onclick="openLightbox(this)">
+            <img src="../assets/pict/service-whitening.png" loading="lazy" alt="تبييض الأسنان">
           </div>
 
-          <div class="gallery-item reveal-up" data-cat="equipment" style="--delay:0.15s" onclick="openLightbox(this)">
-            <img src="../assets/pict/clinic-team.png" alt="أجهزة التصوير الرقمي" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="أجهزة التصوير الرقمي" data-fr="Équipements radiologie">أجهزة التصوير الرقمي</span>
-            </div>
+          <!-- الكل -->
+          <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
+            <img src="../assets/pict/clinic-team.png" loading="lazy" alt="فريق العيادة">
           </div>
-
-          <div class="gallery-item reveal-up tall" data-cat="results" style="--delay:0.2s" onclick="openLightbox(this)">
-            <img src="../assets/pict/gallery-5.png" alt="نتائج تبييض الأسنان" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="نتائج التبييض" data-fr="Résultats blanchiment">نتائج التبييض</span>
-            </div>
+          <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
+            <img src="../assets/pict/gallery-1.jpeg" loading="lazy" alt="الفريق الطبي">
           </div>
-
-          <div class="gallery-item reveal-up" data-cat="clinic" style="--delay:0.25s" onclick="openLightbox(this)">
-            <img src="../assets/pict/clinic-exterior.jpeg" alt="صالة انتظار العيادة" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="صالة الانتظار" data-fr="Salle d'attente">صالة الانتظار</span>
-            </div>
+          <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
+            <img src="../assets/pict/gallery-3.png" loading="lazy" alt="مريض سعيد">
           </div>
-
-          <div class="gallery-item reveal-up" data-cat="equipment" style="--delay:0.3s" onclick="openLightbox(this)">
-            <img src="../assets/pict/clinic-interior.png" alt="الأدوات الطبية المعقمة" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="الأدوات المعقمة" data-fr="Instruments stérilisés">الأدوات المعقمة</span>
-            </div>
+          <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
+            <img src="../assets/pict/doctor-portrait.png" loading="lazy" alt="الدكتور نوري">
           </div>
-
-          <div class="gallery-item reveal-up" data-cat="results" style="--delay:0.35s" onclick="openLightbox(this)">
-            <img src="../assets/pict/clinic-interior.png" alt="نتائج زراعة الأسنان" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="نتائج الزراعة" data-fr="Résultats implants">نتائج الزراعة</span>
-            </div>
+          <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
+            <img src="../assets/pict/hero-dentist.png" loading="lazy" alt="جلسة علاج">
           </div>
-
-          <div class="gallery-item reveal-up tall" data-cat="clinic" style="--delay:0.4s" onclick="openLightbox(this)">
-            <img src="../assets/pict/clinic-interior.png" alt="مدخل العيادة الأنيق" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="مدخل العيادة" data-fr="Entrée du cabinet">مدخل العيادة</span>
-            </div>
-          </div>
-
-          <div class="gallery-item reveal-up" data-cat="equipment" style="--delay:0.45s" onclick="openLightbox(this)">
-            <img src="../assets/pict/clinic-interior.png" alt="أجهزة التعقيم" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="أجهزة التعقيم" data-fr="Autoclaves de stérilisation">أجهزة التعقيم</span>
-            </div>
-          </div>
-
-          <div class="gallery-item reveal-up" data-cat="results" style="--delay:0.5s" onclick="openLightbox(this)">
-            <img src="../assets/pict/clinic-interior.png" alt="نتائج التقويم" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="نتائج التقويم" data-fr="Résultats orthodontie">نتائج التقويم</span>
-            </div>
-          </div>
-
-          <div class="gallery-item reveal-up" data-cat="clinic" style="--delay:0.55s" onclick="openLightbox(this)">
-            <img src="../assets/pict/clinic-interior.png" alt="غرفة الأشعة الرقمية" loading="lazy" decoding="async">
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-caption" data-ar="غرفة الأشعة" data-fr="Salle radiologie">غرفة الأشعة</span>
-            </div>
+          <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
+            <img src="../assets/pict/service-children.jpeg" loading="lazy" alt="أسنان الأطفال">
           </div>
 
         </div>
@@ -300,22 +309,24 @@
   <script src="../js/chat.js"></script>
   <script src="../js/i18n.js"></script>
   <script>
-    // Gallery filter
-    function filterGallery(btn, cat) {
-      document.querySelectorAll('.gallery-filter-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      document.querySelectorAll('.gallery-item').forEach(function(item) {
-        if (cat === 'all' || item.dataset.cat === cat) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const cat = this.dataset.filter;
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          if (cat === 'الكل' || item.dataset.category === cat) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
       });
-    }
+    });
     // Lightbox
     function openLightbox(item) {
       var img = item.querySelector('img');
-      document.getElementById('lightboxImg').src = img.src.replace(/w=800/, 'w=1400');
+      document.getElementById('lightboxImg').src = img.src;
       document.getElementById('lightboxImg').alt = img.alt;
       document.getElementById('lightbox').classList.add('open');
       document.body.style.overflow = 'hidden';
