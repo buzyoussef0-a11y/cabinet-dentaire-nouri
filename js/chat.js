@@ -15,7 +15,7 @@ async function initChat() {
     chatInited = true;
 
     var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
-    var name = user ? (user.user_metadata?.full_name || 'زائر') : 'زائر';
+    var name = user ? (await getUserName(user) || 'زائر') : 'زائر';
     var greeting = user
         ? 'مرحباً ' + name.split(' ')[0] + '! 😊 أنا مساعد Cabinet Nouri. كيف أساعدك؟'
         : 'مرحباً! 😊 أنا مساعد Cabinet Dentaire Nouri.\nكيف يمكنني مساعدتك اليوم؟';
