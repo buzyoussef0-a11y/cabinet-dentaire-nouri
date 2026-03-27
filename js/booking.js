@@ -68,11 +68,20 @@ async function togglePersonalInfo(forOthers) {
             }
         });
     } else if (user) {
-        // Prefill with live Supabase metadata
+        // Prefill from profiles table first, fallback to user_metadata
         var meta = user.user_metadata || {};
+        var profileName = '';
+        var profilePhone = '';
+        try {
+            var profileRes = await supabase.from('profiles').select('full_name, phone').eq('id', user.id).single();
+            if (!profileRes.error && profileRes.data) {
+                profileName = profileRes.data.full_name || '';
+                profilePhone = profileRes.data.phone || '';
+            }
+        } catch(e) {}
         var dataMap = {
-            'fullName': meta.full_name || meta.fullName || '',
-            'phone': meta.phone || '',
+            'fullName': profileName || meta.full_name || meta.fullName || '',
+            'phone': profilePhone || meta.phone || '',
             'email': user.email || ''
         };
         fieldIds.forEach(id => {
