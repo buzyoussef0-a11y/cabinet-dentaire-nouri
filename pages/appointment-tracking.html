@@ -306,7 +306,7 @@
         var phone = apt.phone || '';
         var cancelled = s === 'cancelled';
         return `
-          <div style="
+          <div data-ref="${ref}" style="
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 20px;
@@ -508,8 +508,75 @@
   <script src="../js/toasts.js"></script>
   <script src="../js/modal.js"></script>
   <script>
-    function editAppointment(ref) {
+    async function editAppointment(ref) {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        await fetch('https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event: 'appointment_edit_requested',
+            reference_id: ref,
+            userId: user?.id || null,
+            userName: user?.user_metadata?.full_name || null,
+            timestamp: new Date().toISOString()
+          })
+        });
+      } catch(e) { console.warn('Edit webhook error:', e); }
       window.location.href = (window._ROOT || '../') + 'booking.html?ref=' + ref;
+    }
+
+    async function cancelAppointment(ref) {
+      if (!confirm('هل أنت متأكد من إلغاء هذا الموعد؟')) return;
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+
+        // Step 1 — Update status to cancelled (try appointments table, fallback to bookings)
+        var res = await supabase
+          .from('appointments')
+          .update({ status: 'cancelled', updated_at: new Date().toISOString() })
+          .eq('reference_id', ref);
+
+        if (res.error) {
+          await supabase
+            .from('bookings')
+            .update({ status: 'cancelled' })
+            .eq('reference_id', ref);
+        }
+
+        // Step 2 — Send webhook notification
+        try {
+          await fetch('https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              event: 'appointment_cancelled',
+              reference_id: ref,
+              userId: user?.id || null,
+              userName: user?.user_metadata?.full_name || null,
+              timestamp: new Date().toISOString()
+            })
+          });
+        } catch(e) { console.warn('Cancel webhook error:', e); }
+
+        // Step 3 — Animate and remove card from UI
+        document.querySelectorAll('[data-ref]').forEach(function(card) {
+          if (card.dataset.ref === ref) {
+            card.style.transition = 'all 0.3s ease';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(-10px)';
+            setTimeout(function() { card.remove(); }, 300);
+          }
+        });
+
+        // Step 4 — Re-render after animation
+        setTimeout(function() { renderAppointments(); }, 350);
+
+        showToast('تم إلغاء الموعد بنجاح ✅', 'success');
+      } catch(e) {
+        console.error('Cancel error:', e);
+        showToast('حدث خطأ في الإلغاء', 'error');
+      }
     }
 
     function rateAppointment(ref, rating) {
