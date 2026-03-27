@@ -453,6 +453,13 @@
           return;
         }
 
+        /* DEBUG — log exact columns and first row of bookings table */
+        try {
+          const { data: debugData } = await supabase.from('bookings').select('*').limit(1);
+          console.log('BOOKING COLUMNS:', debugData && debugData[0] ? Object.keys(debugData[0]) : 'empty table');
+          console.log('FIRST BOOKING:', JSON.stringify(debugData?.[0]));
+        } catch(e) { console.warn('DEBUG fetch failed:', e); }
+
         /* Fetch — four strategies so we never miss a booking */
         var appointments = [];
         if (typeof supabase !== 'undefined') {
@@ -468,7 +475,10 @@
             try {
               var res = await supabase.from(s.table).select('*')
                 .eq(s.col, s.val).neq('status', 'cancelled').order('created_at', { ascending: false });
-              console.log('[tracking] ' + s.table + '.' + s.col + ':', res.data, res.error);
+              console.log('Strategy', i, '- table:', s.table, 'col:', s.col);
+              console.log('Result count:', res.data?.length);
+              console.log('All statuses:', res.data?.map(function(b) { return b.status; }));
+              console.log('Error:', res.error);
               if (!res.error && res.data && res.data.length) {
                 appointments = res.data;
                 break;
