@@ -570,15 +570,22 @@
           })
         }).catch(function(e) { console.warn('Cancel webhook error:', e); });
 
-        // Show loading immediately, then re-fetch from Supabase
-        const list = document.getElementById('appointmentsList');
-        if (list) {
-          list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">⏳ جاري التحديث...</div>';
+        // Remove card directly from DOM — works regardless of cache/neq filter
+        var removed = false;
+        document.querySelectorAll('[data-ref]').forEach(function(card) {
+          if (card.dataset.ref === ref) {
+            card.style.transition = 'all 0.3s ease';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(-10px)';
+            setTimeout(function() { card.remove(); }, 300);
+            removed = true;
+          }
+        });
+        // Fallback: if data-ref not found, force full re-render
+        if (!removed) {
+          setTimeout(async function() { await renderAppointments(); }, 500);
         }
-        setTimeout(async function() {
-          await renderAppointments();
-          showToast('تم إلغاء الموعد بنجاح ✅', 'success');
-        }, 500);
+        showToast('تم إلغاء الموعد بنجاح ✅', 'success');
 
       } catch(e) {
         console.error('Cancel error:', e);

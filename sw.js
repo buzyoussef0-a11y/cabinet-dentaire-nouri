@@ -1,5 +1,5 @@
 /* ── SERVICE WORKER — Cabinet Zouhri ── */
-var CACHE = 'zouhri-v3';
+var CACHE = 'zouhri-v4';
 var ASSETS = [
     '/', '/index.html', '/booking.html',
     '/faq.html', '/appointment-tracking.html',
