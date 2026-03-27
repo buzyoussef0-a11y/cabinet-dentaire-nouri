@@ -467,7 +467,7 @@
             if (!s.val) continue;
             try {
               var res = await supabase.from(s.table).select('*')
-                .eq(s.col, s.val).order('created_at', { ascending: false });
+                .eq(s.col, s.val).neq('status', 'cancelled').order('created_at', { ascending: false });
               console.log('[tracking] ' + s.table + '.' + s.col + ':', res.data, res.error);
               if (!res.error && res.data && res.data.length) {
                 appointments = res.data;
@@ -527,55 +527,52 @@
     }
 
     async function cancelAppointment(ref) {
+      console.log('Cancelling ref:', ref);
       if (!confirm('هل أنت متأكد من إلغاء هذا الموعد؟')) return;
+
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-
-        // Step 1 — Update status to cancelled (try appointments table, fallback to bookings)
-        var res = await supabase
-          .from('appointments')
-          .update({ status: 'cancelled', updated_at: new Date().toISOString() })
-          .eq('reference_id', ref);
-
-        if (res.error) {
-          await supabase
-            .from('bookings')
+        // Try all possible column names across both tables
+        const targets = [
+          { table: 'appointments', col: 'reference_id' },
+          { table: 'bookings',     col: 'reference_id' },
+          { table: 'appointments', col: 'ref' },
+          { table: 'bookings',     col: 'ref' },
+          { table: 'appointments', col: 'id' },
+          { table: 'bookings',     col: 'id' }
+        ];
+        for (const t of targets) {
+          const { error } = await supabase
+            .from(t.table)
             .update({ status: 'cancelled' })
-            .eq('reference_id', ref);
+            .eq(t.col, ref);
+          console.log('Update result [' + t.table + '.' + t.col + ']:', error);
+          if (!error) break;
         }
 
-        // Step 2 — Send webhook notification
-        try {
-          await fetch('https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              event: 'appointment_cancelled',
-              reference_id: ref,
-              userId: user?.id || null,
-              userName: user?.user_metadata?.full_name || null,
-              timestamp: new Date().toISOString()
-            })
-          });
-        } catch(e) { console.warn('Cancel webhook error:', e); }
+        // Send webhook (fire-and-forget)
+        fetch('https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event: 'appointment_cancelled',
+            reference_id: ref,
+            timestamp: new Date().toISOString()
+          })
+        }).catch(function(e) { console.warn('Cancel webhook error:', e); });
 
-        // Step 3 — Animate and remove card from UI
-        document.querySelectorAll('[data-ref]').forEach(function(card) {
-          if (card.dataset.ref === ref) {
-            card.style.transition = 'all 0.3s ease';
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(-10px)';
-            setTimeout(function() { card.remove(); }, 300);
-          }
-        });
+        // Show loading immediately, then re-fetch from Supabase
+        const list = document.getElementById('appointmentsList');
+        if (list) {
+          list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">⏳ جاري التحديث...</div>';
+        }
+        setTimeout(async function() {
+          await renderAppointments();
+          showToast('تم إلغاء الموعد بنجاح ✅', 'success');
+        }, 500);
 
-        // Step 4 — Re-render after animation
-        setTimeout(function() { renderAppointments(); }, 350);
-
-        showToast('تم إلغاء الموعد بنجاح ✅', 'success');
       } catch(e) {
         console.error('Cancel error:', e);
-        showToast('حدث خطأ في الإلغاء', 'error');
+        showToast('حدث خطأ: ' + e.message, 'error');
       }
     }
 
