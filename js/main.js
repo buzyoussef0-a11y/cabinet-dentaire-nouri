@@ -30,7 +30,16 @@ async function populateNavUser() {
 
     if (!user && !localUser) return;
 
+    // Fetch display name from profiles table first, fallback to user_metadata
     var displayName = (user?.user_metadata?.full_name || localUser?.fullName || user?.email || 'مستخدم').split(' ')[0];
+    if (user && typeof supabase !== 'undefined') {
+        try {
+            var profileRes = await supabase.from('profiles').select('full_name').eq('id', user.id).single();
+            if (!profileRes.error && profileRes.data?.full_name) {
+                displayName = profileRes.data.full_name.split(' ')[0];
+            }
+        } catch(e) {}
+    }
     var initial = displayName.charAt(0).toUpperCase();
     var currentLang = localStorage.getItem('siteLang') || 'ar';
     var isAr = currentLang === 'ar';
