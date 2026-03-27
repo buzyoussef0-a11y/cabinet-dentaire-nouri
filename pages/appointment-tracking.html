@@ -537,27 +537,47 @@
     }
 
     async function cancelAppointment(ref) {
-      console.log('Cancelling ref:', ref);
       if (!confirm('هل أنت متأكد من إلغاء هذا الموعد؟')) return;
 
       try {
-        // Try all possible column names across both tables
-        const targets = [
-          { table: 'appointments', col: 'reference_id' },
-          { table: 'bookings',     col: 'reference_id' },
-          { table: 'appointments', col: 'ref' },
-          { table: 'bookings',     col: 'ref' },
-          { table: 'appointments', col: 'id' },
-          { table: 'bookings',     col: 'id' }
-        ];
-        for (const t of targets) {
-          const { error } = await supabase
-            .from(t.table)
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) { showToast('يجب تسجيل الدخول أولاً', 'error'); return; }
+
+        // Update with user_id + reference_id — satisfies RLS policy AND checks rows affected
+        var rowsUpdated = 0;
+
+        const { data: d1, error: e1 } = await supabase
+          .from('appointments')
+          .update({ status: 'cancelled' })
+          .eq('reference_id', ref)
+          .eq('user_id', user.id)
+          .select();
+        console.log('appointments.reference_id + user_id:', { rows: d1?.length, error: e1 });
+        if (!e1 && d1?.length) { rowsUpdated = d1.length; }
+
+        if (!rowsUpdated) {
+          const { data: d2, error: e2 } = await supabase
+            .from('appointments')
             .update({ status: 'cancelled' })
-            .eq(t.col, ref);
-          console.log('Update result [' + t.table + '.' + t.col + ']:', error);
-          if (!error) break;
+            .eq('reference_id', ref)
+            .eq('email', user.email)
+            .select();
+          console.log('appointments.reference_id + email:', { rows: d2?.length, error: e2 });
+          if (!e2 && d2?.length) { rowsUpdated = d2.length; }
         }
+
+        if (!rowsUpdated) {
+          const { data: d3, error: e3 } = await supabase
+            .from('bookings')
+            .update({ status: 'cancelled' })
+            .eq('reference_id', ref)
+            .eq('user_id', user.id)
+            .select();
+          console.log('bookings.reference_id + user_id:', { rows: d3?.length, error: e3 });
+          if (!e3 && d3?.length) { rowsUpdated = d3.length; }
+        }
+
+        console.log('Total rows updated in Supabase:', rowsUpdated);
 
         // Send webhook (fire-and-forget)
         fetch('https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e', {
