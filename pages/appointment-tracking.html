@@ -543,17 +543,19 @@
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) { showToast('يجب تسجيل الدخول أولاً', 'error'); return; }
 
-        // Step 1 — fetch all user's appointments to find the correct row by any ref column
+        // Step 1 — fetch all user's appointments (select * to avoid 400 on missing columns)
         var rowsUpdated = 0;
-        const { data: allAppts } = await supabase
+        const { data: allAppts, error: fetchErr } = await supabase
           .from('appointments')
-          .select('id, reference_id, ref')
+          .select('*')
           .eq('user_id', user.id);
+        console.log('Fetched appointments:', allAppts?.length, fetchErr);
 
+        // Find matching row by checking all string-valued fields against ref
         const target = allAppts?.find(function(a) {
-          return a.reference_id === ref || a.ref === ref || String(a.id) === String(ref);
+          return Object.values(a).some(function(v) { return String(v) === String(ref); });
         });
-        console.log('Found target row:', target);
+        console.log('Found target row:', target ? { id: target.id, status: target.status } : 'NOT FOUND');
 
         if (target) {
           // Step 2 — update by primary key (id) — always bypasses column name issues
