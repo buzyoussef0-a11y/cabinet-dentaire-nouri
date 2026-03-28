@@ -57,41 +57,41 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!container) return;
 
     container.innerHTML = faqs.map(function (item, i) {
+        var qEsc = item.qAr.replace(/'/g, '&#39;');
         return '<div class="faq-item">' +
             '<div class="faq-question" onclick="toggleFaq(this)">' +
-            '<span data-ar="' + item.qAr + '" data-fr="' + item.qFr + '">' + item.qAr + '</span>' +
-            '<span class="faq-toggle">+</span>' +
+                '<span data-ar="' + item.qAr + '" data-fr="' + item.qFr + '">' + item.qAr + '</span>' +
+                '<span class="faq-toggle">+</span>' +
             '</div>' +
-            '<div class="faq-answer"><p data-ar="' + item.aAr + '" data-fr="' + item.aFr + '">' + item.aAr + '</p></div>' +
-            '</div>';
+            '<div class="faq-answer">' +
+                '<p data-ar="' + item.aAr + '" data-fr="' + item.aFr + '">' + item.aAr + '</p>' +
+                '<button class="faq-ask-more" onclick="askMoreAbout(\'' + qEsc + '\')" data-ar="اعرف أكثر 💬" data-fr="En savoir plus 💬">اعرف أكثر 💬</button>' +
+            '</div>' +
+        '</div>';
     }).join('');
 });
 
+/* ── Toggle accordion — no longer auto-sends to chat ── */
 function toggleFaq(el) {
     var item = el.parentElement;
-    var wasOpen = item.classList.contains('open');
     var all = document.querySelectorAll('.faq-item');
     all.forEach(function (i) { if (i !== item) i.classList.remove('open'); });
     item.classList.toggle('open');
-
-    if (!wasOpen) {
-        var questionSpan = el.querySelector('span[data-ar]');
-        if (questionSpan) {
-            sendFaqToChat(questionSpan.textContent.trim());
-        }
-    }
 }
 
-function sendFaqToChat(question) {
+/* ── "اعرف أكثر" button: opens chat and sends enriched message ── */
+function askMoreAbout(question) {
     if (typeof toggleChat !== 'function' || typeof sendWithText !== 'function') return;
+    var msg = 'أريد أن أعرف أكثر عن: ' + question;
     if (!chatOpen) {
         toggleChat();
-        setTimeout(function () { sendWithText(question); }, 600);
+        setTimeout(function () { sendWithText(msg); }, 600);
     } else {
-        sendWithText(question);
+        sendWithText(msg);
     }
 }
 
+/* ── Search filter ── */
 function filterFaq(query) {
     if (!query) query = '';
     query = query.toLowerCase();
@@ -106,9 +106,6 @@ function filterFaq(query) {
             item.style.display = 'none';
         }
     });
-
     var noResults = document.getElementById('faqNoResults');
-    if (noResults) {
-        noResults.style.display = hasResults ? 'none' : 'block';
-    }
+    if (noResults) noResults.style.display = hasResults ? 'none' : 'block';
 }

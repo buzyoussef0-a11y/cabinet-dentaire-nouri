@@ -17,6 +17,121 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
+    <style>
+        /* ── "اعرف أكثر" button inside each answer ── */
+        .faq-ask-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            padding: 8px 20px;
+            background: transparent;
+            border: 1.5px solid rgba(13, 242, 242, 0.35);
+            border-radius: 40px;
+            color: #0df2f2;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.2px;
+        }
+        .faq-ask-more:hover {
+            background: rgba(13, 242, 242, 0.1);
+            border-color: rgba(13, 242, 242, 0.7);
+            box-shadow: 0 0 14px rgba(13, 242, 242, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* ── Ask-assistant card ── */
+        .faq-assistant-card {
+            max-width: 800px;
+            margin: 28px auto 0;
+            border-radius: 20px;
+            padding: 32px 40px;
+            background: linear-gradient(135deg,
+                rgba(13, 148, 136, 0.12) 0%,
+                rgba(13, 242, 242, 0.06) 100%);
+            border: 1px solid rgba(13, 242, 242, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+        .faq-assistant-card::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -60px;
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, rgba(13,242,242,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .faq-assistant-card:hover {
+            border-color: rgba(13, 242, 242, 0.45);
+            box-shadow: 0 8px 40px rgba(13, 242, 242, 0.12);
+            transform: translateY(-2px);
+        }
+        .faq-ac-icon {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0D9488, #0df2f2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 18px rgba(13,242,242,0.3);
+            animation: acPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes acPulse {
+            0%, 100% { box-shadow: 0 4px 18px rgba(13,242,242,0.3); }
+            50%       { box-shadow: 0 4px 28px rgba(13,242,242,0.55); }
+        }
+        .faq-ac-body { flex: 1; }
+        .faq-ac-title {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 4px;
+        }
+        .faq-ac-sub {
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.84rem;
+            color: rgba(180,220,230,0.65);
+            line-height: 1.5;
+        }
+        .faq-ac-btn {
+            padding: 11px 26px;
+            background: linear-gradient(135deg, #0D9488, #0df2f2);
+            border: none;
+            border-radius: 40px;
+            color: #0a1628;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(13,242,242,0.25);
+        }
+        .faq-ac-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 22px rgba(13,242,242,0.4);
+        }
+        @media (max-width: 600px) {
+            .faq-assistant-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 28px 24px;
+            }
+            .faq-ac-btn { width: 100%; }
+        }
+    </style>
 </head>
 
 <body>
@@ -114,6 +229,17 @@
                     <p data-ar="عذراً، لم نجد نتائج تطابق بحثك." data-fr="Désolé, aucun résultat ne correspond à votre recherche.">عذراً، لم نجد نتائج تطابق بحثك.</p>
                 </div>
             </div>
+        </div>
+
+        <!-- Ask-assistant card -->
+        <div class="faq-assistant-card" onclick="openAssistantChat()">
+            <div class="faq-ac-icon">💬</div>
+            <div class="faq-ac-body">
+                <div class="faq-ac-title" data-ar="لم تجد السؤال الذي تبحث عنه؟" data-fr="Vous n'avez pas trouvé votre réponse ?">لم تجد السؤال الذي تبحث عنه؟</div>
+                <div class="faq-ac-sub" data-ar="مساعدنا الذكي متاح 24/7 للإجابة على جميع استفساراتك فوراً" data-fr="Notre assistant IA est disponible 24h/24 pour répondre à toutes vos questions">مساعدنا الذكي متاح 24/7 للإجابة على جميع استفساراتك فوراً</div>
+            </div>
+            <button class="faq-ac-btn" data-ar="اسأل المساعد ✦" data-fr="Demander à l'assistant ✦">اسأل المساعد ✦</button>
+        </div>
         </div>
     </main>
 
@@ -213,6 +339,12 @@
     <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
     <script>window._ROOT = '../';</script>
+    <script>
+        function openAssistantChat() {
+            if (typeof toggleChat === 'function' && !chatOpen) toggleChat();
+        }
+    </script>
+    <script src="../js/supabase-client.js"></script>
     <script src="../js/auth.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/i18n.js"></script>
