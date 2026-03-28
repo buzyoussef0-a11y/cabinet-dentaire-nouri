@@ -8,6 +8,7 @@
     <meta name="description" content="اكتشف خدمات Cabinet Dentaire Nouri الشاملة في مكناس: تبييض، تقويم، زراعة، طب أطفال وأكثر من 12 خدمة متخصصة.">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/chat.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -457,6 +458,31 @@
       <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/>
     </svg>
   </a>
+  <div id="chatWidget">
+    <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي"
+      style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
+      <span style="font-size:1.3rem;line-height:1;">💬</span>
+      <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد" data-fr="Assistant">مساعد</span>
+    </button>
+    <div id="chatWindow" class="chat-hidden">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">🦷</div>
+          <div>
+            <div class="chat-title" data-ar="مساعد Cabinet Nouri" data-fr="Assistant Cabinet Nouri">مساعد Cabinet Nouri</div>
+            <div class="chat-status" data-ar="متاح الآن" data-fr="Disponible">متاح الآن</div>
+          </div>
+        </div>
+        <button class="chat-close" onclick="toggleChat()">✕</button>
+      </div>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="اكتب رسالتك..." data-placeholder-ar="اكتب رسالتك..." data-placeholder-fr="Écrivez votre message..." onkeypress="handleChatKey(event)">
+        <button id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+
   <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="العودة للأعلى">↑</button>
   <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
