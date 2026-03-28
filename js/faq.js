@@ -69,9 +69,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function toggleFaq(el) {
     var item = el.parentElement;
+    var wasOpen = item.classList.contains('open');
     var all = document.querySelectorAll('.faq-item');
     all.forEach(function (i) { if (i !== item) i.classList.remove('open'); });
     item.classList.toggle('open');
+
+    if (!wasOpen) {
+        var questionSpan = el.querySelector('span[data-ar]');
+        if (questionSpan) {
+            sendFaqToChat(questionSpan.textContent.trim());
+        }
+    }
+}
+
+function sendFaqToChat(question) {
+    if (typeof toggleChat !== 'function' || typeof sendWithText !== 'function') return;
+    if (!chatOpen) {
+        toggleChat();
+        setTimeout(function () { sendWithText(question); }, 600);
+    } else {
+        sendWithText(question);
+    }
 }
 
 function filterFaq(query) {
