@@ -9,14 +9,34 @@ var chatSessionId = localStorage.getItem('chatSessionId') ||
     'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 localStorage.setItem('chatSessionId', chatSessionId);
 
+/* ── Resolve logged-in user: Supabase session OR localStorage fallback ── */
+async function resolveUser() {
+    var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
+    if (user) return user;
+    /* Race condition fallback: session not yet loaded but auth.js stored data */
+    try {
+        var stored = localStorage.getItem('dental_current_user');
+        if (stored) {
+            var sd = JSON.parse(stored);
+            if (sd && sd.id) return { id: sd.id, email: sd.email || '', _fromStorage: true, _storedData: sd };
+        }
+    } catch (e) { /* ignore */ }
+    return null;
+}
+
 /* ── Initialise on first open ── */
 async function initChat() {
     if (chatInited) return;
     chatInited = true;
 
-    var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
-    var name = user ? (await getUserName(user) || 'زائر') : 'زائر';
-    var greeting = user
+    var user = await resolveUser();
+    var name = null;
+    if (user) {
+        name = user._fromStorage
+            ? (user._storedData.fullName || null)
+            : (await getUserName(user) || null);
+    }
+    var greeting = (user && name)
         ? 'مرحباً ' + name.split(' ')[0] + '! 😊 أنا مساعد Cabinet Nouri. كيف أساعدك؟'
         : 'مرحباً! 😊 أنا مساعد Cabinet Dentaire Nouri.\nكيف يمكنني مساعدتك اليوم؟';
 
@@ -182,13 +202,25 @@ async function sendWithText(msg) {
     chatHistory.push({ role: 'user', content: msg });
 
     var typing = showTyping();
-    var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
-    var userName = user ? await getUserName(user) : null;
+    var user = await resolveUser();
+
+    /* Resolve userName & email from Supabase OR localStorage fallback */
+    var userId = null, userName = null, userEmail = null;
+    if (user) {
+        userId = user.id;
+        if (user._fromStorage) {
+            userName  = user._storedData.fullName || null;
+            userEmail = user._storedData.email    || null;
+        } else {
+            userName  = await getUserName(user);
+            userEmail = user.email || null;
+        }
+    }
 
     /* Get Supabase JWT so n8n can query appointments with RLS */
     var userToken = null;
     try {
-        if (user && window.supabase) {
+        if (user && !user._fromStorage && window.supabase) {
             var sessionRes = await window.supabase.auth.getSession();
             userToken = (sessionRes.data && sessionRes.data.session) ? sessionRes.data.session.access_token : null;
         }
@@ -207,9 +239,9 @@ async function sendWithText(msg) {
             body: JSON.stringify({
                 message: msg,
                 sessionId: chatSessionId,
-                userId:    user ? user.id    : null,
+                userId:    userId,
                 userName:  userName,
-                userEmail: user ? user.email : null,
+                userEmail: userEmail,
                 userToken: userToken
             })
         });
