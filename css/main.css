@@ -1010,6 +1010,15 @@ select:focus {
   color: var(--accent);
 }
 
+.faq-toggle {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s;
+  line-height: 1;
+}
+
 .faq-icon {
   color: var(--accent);
   font-size: 1.2rem;
@@ -1024,7 +1033,7 @@ select:focus {
   font-size: 0.95rem;
 }
 
-.faq-answer.open {
+.faq-item.open .faq-answer {
   display: block;
 }
 
@@ -2178,10 +2187,15 @@ select:focus {
   padding-bottom: 0;
 }
 
-.faq-answer.open {
-  max-height: 400px;
+.faq-item.open .faq-answer {
+  max-height: 600px;
   opacity: 1;
   padding-bottom: 22px;
+}
+
+.faq-item.open .faq-toggle {
+  transform: rotate(45deg);
+  color: var(--accent);
 }
 
 .faq-icon {
