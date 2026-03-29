@@ -302,11 +302,13 @@
         var date = apt.preferred_date || apt.appointment_date || apt.date || '-';
         var time = apt.preferred_time || apt.appointment_time || apt.time || '';
         var ref = apt.reference_id || apt.ref || '-';
+        var aptId = apt.id || '';
+        var aptTable = apt._sourceTable || 'appointments';
         var name = apt.full_name || apt.patient_name || apt.name || '-';
         var phone = apt.phone || '';
         var cancelled = s === 'cancelled';
         return `
-          <div data-ref="${ref}" style="
+          <div data-ref="${ref}" data-apt-id="${aptId}" style="
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 20px;
@@ -383,7 +385,7 @@
 
             <div style="display:flex; justify-content:flex-end; gap:10px;">
               <button
-                onclick="editAppointment('${ref}')"
+                onclick="editAppointment('${ref}', '${aptId}', '${aptTable}')"
                 style="
                   padding: 8px 20px;
                   font-size: 0.82rem;
@@ -401,7 +403,7 @@
                 ✏️ ${isAr ? 'تعديل' : 'Modifier'}
               </button>
               <button
-                onclick="cancelAppointment('${ref}')"
+                onclick="cancelAppointment('${ref}', '${aptId}', '${aptTable}')"
                 ${cancelled ? 'disabled' : ''}
                 style="
                   padding: 8px 20px;
@@ -480,7 +482,7 @@
               console.log('All statuses:', res.data?.map(function(b) { return b.status; }));
               console.log('Error:', res.error);
               if (!res.error && res.data && res.data.length) {
-                appointments = res.data;
+                appointments = res.data.map(function(r) { return Object.assign({}, r, { _sourceTable: s.table }); });
                 break;
               }
             } catch (e) { console.warn('[tracking] strategy ' + i + ' failed:', e); }
@@ -536,36 +538,40 @@
       window.location.href = (window._ROOT || '../') + 'booking.html?ref=' + ref;
     }
 
-    async function cancelAppointment(ref) {
+    async function cancelAppointment(ref, aptId, aptTable) {
       if (!confirm('هل أنت متأكد من إلغاء هذا الموعد؟')) return;
 
       try {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) { showToast('يجب تسجيل الدخول أولاً', 'error'); return; }
 
-        // Step 1 — fetch all user's appointments (select * to avoid 400 on missing columns)
         var rowsUpdated = 0;
-        const { data: allAppts, error: fetchErr } = await supabase
-          .from('appointments')
-          .select('*')
-          .eq('user_id', user.id);
-        console.log('Fetched appointments:', allAppts?.length, fetchErr);
+        var targetTable = aptTable || 'appointments';
 
-        // Find matching row by checking all string-valued fields against ref
-        const target = allAppts?.find(function(a) {
-          return Object.values(a).some(function(v) { return String(v) === String(ref); });
-        });
-        console.log('Found target row:', target ? { id: target.id, status: target.status } : 'NOT FOUND');
-
-        if (target) {
-          // Step 2 — update by primary key (id) — always bypasses column name issues
+        if (aptId) {
+          // Direct update by primary key + table (most reliable)
+          console.log('Cancelling via id:', aptId, 'table:', targetTable);
           const { data: updated, error: updateErr } = await supabase
-            .from('appointments')
+            .from(targetTable)
             .update({ status: 'cancelled' })
-            .eq('id', target.id)
+            .eq('id', aptId)
+            .eq('user_id', user.id)
             .select();
           console.log('Update by id:', { rows: updated?.length, error: updateErr });
           rowsUpdated = updated?.length || 0;
+        } else {
+          // Fallback: search both tables by ref value
+          for (var tbl of ['appointments', 'bookings']) {
+            const { data: rows } = await supabase.from(tbl).select('*').eq('user_id', user.id);
+            const target = rows?.find(function(a) {
+              return Object.values(a).some(function(v) { return String(v) === String(ref); });
+            });
+            if (target) {
+              const { data: updated } = await supabase.from(tbl).update({ status: 'cancelled' }).eq('id', target.id).select();
+              rowsUpdated = updated?.length || 0;
+              break;
+            }
+          }
         }
 
         console.log('Total rows updated in Supabase:', rowsUpdated);
@@ -581,10 +587,10 @@
           })
         }).catch(function(e) { console.warn('Cancel webhook error:', e); });
 
-        // Remove card directly from DOM — works regardless of cache/neq filter
+        // Remove card directly from DOM
         var removed = false;
-        document.querySelectorAll('[data-ref]').forEach(function(card) {
-          if (card.dataset.ref === ref) {
+        document.querySelectorAll('[data-ref],[data-apt-id]').forEach(function(card) {
+          if ((aptId && card.dataset.aptId === aptId) || card.dataset.ref === ref) {
             card.style.transition = 'all 0.3s ease';
             card.style.opacity = '0';
             card.style.transform = 'translateY(-10px)';
