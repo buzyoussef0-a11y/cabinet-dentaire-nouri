@@ -4,17 +4,17 @@ async function getCurrentUser() {
     try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session && session.user) {
-            // Self-heal: ensure localStorage is accurate
-            if (!localStorage.getItem('dental_current_user')) {
-                const meta = session.user.user_metadata || {};
-                const userData = {
-                    id: session.user.id,
-                    fullName: meta.full_name || meta.fullName || '',
-                    phone: meta.phone || '',
-                    email: session.user.email || ''
-                };
-                localStorage.setItem('dental_current_user', JSON.stringify(userData));
-            }
+            // Always keep id/email fresh; preserve fullName if already set from profile sync
+            const meta = session.user.user_metadata || {};
+            let existing = {};
+            try { existing = JSON.parse(localStorage.getItem('dental_current_user') || '{}'); } catch (e) {}
+            const userData = {
+                id: session.user.id,
+                fullName: existing.fullName || meta.full_name || meta.fullName || '',
+                phone: existing.phone || meta.phone || '',
+                email: session.user.email || ''
+            };
+            localStorage.setItem('dental_current_user', JSON.stringify(userData));
             return session.user;
         }
         return null;
@@ -117,6 +117,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         .eq('id', user.id)
                         .single();
                     profile = pd;
+                    /* Sync the correct name back to localStorage so fallback pages get it too */
+                    if (pd && pd.full_name) {
+                        try {
+                            var _ls = JSON.parse(localStorage.getItem('dental_current_user') || '{}');
+                            _ls.fullName = pd.full_name;
+                            localStorage.setItem('dental_current_user', JSON.stringify(_ls));
+                        } catch (e) {}
+                    }
                 } catch (e) { /* ignore — fall back to metadata */ }
             }
 
