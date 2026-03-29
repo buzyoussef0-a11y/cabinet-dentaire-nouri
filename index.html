@@ -671,6 +671,74 @@
     }
 
     /* ═══════════════════════════════════════════════
+       SCROLL ANIMATIONS — entrance keyframes
+       ═══════════════════════════════════════════════ */
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translateY(50px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideDownFade {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideRightFade {
+      from { opacity: 0; transform: translateX(60px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideLeftFade {
+      from { opacity: 0; transform: translateX(-60px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleInFade {
+      from { opacity: 0; transform: scale(0.82); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes glowEntry {
+      0%   { opacity: 0; transform: scale(0.9) translateY(20px); filter: brightness(0.5); }
+      60%  { filter: brightness(1.15); }
+      100% { opacity: 1; transform: scale(1) translateY(0); filter: brightness(1); }
+    }
+    @keyframes flipIn {
+      from { opacity: 0; transform: rotateX(-25deg) translateY(30px); }
+      to   { opacity: 1; transform: rotateX(0deg) translateY(0); }
+    }
+    @keyframes lineGrow {
+      from { width: 0; opacity: 0; }
+      to   { width: 60px; opacity: 1; }
+    }
+    @keyframes numberPop {
+      0%   { opacity: 0; transform: scale(0.5) translateY(20px); }
+      70%  { transform: scale(1.12) translateY(-4px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* — Initial hidden state for animated elements — */
+    .anim-target { opacity: 0; will-change: opacity, transform; }
+    .anim-target.anim-played { animation-fill-mode: both; animation-timing-function: cubic-bezier(0.22,1,0.36,1); animation-duration: 0.75s; opacity: 1; }
+    .anim-up.anim-played      { animation-name: slideUpFade; }
+    .anim-right.anim-played   { animation-name: slideRightFade; }
+    .anim-left.anim-played    { animation-name: slideLeftFade; }
+    .anim-scale.anim-played   { animation-name: scaleInFade; }
+    .anim-glow.anim-played    { animation-name: glowEntry; }
+    .anim-flip.anim-played    { animation-name: flipIn; }
+    .anim-down.anim-played    { animation-name: slideDownFade; }
+    .anim-num.anim-played     { animation-name: numberPop; animation-timing-function: cubic-bezier(0.34,1.56,0.64,1); }
+
+    /* — Section heading underline grow — */
+    .section-anim-line {
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, #0df2f2, #0D9488);
+      border-radius: 99px;
+      width: 0;
+      margin: 10px auto 0;
+      opacity: 0;
+    }
+    .section-anim-line.anim-played {
+      animation: lineGrow 0.8s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    /* ═══════════════════════════════════════════════
        UNIFY SECTION BACKGROUNDS — match hero (#0A1628)
        Override var(--bg-darker) on services & footer
        ═══════════════════════════════════════════════ */
@@ -1870,6 +1938,102 @@
     }
     updateClinicStatus();
     document.addEventListener('DOMContentLoaded', updateClinicStatus);
+  </script>
+
+  <script>
+  /* ══════════════════════════════════════════════════
+     PREMIUM SCROLL ANIMATIONS — staggered entrance
+  ══════════════════════════════════════════════════ */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+
+    /* ── Register elements with animation type + delay ── */
+    function register(selector, animClass, baseDelay, stagger) {
+      document.querySelectorAll(selector).forEach(function (el, i) {
+        el.classList.add('anim-target', animClass);
+        el.style.animationDelay = (baseDelay + i * (stagger || 0)) + 's';
+      });
+    }
+
+    /* ── TESTIMONIALS ── */
+    register('.t-section-head',       'anim-up',    0);
+    register('.t-rating-pill',        'anim-scale', 0.25);
+    register('.tg-card',              'anim-flip',  0.05, 0.10);
+
+    /* ── DOCTOR SECTION ── */
+    register('.dr-redesign-label',    'anim-right', 0);
+    register('.dr-redesign-name',     'anim-right', 0.12);
+    register('.dr-redesign-specialty','anim-right', 0.22);
+    register('.dr-redesign-quote',    'anim-right', 0.32);
+    register('.dr-redesign-stat',     'anim-num',   0.1,  0.12);
+    register('.dr-redesign-cta',      'anim-up',    0.5);
+    register('.dr-redesign-img-wrap', 'anim-glow',  0.15);
+    register('.dr-redesign-float-badge', 'anim-down', 0.55);
+
+    /* ── CONTACT SECTION ── */
+    register('.cv3-head',             'anim-up',    0);
+    register('.cv3-card',             'anim-right', 0.05, 0.12);
+    register('.cv3-map-wrap',         'anim-scale', 0.1);
+    register('.cv3-actions',          'anim-up',    0.45);
+    register('.cv3-mini-row',         'anim-up',    0.2);
+
+    /* ── OBSERVE & TRIGGER ── */
+    var targets = document.querySelectorAll('.anim-target');
+    var played = new Set();
+
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || played.has(entry.target)) return;
+        played.add(entry.target);
+        entry.target.classList.add('anim-played');
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(function (el) { obs.observe(el); });
+
+    /* ── Section heading glow underline ── */
+    document.querySelectorAll('.t-header-title, .cv3-h2').forEach(function (h) {
+      var line = document.createElement('span');
+      line.className = 'section-anim-line anim-target';
+      h.parentNode.insertBefore(line, h.nextSibling);
+      obs.observe(line);
+      /* Trigger when the heading is triggered */
+      h.addEventListener('animationstart', function () {
+        setTimeout(function () { line.classList.add('anim-played'); }, 200);
+      }, { once: true });
+    });
+
+    /* ── 3D Tilt effect on testimonial cards ── */
+    if (window.innerWidth >= 768) {
+      document.querySelectorAll('.tg-card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          var x = ((e.clientX - r.left) / r.width  - 0.5) * 14;
+          var y = ((e.clientY - r.top)  / r.height - 0.5) * -14;
+          card.style.transform = 'perspective(600px) rotateX('+y+'deg) rotateY('+x+'deg) translateY(-6px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', function () {
+          card.style.transform = '';
+        });
+      });
+    }
+
+    /* ── Spotlight follow on contact cards ── */
+    document.querySelectorAll('.cv3-card').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var x = e.clientX - r.left;
+        var y = e.clientY - r.top;
+        card.style.background =
+          'radial-gradient(200px circle at '+x+'px '+y+'px, rgba(13,242,242,0.09), rgba(13,242,242,0.03) 60%, rgba(13,242,242,0.04))';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.background = '';
+      });
+    });
+
+  })();
   </script>
 
 
