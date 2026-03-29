@@ -95,6 +95,16 @@ document.addEventListener('DOMContentLoaded', function () {
     (async function () {
         try {
             var user = await getCurrentUser();
+            /* Fallback: Supabase session may not be ready yet — use localStorage */
+            if (!user) {
+                try {
+                    var stored = localStorage.getItem('dental_current_user');
+                    if (stored) {
+                        var sd = JSON.parse(stored);
+                        if (sd && sd.id) user = { id: sd.id, email: sd.email || '', user_metadata: { full_name: sd.fullName || '' }, _fromStorage: true };
+                    }
+                } catch (e) {}
+            }
             if (!user) { authLinks.innerHTML = ''; return; }
 
             var { data: profile } = await supabase
