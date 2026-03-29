@@ -150,11 +150,22 @@ async function renderAppointments() {
       var ref = apt.reference_id || '-';
       var name = apt.full_name || apt.patient_name || apt.name || '-';
       var isCancelled = s === 'cancelled';
+      var isExpired = isAppointmentExpired(apt);
 
       var lblDate = isAr ? 'التاريخ:' : 'Date :';
       var lblRef = isAr ? 'الرقم المرجعي:' : 'Réf :';
       var lblName = isAr ? 'باسم:' : 'Nom :';
       var btnCancel = isAr ? 'إلغاء 🗑️' : 'Annuler 🗑️';
+
+      // Expired label
+      var expiredBadge = isExpired
+        ? '<span style="padding:3px 10px;border-radius:50px;font-size:0.72rem;font-weight:700;color:#94a3b8;background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.25);margin-right:6px;">' + (isAr ? 'منتهي' : 'Expiré') + '</span>'
+        : '';
+
+      // Action button: delete for expired, cancel for active
+      var actionBtn = isExpired
+        ? '<button onclick="deleteExpiredAppointment(\'' + apt.id + '\')" style="padding:8px 16px;font-size:0.85rem;color:#94a3b8;border:1px solid rgba(148,163,184,0.3);border-radius:8px;cursor:pointer;background:transparent;">' + (isAr ? '🗑️ حذف' : '🗑️ Supprimer') + '</button>'
+        : '<button class="btn-ghost" onclick="cancelAppointment(\'' + ref + '\')" style="padding:8px 16px;font-size:0.85rem;color:#EF4444;border:1px solid rgba(244,63,94,0.3);border-radius:8px;cursor:pointer;background:transparent;' + (isCancelled ? 'opacity:0.4;' : '') + '"' + (isCancelled ? ' disabled' : '') + '>' + btnCancel + '</button>';
 
       appointmentsHtml +=
         '<div class="appointment-item" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">' +
@@ -164,6 +175,7 @@ async function renderAppointments() {
         '<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-direction: row-reverse;">' +
         '<span style="font-weight: 700; font-size: 1.1rem; color: #ffffff;">' + service + '</span>' +
         '<span style="padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; color: white; background-color: ' + sCol + ';">' + sTxt + '</span>' +
+        expiredBadge +
         '</div>' +
         '<div style="font-size: 0.9rem; color: rgba(255,255,255,0.6); display: flex; gap: 15px; flex-direction: row-reverse;">' +
         '<span><strong style="color: rgba(255,255,255,0.9);">' + lblDate + '</strong> ' + date + ' ' + time + '</span>' +
@@ -175,9 +187,7 @@ async function renderAppointments() {
         '</div>' +
         '</div>' +
         '<div style="display: flex; gap: 10px; margin-right: 20px;">' +
-        '<button class="btn-ghost" onclick="cancelAppointment(\'' + ref + '\')" ' +
-        'style="padding: 8px 16px; font-size: 0.85rem; color: #EF4444; border: 1px solid rgba(244,63,94,0.3); border-radius: 8px; cursor: pointer; background: transparent;' + (isCancelled ? ' opacity: 0.4;' : '') + '"' +
-        (isCancelled ? ' disabled' : '') + '>' + btnCancel + '</button>' +
+        actionBtn +
         '</div>' +
         '</div>';
 
@@ -206,6 +216,43 @@ function cancelAppointment(refId) {
       performCancel(refId);
     }
   });
+}
+
+function deleteExpiredAppointment(aptId) {
+  if (typeof showConfirmModal !== 'function') {
+    if (!confirm('هل تريد حذف هذا الموعد المنتهي؟')) return;
+    performDelete(aptId);
+    return;
+  }
+  showConfirmModal({
+    icon: '🗑️',
+    title: 'حذف الموعد المنتهي',
+    msg: 'هذا الموعد منتهي. هل تريد حذفه نهائياً؟',
+    yesText: 'نعم، احذف',
+    onConfirm: function () { performDelete(aptId); }
+  });
+}
+
+async function performDelete(aptId) {
+  try {
+    var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
+    if (!user) return;
+    const { error } = await supabase
+      .from('appointments')
+      .delete()
+      .eq('id', aptId)
+      .eq('user_id', user.id);
+
+    if (error) {
+      console.error('Delete error:', error);
+      if (typeof showToast === 'function') showToast('تعذّر الحذف. تحقق من صلاحيات Supabase.', 'error');
+      return;
+    }
+    if (typeof showToast === 'function') showToast('تم حذف الموعد', 'success');
+    renderAppointments();
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 
