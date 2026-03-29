@@ -1,3 +1,53 @@
+/* ══════════════════════════════════════════
+   GLOBAL SCROLL ANIMATION SYSTEM
+══════════════════════════════════════════ */
+@keyframes _slideUpFade   { from{opacity:0;transform:translateY(52px)} to{opacity:1;transform:translateY(0)} }
+@keyframes _slideDownFade { from{opacity:0;transform:translateY(-36px)} to{opacity:1;transform:translateY(0)} }
+@keyframes _slideRightFade{ from{opacity:0;transform:translateX(64px)} to{opacity:1;transform:translateX(0)} }
+@keyframes _slideLeftFade { from{opacity:0;transform:translateX(-64px)} to{opacity:1;transform:translateX(0)} }
+@keyframes _scaleInFade   { from{opacity:0;transform:scale(0.78)} to{opacity:1;transform:scale(1)} }
+@keyframes _flipInFade    { from{opacity:0;transform:perspective(500px) rotateX(-28deg) translateY(36px)} to{opacity:1;transform:perspective(500px) rotateX(0) translateY(0)} }
+@keyframes _glowEntry     { 0%{opacity:0;transform:scale(0.88);filter:brightness(.5)} 60%{filter:brightness(1.2)} 100%{opacity:1;transform:scale(1);filter:brightness(1)} }
+@keyframes _numberPop     { 0%{opacity:0;transform:scale(.5) translateY(18px)} 70%{transform:scale(1.14) translateY(-4px)} 100%{opacity:1;transform:scale(1) translateY(0)} }
+@keyframes _lineGrow      { from{width:0;opacity:0} to{width:64px;opacity:1} }
+@keyframes _fadeIn        { from{opacity:0} to{opacity:1} }
+
+/* Initial hidden state */
+[data-anim] { opacity: 0; will-change: opacity, transform; }
+
+/* Base transition */
+[data-anim].a-in {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 0.72s;
+  opacity: 1;
+}
+[data-anim="up"].a-in      { animation-name: _slideUpFade; }
+[data-anim="down"].a-in    { animation-name: _slideDownFade; }
+[data-anim="right"].a-in   { animation-name: _slideRightFade; }
+[data-anim="left"].a-in    { animation-name: _slideLeftFade; }
+[data-anim="scale"].a-in   { animation-name: _scaleInFade; }
+[data-anim="flip"].a-in    { animation-name: _flipInFade; }
+[data-anim="glow"].a-in    { animation-name: _glowEntry; }
+[data-anim="num"].a-in     { animation-name: _numberPop; animation-timing-function: cubic-bezier(0.34,1.56,0.64,1); }
+[data-anim="fade"].a-in    { animation-name: _fadeIn; }
+
+/* Underline grow decoration */
+.section-deco-line {
+  display: block;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #0df2f2, #0D9488);
+  border-radius: 99px;
+  margin: 10px auto 0;
+  opacity: 0;
+  transition: none;
+}
+.section-deco-line.a-in {
+  animation: _lineGrow 0.85s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+  opacity: 1;
+}
+
 :root {
   --bg-primary: #0A1628;
   --bg: #0A1628;
