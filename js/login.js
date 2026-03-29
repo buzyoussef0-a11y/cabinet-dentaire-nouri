@@ -56,9 +56,21 @@ document.addEventListener('DOMContentLoaded', async function () {
                 phone: meta.phone || '',
                 email: user.email || ''
             };
+
+            // Fetch real profile name (profiles table is source of truth)
+            try {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('full_name')
+                    .eq('id', user.id)
+                    .single();
+                if (profile && profile.full_name) userData.fullName = profile.full_name;
+            } catch (e) {}
+
             localStorage.setItem('dental_current_user', JSON.stringify(userData));
 
-            var redirect = localStorage.getItem('dental_redirect_after_login') || 'index.html';
+            // Use absolute fallback to avoid pages/index.html 404
+            var redirect = localStorage.getItem('dental_redirect_after_login') || (window._ROOT || '') + 'index.html';
             localStorage.removeItem('dental_redirect_after_login');
             window.location.href = redirect;
 
