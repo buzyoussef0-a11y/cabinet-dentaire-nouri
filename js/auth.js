@@ -107,13 +107,28 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             if (!user) { authLinks.innerHTML = ''; return; }
 
-            var { data: profile } = await supabase
-                .from('profiles')
-                .select('full_name')
-                .eq('id', user.id)
-                .single();
+            var profile = null;
+            /* Only fetch from DB when we have a real authenticated session */
+            if (!user._fromStorage) {
+                try {
+                    var { data: pd } = await supabase
+                        .from('profiles')
+                        .select('full_name')
+                        .eq('id', user.id)
+                        .single();
+                    profile = pd;
+                } catch (e) { /* ignore — fall back to metadata */ }
+            }
+
+            /* Use localStorage stored fullName when _fromStorage fallback */
+            var storedFullName = '';
+            try {
+                var _s = localStorage.getItem('dental_current_user');
+                if (_s) { var _sd = JSON.parse(_s); storedFullName = _sd.fullName || ''; }
+            } catch (e) {}
 
             var fullName = (profile && profile.full_name) ||
+                storedFullName ||
                 (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) ||
                 (user.email ? user.email.split('@')[0] : 'مستخدم');
 
@@ -142,6 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
             ].join('');
 
             authLinks.innerHTML = dropdownHTML;
-        } catch (e) { /* silent */ }
+        } catch (e) { authLinks.innerHTML = ''; }
     })();
 });
