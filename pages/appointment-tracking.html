@@ -555,7 +555,6 @@
             .from(targetTable)
             .update({ status: 'cancelled' })
             .eq('id', aptId)
-            .eq('user_id', user.id)
             .select();
           console.log('Update by id:', { rows: updated?.length, error: updateErr });
           rowsUpdated = updated?.length || 0;
