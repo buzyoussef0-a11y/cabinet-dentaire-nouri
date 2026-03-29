@@ -9584,7 +9584,7 @@ FIX 4 — GLOBAL: Prevent word-by-word breaking
   display: grid;
   grid-template-columns: 45fr 55fr;
   gap: 32px;
-  align-items: start;
+  align-items: stretch;
   position: relative;
   z-index: 1;
 }
@@ -9734,8 +9734,7 @@ FIX 4 — GLOBAL: Prevent word-by-word breaking
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  flex: 1;
-  min-height: 320px;
+  min-height: 280px;
   border: 1px solid rgba(13,242,242,0.12);
   box-shadow: 0 0 40px rgba(13,242,242,0.05), 0 24px 60px rgba(0,0,0,0.35);
 }
@@ -9819,9 +9818,11 @@ FIX 4 — GLOBAL: Prevent word-by-word breaking
 .cv3-map-col {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .cv3-map-wrap {
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 280px;
 }
 .cv3-mini-row {
   display: grid;
