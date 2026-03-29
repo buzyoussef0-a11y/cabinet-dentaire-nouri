@@ -1,4 +1,71 @@
 /* ── TRACKING.JS ── */
+
+/* ══════════════════════════════════════════
+   AUTO-CLEANUP — delete expired appointments
+══════════════════════════════════════════ */
+
+/**
+ * Parse a time string into { hours, minutes }
+ * Handles: "10:30", "10h30", "10h", "14:00", "2:30 PM", "10:30 AM"
+ */
+function parseTimeString(timeStr) {
+  if (!timeStr) return { hours: 23, minutes: 59 }; // no time = treat as end of day
+  var s = String(timeStr).trim().toUpperCase();
+  var isPM = s.includes('PM');
+  var isAM = s.includes('AM');
+  s = s.replace(/[APM\s]/g, '');
+  var parts = s.split(/[H:]/);
+  var h = parseInt(parts[0], 10) || 0;
+  var m = parseInt(parts[1], 10) || 0;
+  if (isPM && h !== 12) h += 12;
+  if (isAM && h === 12) h = 0;
+  return { hours: h, minutes: m };
+}
+
+/**
+ * Returns true if the appointment's date+time is in the past
+ */
+function isAppointmentExpired(apt) {
+  var dateStr = apt.preferred_date || apt.appointment_date || apt.date;
+  var timeStr = apt.preferred_time || apt.appointment_time || apt.time;
+  if (!dateStr || dateStr === '-') return false;
+
+  var t = parseTimeString(timeStr);
+  var apptDate = new Date(dateStr);
+  if (isNaN(apptDate.getTime())) return false;
+
+  apptDate.setHours(t.hours, t.minutes, 0, 0);
+  return apptDate.getTime() < Date.now();
+}
+
+/**
+ * Delete all expired appointments for the current user from Supabase
+ * Returns the list of non-expired appointments
+ */
+async function cleanupExpiredAppointments(userId, appointments) {
+  var expired = appointments.filter(function (apt) {
+    return apt.status !== 'cancelled' && isAppointmentExpired(apt);
+  });
+
+  if (!expired.length) return appointments;
+
+  var expiredIds = expired.map(function (a) { return a.id; });
+
+  try {
+    await supabase
+      .from('appointments')
+      .delete()
+      .in('id', expiredIds)
+      .eq('user_id', userId);
+  } catch (e) {
+    console.warn('Cleanup error:', e);
+  }
+
+  // Return only non-expired
+  return appointments.filter(function (apt) {
+    return !expiredIds.includes(apt.id);
+  });
+}
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof requireAuth === 'function') requireAuth();
   if (typeof populateNavUser === 'function') populateNavUser();
@@ -50,6 +117,9 @@ async function renderAppointments() {
   } catch (e) {
     console.error(e);
   }
+
+  // Auto-delete expired appointments then re-render with clean list
+  appointments = await cleanupExpiredAppointments(user.id, appointments);
 
   if (!appointments.length) {
     if (empty) empty.style.display = 'block';
