@@ -9463,8 +9463,64 @@ FIX 4 — GLOBAL: Prevent word-by-word breaking
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 20px;
   flex-wrap: wrap;
+}
+
+/* ── CTA Section Buttons — redesigned ── */
+.page-cta-btns .btn-primary-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #0df2f2 0%, #0ab8b8 50%, #0D9488 100%);
+  color: #071525;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 0 0 0 rgba(13, 242, 242, 0.5),
+              0 8px 24px rgba(13, 242, 242, 0.35);
+  animation: ctaBtnPulse 2.8s ease-in-out infinite;
+}
+@keyframes ctaBtnPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(13,242,242,0.5), 0 8px 24px rgba(13,242,242,0.35); }
+  50%       { box-shadow: 0 0 0 10px rgba(13,242,242,0), 0 12px 32px rgba(13,242,242,0.5); }
+}
+.page-cta-btns .btn-primary-new:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 0 0 rgba(13,242,242,0.3), 0 16px 40px rgba(13,242,242,0.55);
+  animation: none;
+}
+
+.page-cta-btns .btn-secondary-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(13, 242, 242, 0.06);
+  color: #e8f8f8;
+  border: 1.5px solid rgba(13, 242, 242, 0.4);
+  padding: 15px 32px;
+  border-radius: 50px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.page-cta-btns .btn-secondary-new:hover {
+  background: rgba(13, 242, 242, 0.14);
+  border-color: rgba(13, 242, 242, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(13, 242, 242, 0.2);
 }
 
 /* Mobile overflow guard */
