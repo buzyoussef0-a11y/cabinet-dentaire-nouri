@@ -671,6 +671,245 @@
     }
 
     /* ═══════════════════════════════════════════════
+       HERO — cinematic entrance animations
+       ═══════════════════════════════════════════════ */
+
+    /* Hero tag pill drop-bounce */
+    @keyframes heroTagDrop {
+      0%  { opacity:0; transform:translateY(-28px) scale(0.8); }
+      60% { transform:translateY(5px) scale(1.04); }
+      80% { transform:translateY(-3px) scale(0.98); }
+      100%{ opacity:1; transform:translateY(0) scale(1); }
+    }
+    /* Each word of the hero title */
+    @keyframes heroWordReveal {
+      0%  { opacity:0; transform:translateY(48px) rotateX(-30deg); filter:blur(6px); }
+      100%{ opacity:1; transform:translateY(0) rotateX(0); filter:blur(0); }
+    }
+    /* Hero description */
+    @keyframes heroDescSlide {
+      0%  { opacity:0; transform:translateY(30px); }
+      100%{ opacity:1; transform:translateY(0); }
+    }
+    /* Hero CTA buttons */
+    @keyframes heroActionsUp {
+      0%  { opacity:0; transform:translateY(28px) scale(0.94); }
+      70% { transform:translateY(-4px) scale(1.01); }
+      100%{ opacity:1; transform:translateY(0) scale(1); }
+    }
+    /* Hero image dramatic entrance */
+    @keyframes heroImgReveal {
+      0%  { opacity:0; transform:scale(0.72) translateX(40px); filter:brightness(0.2) blur(14px) saturate(0); }
+      55% { filter:brightness(1.2) blur(0) saturate(1.3); }
+      100%{ opacity:1; transform:scale(1) translateX(0); filter:brightness(1) blur(0) saturate(1); }
+    }
+    /* Floating overlay cards bounce-in */
+    @keyframes heroBadgeBounce {
+      0%  { opacity:0; transform:translateY(-36px) scale(0.6); }
+      55% { transform:translateY(8px) scale(1.06); }
+      75% { transform:translateY(-4px) scale(0.97); }
+      100%{ opacity:1; transform:translateY(0) scale(1); }
+    }
+    /* Glass pill slide from right */
+    @keyframes heroPillRight {
+      0%  { opacity:0; transform:translateX(40px) scale(0.88); }
+      70% { transform:translateX(-5px) scale(1.02); }
+      100%{ opacity:1; transform:translateX(0) scale(1); }
+    }
+    /* Availability badge slide from left */
+    @keyframes heroAvailLeft {
+      0%  { opacity:0; transform:translateX(-40px) scale(0.88); }
+      70% { transform:translateX(5px) scale(1.02); }
+      100%{ opacity:1; transform:translateX(0) scale(1); }
+    }
+    /* Metric number pop */
+    @keyframes heroMetricPop {
+      0%  { opacity:0; transform:translateY(20px) scale(0.6); }
+      65% { transform:translateY(-5px) scale(1.1); }
+      100%{ opacity:1; transform:translateY(0) scale(1); }
+    }
+    /* Deco cards stagger */
+    @keyframes decoCardIn {
+      0%  { opacity:0; transform:translateX(-50px) rotate(-8deg) scale(0.8); }
+      70% { transform:translateX(6px) rotate(1deg) scale(1.02); }
+      100%{ opacity:1; transform:translateX(0) rotate(0) scale(1); }
+    }
+    /* Scroll indicator fade */
+    @keyframes scrollIndicatorFade {
+      0%,60% { opacity:0; transform:translateY(10px); }
+      100%   { opacity:1; transform:translateY(0); }
+    }
+    /* Shimmer sweep on title */
+    @keyframes titleShimmer {
+      0%   { background-position: -300% center; }
+      100% { background-position: 300% center; }
+    }
+    /* Continuous float for hero image */
+    @keyframes heroFloatLoop {
+      0%,100%{ transform:translateY(0px) rotate(0deg); }
+      33%    { transform:translateY(-14px) rotate(0.5deg); }
+      66%    { transform:translateY(-7px) rotate(-0.3deg); }
+    }
+    /* Glow pulse ring around hero image */
+    @keyframes heroRingPulse {
+      0%,100%{ box-shadow: 0 0 0 0 rgba(13,242,242,0.35), 0 0 60px rgba(13,242,242,0.12); }
+      50%    { box-shadow: 0 0 0 18px rgba(13,242,242,0), 0 0 100px rgba(13,242,242,0.22); }
+    }
+
+    /* ── Hero word span — hidden until JS splits ── */
+    .hero-word {
+      display: inline-block;
+      opacity: 0;
+      animation: heroWordReveal 0.7s cubic-bezier(0.22,1,0.36,1) both;
+      perspective: 600px;
+    }
+    /* ── Hero initial hidden states ── */
+    .hero-tag          { opacity:0; }
+    .hero-desc         { opacity:0; }
+    .hero-actions-new  { opacity:0; }
+    .hero-metrics-new  { opacity:0; }
+    .hero-visual       { opacity:0; }
+    .hero-glass-rating { opacity:0; }
+    .hero-avail-badge  { opacity:0; }
+    .card-appt, .card-rating { opacity:0; }
+    .deco-img-card     { opacity:0; }
+    .scroll-indicator  { opacity:0; }
+
+    /* ── Apply animations ── */
+    .hero-anim-started .hero-tag {
+      animation: heroTagDrop 0.7s 0.15s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .hero-desc {
+      animation: heroDescSlide 0.75s 1.1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-anim-started .hero-actions-new {
+      animation: heroActionsUp 0.75s 1.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .hero-metrics-new .metric-block:nth-child(1) {
+      opacity:0; animation: heroMetricPop 0.65s 1.55s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .hero-metrics-new .metric-block:nth-child(2) {
+      opacity:0; animation: heroMetricPop 0.65s 1.68s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .hero-metrics-new .metric-block:nth-child(3) {
+      opacity:0; animation: heroMetricPop 0.65s 1.81s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .hero-metrics-new { animation: none; opacity:1; }
+    .hero-anim-started .hero-visual {
+      animation: heroImgReveal 1.1s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-anim-started .hero-glass-rating {
+      animation: heroPillRight 0.8s 1.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .hero-avail-badge {
+      animation: heroAvailLeft 0.8s 1.2s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .card-appt {
+      animation: heroBadgeBounce 0.85s 1.0s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .card-rating {
+      animation: heroBadgeBounce 0.85s 0.85s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-anim-started .deco-card-1 {
+      animation: decoCardIn 0.9s 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-anim-started .deco-card-2 {
+      animation: decoCardIn 0.9s 0.85s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-anim-started .deco-card-3 {
+      animation: decoCardIn 0.9s 1.0s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-anim-started .scroll-indicator {
+      animation: scrollIndicatorFade 1s 2.2s ease both;
+    }
+
+    /* ── Hero image continuous float (after entrance) ── */
+    .hero-float-wrap {
+      animation: heroFloatLoop 7s 1.5s ease-in-out infinite !important;
+    }
+    /* ── Hero image glow pulse ring ── */
+    .hero-img-box {
+      animation: heroRingPulse 3.5s 1.8s ease-in-out infinite;
+      border-radius: 20px;
+    }
+
+    /* ══════════════════════════════════════════════
+       SERVICES BENTO — scroll-triggered entrance
+    ══════════════════════════════════════════════ */
+    @keyframes bentoCome {
+      0%  { opacity:0; transform:perspective(800px) rotateY(20deg) translateX(60px) scale(0.85); filter:blur(4px); }
+      65% { filter:blur(0); }
+      100%{ opacity:1; transform:perspective(800px) rotateY(0) translateX(0) scale(1); }
+    }
+    @keyframes bentoComeFeatured {
+      0%  { opacity:0; transform:perspective(800px) rotateX(12deg) scale(0.82); filter:blur(6px); }
+      65% { filter:blur(0); }
+      100%{ opacity:1; transform:perspective(800px) rotateX(0) scale(1); }
+    }
+    .svc-bento-card { opacity:0; will-change:opacity,transform; }
+    .svc-bento-card.bento-in {
+      animation: bentoCome 0.8s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .svc-bento-card.svc-featured.bento-in {
+      animation: bentoComeFeatured 0.9s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    /* Hover: lift + image zoom + btn glow */
+    .svc-bento-card {
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
+    }
+    .svc-bento-card:hover {
+      transform: translateY(-8px) scale(1.02) !important;
+      box-shadow: 0 24px 64px rgba(13,242,242,0.22), 0 4px 20px rgba(0,0,0,0.5) !important;
+    }
+    .svc-bento-card:hover .svc-bento-img img {
+      transform: scale(1.08) !important;
+    }
+    .svc-bento-card:hover .svc-bento-btn {
+      background: rgba(13,242,242,0.25) !important;
+      border-color: rgba(13,242,242,0.7) !important;
+      box-shadow: 0 0 16px rgba(13,242,242,0.35) !important;
+    }
+
+    /* ══════════════════════════════════════════════
+       WHY-US — scroll-triggered entrance
+    ══════════════════════════════════════════════ */
+    @keyframes whyImgIn {
+      0%  { opacity:0; transform:scale(0.82) translateX(-50px); filter:brightness(0.3) saturate(0) blur(10px); }
+      60% { filter:brightness(1.15) saturate(1.2) blur(0); }
+      100%{ opacity:1; transform:scale(1) translateX(0); filter:brightness(1) saturate(1) blur(0); }
+    }
+    @keyframes whyRowIn {
+      0%  { opacity:0; transform:translateX(60px) scale(0.94); }
+      70% { transform:translateX(-4px) scale(1.01); }
+      100%{ opacity:1; transform:translateX(0) scale(1); }
+    }
+    @keyframes whyBadgeIn {
+      0%  { opacity:0; transform:scale(0.5) rotate(-10deg); }
+      65% { transform:scale(1.12) rotate(3deg); }
+      100%{ opacity:1; transform:scale(1) rotate(0); }
+    }
+    .why-visual-col { opacity:0; will-change:opacity,transform; }
+    .why-visual-col.why-in { animation: whyImgIn 1.1s cubic-bezier(0.22,1,0.36,1) both; }
+    .why-item-row { opacity:0; will-change:opacity,transform; }
+    .why-item-row.why-row-in { animation: whyRowIn 0.7s cubic-bezier(0.34,1.56,0.64,1) both; }
+    .why-img-badge, .why-img-badge2 { opacity:0; }
+    .why-img-badge.why-badge-in  { animation: whyBadgeIn 0.75s cubic-bezier(0.34,1.56,0.64,1) both; }
+    .why-img-badge2.why-badge-in { animation: whyBadgeIn 0.75s 0.15s cubic-bezier(0.34,1.56,0.64,1) both; }
+    /* Hover on why-item-row */
+    .why-item-row {
+      transition: transform 0.3s ease, background 0.3s ease;
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    .why-item-row:hover {
+      background: rgba(13,242,242,0.06);
+      transform: translateX(-6px);
+    }
+    .why-item-row:hover .why-item-icon {
+      box-shadow: 0 0 20px rgba(13,242,242,0.4);
+    }
+
+    /* ═══════════════════════════════════════════════
        SCROLL ANIMATIONS — entrance keyframes
        ═══════════════════════════════════════════════ */
     @keyframes slideUpFade {
@@ -1941,6 +2180,142 @@
   </script>
 
   <script>
+  /* ══════════════════════════════════════════════════
+     HERO — cinematic entrance on load
+  ══════════════════════════════════════════════════ */
+  (function () {
+    /* Split hero title into word spans */
+    var titleEl = document.querySelector('.hero-title-new');
+    if (titleEl) {
+      var raw = titleEl.getAttribute('data-ar') || titleEl.textContent.trim();
+      titleEl.innerHTML = raw.split(' ').map(function (w, i) {
+        return '<span class="hero-word" style="animation-delay:' + (0.45 + i * 0.13) + 's">' + w + '</span>';
+      }).join('&nbsp;');
+    }
+
+    /* Trigger hero sequence */
+    var hero = document.querySelector('.hero-new');
+    if (hero) {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          hero.classList.add('hero-anim-started');
+        });
+      });
+    }
+
+    /* Shimmer sweep on title after entrance */
+    if (titleEl) {
+      setTimeout(function () {
+        titleEl.style.background = 'linear-gradient(90deg,#ffffff 30%,#0df2f2 50%,#ffffff 70%)';
+        titleEl.style.backgroundSize = '300% auto';
+        titleEl.style.webkitBackgroundClip = 'text';
+        titleEl.style.backgroundClip = 'text';
+        titleEl.style.webkitTextFillColor = 'transparent';
+        titleEl.style.animation = 'titleShimmer 2.2s ease-in-out 1 forwards';
+        setTimeout(function () {
+          titleEl.style.background = '';
+          titleEl.style.backgroundSize = '';
+          titleEl.style.webkitBackgroundClip = '';
+          titleEl.style.backgroundClip = '';
+          titleEl.style.webkitTextFillColor = '';
+          titleEl.style.animation = '';
+          titleEl.style.color = '#ffffff';
+        }, 2400);
+      }, 1800);
+    }
+
+    /* Cursor-reactive glow on hero image */
+    var heroBox = document.querySelector('.hero-img-box');
+    if (heroBox && window.innerWidth >= 768) {
+      document.addEventListener('mousemove', function (e) {
+        var r = heroBox.getBoundingClientRect();
+        var cx = r.left + r.width / 2;
+        var cy = r.top + r.height / 2;
+        var dx = (e.clientX - cx) / window.innerWidth;
+        var dy = (e.clientY - cy) / window.innerHeight;
+        heroBox.style.transform = 'perspective(900px) rotateY(' + (dx * 10) + 'deg) rotateX(' + (-dy * 8) + 'deg)';
+        heroBox.style.boxShadow = '0 0 ' + (60 + Math.abs(dx) * 40) + 'px rgba(13,242,242,' + (0.12 + Math.abs(dx) * 0.18) + ')';
+      });
+    }
+  })();
+
+  /* ══════════════════════════════════════════════════
+     SERVICES BENTO — scroll-triggered 3D entrance
+  ══════════════════════════════════════════════════ */
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.svc-bento-card').forEach(function(c){ c.style.opacity='1'; });
+      return;
+    }
+    var cards = document.querySelectorAll('.svc-bento-card');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var i = Array.from(cards).indexOf(el);
+        el.style.animationDelay = (0.04 + i * 0.1) + 's';
+        el.classList.add('bento-in');
+        obs.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    cards.forEach(function (c) { obs.observe(c); });
+
+    /* 3D tilt on hover */
+    if (window.innerWidth >= 768) {
+      cards.forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          var x = ((e.clientX - r.left) / r.width  - 0.5) * 18;
+          var y = ((e.clientY - r.top)  / r.height - 0.5) * -18;
+          card.style.transform = 'perspective(700px) rotateX('+y+'deg) rotateY('+x+'deg) translateY(-8px) scale(1.03)';
+          card.style.boxShadow = '0 28px 70px rgba(13,242,242,0.25)';
+        });
+        card.addEventListener('mouseleave', function () {
+          card.style.transform = '';
+          card.style.boxShadow = '';
+        });
+      });
+    }
+  })();
+
+  /* ══════════════════════════════════════════════════
+     WHY-US — scroll-triggered staggered entrance
+  ══════════════════════════════════════════════════ */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+
+    /* Visual column */
+    var visual = document.querySelector('.why-visual-col');
+    if (visual) {
+      var vObs = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        visual.classList.add('why-in');
+        setTimeout(function () {
+          var b1 = document.querySelector('.why-img-badge');
+          var b2 = document.querySelector('.why-img-badge2');
+          if (b1) b1.classList.add('why-badge-in');
+          if (b2) b2.classList.add('why-badge-in');
+        }, 600);
+        vObs.disconnect();
+      }, { threshold: 0.15 });
+      vObs.observe(visual);
+    }
+
+    /* Why-item rows — staggered */
+    var rows = document.querySelectorAll('.why-item-row');
+    var rowObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var i = Array.from(rows).indexOf(el);
+        el.style.animationDelay = (0.1 + i * 0.14) + 's';
+        el.classList.add('why-row-in');
+        rowObs.unobserve(el);
+      });
+    }, { threshold: 0.1 });
+    rows.forEach(function (r) { rowObs.observe(r); });
+  })();
+
   /* ══════════════════════════════════════════════════
      PREMIUM SCROLL ANIMATIONS — staggered entrance
   ══════════════════════════════════════════════════ */
