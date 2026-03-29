@@ -9734,7 +9734,8 @@ FIX 4 — GLOBAL: Prevent word-by-word breaking
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  height: 400px;
+  flex: 1;
+  min-height: 320px;
   border: 1px solid rgba(13,242,242,0.12);
   box-shadow: 0 0 40px rgba(13,242,242,0.05), 0 24px 60px rgba(0,0,0,0.35);
 }
@@ -9815,11 +9816,19 @@ FIX 4 — GLOBAL: Prevent word-by-word breaking
   transition: background 0.2s;
 }
 .cv3-open-maps-btn:hover { background: rgba(0,0,0,0.92); }
+.cv3-map-col {
+  display: flex;
+  flex-direction: column;
+}
+.cv3-map-wrap {
+  flex: 1;
+}
 .cv3-mini-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-top: 12px;
+  flex-shrink: 0;
 }
 .cv3-tour-card {
   position: relative;
