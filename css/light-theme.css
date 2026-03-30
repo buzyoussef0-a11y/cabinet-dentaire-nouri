@@ -100,13 +100,19 @@ footer h1, footer h2, footer h3, footer h4,
 .testimonials-grid-section::before,
 .testimonials-grid-section::after { display: none !important; }
 
-/* Doctor — keeps dark gradient */
+/* Doctor — keeps dark gradient (DO NOT add background-image:none — it cancels gradient) */
 .doctor-new, .doctor-redesign {
-  background: linear-gradient(135deg, #0A1628 0%, #006a67 100%) !important;
-  background-image: none !important;
+  background: linear-gradient(135deg, #001133 0%, #0F2650 55%, #006a67 100%) !important;
 }
-.doctor-redesign::before,
-.doctor-redesign::after { display: none !important; }
+/* Restore ::before / ::after for edge fades */
+.doctor-redesign::before {
+  display: block !important;
+  background: linear-gradient(to bottom, #001133 0%, transparent 100%) !important;
+}
+.doctor-redesign::after {
+  display: block !important;
+  background: linear-gradient(to top, #001133 0%, transparent 100%) !important;
+}
 
 /* Contact */
 .contact-v3 {
