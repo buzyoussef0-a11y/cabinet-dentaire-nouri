@@ -16,34 +16,231 @@
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#0D9488">
     <style>
+      /* ═══════════════════════════════════════════
+         GALLERY PAGE — LIGHT THEME REDESIGN
+      ═══════════════════════════════════════════ */
+
+      /* ── Section Background ── */
+      .gallery-section-bg {
+        background: linear-gradient(180deg, #f0f8f8 0%, #fef7ff 100%);
+        padding: 60px 0 100px;
+      }
+
+      /* ── Filter Buttons ── */
+      .gallery-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 40px;
+      }
+      .filter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 20px;
+        border-radius: 50px;
+        border: 2px solid #d1e8e7;
+        background: #ffffff;
+        color: #374151;
+        font-size: 0.88rem;
+        font-weight: 600;
+        font-family: 'Cairo', sans-serif;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        box-shadow: 0 2px 8px rgba(0,106,103,0.06);
+      }
+      .filter-btn:hover {
+        border-color: #006a67;
+        color: #006a67;
+        background: #f0fbfa;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(0,106,103,0.15);
+      }
+      .filter-btn.active {
+        background: linear-gradient(135deg, #006a67, #009e99);
+        border-color: transparent;
+        color: #ffffff;
+        box-shadow: 0 4px 18px rgba(0,106,103,0.35);
+        transform: translateY(-1px);
+      }
+      .filter-btn .filter-icon {
+        font-size: 1rem;
+        line-height: 1;
+      }
+
+      /* ── Gallery Grid (Masonry) ── */
       .gallery-grid {
         columns: 3;
-        column-gap: 16px;
-        padding: 20px;
+        column-gap: 18px;
+        padding: 4px 0;
       }
-      @media (max-width: 768px) {
+      @media (max-width: 900px) {
         .gallery-grid { columns: 2; }
       }
       @media (max-width: 480px) {
         .gallery-grid { columns: 1; }
       }
+
+      /* ── Gallery Item ── */
       .gallery-item {
         break-inside: avoid;
-        margin-bottom: 16px;
-        border-radius: 12px;
+        margin-bottom: 18px;
+        border-radius: 14px;
         overflow: hidden;
         position: relative;
         cursor: pointer;
+        box-shadow: 0 3px 14px rgba(0,17,51,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: #e8f5f5;
+      }
+      .gallery-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 32px rgba(0,106,103,0.22);
       }
       .gallery-item img {
         width: 100%;
         height: auto;
         display: block;
-        transition: transform 0.3s ease;
-        border-radius: 12px;
+        transition: transform 0.45s ease;
       }
       .gallery-item:hover img {
-        transform: scale(1.05);
+        transform: scale(1.06);
+      }
+
+      /* ── Hover Overlay with Caption ── */
+      .gallery-item-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,17,51,0.72) 0%, rgba(0,17,51,0.1) 55%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        display: flex;
+        align-items: flex-end;
+        padding: 16px;
+        border-radius: 14px;
+      }
+      .gallery-item:hover .gallery-item-overlay {
+        opacity: 1;
+      }
+      .gallery-item-caption {
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-weight: 700;
+        font-family: 'Cairo', sans-serif;
+        line-height: 1.3;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .gallery-item-caption::before {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 14px;
+        background: #b7ecea;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      /* ── Category Badge ── */
+      .gallery-item-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,106,103,0.85);
+        color: #ffffff;
+        font-size: 0.68rem;
+        font-weight: 700;
+        font-family: 'Cairo', sans-serif;
+        padding: 3px 10px;
+        border-radius: 20px;
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .gallery-item:hover .gallery-item-badge {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── Zoom Icon ── */
+      .gallery-zoom-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.6);
+        width: 44px;
+        height: 44px;
+        background: rgba(255,255,255,0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        color: #006a67;
+        font-size: 1.2rem;
+      }
+      .gallery-item:hover .gallery-zoom-icon {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      /* ── Lightbox ── */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,17,51,0.92);
+        z-index: 99999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        backdrop-filter: blur(8px);
+      }
+      .lightbox.open {
+        display: flex;
+        animation: lbFadeIn 0.3s ease;
+      }
+      @keyframes lbFadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+      .lightbox-img {
+        max-width: min(90vw, 900px);
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+        animation: lbSlideUp 0.35s ease;
+      }
+      @keyframes lbSlideUp {
+        from { transform: translateY(20px) scale(0.95); opacity: 0; }
+        to   { transform: translateY(0) scale(1);      opacity: 1; }
+      }
+      .lightbox-close {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #006a67, #009e99);
+        border: none;
+        color: #ffffff;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 16px rgba(0,106,103,0.4);
+      }
+      .lightbox-close:hover {
+        transform: scale(1.12);
+        box-shadow: 0 6px 22px rgba(0,106,103,0.6);
       }
     </style>
 </head>
@@ -132,7 +329,7 @@
     </div>
 
     <!-- GALLERY SECTION -->
-    <section style="padding: 60px 0 100px;">
+    <section class="gallery-section-bg">
       <div class="container">
 
         <!-- Filter Buttons -->
@@ -157,63 +354,117 @@
           <!-- العيادة -->
           <div class="gallery-item" data-category="العيادة" onclick="openLightbox(this)">
             <img src="../assets/pict/clinic-interior.png" loading="lazy" alt="استقبال العيادة">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">استقبال العيادة</span></div>
+            <div class="gallery-item-badge">العيادة</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="العيادة" onclick="openLightbox(this)">
             <img src="../assets/pict/gallery-2.jpeg" loading="lazy" alt="غرفة العلاج">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">غرفة العلاج</span></div>
+            <div class="gallery-item-badge">العيادة</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="العيادة" onclick="openLightbox(this)">
             <img src="../assets/pict/gallery-4.jpg" loading="lazy" alt="العيادة بانوراما">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">العيادة بانوراما</span></div>
+            <div class="gallery-item-badge">العيادة</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="العيادة" onclick="openLightbox(this)">
             <img src="../assets/pict/clinic-exterior.jpeg" loading="lazy" alt="خارج العيادة">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">خارج العيادة</span></div>
+            <div class="gallery-item-badge">العيادة</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
 
           <!-- التجهيزات -->
           <div class="gallery-item" data-category="التجهيزات" onclick="openLightbox(this)">
             <img src="../assets/pict/service-xray.jpg" loading="lazy" alt="أشعة رقمية">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">أشعة رقمية</span></div>
+            <div class="gallery-item-badge">التجهيزات</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="التجهيزات" onclick="openLightbox(this)">
             <img src="../assets/pict/gallery-5.png" loading="lazy" alt="تجهيزات متطورة">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">تجهيزات متطورة</span></div>
+            <div class="gallery-item-badge">التجهيزات</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="التجهيزات" onclick="openLightbox(this)">
             <img src="../assets/pict/hero-equipment.png" loading="lazy" alt="أدوات طبية">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">أدوات طبية</span></div>
+            <div class="gallery-item-badge">التجهيزات</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="التجهيزات" onclick="openLightbox(this)">
             <img src="../assets/pict/service-implant.png" loading="lazy" alt="زراعة الأسنان">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">زراعة الأسنان</span></div>
+            <div class="gallery-item-badge">التجهيزات</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
 
           <!-- قبل وبعد -->
           <div class="gallery-item" data-category="قبل وبعد" onclick="openLightbox(this)">
             <img src="../assets/pict/gallery-before-after-1.jpg" loading="lazy" alt="قبل وبعد تبييض">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">قبل وبعد تبييض</span></div>
+            <div class="gallery-item-badge">قبل وبعد</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="قبل وبعد" onclick="openLightbox(this)">
             <img src="../assets/pict/gallery-before-after-3.jpg" loading="lazy" alt="قبل وبعد تقويم">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">قبل وبعد تقويم</span></div>
+            <div class="gallery-item-badge">قبل وبعد</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="قبل وبعد" onclick="openLightbox(this)">
             <img src="../assets/pict/service-veneer.jpg" loading="lazy" alt="قبل وبعد فينيرز">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">قبل وبعد فينيرز</span></div>
+            <div class="gallery-item-badge">قبل وبعد</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="قبل وبعد" onclick="openLightbox(this)">
             <img src="../assets/pict/service-whitening.png" loading="lazy" alt="تبييض الأسنان">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">تبييض الأسنان</span></div>
+            <div class="gallery-item-badge">قبل وبعد</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
 
           <!-- الكل -->
           <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
             <img src="../assets/pict/clinic-team.png" loading="lazy" alt="فريق العيادة">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">فريق العيادة</span></div>
+            <div class="gallery-item-badge">الفريق</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
             <img src="../assets/pict/gallery-1.jpeg" loading="lazy" alt="الفريق الطبي">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">الفريق الطبي</span></div>
+            <div class="gallery-item-badge">الفريق</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
             <img src="../assets/pict/gallery-3.png" loading="lazy" alt="مريض سعيد">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">مريض سعيد</span></div>
+            <div class="gallery-item-badge">الفريق</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
             <img src="../assets/pict/doctor-portrait.png" loading="lazy" alt="الدكتور نوري">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">الدكتور نوري</span></div>
+            <div class="gallery-item-badge">الفريق</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
             <img src="../assets/pict/hero-dentist.png" loading="lazy" alt="جلسة علاج">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">جلسة علاج</span></div>
+            <div class="gallery-item-badge">الفريق</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
           <div class="gallery-item" data-category="الكل" onclick="openLightbox(this)">
             <img src="../assets/pict/service-children.jpeg" loading="lazy" alt="أسنان الأطفال">
+            <div class="gallery-item-overlay"><span class="gallery-item-caption">أسنان الأطفال</span></div>
+            <div class="gallery-item-badge">الفريق</div>
+            <div class="gallery-zoom-icon">🔍</div>
           </div>
 
         </div>
