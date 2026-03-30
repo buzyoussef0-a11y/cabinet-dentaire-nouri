@@ -237,7 +237,7 @@
        TESTIMONIALS — Google Reviews Slider Style
        ══════════════════════════════════════════════ */
     .testimonials-grid-section {
-      background: linear-gradient(120deg, #fef7ff 0%, #f5f0fc 25%, #edfafa 70%, #ddf4f2 100%) !important;
+      background: linear-gradient(120deg, #fef7ff 0%, #f5f0fc 30%, #eaf7f6 70%, #d8f2f0 100%) !important;
       background-image: none !important;
       padding: 90px 5% !important;
       overflow: hidden !important;
@@ -245,130 +245,104 @@
     }
     .testimonials-grid-section::before,
     .testimonials-grid-section::after { display: none !important; }
-    .testimonials-grid-section .container { position: relative; z-index: 2; }
 
     /* Header */
-    .t-section-head { text-align: center; margin-bottom: 40px; }
+    .t-section-head { text-align: center; margin-bottom: 44px; }
     .t-header-eyebrow {
       display: inline-block;
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.68rem; font-weight: 800;
+      font-family: 'Cairo', sans-serif; font-size: 0.68rem; font-weight: 800;
       letter-spacing: 3px; text-transform: uppercase;
-      color: #006a67 !important; margin-bottom: 12px;
+      color: #006a67 !important;
+      background: rgba(0,106,103,0.08); border: 1px solid rgba(0,106,103,0.2);
+      border-radius: 50px; padding: 4px 14px; margin-bottom: 14px;
     }
     .t-header-title {
       font-family: 'Tajawal', 'Cairo', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 900; color: #001133 !important;
-      margin: 0 0 24px; line-height: 1.2;
+      font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900;
+      color: #001133 !important; margin: 0 0 26px; line-height: 1.2;
     }
-
-    /* Rating summary */
     .t-rating-pill { display: none !important; }
-    .t-rating-summary {
-      display: flex; flex-direction: column; align-items: center; gap: 5px;
-    }
+    .t-rating-summary { display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .t-rating-excellent {
-      font-family: 'Cairo', sans-serif; font-size: 0.82rem; font-weight: 800;
+      font-family: 'Cairo', sans-serif; font-size: 0.8rem; font-weight: 800;
       letter-spacing: 2px; text-transform: uppercase; color: #001133;
     }
-    .t-rating-stars-big { font-size: 1.65rem; color: #FBBF24; letter-spacing: 3px; line-height: 1; }
-    .t-rating-based { font-family: 'Cairo', sans-serif; font-size: 0.78rem; color: #64748b; }
+    .t-rating-stars-big { font-size: 1.7rem; color: #FBBF24; letter-spacing: 2px; line-height: 1.1; }
+    .t-rating-based { font-family: 'Cairo', sans-serif; font-size: 0.78rem; color: #64748b; margin-top: 2px; }
     .t-rating-based strong { color: #001133; font-weight: 800; }
 
-    /* Carousel */
-    .tg-carousel-wrap { position: relative; margin-top: 44px; padding: 0 28px; }
-    .tg-carousel { overflow: hidden; }
+    /* ── Slider row: [arrow] [overflow:hidden track] [arrow] ── */
+    .tg-slider-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 44px; direction: ltr; /* force LTR for carousel */
+    }
+    .tg-carousel { flex: 1; overflow: hidden; min-width: 0; }
     .tg-grid {
-      display: flex !important;
-      gap: 18px;
-      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex !important; gap: 18px;
+      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
       will-change: transform;
     }
 
     /* Card */
     .tg-card {
-      flex: 0 0 calc((100% - 36px) / 3) !important;
-      min-width: 0;
+      flex: 0 0 calc((100% - 36px) / 3) !important; min-width: 0;
       background: #ffffff !important;
       backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
-      border: 1px solid #e8edf2 !important;
-      border-radius: 14px !important;
-      padding: 20px !important;
-      display: flex !important; flex-direction: column !important;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06) !important;
+      border: 1px solid #e2e8f0 !important; border-radius: 14px !important;
+      padding: 20px 18px !important; display: flex !important; flex-direction: column !important;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
       transition: box-shadow 0.25s ease, transform 0.25s ease !important;
     }
     .tg-card:hover {
       box-shadow: 0 8px 28px rgba(0,106,103,0.13) !important;
-      transform: translateY(-3px) !important;
-      border-color: rgba(0,106,103,0.22) !important;
+      transform: translateY(-3px) !important; border-color: rgba(0,106,103,0.22) !important;
     }
     .tg-card::before { display: none !important; }
 
-    /* Card head: avatar + name/date + G icon */
-    .tg-card-head {
-      display: flex; align-items: flex-start; gap: 11px; margin-bottom: 13px;
-    }
+    /* Card header row */
+    .tg-card-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; direction: rtl; }
     .tg-card-head .t-avatar-v3 {
-      width: 40px !important; height: 40px !important; min-width: 40px;
+      width: 40px !important; height: 40px !important; min-width: 40px !important;
       border-radius: 50% !important; border: none !important;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 800; color: #fff;
-      flex-shrink: 0;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      font-size: 1rem !important; font-weight: 800 !important; color: #fff !important; flex-shrink: 0;
     }
-    .tg-card-head-info { flex: 1; min-width: 0; }
-    .tg-name {
-      font-family: 'Cairo', sans-serif; font-size: 0.88rem; font-weight: 800;
-      color: #001133 !important; display: block;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .tg-date {
-      font-family: 'Cairo', sans-serif; font-size: 0.73rem;
-      color: #94a3b8; display: block; margin-top: 1px;
-    }
+    .tg-card-head-info { flex: 1; min-width: 0; text-align: right; }
+    .tg-name { font-family: 'Cairo', sans-serif; font-size: 0.87rem; font-weight: 800; color: #001133 !important; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tg-date { font-family: 'Cairo', sans-serif; font-size: 0.72rem; color: #94a3b8; display: block; margin-top: 1px; direction: ltr; text-align: left; }
+    .tg-card-g-icon { flex-shrink: 0; }
 
-    /* Stars + verify */
-    .tg-stars-row { display: flex; align-items: center; gap: 7px; margin-bottom: 11px; }
-    .tg-stars { color: #FBBF24; font-size: 0.82rem; letter-spacing: 1px; }
-    .tg-verify {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 15px; height: 15px; border-radius: 50%; background: #4285F4; flex-shrink: 0;
-    }
+    /* Stars row */
+    .tg-stars-row { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; direction: ltr; }
+    .tg-stars { color: #FBBF24; font-size: 0.85rem; letter-spacing: 1px; }
+    .tg-verify { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; background: #4285F4; flex-shrink: 0; }
 
     /* Text */
     .tg-text {
-      font-family: 'Cairo', sans-serif; font-size: 0.84rem;
-      color: #4a5568 !important; line-height: 1.78;
-      margin: 0 0 10px; flex: 1;
+      font-family: 'Cairo', sans-serif; font-size: 0.84rem; color: #4a5568 !important;
+      line-height: 1.78; margin: 0 0 10px; flex: 1; text-align: right;
       display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
     }
-    .tg-read-more {
-      font-family: 'Cairo', sans-serif; font-size: 0.78rem; font-weight: 700;
-      color: #006a67; text-decoration: none; display: inline-block;
-    }
+    .tg-read-more { font-family: 'Cairo', sans-serif; font-size: 0.78rem; font-weight: 700; color: #006a67; text-decoration: none; display: block; text-align: right; }
     .tg-read-more:hover { text-decoration: underline; }
-    .tg-deco-quote { display: none !important; }
-    .tg-foot { display: none !important; }
+    .tg-deco-quote, .tg-foot { display: none !important; }
 
-    /* Arrow buttons */
+    /* Arrow buttons — inline with flex row */
     .tg-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 38px; height: 38px; border-radius: 50%;
+      flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
       background: #ffffff; border: 1px solid #e2e8f0;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s ease; z-index: 10; color: #001133;
-      font-size: 1rem; line-height: 1;
+      transition: all 0.2s ease; color: #001133; font-size: 1.1rem; line-height: 1;
+      user-select: none;
     }
     .tg-arrow:hover { background: #006a67; color: #ffffff; border-color: #006a67; box-shadow: 0 4px 16px rgba(0,106,103,0.3); }
-    .tg-arrow-prev { left: -2px; }
-    .tg-arrow-next { right: -2px; }
 
     @media (max-width: 1024px) { .tg-card { flex: 0 0 calc((100% - 18px) / 2) !important; } }
     @media (max-width: 640px) {
       .tg-card { flex: 0 0 100% !important; }
       .testimonials-grid-section { padding: 60px 5% !important; }
+      .tg-slider-row { gap: 8px; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -1750,7 +1724,9 @@
           <div class="t-rating-summary">
             <div class="t-rating-excellent">EXCELLENT</div>
             <div class="t-rating-stars-big">★★★★★</div>
-            <div class="t-rating-based" data-ar="بناءً على <strong>85 تقييم</strong>" data-fr="Based on <strong>85 reviews</strong>">بناءً على <strong>85 تقييم</strong></div>
+            <div class="t-rating-based">
+              <span data-ar="بناءً على" data-fr="Based on">بناءً على</span> <strong>85</strong> <span data-ar="تقييم" data-fr="reviews">تقييم</span>
+            </div>
             <!-- Google logo -->
             <div class="t-google-logo" style="margin-top:6px;">
               <svg width="72" height="24" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg"><path d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#EA4335"/><path d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#FBBC05"/><path d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" fill="#4285F4"/><path d="M225 3v65h-9.5V3h9.5z" fill="#34A853"/><path d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" fill="#EA4335"/><path d="M35.29 41.41V32h31.86c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z" fill="#4285F4"/></svg>
@@ -1758,9 +1734,9 @@
           </div>
         </div>
 
-        <!-- Carousel -->
-        <div class="tg-carousel-wrap">
-          <button class="tg-arrow tg-arrow-prev" onclick="tgSlide(-1)" aria-label="Previous">&#8249;</button>
+        <!-- Carousel: [←] [track] [→] inline flex -->
+        <div class="tg-slider-row">
+          <button class="tg-arrow" onclick="tgSlide(-1)" aria-label="Previous">&#8249;</button>
           <div class="tg-carousel">
             <div class="tg-grid" id="tgTrack">
 
@@ -1874,39 +1850,53 @@
 
             </div><!-- end tg-grid -->
           </div><!-- end tg-carousel -->
-          <button class="tg-arrow tg-arrow-next" onclick="tgSlide(1)" aria-label="Next">&#8250;</button>
-        </div><!-- end tg-carousel-wrap -->
+          <button class="tg-arrow" onclick="tgSlide(1)" aria-label="Next">&#8250;</button>
+        </div><!-- end tg-slider-row -->
 
       </div>
     </section>
 
     <script>
     (function(){
-      var track = document.getElementById('tgTrack');
-      var idx = 0;
-      function getVisible() {
-        var w = window.innerWidth;
-        return w <= 640 ? 1 : w <= 1024 ? 2 : 3;
+      var track  = document.getElementById('tgTrack');
+      var idx    = 0;
+      var autoTimer = null;
+
+      function visibleCount() {
+        return window.innerWidth <= 640 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
       }
-      function getTotal() { return track ? track.children.length : 6; }
+      function totalCards() { return track ? track.children.length : 6; }
+
+      function goTo(i) {
+        if (!track || !track.children.length) return;
+        var vis  = visibleCount();
+        var max  = totalCards() - vis;
+        idx      = Math.max(0, Math.min(i, max));
+        /* offsetWidth gives actual rendered card width */
+        var cardW = track.children[0].offsetWidth;
+        var gap   = 18;
+        track.style.transform = 'translateX(' + (-(idx * (cardW + gap))) + 'px)';
+      }
+
       window.tgSlide = function(dir) {
-        if (!track) return;
-        var vis = getVisible();
-        var max = getTotal() - vis;
-        idx = Math.max(0, Math.min(idx + dir, max));
-        var cardW = track.children[0] ? track.children[0].offsetWidth : 0;
-        var gap = 18;
-        track.style.transform = 'translateX(' + (idx * (cardW + gap) * -1) + 'px)';
+        goTo(idx + dir);
+        /* Reset auto-advance on manual interaction */
+        clearInterval(autoTimer);
+        autoTimer = setInterval(autoAdvance, 5000);
       };
-      /* Auto-advance every 5s */
-      setInterval(function(){
-        var vis = getVisible();
-        var max = getTotal() - vis;
-        idx = idx >= max ? 0 : idx + 1;
-        var cardW = track && track.children[0] ? track.children[0].offsetWidth : 0;
-        var gap = 18;
-        if (track) track.style.transform = 'translateX(' + (idx * (cardW + gap) * -1) + 'px)';
-      }, 5000);
+
+      function autoAdvance() {
+        var vis = visibleCount();
+        var max = totalCards() - vis;
+        goTo(idx >= max ? 0 : idx + 1);
+      }
+
+      /* Start auto-advance after page load */
+      window.addEventListener('load', function() {
+        autoTimer = setInterval(autoAdvance, 5000);
+      });
+      /* Recalculate on resize */
+      window.addEventListener('resize', function() { goTo(0); });
     })();
     </script>
 
