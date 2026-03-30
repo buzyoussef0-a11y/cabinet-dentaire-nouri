@@ -1,0 +1,375 @@
+/* ================================================
+   CABINET DENTAIRE NOURI — Light Theme
+   Applied to ALL pages
+   ================================================ */
+
+/* ── GLOBAL ── */
+body {
+  background-color: #F8FAFF !important;
+  color: #1a2332 !important;
+}
+body::before {
+  opacity: 0.015 !important;
+}
+.blob-bg { opacity: 0.2 !important; }
+
+/* ── NAVBAR ── */
+#mainNav, nav {
+  background: rgba(255,255,255,0.97) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(13,148,136,0.15) !important;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06) !important;
+}
+.nav-links a {
+  color: #374151 !important;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: #0D9488 !important;
+}
+.nav-logo,
+.logo-word-top,
+.logo-word-bottom {
+  color: #1a2332 !important;
+}
+.mobile-burger span {
+  background-color: #1a2332 !important;
+}
+/* Lang toggle button */
+.lang-btn {
+  color: #374151 !important;
+  border-color: rgba(13,148,136,0.25) !important;
+}
+#langLabel { color: #374151 !important; }
+
+/* ── CLINIC INFO BAR ── */
+#clinicInfoBar {
+  background: rgba(13,148,136,0.05) !important;
+  color: #64748b !important;
+}
+#clinicInfoBar span { color: #64748b !important; }
+
+/* ── ANNOUNCEMENT BANNER — keep teal ── */
+#announceBanner {
+  background: linear-gradient(90deg, #0D9488, #0891b2) !important;
+}
+
+/* ── HERO — dark overlay stays, no change needed ── */
+/* hero-new has its own bg image set inline — intentionally left dark */
+
+/* ── SECTION BACKGROUNDS ── */
+/* Services */
+.services-new, .services-section, .page-services-section {
+  background: #F0F4FF !important;
+}
+/* Why Us */
+.why-us-new, .why-section {
+  background: #ffffff !important;
+}
+.why-bg-photo img { opacity: 0.03 !important; }
+/* Testimonials */
+.testimonials-new, .testimonials-grid-section, .testimonials-section {
+  background: #F0F4FF !important;
+  background-image: none !important;
+}
+.testimonials-grid-section::before,
+.testimonials-grid-section::after {
+  display: none !important;
+}
+/* Doctor — stays dark gradient */
+.doctor-new, .doctor-redesign, .doctor-section, .about-doctor {
+  background: linear-gradient(135deg, #0A1628 0%, #0D9488 100%) !important;
+  background-image: none !important;
+}
+.doctor-redesign::before,
+.doctor-redesign::after {
+  display: none !important;
+}
+/* Contact */
+.contact-v3, .contact-section {
+  background: #F8FAFF !important;
+  background-image: none !important;
+}
+.contact-v3::before,
+.contact-v3::after {
+  display: none !important;
+}
+/* General page sections */
+.page-hero, .page-header {
+  background: linear-gradient(135deg, #0A1628 0%, #0D9488 80%) !important;
+}
+
+/* ── SECTION TEXT (non-hero) ── */
+.section-title-new,
+.section-title,
+.page-title {
+  color: #1a2332 !important;
+}
+.section-desc-new,
+.section-desc,
+.page-subtitle {
+  color: #64748b !important;
+}
+.section-tag, .page-tag, .cv3-pill, .t-header-eyebrow {
+  background: rgba(13,148,136,0.1) !important;
+  color: #0D9488 !important;
+  border: 1px solid rgba(13,148,136,0.2) !important;
+}
+.text-gradient {
+  background: linear-gradient(135deg, #0D9488, #0df2f2) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+/* Section heading underlines */
+.all-services-link {
+  color: #0D9488 !important;
+}
+
+/* ── CARDS (generic) ── */
+.glass-card {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(13,148,136,0.12) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important;
+}
+
+/* Services page cards */
+.service-full-card {
+  background: #ffffff !important;
+  border-color: rgba(13,148,136,0.15) !important;
+}
+.service-full-card h3 { color: #1a2332 !important; }
+.service-full-card p  { color: #64748b !important; }
+.service-icon-wrap {
+  background: rgba(13,148,136,0.08) !important;
+  border-color: rgba(13,148,136,0.2) !important;
+}
+
+/* About page cards */
+.about-value-card, .about-team-card, .timeline-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(13,148,136,0.12) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+}
+.about-value-card h3, .about-team-card h3 { color: #1a2332 !important; }
+.about-value-card p,  .about-team-card p  { color: #64748b !important; }
+
+/* Why-us items */
+.why-item-row:hover {
+  background: rgba(13,148,136,0.06) !important;
+}
+.why-item-text h4 { color: #1a2332 !important; }
+.why-item-text p  { color: #64748b !important; }
+.why-item-num     { color: rgba(13,148,136,0.15) !important; }
+.why-img-badge, .why-img-badge2 {
+  background: rgba(255,255,255,0.97) !important;
+  border: 1px solid rgba(13,148,136,0.18) !important;
+  color: #1a2332 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
+}
+.wib-num  { color: #0D9488 !important; }
+.wib-text { color: #64748b !important; }
+
+/* Testimonial cards */
+.tg-card {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(13,148,136,0.12) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
+}
+.tg-card:hover {
+  box-shadow: 0 12px 32px rgba(13,148,136,0.14) !important;
+  border-color: rgba(13,148,136,0.28) !important;
+}
+.tg-text { color: #475569 !important; }
+.tg-name { color: #1a2332 !important; }
+.tg-deco-quote { color: rgba(13,148,136,0.07) !important; }
+.t-header-title { color: #1a2332 !important; }
+.t-pill-score   { color: #1a2332 !important; }
+.t-pill-count   { color: #64748b !important; }
+.t-pill-dot     { color: #94a3b8 !important; }
+.t-rating-pill  {
+  background: rgba(13,148,136,0.08) !important;
+  border: 1px solid rgba(13,148,136,0.2) !important;
+}
+.tg-card .t-google-pill {
+  background: rgba(13,148,136,0.06) !important;
+  border: 1px solid rgba(13,148,136,0.15) !important;
+  color: rgba(13,148,136,0.75) !important;
+}
+
+/* Contact section */
+.cv3-h2       { color: #1a2332 !important; }
+.cv3-subtitle { color: #64748b !important; }
+.cv3-col-title{ color: #1a2332 !important; }
+.cv3-col-sub  { color: #64748b !important; }
+.cv3-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(13,148,136,0.12) !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05) !important;
+}
+.cv3-card:hover {
+  border-color: rgba(13,148,136,0.3) !important;
+  background: #f5fffe !important;
+}
+.cv3-card-label   { color: #94a3b8 !important; }
+.cv3-card-val     { color: #1a2332 !important; }
+.cv3-card-sub-text{ color: #64748b !important; }
+.cv3-dir-link     { color: #0D9488 !important; }
+.cv3-day          { color: #64748b !important; }
+.cv3-time         { color: #1a2332 !important; }
+.cv3-closed       { color: #ef4444 !important; }
+.cv3-outline-btn  {
+  color: #0D9488 !important;
+  border-color: rgba(13,148,136,0.35) !important;
+  background: transparent !important;
+}
+.cv3-outline-btn:hover {
+  background: rgba(13,148,136,0.07) !important;
+}
+/* Map: no dark filter on light bg */
+.cv3-map-wrap iframe,
+.cv3-map-wrap:hover iframe {
+  filter: none !important;
+}
+.cv3-map-wrap {
+  border-color: rgba(13,148,136,0.22) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+}
+.cv3-email-card  {
+  background: #ffffff !important;
+  border: 1px solid rgba(13,148,136,0.12) !important;
+}
+.cv3-email-title { color: #1a2332 !important; }
+.cv3-email-addr  { color: #64748b !important; }
+.cv3-tour-label  { color: #1a2332 !important; }
+.cv3-opennow-badge {
+  background: rgba(255,255,255,0.92) !important;
+  color: #1a2332 !important;
+}
+
+/* FAQ */
+.faq-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(13,148,136,0.12) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04) !important;
+}
+.faq-item.open {
+  border-color: rgba(13,148,136,0.3) !important;
+}
+.faq-question { color: #1a2332 !important; }
+.faq-answer   { color: #475569 !important; }
+.faq-toggle   { color: #0D9488 !important; }
+
+/* Gallery filter buttons */
+.filter-tab-btn {
+  color: #374151 !important;
+  background: rgba(13,148,136,0.05) !important;
+  border-color: rgba(13,148,136,0.15) !important;
+}
+.filter-tab-btn.active,
+.filter-tab-btn:hover {
+  background: #0D9488 !important;
+  color: #ffffff !important;
+}
+
+/* Profile / Auth pages */
+.auth-card, .profile-card, .form-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(13,148,136,0.12) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08) !important;
+}
+.auth-card h2, .profile-card h2, .form-card h2 { color: #1a2332 !important; }
+.auth-card label, .profile-card label          { color: #374151 !important; }
+
+/* Appointment tracking cards */
+.appointment-item {
+  background: #ffffff !important;
+  border: 1px solid rgba(13,148,136,0.12) !important;
+}
+
+/* ── BUTTONS ── */
+/* Keep primary buttons teal */
+.btn-primary,
+a.btn-primary,
+button.btn-primary,
+.btn-primary-new,
+.why-cta-btn,
+.dr-redesign-cta {
+  background: linear-gradient(135deg, #0D9488, #0df2f2) !important;
+  color: #0A1628 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 20px rgba(13,148,136,0.3) !important;
+  border: none !important;
+}
+/* Outline/ghost buttons */
+.btn-outline, .btn-ghost, .btn-secondary-new {
+  border-color: rgba(13,148,136,0.35) !important;
+  color: #0D9488 !important;
+}
+.btn-outline:hover, .btn-ghost:hover {
+  background: rgba(13,148,136,0.07) !important;
+}
+/* Logout button — stays transparent */
+.btn-primary[onclick="logoutUser()"],
+button[onclick="logoutUser()"] {
+  background: transparent !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239,68,68,0.4) !important;
+  box-shadow: none !important;
+}
+
+/* ── FORMS ── */
+input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  background: #F8FAFF !important;
+  border: 1px solid rgba(13,148,136,0.2) !important;
+  color: #1a2332 !important;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* ── FOOTER ── */
+footer, .footer-wrap, .footer-new {
+  background: #1a2332 !important;
+}
+footer p, footer span, footer li, footer h4,
+.footer-wrap p, .footer-wrap span, .footer-wrap li, .footer-wrap h4,
+.footer-new p, .footer-new span, .footer-new li, .footer-new h4 {
+  color: rgba(255,255,255,0.7) !important;
+}
+footer a, .footer-wrap a, .footer-new a {
+  color: rgba(255,255,255,0.7) !important;
+}
+footer a:hover, .footer-wrap a:hover, .footer-new a:hover {
+  color: #0df2f2 !important;
+}
+.footer-bottom-new p { color: rgba(255,255,255,0.45) !important; }
+
+/* ── MISC ── */
+/* Scroll progress */
+#scrollFill {
+  background: linear-gradient(90deg, #0D9488, #0df2f2) !important;
+}
+/* Back to top button */
+#backToTop {
+  background: #0D9488 !important;
+  color: #ffffff !important;
+}
+/* Toasts */
+.toast-success { background: #10b981 !important; }
+.toast-error   { background: #ef4444 !important; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F0F4FF; }
+::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #0df2f2; }
