@@ -90,6 +90,21 @@ footer h1, footer h2, footer h3, footer h4,
 
 /* index.html hero — stays dark (has bg image + overlay) */
 
+/* ── Service bento cards — dark green overlay, dark text ── */
+.svc-bento-content h3 { color: #ffffff !important; }
+.svc-bento-content p  { color: rgba(255,255,255,0.80) !important; }
+.svc-bento-tag {
+  background: rgba(0,106,103,0.25) !important;
+  border-color: rgba(183,236,234,0.4) !important;
+  color: #b7ecea !important;
+}
+.svc-bento-price {
+  color: #b7ecea !important;
+  background: rgba(0,106,103,0.2) !important;
+  border-color: rgba(183,236,234,0.3) !important;
+}
+.svc-bento-btn { background: rgba(255,255,255,0.15) !important; color: #ffffff !important; }
+
 /* ── 5. SECTION BACKGROUNDS ── */
 .services-new, .services-section { background: #f9f1fd !important; }
 .why-us-new,   .why-section      { background: #ffffff !important; }
