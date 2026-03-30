@@ -19,7 +19,9 @@
   --border-color: rgba(0,106,103,0.15);
   --border-accent: rgba(0,106,103,0.25);
   --shadow-premium: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+  /* Replace old cyan with DESIGN.md teal */
   --accent: #006a67;
+  --accent-primary: #006a67;
   --accent-light: #b7ecea;
 }
 
@@ -131,12 +133,31 @@ footer h1, footer h2, footer h3, footer h4,
   border: 1px solid rgba(0,106,103,0.2) !important;
 }
 
+/* text-gradient: on light bg, use dark teal → teal (readable) */
 .text-gradient {
-  background: linear-gradient(135deg, #006a67, #b7ecea) !important;
+  background: linear-gradient(135deg, #001133, #006a67) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
 }
+
+/* Section title underline — replace cyan with teal */
+.section-title-new::after {
+  background: linear-gradient(90deg, #006a67, transparent) !important;
+}
+
+/* Section titles — dark readable color */
+.section-title-new {
+  color: #001133 !important;
+  -webkit-text-fill-color: #001133 !important;
+}
+
+/* Override any remaining old cyan (#0df2f2) on light backgrounds */
+[style*="#0df2f2"],
+[style*="0df2f2"] { color: #006a67 !important; }
+
+/* Scrollbar fill line */
+#scrollFill { background: linear-gradient(90deg, #006a67, #b7ecea) !important; }
 
 .all-services-link { color: #006a67 !important; }
 
