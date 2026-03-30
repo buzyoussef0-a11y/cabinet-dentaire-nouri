@@ -5,76 +5,96 @@
 
 /* ── 0. OVERRIDE CSS VARIABLES (must be first) ── */
 :root {
-  --bg: #F8FAFF;
-  --bg-primary: #F8FAFF;
-  --bg-secondary: #F0F4FF;
-  --bg-darker: #e8edf8;
+  --bg: #fef7ff;
+  --bg-primary: #fef7ff;
+  --bg-secondary: #f9f1fd;
+  --bg-darker: #f0eaf6;
   --bg-card: #ffffff;
-  --bg-card-hover: rgba(13,148,136,0.06);
-  --text: #1a2332;
-  --text-primary: #1a2332;
-  --text-muted: #64748b;
-  --text-dim: #94a3b8;
-  --border: rgba(13,148,136,0.15);
-  --border-color: rgba(13,148,136,0.15);
-  --border-accent: rgba(13,148,136,0.25);
+  --bg-card-hover: rgba(0,106,103,0.06);
+  --text: #001133;
+  --text-primary: #001133;
+  --text-muted: #4a5568;
+  --text-dim: #718096;
+  --border: rgba(0,106,103,0.15);
+  --border-color: rgba(0,106,103,0.15);
+  --border-accent: rgba(0,106,103,0.25);
   --shadow-premium: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+  --accent: #006a67;
+  --accent-light: #b7ecea;
 }
 
 /* ── 1. GLOBAL ── */
 body {
-  background-color: #F8FAFF !important;
-  color: #1a2332 !important;
+  background-color: #fef7ff !important;
+  color: #001133 !important;
 }
 body::before { opacity: 0.012 !important; }
 .blob-bg { opacity: 0.18 !important; }
 
 /* General text — override hardcoded white/light */
-h1, h2, h3, h4, h5, h6 { color: #1a2332 !important; }
+h1, h2, h3, h4, h5, h6 { color: #001133 !important; }
 p { color: #475569 !important; }
+
+/* ── Restore white text inside DARK sections ── */
+.doctor-new h1, .doctor-new h2, .doctor-new h3, .doctor-new h4,
+.doctor-new h5, .doctor-new h6,
+.doctor-redesign h1, .doctor-redesign h2, .doctor-redesign h3,
+.doctor-redesign h4, .doctor-redesign h5, .doctor-redesign h6,
+.hero-new h1, .hero-new h2, .hero-new h3,
+.hero-new h4, .hero-new h5, .hero-new h6,
+.page-hero-banner h1, .page-hero-banner h2, .page-hero-banner h3,
+footer h1, footer h2, footer h3, footer h4,
+.footer-new h1, .footer-new h2, .footer-new h3, .footer-new h4 {
+  color: #ffffff !important;
+}
+.doctor-new p, .doctor-new span, .doctor-new li,
+.doctor-redesign p, .doctor-redesign span, .doctor-redesign li {
+  color: rgba(255,255,255,0.85) !important;
+}
+.hero-new p, .hero-new span { color: rgba(255,255,255,0.85) !important; }
 
 /* ── 2. NAVBAR ── */
 #mainNav, nav {
   background: rgba(255,255,255,0.97) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(13,148,136,0.12) !important;
+  border-bottom: 1px solid rgba(0,106,103,0.12) !important;
   box-shadow: 0 2px 20px rgba(0,0,0,0.06) !important;
 }
 .nav-links a { color: #374151 !important; }
-.nav-links a:hover, .nav-links a.active { color: #0D9488 !important; }
-.nav-logo, .logo-word-top, .logo-word-bottom { color: #1a2332 !important; }
-.mobile-burger span { background-color: #1a2332 !important; }
-.lang-btn { color: #374151 !important; border-color: rgba(13,148,136,0.25) !important; }
+.nav-links a:hover, .nav-links a.active { color: #006a67 !important; }
+.nav-logo, .logo-word-top, .logo-word-bottom { color: #001133 !important; }
+.mobile-burger span { background-color: #001133 !important; }
+.lang-btn { color: #374151 !important; border-color: rgba(0,106,103,0.25) !important; }
 #langLabel { color: #374151 !important; }
 
 /* ── 3. INFO BAR ── */
 #clinicInfoBar {
-  background: rgba(13,148,136,0.05) !important;
+  background: rgba(0,106,103,0.05) !important;
   color: #64748b !important;
 }
 #clinicInfoBar span { color: #64748b !important; }
 
 /* ── 4. PAGE HERO BANNER (sub-pages: services, gallery, etc.) ── */
 .page-hero-banner {
-  background: linear-gradient(135deg, #0A1E3C 0%, #0D9488 100%) !important;
+  background: linear-gradient(135deg, #0A1E3C 0%, #006a67 100%) !important;
 }
 .page-hero-banner h1 { color: #ffffff !important; }
 .page-hero-banner p  { color: rgba(255,255,255,0.8) !important; }
 .page-hero-banner .page-breadcrumb { color: rgba(255,255,255,0.6) !important; }
-.page-hero-banner .page-breadcrumb a { color: #0df2f2 !important; }
+.page-hero-banner .page-breadcrumb a { color: #b7ecea !important; }
 .ph-stat-num   { color: #ffffff !important; }
 .ph-stat-label { color: rgba(255,255,255,0.65) !important; }
 
 /* index.html hero — stays dark (has bg image + overlay) */
 
 /* ── 5. SECTION BACKGROUNDS ── */
-.services-new, .services-section { background: #F0F4FF !important; }
+.services-new, .services-section { background: #f9f1fd !important; }
 .why-us-new,   .why-section      { background: #ffffff !important; }
 .why-bg-photo img                 { opacity: 0.03 !important; }
 
 .testimonials-new, .testimonials-grid-section {
-  background: #F0F4FF !important;
+  background: #f9f1fd !important;
   background-image: none !important;
 }
 .testimonials-grid-section::before,
@@ -82,7 +102,7 @@ p { color: #475569 !important; }
 
 /* Doctor — keeps dark gradient */
 .doctor-new, .doctor-redesign {
-  background: linear-gradient(135deg, #0A1628 0%, #0D9488 100%) !important;
+  background: linear-gradient(135deg, #0A1628 0%, #006a67 100%) !important;
   background-image: none !important;
 }
 .doctor-redesign::before,
@@ -90,91 +110,91 @@ p { color: #475569 !important; }
 
 /* Contact */
 .contact-v3 {
-  background: #F8FAFF !important;
+  background: #fef7ff !important;
   background-image: none !important;
 }
 .contact-v3::before, .contact-v3::after { display: none !important; }
 
 /* ── 6. SECTION TEXT ── */
-.section-title-new, .section-title, .page-title { color: #1a2332 !important; }
+.section-title-new, .section-title, .page-title { color: #001133 !important; }
 .section-desc-new,  .section-desc,  .page-subtitle { color: #64748b !important; }
 
 .section-tag, .page-tag, .cv3-pill, .t-header-eyebrow {
-  background: rgba(13,148,136,0.1) !important;
-  color: #0D9488 !important;
-  border: 1px solid rgba(13,148,136,0.2) !important;
+  background: rgba(0,106,103,0.1) !important;
+  color: #006a67 !important;
+  border: 1px solid rgba(0,106,103,0.2) !important;
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #0D9488, #0df2f2) !important;
+  background: linear-gradient(135deg, #006a67, #b7ecea) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
 }
 
-.all-services-link { color: #0D9488 !important; }
+.all-services-link { color: #006a67 !important; }
 
 /* ── 7. GLASS CARDS (generic) ── */
 .glass-card {
   background: #ffffff !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border: 1px solid rgba(13,148,136,0.12) !important;
+  border: 1px solid rgba(0,106,103,0.12) !important;
   box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important;
 }
 
 /* Override text inside glass-card that uses hardcoded white */
-.glass-card h1, .glass-card h2, .glass-card h3, .glass-card h4 { color: #1a2332 !important; }
+.glass-card h1, .glass-card h2, .glass-card h3, .glass-card h4 { color: #001133 !important; }
 .glass-card p, .glass-card span, .glass-card label             { color: #475569 !important; }
 
 /* ── 8. FAQ ── */
 #faqSearch {
-  background: #F0F4FF !important;
-  border: 1px solid rgba(13,148,136,0.2) !important;
-  color: #1a2332 !important;
+  background: #f9f1fd !important;
+  border: 1px solid rgba(0,106,103,0.2) !important;
+  color: #001133 !important;
 }
 .faq-item {
   background: #ffffff !important;
-  border: 1px solid rgba(13,148,136,0.12) !important;
+  border: 1px solid rgba(0,106,103,0.12) !important;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04) !important;
 }
-.faq-item.open { border-color: rgba(13,148,136,0.3) !important; }
-.faq-question  { color: #1a2332 !important; }
+.faq-item.open { border-color: rgba(0,106,103,0.3) !important; }
+.faq-question  { color: #001133 !important; }
 .faq-answer    { color: #475569 !important; }
-.faq-toggle    { color: #0D9488 !important; }
+.faq-toggle    { color: #006a67 !important; }
 /* FAQ assistant card */
 .faq-assistant-card {
   background: #ffffff !important;
-  border: 1px solid rgba(13,148,136,0.15) !important;
+  border: 1px solid rgba(0,106,103,0.15) !important;
 }
-.faq-ac-title { color: #1a2332 !important; }
+.faq-ac-title { color: #001133 !important; }
 .faq-ac-sub   { color: #64748b !important; }
 
 /* ── 9. SERVICES PAGE ── */
 .service-full-card {
   background: #ffffff !important;
-  border-color: rgba(13,148,136,0.15) !important;
+  border-color: rgba(0,106,103,0.15) !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
 }
-.service-full-card h3   { color: #1a2332 !important; }
+.service-full-card h3   { color: #001133 !important; }
 .service-full-card p    { color: #64748b !important; }
 .service-icon-wrap {
-  background: rgba(13,148,136,0.08) !important;
-  border-color: rgba(13,148,136,0.2) !important;
+  background: rgba(0,106,103,0.08) !important;
+  border-color: rgba(0,106,103,0.2) !important;
 }
 
 /* ── 10. WHY-US ── */
-.why-item-row:hover  { background: rgba(13,148,136,0.06) !important; }
-.why-item-text h4    { color: #1a2332 !important; }
+.why-item-row:hover  { background: rgba(0,106,103,0.06) !important; }
+.why-item-text h4    { color: #001133 !important; }
 .why-item-text p     { color: #64748b !important; }
-.why-item-num        { color: rgba(13,148,136,0.15) !important; }
+.why-item-num        { color: rgba(0,106,103,0.15) !important; }
 .why-img-badge, .why-img-badge2 {
   background: rgba(255,255,255,0.97) !important;
-  border: 1px solid rgba(13,148,136,0.18) !important;
-  color: #1a2332 !important;
+  border: 1px solid rgba(0,106,103,0.18) !important;
+  color: #001133 !important;
   box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
 }
-.wib-num  { color: #0D9488 !important; }
+.wib-num  { color: #006a67 !important; }
 .wib-text { color: #64748b !important; }
 
 /* ── 11. TESTIMONIALS ── */
@@ -182,92 +202,92 @@ p { color: #475569 !important; }
   background: #ffffff !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border: 1px solid rgba(13,148,136,0.12) !important;
+  border: 1px solid rgba(0,106,103,0.12) !important;
   box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
 }
 .tg-card:hover {
-  box-shadow: 0 12px 32px rgba(13,148,136,0.14) !important;
-  border-color: rgba(13,148,136,0.28) !important;
+  box-shadow: 0 12px 32px rgba(0,106,103,0.14) !important;
+  border-color: rgba(0,106,103,0.28) !important;
 }
 .tg-text       { color: #475569 !important; }
-.tg-name       { color: #1a2332 !important; }
-.tg-deco-quote { color: rgba(13,148,136,0.07) !important; }
-.t-header-title{ color: #1a2332 !important; }
-.t-pill-score  { color: #1a2332 !important; }
+.tg-name       { color: #001133 !important; }
+.tg-deco-quote { color: rgba(0,106,103,0.07) !important; }
+.t-header-title{ color: #001133 !important; }
+.t-pill-score  { color: #001133 !important; }
 .t-pill-count  { color: #64748b !important; }
 .t-pill-dot    { color: #94a3b8 !important; }
 .t-rating-pill {
-  background: rgba(13,148,136,0.08) !important;
-  border: 1px solid rgba(13,148,136,0.2) !important;
+  background: rgba(0,106,103,0.08) !important;
+  border: 1px solid rgba(0,106,103,0.2) !important;
 }
 .tg-card .t-google-pill {
-  background: rgba(13,148,136,0.06) !important;
-  border: 1px solid rgba(13,148,136,0.15) !important;
-  color: rgba(13,148,136,0.75) !important;
+  background: rgba(0,106,103,0.06) !important;
+  border: 1px solid rgba(0,106,103,0.15) !important;
+  color: rgba(0,106,103,0.75) !important;
 }
 
 /* ── 12. CONTACT ── */
-.cv3-h2        { color: #1a2332 !important; }
+.cv3-h2        { color: #001133 !important; }
 .cv3-subtitle  { color: #64748b !important; }
-.cv3-col-title { color: #1a2332 !important; }
+.cv3-col-title { color: #001133 !important; }
 .cv3-col-sub   { color: #64748b !important; }
 .cv3-card {
   background: #ffffff !important;
-  border: 1px solid rgba(13,148,136,0.12) !important;
+  border: 1px solid rgba(0,106,103,0.12) !important;
   backdrop-filter: none !important;
   box-shadow: 0 2px 12px rgba(0,0,0,0.05) !important;
 }
-.cv3-card:hover { border-color: rgba(13,148,136,0.3) !important; background: #f5fffe !important; }
+.cv3-card:hover { border-color: rgba(0,106,103,0.3) !important; background: #f5fffe !important; }
 .cv3-card-label    { color: #94a3b8 !important; }
-.cv3-card-val      { color: #1a2332 !important; }
+.cv3-card-val      { color: #001133 !important; }
 .cv3-card-sub-text { color: #64748b !important; }
-.cv3-dir-link      { color: #0D9488 !important; }
+.cv3-dir-link      { color: #006a67 !important; }
 .cv3-day           { color: #64748b !important; }
-.cv3-time          { color: #1a2332 !important; }
+.cv3-time          { color: #001133 !important; }
 .cv3-closed        { color: #ef4444 !important; }
-.cv3-outline-btn   { color: #0D9488 !important; border-color: rgba(13,148,136,0.35) !important; background: transparent !important; }
-.cv3-outline-btn:hover { background: rgba(13,148,136,0.07) !important; }
+.cv3-outline-btn   { color: #006a67 !important; border-color: rgba(0,106,103,0.35) !important; background: transparent !important; }
+.cv3-outline-btn:hover { background: rgba(0,106,103,0.07) !important; }
 .cv3-map-wrap iframe, .cv3-map-wrap:hover iframe { filter: none !important; }
-.cv3-map-wrap      { border-color: rgba(13,148,136,0.22) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important; }
-.cv3-email-card    { background: #ffffff !important; border: 1px solid rgba(13,148,136,0.12) !important; }
-.cv3-email-title   { color: #1a2332 !important; }
+.cv3-map-wrap      { border-color: rgba(0,106,103,0.22) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important; }
+.cv3-email-card    { background: #ffffff !important; border: 1px solid rgba(0,106,103,0.12) !important; }
+.cv3-email-title   { color: #001133 !important; }
 .cv3-email-addr    { color: #64748b !important; }
-.cv3-tour-label    { color: #1a2332 !important; }
-.cv3-opennow-badge { background: rgba(255,255,255,0.92) !important; color: #1a2332 !important; }
+.cv3-tour-label    { color: #001133 !important; }
+.cv3-opennow-badge { background: rgba(255,255,255,0.92) !important; color: #001133 !important; }
 
 /* ── 13. ABOUT PAGE ── */
 .about-value-card, .about-team-card, .timeline-item {
   background: #ffffff !important;
-  border: 1px solid rgba(13,148,136,0.12) !important;
+  border: 1px solid rgba(0,106,103,0.12) !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
 }
-.about-value-card h3, .about-team-card h3 { color: #1a2332 !important; }
+.about-value-card h3, .about-team-card h3 { color: #001133 !important; }
 .about-value-card p,  .about-team-card p  { color: #64748b !important; }
 
 /* ── 14. GALLERY ── */
 .filter-tab-btn {
   color: #374151 !important;
-  background: rgba(13,148,136,0.05) !important;
-  border-color: rgba(13,148,136,0.15) !important;
+  background: rgba(0,106,103,0.05) !important;
+  border-color: rgba(0,106,103,0.15) !important;
 }
 .filter-tab-btn.active, .filter-tab-btn:hover {
-  background: #0D9488 !important;
+  background: #006a67 !important;
   color: #ffffff !important;
 }
 
 /* ── 15. AUTH / PROFILE PAGES ── */
 .auth-card, .profile-card, .form-card {
   background: #ffffff !important;
-  border: 1px solid rgba(13,148,136,0.12) !important;
+  border: 1px solid rgba(0,106,103,0.12) !important;
   box-shadow: 0 8px 32px rgba(0,0,0,0.08) !important;
 }
-.auth-card h2, .profile-card h2, .form-card h2 { color: #1a2332 !important; }
+.auth-card h2, .profile-card h2, .form-card h2 { color: #001133 !important; }
 .auth-card label, .profile-card label          { color: #374151 !important; }
 
 /* ── 16. APPOINTMENT TRACKING ── */
 .appointment-item {
   background: #ffffff !important;
-  border: 1px solid rgba(13,148,136,0.12) !important;
+  border: 1px solid rgba(0,106,103,0.12) !important;
 }
 
 /* ── 17. BUTTONS ── */
@@ -277,17 +297,17 @@ button.btn-primary,
 .btn-primary-new,
 .why-cta-btn,
 .dr-redesign-cta {
-  background: linear-gradient(135deg, #0D9488, #0df2f2) !important;
+  background: linear-gradient(135deg, #006a67, #b7ecea) !important;
   color: #0A1628 !important;
   font-weight: 800 !important;
-  box-shadow: 0 4px 20px rgba(13,148,136,0.3) !important;
+  box-shadow: 0 4px 20px rgba(0,106,103,0.3) !important;
   border: none !important;
 }
 .btn-outline, .btn-ghost, .btn-secondary-new {
-  border-color: rgba(13,148,136,0.35) !important;
-  color: #0D9488 !important;
+  border-color: rgba(0,106,103,0.35) !important;
+  color: #006a67 !important;
 }
-.btn-outline:hover, .btn-ghost:hover { background: rgba(13,148,136,0.07) !important; }
+.btn-outline:hover, .btn-ghost:hover { background: rgba(0,106,103,0.07) !important; }
 /* Logout stays red-transparent */
 .btn-primary[onclick="logoutUser()"], button[onclick="logoutUser()"] {
   background: transparent !important;
@@ -300,14 +320,14 @@ button.btn-primary,
 input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]),
 textarea,
 select {
-  background: #F0F4FF !important;
-  border: 1px solid rgba(13,148,136,0.2) !important;
-  color: #1a2332 !important;
+  background: #f9f1fd !important;
+  border: 1px solid rgba(0,106,103,0.2) !important;
+  color: #001133 !important;
 }
 input::placeholder, textarea::placeholder { color: #94a3b8 !important; }
 
 /* ── 19. FOOTER ── */
-footer, .footer-wrap, .footer-new { background: #1a2332 !important; }
+footer, .footer-wrap, .footer-new { background: #001133 !important; }
 footer h1, footer h2, footer h3, footer h4,
 .footer-new h1, .footer-new h2, .footer-new h3, .footer-new h4 {
   color: rgba(255,255,255,0.9) !important;
@@ -317,17 +337,17 @@ footer p, footer span, footer li,
   color: rgba(255,255,255,0.65) !important;
 }
 footer a, .footer-new a { color: rgba(255,255,255,0.65) !important; }
-footer a:hover, .footer-new a:hover { color: #0df2f2 !important; }
+footer a:hover, .footer-new a:hover { color: #b7ecea !important; }
 .footer-bottom-new p { color: rgba(255,255,255,0.4) !important; }
 
 /* ── 20. MISC ── */
-#scrollFill   { background: linear-gradient(90deg, #0D9488, #0df2f2) !important; }
-#backToTop    { background: #0D9488 !important; color: #ffffff !important; }
+#scrollFill   { background: linear-gradient(90deg, #006a67, #b7ecea) !important; }
+#backToTop    { background: #006a67 !important; color: #ffffff !important; }
 .toast-success{ background: #10b981 !important; }
 .toast-error  { background: #ef4444 !important; }
 
 /* ── 21. SCROLLBAR ── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F0F4FF; }
-::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #0df2f2; }
+::-webkit-scrollbar-track { background: #f9f1fd; }
+::-webkit-scrollbar-thumb { background: #006a67; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #b7ecea; }
