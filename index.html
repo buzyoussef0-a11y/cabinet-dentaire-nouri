@@ -37,7 +37,7 @@
     rel="stylesheet">
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0D9488">
+  <meta name="theme-color" content="#006a67">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
@@ -112,7 +112,7 @@
     /* Hide right-side visual card */
     .hero-visual { display: none !important; }
 
-    /* Center the content */
+    /* Center the content — override all base align-self rules */
     .hero-container.container {
       display: flex !important;
       flex-direction: column !important;
@@ -126,6 +126,27 @@
       text-align: center !important;
       max-width: 780px !important;
       width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+    /* Override base align-self: flex-start on tag/desc */
+    .hero-tag {
+      align-self: center !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .hero-title-new {
+      align-self: center !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
+    .hero-desc {
+      align-self: center !important;
+      text-align: center !important;
+      max-width: 600px !important;
     }
 
     /* ── Text — white on dark bg image ── */
@@ -511,7 +532,7 @@
 
     /* Icon circles — gradient */
     .cv3-icon-wrap {
-      background: linear-gradient(135deg, rgba(13,242,242,0.2), rgba(13,148,136,0.3)) !important;
+      background: linear-gradient(135deg, rgba(13,242,242,0.2), rgba(0,106,103,0.3)) !important;
       border: 1.5px solid rgba(13,242,242,0.3) !important;
       border-radius: 12px !important;
     }
@@ -519,7 +540,7 @@
 
     /* Buttons */
     .cv3-actions .btn-primary-new {
-      background: linear-gradient(135deg, #0df2f2 0%, #0D9488 100%) !important;
+      background: linear-gradient(135deg, #0df2f2 0%, #006a67 100%) !important;
       border-radius: 50px !important;
       color: #071525 !important; font-weight: 900 !important;
       box-shadow: 0 8px 28px rgba(13,242,242,0.3) !important;
@@ -927,7 +948,7 @@
     .section-anim-line {
       display: block;
       height: 3px;
-      background: linear-gradient(90deg, #0df2f2, #0D9488);
+      background: linear-gradient(90deg, #0df2f2, #006a67);
       border-radius: 99px;
       width: 0;
       margin: 10px auto 0;
@@ -958,8 +979,8 @@
 
     /* ── 1. GLOBAL ── */
     body {
-      background-color: #F8FAFF !important;
-      color: #1a2332 !important;
+      background-color: #fef7ff !important;
+      color: #001133 !important;
     }
     body::before {
       opacity: 0.015 !important;
@@ -979,17 +1000,17 @@
     }
     .nav-links a:hover,
     .nav-links a.active {
-      color: #0D9488 !important;
+      color: #006a67 !important;
     }
     .logo-word-top,
     .logo-word-bottom {
-      color: #1a2332 !important;
+      color: #001133 !important;
     }
     .mobile-burger span {
-      background-color: #1a2332 !important;
+      background-color: #001133 !important;
     }
     #clinicInfoBar {
-      background: rgba(13,148,136,0.04) !important;
+      background: rgba(0,106,103,0.04) !important;
       color: #64748b !important;
     }
 
@@ -997,20 +1018,20 @@
 
     /* ── 4. SERVICES SECTION ── */
     .services-new {
-      background: #F0F4FF !important;
+      background: #f9f1fd !important;
     }
     .services-new .section-title-new {
-      color: #1a2332 !important;
+      color: #001133 !important;
     }
     .services-new .section-desc-new {
       color: #64748b !important;
     }
     .all-services-link {
-      color: #0D9488 !important;
+      color: #006a67 !important;
     }
     /* Service bento cards — keep image overlays but lighten border */
     .svc-bento-card:hover {
-      box-shadow: 0 24px 64px rgba(13,148,136,0.18), 0 4px 20px rgba(0,0,0,0.15) !important;
+      box-shadow: 0 24px 64px rgba(0,106,103,0.18), 0 4px 20px rgba(0,0,0,0.15) !important;
     }
 
     /* ── 5. WHY CHOOSE US ── */
@@ -1021,31 +1042,31 @@
       opacity: 0.03 !important;
     }
     .why-us-new .section-title-new {
-      color: #1a2332 !important;
+      color: #001133 !important;
     }
     .why-us-new .section-desc-new {
       color: #64748b !important;
     }
     .why-item-text h4 {
-      color: #1a2332 !important;
+      color: #001133 !important;
     }
     .why-item-text p {
       color: #64748b !important;
     }
     .why-item-num {
-      color: rgba(13,148,136,0.18) !important;
+      color: rgba(0,106,103,0.18) !important;
     }
     .why-item-row:hover {
-      background: rgba(13,148,136,0.06) !important;
+      background: rgba(0,106,103,0.06) !important;
     }
     .why-img-badge,
     .why-img-badge2 {
       background: rgba(255,255,255,0.96) !important;
-      border: 1px solid rgba(13,148,136,0.2) !important;
-      color: #1a2332 !important;
+      border: 1px solid rgba(0,106,103,0.2) !important;
+      color: #001133 !important;
       box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
     }
-    .wib-num { color: #0D9488 !important; }
+    .wib-num { color: #006a67 !important; }
     .wib-text { color: #64748b !important; }
     .why-cta-btn {
       color: #0A1628 !important;
@@ -1067,39 +1088,39 @@
     .contact-v3::after {
       display: none !important;
     }
-    .cv3-h2 { color: #1a2332 !important; }
+    .cv3-h2 { color: #001133 !important; }
     .cv3-subtitle { color: #64748b !important; }
     .cv3-pill {
-      background: rgba(13,148,136,0.1) !important;
-      color: #0D9488 !important;
-      border: 1px solid rgba(13,148,136,0.2) !important;
+      background: rgba(0,106,103,0.1) !important;
+      color: #006a67 !important;
+      border: 1px solid rgba(0,106,103,0.2) !important;
     }
-    .cv3-col-title { color: #1a2332 !important; }
+    .cv3-col-title { color: #001133 !important; }
     .cv3-col-sub   { color: #64748b !important; }
     .cv3-card {
       background: #ffffff !important;
-      border: 1px solid rgba(13,148,136,0.12) !important;
+      border: 1px solid rgba(0,106,103,0.12) !important;
       backdrop-filter: none !important;
       box-shadow: 0 2px 12px rgba(0,0,0,0.05) !important;
     }
     .cv3-card:hover {
-      border-color: rgba(13,148,136,0.3) !important;
+      border-color: rgba(0,106,103,0.3) !important;
       background: #f5fffe !important;
     }
     .cv3-card-label { color: #94a3b8 !important; }
-    .cv3-card-val   { color: #1a2332 !important; }
+    .cv3-card-val   { color: #001133 !important; }
     .cv3-card-sub-text { color: #64748b !important; }
-    .cv3-dir-link   { color: #0D9488 !important; }
+    .cv3-dir-link   { color: #006a67 !important; }
     .cv3-day        { color: #64748b !important; }
-    .cv3-time       { color: #1a2332 !important; }
+    .cv3-time       { color: #001133 !important; }
     .cv3-closed     { color: #ef4444 !important; }
     .cv3-outline-btn {
-      color: #0D9488 !important;
-      border-color: rgba(13,148,136,0.35) !important;
+      color: #006a67 !important;
+      border-color: rgba(0,106,103,0.35) !important;
       background: transparent !important;
     }
     .cv3-outline-btn:hover {
-      background: rgba(13,148,136,0.07) !important;
+      background: rgba(0,106,103,0.07) !important;
     }
     /* Map: no dark filter on light bg */
     .cv3-map-wrap iframe,
@@ -1107,31 +1128,31 @@
       filter: none !important;
     }
     .cv3-map-wrap {
-      border-color: rgba(13,148,136,0.22) !important;
+      border-color: rgba(0,106,103,0.22) !important;
       box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
     }
     .cv3-email-card {
       background: #ffffff !important;
-      border: 1px solid rgba(13,148,136,0.12) !important;
+      border: 1px solid rgba(0,106,103,0.12) !important;
     }
-    .cv3-email-title { color: #1a2332 !important; }
+    .cv3-email-title { color: #001133 !important; }
     .cv3-email-addr  { color: #64748b !important; }
-    .cv3-tour-label  { color: #1a2332 !important; }
+    .cv3-tour-label  { color: #001133 !important; }
 
     /* ── 9. FOOTER — dark stays as-is ── */
     .footer-new {
-      background: #1a2332 !important;
+      background: #001133 !important;
     }
 
     /* ── 10. SHARED: section title/desc on light sections ── */
     .section-title-new {
-      color: #1a2332 !important;
+      color: #001133 !important;
     }
     .section-desc-new {
       color: #64748b !important;
     }
     .text-gradient {
-      background: linear-gradient(135deg, #0D9488, #0df2f2) !important;
+      background: linear-gradient(135deg, #006a67, #0df2f2) !important;
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
     }
@@ -1141,13 +1162,13 @@
       background: #ffffff !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
-      border: 1px solid rgba(13,148,136,0.12) !important;
+      border: 1px solid rgba(0,106,103,0.12) !important;
       box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important;
     }
 
     /* ── 12. Scroll progress bar ── */
     #scrollFill {
-      background: linear-gradient(90deg, #0D9488, #0df2f2) !important;
+      background: linear-gradient(90deg, #006a67, #0df2f2) !important;
     }
 
   </style>
@@ -1158,7 +1179,7 @@
   <!-- ANIMATED SVG BACKGROUND BLOBS -->
   <div class="blob-bg" aria-hidden="true">
     <svg class="blob blob-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path fill="rgba(13,148,136,0.07)" d="M47.5,-57.2C60.5,-45.5,69.2,-28.5,70.8,-11
+      <path fill="rgba(0,106,103,0.07)" d="M47.5,-57.2C60.5,-45.5,69.2,-28.5,70.8,-11
              C72.4,6.5,66.9,24.1,56.4,37.2C45.9,50.3,30.4,58.9,
              13.1,63.7C-4.2,68.5,-23.3,69.5,-38.6,62
              C-53.9,54.5,-65.4,38.5,-68.8,21.2
@@ -1192,12 +1213,12 @@
 
   <!-- ANNOUNCEMENT BANNER -->
   <div id="announceBanner"
-    style="background: linear-gradient(90deg, #0D9488, #06B6D4); color: white; text-align: center; padding: 10px 20px; font-size: 0.85rem; font-family: 'Cairo', sans-serif; position: relative; z-index: 99998; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+    style="background: linear-gradient(90deg, #006a67, #06B6D4); color: white; text-align: center; padding: 10px 20px; font-size: 0.85rem; font-family: 'Cairo', sans-serif; position: relative; z-index: 99998; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
     <span data-ar="🦷 أول عيادة أسنان رقمية في مكناس — احجز موعدك أونلاين الآن بدون اتصال!"
       data-fr="🦷 1er Cabinet Numérique à Meknès — Réservez en ligne !">🦷 أول عيادة أسنان رقمية في مكناس — احجز موعدك
       أونلاين الآن بدون اتصال!</span>
     <a href="#" onclick="goToBooking(); return false;"
-      style="background: white; color: #0D9488; padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; text-decoration: none; white-space: nowrap;"
+      style="background: white; color: #006a67; padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; text-decoration: none; white-space: nowrap;"
       data-ar="←" data-fr="←">احجز
       الآن ←</a>
     <button onclick="this.parentElement.style.display='none'"
@@ -1227,11 +1248,11 @@
             <defs>
               <linearGradient id="hexFill" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#0df2f2"></stop>
-                <stop offset="100%" stop-color="#0D9488"></stop>
+                <stop offset="100%" stop-color="#006a67"></stop>
               </linearGradient>
               <linearGradient id="hexStroke" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#0df2f2"></stop>
-                <stop offset="100%" stop-color="#0D9488"></stop>
+                <stop offset="100%" stop-color="#006a67"></stop>
               </linearGradient>
               <linearGradient id="crossFill" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#0df2f2"></stop>
@@ -1279,7 +1300,7 @@
 
     <!-- CLINIC INFO BAR -->
     <div id="clinicInfoBar"
-      style="background: rgba(13,148,136,0.06); border-bottom: 1px solid rgba(13,148,136,0.12); padding: 8px 24px; display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; font-size: 0.8rem; color: #94a3b8; font-family: 'Cairo', sans-serif; position: relative; z-index: 100;">
+      style="background: rgba(0,106,103,0.06); border-bottom: 1px solid rgba(0,106,103,0.12); padding: 8px 24px; display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; font-size: 0.8rem; color: #94a3b8; font-family: 'Cairo', sans-serif; position: relative; z-index: 100;">
       <span data-ar="📍 شارع الحسن الثاني 209، الطابق 2، مكناس" data-fr="📍 209 Av Hassan II, 2ème étage, Meknès">📍 شارع الحسن الثاني 209، الطابق 2، مكناس</span>
       <span>|</span>
       <span>📞 <a href="tel:+212535402211" style="color:#0df2f2; text-decoration:none; font-weight:600;">0535 40 22 11</a></span>
@@ -2061,11 +2082,11 @@
                 <defs>
                   <linearGradient id="hexFill" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stop-color="#0df2f2"></stop>
-                    <stop offset="100%" stop-color="#0D9488"></stop>
+                    <stop offset="100%" stop-color="#006a67"></stop>
                   </linearGradient>
                   <linearGradient id="hexStroke" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stop-color="#0df2f2"></stop>
-                    <stop offset="100%" stop-color="#0D9488"></stop>
+                    <stop offset="100%" stop-color="#006a67"></stop>
                   </linearGradient>
                   <linearGradient id="crossFill" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stop-color="#0df2f2"></stop>
@@ -2177,7 +2198,7 @@
   <!-- Chat Widget -->
   <div id="chatWidget">
     <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي"
-      style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
+      style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#006a67,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
       <span style="font-size:1.3rem;line-height:1;">💬</span>
       <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد"
         data-fr="Assistant">مساعد</span>
@@ -2693,7 +2714,7 @@
           <defs>
             <linearGradient id="bcmHex" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#0df2f2"></stop>
-              <stop offset="100%" stop-color="#0D9488"></stop>
+              <stop offset="100%" stop-color="#006a67"></stop>
             </linearGradient>
             <linearGradient id="bcmCross" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#0df2f2"></stop>
