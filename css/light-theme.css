@@ -37,6 +37,10 @@ body::before { opacity: 0.012 !important; }
 h1, h2, h3, h4, h5, h6 { color: #001133 !important; }
 p { color: #475569 !important; }
 
+/* ── Bento service cards on homepage — keep white text on dark overlay ── */
+.svc-bento-content h3 { color: #ffffff !important; text-shadow: 0 1px 3px rgba(0,0,0,0.4) !important; }
+.svc-bento-content p  { color: rgba(255,255,255,0.82) !important; }
+
 /* ── Restore white text inside DARK sections (hero is now light — excluded) ── */
 .doctor-new h1, .doctor-new h2, .doctor-new h3, .doctor-new h4,
 .doctor-new h5, .doctor-new h6,
