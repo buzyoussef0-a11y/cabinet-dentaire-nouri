@@ -19,119 +19,341 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
     <style>
-        /* ── "اعرف أكثر" button inside each answer ── */
-        .faq-ask-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 14px;
-            padding: 8px 20px;
-            background: transparent;
-            border: 1.5px solid rgba(13, 242, 242, 0.35);
-            border-radius: 40px;
-            color: #0df2f2;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-            letter-spacing: 0.2px;
-        }
-        .faq-ask-more:hover {
-            background: rgba(13, 242, 242, 0.1);
-            border-color: rgba(13, 242, 242, 0.7);
-            box-shadow: 0 0 14px rgba(13, 242, 242, 0.2);
-            transform: translateY(-1px);
-        }
+    /* ═══════════════════════════════════════
+       FAQ PAGE — Light Redesign
+       #001133 / #006a67 / #b7ecea / #fef7ff
+       ═══════════════════════════════════════ */
 
-        /* ── Ask-assistant card ── */
-        .faq-assistant-card {
-            max-width: 800px;
-            margin: 28px auto 0;
-            border-radius: 20px;
-            padding: 32px 40px;
-            background: linear-gradient(135deg,
-                rgba(13, 148, 136, 0.12) 0%,
-                rgba(13, 242, 242, 0.06) 100%);
-            border: 1px solid rgba(13, 242, 242, 0.18);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-            cursor: pointer;
-            transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
-            position: relative;
-            overflow: hidden;
+    /* ── Page background ── */
+    body { background: #f4f9f9; }
+
+    /* ── FAQ main wrapper ── */
+    .faq-main {
+        background: #f4f9f9;
+        padding-bottom: 80px;
+    }
+
+    /* ── Search + filters area ── */
+    .faq-search-wrap {
+        max-width: 720px;
+        margin: 0 auto 40px;
+        padding: 0 20px;
+    }
+    .faq-search-box {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    .faq-search-box svg {
+        position: absolute;
+        top: 50%; right: 18px;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        pointer-events: none;
+        transition: color 0.2s;
+    }
+    #faqSearch {
+        width: 100%;
+        padding: 16px 52px 16px 20px;
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 16px;
+        color: #001133;
+        font-family: 'Cairo', sans-serif;
+        font-size: 0.97rem;
+        outline: none;
+        box-sizing: border-box;
+        box-shadow: 0 2px 12px rgba(0,106,103,0.07);
+        transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    #faqSearch:focus {
+        border-color: #006a67;
+        box-shadow: 0 0 0 4px rgba(0,106,103,0.1);
+    }
+    #faqSearch:focus + svg { color: #006a67; }
+    #faqSearch::placeholder { color: #94a3b8; }
+
+    /* Category filter pills */
+    .faq-cats {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .faq-cat-btn {
+        padding: 7px 18px;
+        border-radius: 40px;
+        border: 1.5px solid #e2e8f0;
+        background: #ffffff;
+        color: #475569;
+        font-family: 'Cairo', sans-serif;
+        font-size: 0.83rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.22s ease;
+    }
+    .faq-cat-btn:hover,
+    .faq-cat-btn.active {
+        background: #006a67;
+        border-color: #006a67;
+        color: #ffffff;
+        box-shadow: 0 4px 14px rgba(0,106,103,0.25);
+    }
+
+    /* ── FAQ list container ── */
+    .faq-list-wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* ── Individual FAQ card ── */
+    .faq-item {
+        background: #ffffff;
+        border: 1.5px solid rgba(0,106,103,0.1);
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(0,106,103,0.06);
+        overflow: hidden;
+        transition: border-color 0.25s, box-shadow 0.25s;
+        border-bottom: 1.5px solid rgba(0,106,103,0.1) !important;
+    }
+    .faq-item:hover {
+        border-color: rgba(0,106,103,0.22);
+        box-shadow: 0 6px 24px rgba(0,106,103,0.1);
+    }
+    .faq-item.open {
+        border-color: #006a67;
+        box-shadow: 0 8px 28px rgba(0,106,103,0.14);
+    }
+
+    /* ── FAQ question row ── */
+    .faq-question {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 24px;
+        cursor: pointer;
+        color: #001133;
+        font-family: 'Cairo', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        transition: color 0.2s, background 0.2s;
+        border-bottom: none !important;
+    }
+    .faq-question:hover { color: #006a67; background: rgba(0,106,103,0.03); }
+    .faq-item.open .faq-question {
+        color: #006a67;
+        background: rgba(0,106,103,0.04);
+        border-bottom: 1px solid rgba(0,106,103,0.1) !important;
+    }
+
+    /* ── Toggle icon ── */
+    .faq-toggle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(0,106,103,0.07);
+        border: 1.5px solid rgba(0,106,103,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 300;
+        color: #006a67;
+        flex-shrink: 0;
+        transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        line-height: 1;
+    }
+    .faq-item.open .faq-toggle {
+        background: #006a67;
+        border-color: #006a67;
+        color: #ffffff;
+        transform: rotate(45deg);
+    }
+
+    /* ── FAQ answer ── */
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+        padding: 0 24px;
+        background: #ffffff;
+    }
+    .faq-item.open .faq-answer {
+        max-height: 400px;
+        opacity: 1;
+        padding: 16px 24px 22px;
+    }
+    .faq-answer p {
+        color: #475569 !important;
+        font-family: 'Cairo', sans-serif;
+        font-size: 0.93rem;
+        line-height: 1.8;
+        margin: 0 0 4px;
+    }
+
+    /* ── "اعرف أكثر" button ── */
+    .faq-ask-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 12px;
+        padding: 8px 18px;
+        background: rgba(0,106,103,0.07);
+        border: 1.5px solid rgba(0,106,103,0.2);
+        border-radius: 40px;
+        color: #006a67;
+        font-family: 'Cairo', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.22s ease;
+    }
+    .faq-ask-more:hover {
+        background: #006a67;
+        border-color: #006a67;
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(0,106,103,0.25);
+    }
+
+    /* ── No results ── */
+    #faqNoResults {
+        text-align: center;
+        padding: 48px 24px;
+        color: #94a3b8;
+        font-family: 'Cairo', sans-serif;
+    }
+    #faqNoResults p { color: #94a3b8 !important; font-size: 0.95rem; }
+
+    /* ── Assistant card ── */
+    .faq-assistant-card {
+        max-width: 720px;
+        margin: 36px auto 0;
+        padding: 0 20px;
+    }
+    .faq-assistant-inner {
+        border-radius: 20px;
+        padding: 32px 36px;
+        background: linear-gradient(135deg, #006a67 0%, #004d4b 100%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        cursor: pointer;
+        transition: transform 0.25s, box-shadow 0.25s;
+        box-shadow: 0 8px 32px rgba(0,106,103,0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    .faq-assistant-inner::before {
+        content: '';
+        position: absolute;
+        top: -50px; left: -50px;
+        width: 160px; height: 160px;
+        background: radial-gradient(circle, rgba(183,236,234,0.15) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .faq-assistant-inner:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 44px rgba(0,106,103,0.38);
+    }
+    .faq-ac-icon {
+        width: 58px; height: 58px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.15);
+        border: 2px solid rgba(255,255,255,0.25);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.6rem;
+        flex-shrink: 0;
+        animation: acPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes acPulse {
+        0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.15); }
+        50%      { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+    }
+    .faq-ac-body { flex: 1; }
+    .faq-ac-title {
+        font-family: 'Cairo', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 5px;
+    }
+    .faq-ac-sub {
+        font-family: 'Cairo', sans-serif;
+        font-size: 0.84rem;
+        color: rgba(183,236,234,0.85);
+        line-height: 1.5;
+    }
+    .faq-ac-btn {
+        padding: 12px 26px;
+        background: #ffffff;
+        border: none;
+        border-radius: 40px;
+        color: #006a67;
+        font-family: 'Cairo', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 800;
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: all 0.22s ease;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .faq-ac-btn:hover {
+        background: #b7ecea;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 22px rgba(0,0,0,0.16);
+    }
+
+    /* ── Stats bar ── */
+    .faq-stats-bar {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+        flex-wrap: wrap;
+        max-width: 720px;
+        margin: 0 auto 44px;
+        padding: 24px 20px;
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1.5px solid rgba(0,106,103,0.1);
+        box-shadow: 0 2px 12px rgba(0,106,103,0.07);
+    }
+    .faq-stat {
+        text-align: center;
+    }
+    .faq-stat-num {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: #006a67;
+        font-family: 'Cairo', sans-serif;
+        line-height: 1;
+        margin-bottom: 4px;
+    }
+    .faq-stat-label {
+        display: block;
+        font-size: 0.78rem;
+        color: #64748b;
+        font-family: 'Cairo', sans-serif;
+        font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+        .faq-assistant-inner {
+            flex-direction: column;
+            text-align: center;
+            padding: 28px 24px;
         }
-        .faq-assistant-card::before {
-            content: '';
-            position: absolute;
-            top: -60px; left: -60px;
-            width: 180px; height: 180px;
-            background: radial-gradient(circle, rgba(13,242,242,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .faq-assistant-card:hover {
-            border-color: rgba(13, 242, 242, 0.45);
-            box-shadow: 0 8px 40px rgba(13, 242, 242, 0.12);
-            transform: translateY(-2px);
-        }
-        .faq-ac-icon {
-            width: 56px; height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0D9488, #0df2f2);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            box-shadow: 0 4px 18px rgba(13,242,242,0.3);
-            animation: acPulse 2.5s ease-in-out infinite;
-        }
-        @keyframes acPulse {
-            0%, 100% { box-shadow: 0 4px 18px rgba(13,242,242,0.3); }
-            50%       { box-shadow: 0 4px 28px rgba(13,242,242,0.55); }
-        }
-        .faq-ac-body { flex: 1; }
-        .faq-ac-title {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 4px;
-        }
-        .faq-ac-sub {
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.84rem;
-            color: rgba(180,220,230,0.65);
-            line-height: 1.5;
-        }
-        .faq-ac-btn {
-            padding: 11px 26px;
-            background: linear-gradient(135deg, #0D9488, #0df2f2);
-            border: none;
-            border-radius: 40px;
-            color: #0a1628;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 800;
-            cursor: pointer;
-            white-space: nowrap;
-            flex-shrink: 0;
-            transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 16px rgba(13,242,242,0.25);
-        }
-        .faq-ac-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 22px rgba(13,242,242,0.4);
-        }
-        @media (max-width: 600px) {
-            .faq-assistant-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 28px 24px;
-            }
-            .faq-ac-btn { width: 100%; }
-        }
+        .faq-ac-btn { width: 100%; }
+        .faq-stats-bar { gap: 24px; }
+    }
     </style>
 </head>
 
@@ -213,44 +435,86 @@
         </nav>
     </header>
 
-    <main style="padding-top: 120px; padding-bottom: 60px;">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h1 style="font-size: 2.5rem; margin-bottom: 16px;"><span data-ar="الأسئلة " data-fr="Questions ">الأسئلة </span><span class="text-gradient" data-ar="الشائعة" data-fr="Fréquentes">الشائعة</span></h1>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">إليك بعض الإجابات على الأسئلة
-                    الأكثر تداولاً من قبل زوارنا الكرام.</p>
-            </div>
+    <main class="faq-main">
 
-            <div class="glass-card" style="max-width: 800px; margin: 0 auto; padding: 40px;">
-                <!-- SEARCH BAR -->
-                <div style="margin-bottom: 30px; position: relative;">
-                    <input type="text" id="faqSearch" oninput="filterFaq(this.value)" placeholder="ابحث عن سؤال..." data-placeholder-ar="ابحث عن سؤال..." data-placeholder-fr="Rechercher une question..."
-                        style="width: 100%; padding: 14px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-family: 'Cairo', sans-serif; outline: none; transition: border-color 0.3s;">
+        <!-- PAGE HERO BANNER -->
+        <div class="page-hero-banner">
+            <div class="container">
+                <div class="page-breadcrumb">
+                    <a href="../index.html" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a>
+                    <span>›</span>
+                    <span data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة الشائعة</span>
                 </div>
-
-                <div id="faq-list">
-                    <!-- FAQ content will be populated by faq.js -->
-                    <p style="text-align: center; color: var(--text-muted);" data-ar="جاري تحميل الأسئلة..." data-fr="Chargement des questions...">جاري تحميل الأسئلة...</p>
-                </div>
-                <!-- NO RESULTS -->
-                <div id="faqNoResults"
-                    style="display:none; text-align:center; padding: 40px; color: var(--text-muted);">
-                    <div style="font-size: 3rem; margin-bottom: 10px;">🔍</div>
-                    <p data-ar="عذراً، لم نجد نتائج تطابق بحثك." data-fr="Désolé, aucun résultat ne correspond à votre recherche.">عذراً، لم نجد نتائج تطابق بحثك.</p>
+                <h1 class="reveal-up">
+                    <span data-ar="الأسئلة " data-fr="Questions ">الأسئلة </span>
+                    <span class="text-gradient" data-ar="الشائعة" data-fr="Fréquentes">الشائعة</span>
+                </h1>
+                <p class="reveal-up" data-ar="إجابات واضحة على أكثر الأسئلة شيوعاً من مرضانا الكرام" data-fr="Des réponses claires aux questions les plus fréquentes de nos patients">
+                    إجابات واضحة على أكثر الأسئلة شيوعاً من مرضانا الكرام
+                </p>
+                <div class="page-hero-stats reveal-up">
+                    <div class="ph-stat">
+                        <span class="ph-stat-num">8</span>
+                        <span class="ph-stat-label" data-ar="سؤال وجواب" data-fr="Questions répondues">سؤال وجواب</span>
+                    </div>
+                    <div class="ph-stat">
+                        <span class="ph-stat-num">24/7</span>
+                        <span class="ph-stat-label" data-ar="مساعد ذكي متاح" data-fr="Assistant IA disponible">مساعد ذكي متاح</span>
+                    </div>
+                    <div class="ph-stat">
+                        <span class="ph-stat-num">0535</span>
+                        <span class="ph-stat-label" data-ar="40 22 11 للتواصل" data-fr="40 22 11 pour nous contacter">40 22 11 للتواصل</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Ask-assistant card -->
-        <div class="faq-assistant-card" onclick="openAssistantChat()">
-            <div class="faq-ac-icon">💬</div>
-            <div class="faq-ac-body">
-                <div class="faq-ac-title" data-ar="لم تجد السؤال الذي تبحث عنه؟" data-fr="Vous n'avez pas trouvé votre réponse ?">لم تجد السؤال الذي تبحث عنه؟</div>
-                <div class="faq-ac-sub" data-ar="مساعدنا الذكي متاح 24/7 للإجابة على جميع استفساراتك فوراً" data-fr="Notre assistant IA est disponible 24h/24 pour répondre à toutes vos questions">مساعدنا الذكي متاح 24/7 للإجابة على جميع استفساراتك فوراً</div>
+        <!-- SEARCH + FILTERS -->
+        <div style="padding: 52px 0 0;">
+            <div class="faq-search-wrap">
+                <div class="faq-search-box">
+                    <input type="text" id="faqSearch" oninput="filterFaq(this.value)"
+                        placeholder="ابحث عن سؤال..."
+                        data-placeholder-ar="ابحث عن سؤال..."
+                        data-placeholder-fr="Rechercher une question...">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </div>
+                <div class="faq-cats">
+                    <button class="faq-cat-btn active" onclick="filterFaq(''); setActivecat(this)" data-ar="الكل" data-fr="Tout">الكل</button>
+                    <button class="faq-cat-btn" onclick="filterFaq('حجز'); setActivecat(this)" data-ar="🗓 الحجز" data-fr="🗓 Réservation">🗓 الحجز</button>
+                    <button class="faq-cat-btn" onclick="filterFaq('ساعات'); setActivecat(this)" data-ar="🕐 ساعات العمل" data-fr="🕐 Horaires">🕐 ساعات العمل</button>
+                    <button class="faq-cat-btn" onclick="filterFaq('خدمات'); setActivecat(this)" data-ar="🦷 الخدمات" data-fr="🦷 Services">🦷 الخدمات</button>
+                    <button class="faq-cat-btn" onclick="filterFaq('تواصل'); setActivecat(this)" data-ar="📞 التواصل" data-fr="📞 Contact">📞 التواصل</button>
+                </div>
             </div>
-            <button class="faq-ac-btn" data-ar="اسأل المساعد ✦" data-fr="Demander à l'assistant ✦">اسأل المساعد ✦</button>
         </div>
+
+        <!-- FAQ LIST -->
+        <div class="faq-list-wrap">
+            <div id="faq-list">
+                <p style="text-align:center; color:#94a3b8; font-family:'Cairo',sans-serif; padding:32px 0;"
+                   data-ar="جاري تحميل الأسئلة..." data-fr="Chargement...">جاري تحميل الأسئلة...</p>
+            </div>
+            <div id="faqNoResults" style="display:none;">
+                <div style="font-size:3rem; margin-bottom:12px;">🔍</div>
+                <p data-ar="لم نجد نتائج تطابق بحثك." data-fr="Aucun résultat trouvé.">لم نجد نتائج تطابق بحثك.</p>
+            </div>
         </div>
+
+        <!-- ASSISTANT CARD -->
+        <div class="faq-assistant-card">
+            <div class="faq-assistant-inner" onclick="openAssistantChat()">
+                <div class="faq-ac-icon">💬</div>
+                <div class="faq-ac-body">
+                    <div class="faq-ac-title" data-ar="لم تجد السؤال الذي تبحث عنه؟" data-fr="Vous n'avez pas trouvé votre réponse ?">لم تجد السؤال الذي تبحث عنه؟</div>
+                    <div class="faq-ac-sub" data-ar="مساعدنا الذكي متاح 24/7 للإجابة على جميع استفساراتك فوراً" data-fr="Notre assistant IA est disponible 24h/24 pour répondre instantanément">مساعدنا الذكي متاح 24/7 للإجابة على جميع استفساراتك فوراً</div>
+                </div>
+                <button class="faq-ac-btn" data-ar="اسأل المساعد ✦" data-fr="Demander à l'assistant ✦">اسأل المساعد ✦</button>
+            </div>
+        </div>
+
     </main>
 
     <footer class="footer-wrap">
@@ -352,6 +616,10 @@
     <script>
         function openAssistantChat() {
             if (typeof toggleChat === 'function' && !chatOpen) toggleChat();
+        }
+        function setActivecat(btn) {
+            document.querySelectorAll('.faq-cat-btn').forEach(function(b){ b.classList.remove('active'); });
+            btn.classList.add('active');
         }
     </script>
     <script src="../js/supabase-client.js"></script>
