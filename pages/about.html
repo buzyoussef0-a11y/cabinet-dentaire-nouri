@@ -14,7 +14,311 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="manifest" href="../manifest.json">
-    <meta name="theme-color" content="#0D9488">
+    <meta name="theme-color" content="#006a67">
+  <style>
+    /* ═══════════════════════════════════════
+       ABOUT PAGE — Light Redesign
+       #001133 / #006a67 / #b7ecea / #fef7ff
+       ═══════════════════════════════════════ */
+
+    /* ── Doctor section ── */
+    .about-doctor-section {
+      background: #ffffff;
+      padding: 80px 0 100px;
+    }
+    .about-dr-img {
+      border-radius: 24px;
+      box-shadow: 0 16px 48px rgba(0,106,103,0.14), 0 4px 16px rgba(0,0,0,0.06);
+      border: 3px solid rgba(0,106,103,0.15) !important;
+    }
+    .about-dr-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(0,106,103,0.08), rgba(183,236,234,0.15));
+      z-index: -1;
+    }
+    .about-dr-badge {
+      background: linear-gradient(135deg, #006a67, #009e99) !important;
+      box-shadow: 0 8px 24px rgba(0,106,103,0.4) !important;
+      bottom: -16px;
+      right: 24px;
+    }
+    .about-dr-content h2 {
+      color: #001133 !important;
+      font-size: clamp(1.8rem, 4vw, 2.4rem) !important;
+    }
+    .about-dr-content .about-dr-title {
+      color: #006a67 !important;
+      font-weight: 700 !important;
+      font-size: 1rem !important;
+      margin-bottom: 20px !important;
+    }
+    .about-dr-content blockquote {
+      background: linear-gradient(135deg, rgba(0,106,103,0.05), rgba(183,236,234,0.12)) !important;
+      border: none !important;
+      border-right: 4px solid #006a67 !important;
+      border-radius: 12px !important;
+      color: #475569 !important;
+      font-style: italic !important;
+      padding: 20px 24px !important;
+    }
+    .about-dr-chip {
+      background: rgba(0,106,103,0.08) !important;
+      border: 1px solid rgba(0,106,103,0.2) !important;
+      color: #006a67 !important;
+      font-weight: 700 !important;
+      border-radius: 50px !important;
+      padding: 6px 14px !important;
+      font-size: 0.83rem !important;
+    }
+
+    /* ── Stats strip ── */
+    .about-stats-strip {
+      display: flex;
+      gap: 0;
+      background: linear-gradient(135deg, #006a67 0%, #004d4b 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 0 0 80px;
+      box-shadow: 0 12px 40px rgba(0,106,103,0.3);
+    }
+    .about-stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 28px 16px;
+      border-left: 1px solid rgba(255,255,255,0.12);
+      position: relative;
+    }
+    .about-stat-item:last-child { border-left: none; }
+    .about-stat-num {
+      display: block;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffffff;
+      font-family: 'Cairo', sans-serif;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .about-stat-label {
+      display: block;
+      font-size: 0.78rem;
+      color: rgba(183,236,234,0.85);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 600;
+    }
+
+    /* ── Timeline ── */
+    .about-timeline-section {
+      background: #f8fbfb !important;
+      border-top: none !important;
+      padding: 80px 0 !important;
+    }
+    .about-timeline-section h2 {
+      color: #001133 !important;
+      text-align: center;
+      margin-bottom: 60px !important;
+    }
+    .about-timeline {
+      position: relative;
+    }
+    .about-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: linear-gradient(180deg, #006a67, rgba(0,106,103,0.1));
+    }
+    .tl-card {
+      background: #ffffff !important;
+      border: 1.5px solid rgba(0,106,103,0.12) !important;
+      border-radius: 16px !important;
+      padding: 20px 24px !important;
+      box-shadow: 0 4px 20px rgba(0,106,103,0.08) !important;
+      transition: box-shadow 0.3s ease, transform 0.3s ease !important;
+    }
+    .tl-card:hover {
+      box-shadow: 0 8px 32px rgba(0,106,103,0.14) !important;
+      transform: translateY(-3px) !important;
+    }
+    .tl-year {
+      color: #006a67 !important;
+      font-weight: 800 !important;
+      font-size: 0.8rem !important;
+      background: rgba(0,106,103,0.08) !important;
+      padding: 3px 10px !important;
+      border-radius: 20px !important;
+      display: inline-block !important;
+      margin-bottom: 8px !important;
+    }
+    .tl-card h4 {
+      color: #001133 !important;
+      font-size: 1rem !important;
+      font-weight: 900 !important;
+      margin: 0 0 6px !important;
+    }
+    .tl-card p {
+      color: #64748b !important;
+      font-size: 0.84rem !important;
+      margin: 0 !important;
+      line-height: 1.6 !important;
+    }
+    .tl-dot {
+      width: 52px !important;
+      height: 52px !important;
+      background: #ffffff !important;
+      border: 3px solid #006a67 !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 1.3rem !important;
+      flex-shrink: 0 !important;
+      box-shadow: 0 4px 16px rgba(0,106,103,0.2) !important;
+      z-index: 1 !important;
+      position: relative !important;
+    }
+
+    /* ── Values section ── */
+    .about-values-section {
+      background: #ffffff !important;
+      padding: 80px 0 !important;
+    }
+    .about-values-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 24px !important;
+      margin-top: 48px !important;
+    }
+    @media (max-width: 768px) {
+      .about-values-grid { grid-template-columns: 1fr !important; }
+    }
+    .about-value-card {
+      background: #ffffff !important;
+      border: 1.5px solid rgba(0,106,103,0.1) !important;
+      border-radius: 20px !important;
+      padding: 32px 28px !important;
+      text-align: center !important;
+      box-shadow: 0 4px 20px rgba(0,106,103,0.07) !important;
+      transition: all 0.3s ease !important;
+    }
+    .about-value-card:hover {
+      border-color: rgba(0,106,103,0.3) !important;
+      box-shadow: 0 12px 36px rgba(0,106,103,0.14) !important;
+      transform: translateY(-5px) !important;
+    }
+    .about-value-icon {
+      background: linear-gradient(135deg, rgba(0,106,103,0.1), rgba(183,236,234,0.25)) !important;
+      border: 1.5px solid rgba(0,106,103,0.15) !important;
+      font-size: 1.8rem !important;
+      width: 64px !important;
+      height: 64px !important;
+      border-radius: 18px !important;
+    }
+    .about-value-card h3 {
+      color: #001133 !important;
+      font-size: 1.1rem !important;
+      font-weight: 900 !important;
+      margin: 0 0 10px !important;
+    }
+    .about-value-card p {
+      color: #64748b !important;
+      font-size: 0.85rem !important;
+      line-height: 1.7 !important;
+    }
+
+    /* ── Team section ── */
+    .about-team-section {
+      background: #f8fbfb !important;
+      border-top: none !important;
+      padding: 80px 0 !important;
+    }
+    .about-team-card {
+      background: #ffffff !important;
+      border: 1.5px solid rgba(0,106,103,0.1) !important;
+      border-radius: 20px !important;
+      overflow: hidden !important;
+      box-shadow: 0 4px 20px rgba(0,106,103,0.07) !important;
+      transition: all 0.3s ease !important;
+    }
+    .about-team-card:hover {
+      transform: translateY(-5px) !important;
+      border-color: rgba(0,106,103,0.28) !important;
+      box-shadow: 0 12px 36px rgba(0,106,103,0.14) !important;
+    }
+    .about-team-img {
+      height: 240px !important;
+      object-fit: cover !important;
+      object-position: top !important;
+      width: 100% !important;
+    }
+    .about-team-body {
+      padding: 20px 22px 22px !important;
+      background: #ffffff !important;
+    }
+    .about-team-body h4 {
+      color: #001133 !important;
+      font-size: 1rem !important;
+      font-weight: 900 !important;
+      margin: 0 0 4px !important;
+    }
+    .about-team-body span {
+      color: #006a67 !important;
+      font-size: 0.82rem !important;
+      font-weight: 600 !important;
+    }
+
+    /* ── Certifications ── */
+    .about-cert-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .about-cert-item {
+      text-align: center;
+      padding: 24px 28px;
+      background: #ffffff;
+      border: 1.5px solid rgba(0,106,103,0.14);
+      border-radius: 18px;
+      min-width: 140px;
+      box-shadow: 0 4px 16px rgba(0,106,103,0.08);
+      transition: all 0.3s ease;
+    }
+    .about-cert-item:hover {
+      border-color: rgba(0,106,103,0.3);
+      box-shadow: 0 8px 28px rgba(0,106,103,0.14);
+      transform: translateY(-3px);
+    }
+    .about-cert-item .cert-icon {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .about-cert-item .cert-label {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #334155;
+      display: block;
+    }
+    .about-cert-section {
+      padding: 60px 0 80px;
+      background: #ffffff;
+      border-top: 1px solid rgba(0,106,103,0.08);
+    }
+
+    /* ── CTA ── */
+    .page-cta-section {
+      background: linear-gradient(135deg, #001133 0%, #0F2650 50%, #006a67 100%) !important;
+    }
+    .page-cta-section h2 { color: #ffffff !important; }
+    .page-cta-section p  { color: rgba(183,236,234,0.85) !important; }
+  </style>
 </head>
 
 <body>
@@ -142,6 +446,30 @@
         </div>
       </div>
     </section>
+
+    <!-- STATS STRIP -->
+    <div style="background:#f8fbfb; padding: 0 0 40px;">
+      <div class="container">
+        <div class="about-stats-strip reveal-up">
+          <div class="about-stat-item">
+            <span class="about-stat-num">+12</span>
+            <span class="about-stat-label" data-ar="سنة خبرة" data-fr="Ans d'expérience">سنة خبرة</span>
+          </div>
+          <div class="about-stat-item">
+            <span class="about-stat-num">450+</span>
+            <span class="about-stat-label" data-ar="مريض سعيد" data-fr="Patients satisfaits">مريض سعيد</span>
+          </div>
+          <div class="about-stat-item">
+            <span class="about-stat-num">4.8★</span>
+            <span class="about-stat-label" data-ar="تقييم Google" data-fr="Note Google">تقييم Google</span>
+          </div>
+          <div class="about-stat-item">
+            <span class="about-stat-num">+12</span>
+            <span class="about-stat-label" data-ar="خدمة متخصصة" data-fr="Services spécialisés">خدمة متخصصة</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- EDUCATION TIMELINE -->
     <section class="about-timeline-section">
@@ -280,27 +608,27 @@
     </section>
 
     <!-- CERTIFICATIONS -->
-    <section style="padding: 60px 0 80px; border-top: 1px solid var(--border);">
+    <section class="about-cert-section">
       <div class="container">
-        <div class="section-top reveal-up" style="text-align:center; margin-bottom: 40px;">
+        <div class="section-top reveal-up" style="text-align:center; margin-bottom: 44px;">
           <h2 class="section-title-new" data-ar="شهاداتنا واعتماداتنا" data-fr="Nos Certifications et Accréditations">شهاداتنا واعتماداتنا</h2>
         </div>
-        <div class="reveal-up" style="display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap;">
-          <div style="text-align:center; padding: 20px 28px; background: linear-gradient(145deg, rgba(30,41,59,0.4), rgba(15,23,42,0.6)); border: 1px solid var(--border); border-radius: 16px; min-width: 140px;">
-            <div style="font-size: 2.2rem; margin-bottom: 8px;">🏛️</div>
-            <span style="font-family: 'Cairo', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block;" data-ar="جامعة محمد الخامس" data-fr="Université Mohammed V">جامعة محمد الخامس</span>
+        <div class="about-cert-grid reveal-up">
+          <div class="about-cert-item">
+            <span class="cert-icon">🏛️</span>
+            <span class="cert-label" data-ar="جامعة محمد الخامس" data-fr="Université Mohammed V">جامعة محمد الخامس</span>
           </div>
-          <div style="text-align:center; padding: 20px 28px; background: linear-gradient(145deg, rgba(30,41,59,0.4), rgba(15,23,42,0.6)); border: 1px solid var(--border); border-radius: 16px; min-width: 140px;">
-            <div style="font-size: 2.2rem; margin-bottom: 8px;">🌐</div>
-            <span style="font-family: 'Cairo', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block;" data-ar="الجمعية المغربية" data-fr="Association Marocaine">الجمعية المغربية</span>
+          <div class="about-cert-item">
+            <span class="cert-icon">🌐</span>
+            <span class="cert-label" data-ar="الجمعية المغربية" data-fr="Association Marocaine">الجمعية المغربية</span>
           </div>
-          <div style="text-align:center; padding: 20px 28px; background: linear-gradient(145deg, rgba(30,41,59,0.4), rgba(15,23,42,0.6)); border: 1px solid var(--border); border-radius: 16px; min-width: 140px;">
-            <div style="font-size: 2.2rem; margin-bottom: 8px;">🇫🇷</div>
-            <span style="font-family: 'Cairo', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block;" data-ar="شهادة دولية — باريس" data-fr="Diplôme International — Paris">شهادة دولية — باريس</span>
+          <div class="about-cert-item">
+            <span class="cert-icon">🇫🇷</span>
+            <span class="cert-label" data-ar="شهادة دولية — باريس" data-fr="Diplôme International — Paris">شهادة دولية — باريس</span>
           </div>
-          <div style="text-align:center; padding: 20px 28px; background: linear-gradient(145deg, rgba(30,41,59,0.4), rgba(15,23,42,0.6)); border: 1px solid var(--border); border-radius: 16px; min-width: 140px;">
-            <div style="font-size: 2.2rem; margin-bottom: 8px;">⭐</div>
-            <span style="font-family: 'Cairo', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block;" data-ar="4.8/5 على Google" data-fr="4.8/5 sur Google">4.8/5 على Google</span>
+          <div class="about-cert-item">
+            <span class="cert-icon">⭐</span>
+            <span class="cert-label" data-ar="4.8/5 على Google" data-fr="4.8/5 sur Google">4.8/5 على Google</span>
           </div>
         </div>
       </div>
