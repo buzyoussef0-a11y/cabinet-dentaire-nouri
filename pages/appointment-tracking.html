@@ -19,7 +19,307 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
   <style>
-    #appointmentsList { min-height: 100px; width: 100%; }
+    /* ═══════════════════════════════════════════
+       TRACKING PAGE — Light Redesign
+       #001133 / #006a67 / #b7ecea / #fef7ff
+       ═══════════════════════════════════════════ */
+
+    body { background: #f4f9f9; }
+
+    .tracking-main { background: #f4f9f9; padding-bottom: 80px; }
+
+    /* ── Page hero ── */
+    .tracking-hero {
+      background: linear-gradient(135deg, #0A1E3C 0%, #006a67 100%);
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .tracking-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(183,236,234,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .tracking-hero-tag {
+      display: inline-block;
+      background: rgba(183,236,234,0.15);
+      border: 1px solid rgba(183,236,234,0.3);
+      color: #b7ecea;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 16px;
+      border-radius: 40px;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    .tracking-hero h1 {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: #ffffff;
+      margin: 0 0 12px;
+    }
+    .tracking-hero h1 .text-hl {
+      background: linear-gradient(135deg, #b7ecea, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .tracking-hero p {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      color: rgba(183,236,234,0.8);
+      margin: 0 0 8px;
+    }
+    #pageGreeting {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      color: rgba(183,236,234,0.9) !important;
+      margin-bottom: 6px !important;
+    }
+
+    /* ── Wrapper ── */
+    .tracking-wrapper {
+      max-width: 860px;
+      margin: -32px auto 0;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── Appointment card ── */
+    .apt-card {
+      background: #ffffff;
+      border: 1.5px solid rgba(0,106,103,0.1);
+      border-radius: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 20px rgba(0,106,103,0.07);
+      overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    }
+    .apt-card:hover {
+      border-color: rgba(0,106,103,0.25);
+      box-shadow: 0 8px 32px rgba(0,106,103,0.12);
+      transform: translateY(-2px);
+    }
+    .apt-card-top-bar {
+      height: 4px;
+      border-radius: 20px 20px 0 0;
+    }
+    .apt-card-body { padding: 22px 24px; }
+    .apt-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .apt-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .apt-card-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, rgba(0,106,103,0.1), rgba(183,236,234,0.2));
+      border: 1.5px solid rgba(0,106,103,0.15);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .apt-service-name {
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #001133;
+      margin-bottom: 3px;
+    }
+    .apt-ref {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+    .apt-ref span { color: #006a67; font-weight: 700; }
+    .apt-status-badge {
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+      flex-shrink: 0;
+    }
+    .apt-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .apt-info-cell {
+      background: #f4f9f9;
+      border: 1px solid rgba(0,106,103,0.08);
+      border-radius: 12px;
+      padding: 10px 14px;
+    }
+    .apt-info-cell.full { grid-column: span 2; }
+    .apt-info-label {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.72rem;
+      color: #94a3b8;
+      margin-bottom: 3px;
+    }
+    .apt-info-value {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #001133;
+    }
+    .apt-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0,106,103,0.08);
+    }
+    .apt-btn-edit {
+      padding: 9px 20px;
+      font-size: 0.84rem;
+      color: #006a67;
+      border: 1.5px solid rgba(0,106,103,0.3);
+      border-radius: 10px;
+      cursor: pointer;
+      background: rgba(0,106,103,0.05);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      transition: all 0.22s ease;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .apt-btn-edit:hover {
+      background: #006a67;
+      color: #ffffff;
+      border-color: #006a67;
+      box-shadow: 0 4px 14px rgba(0,106,103,0.25);
+    }
+    .apt-btn-cancel {
+      padding: 9px 20px;
+      font-size: 0.84rem;
+      color: #ef4444;
+      border: 1.5px solid rgba(239,68,68,0.3);
+      border-radius: 10px;
+      cursor: pointer;
+      background: rgba(239,68,68,0.04);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      transition: all 0.22s ease;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .apt-btn-cancel:hover:not(:disabled) {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #ef4444;
+      box-shadow: 0 4px 14px rgba(239,68,68,0.25);
+    }
+    .apt-btn-cancel:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Empty & loading ── */
+    .apt-empty {
+      text-align: center;
+      padding: 60px 24px;
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1.5px solid rgba(0,106,103,0.1);
+      box-shadow: 0 4px 20px rgba(0,106,103,0.07);
+    }
+    .apt-empty h3 { color: #001133 !important; font-size: 1.4rem; margin: 0 0 10px; }
+    .apt-empty p  { color: #64748b !important; margin: 0 0 24px; }
+    .apt-login-cta {
+      display: inline-block;
+      background: #006a67;
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(0,106,103,0.3);
+    }
+    .apt-login-cta:hover { background: #004d4b; box-shadow: 0 6px 22px rgba(0,106,103,0.4); }
+
+    /* ── Loading spinner ── */
+    .apt-loading {
+      text-align: center;
+      padding: 48px 24px;
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1.5px solid rgba(0,106,103,0.1);
+    }
+    .apt-spinner {
+      width: 40px; height: 40px;
+      border: 3px solid rgba(0,106,103,0.15);
+      border-top-color: #006a67;
+      border-radius: 50%;
+      animation: aptSpin 0.8s linear infinite;
+      margin: 0 auto 14px;
+    }
+    @keyframes aptSpin { to { transform: rotate(360deg); } }
+    .apt-loading p { color: #64748b; font-family: 'Cairo', sans-serif; margin: 0; }
+
+    /* ── New booking CTA ── */
+    .tracking-cta-strip {
+      background: linear-gradient(135deg, #006a67, #004d4b);
+      border-radius: 20px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 24px;
+      box-shadow: 0 8px 28px rgba(0,106,103,0.28);
+    }
+    .tracking-cta-strip h3 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin: 0 0 4px;
+    }
+    .tracking-cta-strip p {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.84rem;
+      color: rgba(183,236,234,0.8);
+      margin: 0;
+    }
+    .tracking-cta-btn {
+      padding: 12px 26px;
+      background: #ffffff;
+      color: #006a67;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.93rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.22s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .tracking-cta-btn:hover { background: #b7ecea; transform: translateY(-2px); }
+
+    @media (max-width: 600px) {
+      .apt-info-grid { grid-template-columns: 1fr; }
+      .apt-info-cell.full { grid-column: 1; }
+      .tracking-cta-strip { flex-direction: column; text-align: center; }
+      .tracking-cta-btn { width: 100%; text-align: center; }
+    }
   </style>
 </head>
 
@@ -87,52 +387,52 @@
     </nav>
   </header>
 
-  <main style="padding-top: 140px; padding-bottom: 80px;">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag" data-ar="مركز التحكم" data-fr="Tableau de Bord">مركز التحكم</span>
-        <p id="pageGreeting" style="font-size:1.05rem;color:rgba(255,255,255,0.6);margin:10px 0 4px;min-height:1.4em;"></p>
-        <h1 class="section-title" data-ar="تتبع مواعيدك" data-fr="Suivi de vos rendez-vous">تتبع <span
-            class="text-gradient" data-ar="مواعيدك" data-fr="rendez-vous">مواعيدك</span></h1>
-        <p class="section-subtitle" data-ar="إدارة ومتابعة جميع حجوزاتك في مكان واحد بكل سهولة."
-          data-fr="Gérez et suivez tous vos rendez-vous en un seul endroit en toute simplicité.">إدارة ومتابعة جميع
-          حجوزاتك في مكان واحد بكل سهولة.</p>
+  <main class="tracking-main">
+
+    <!-- HERO -->
+    <div class="tracking-hero">
+      <div class="container" style="text-align:center;">
+        <div class="tracking-hero-tag" data-ar="مركز التحكم" data-fr="Tableau de Bord">مركز التحكم</div>
+        <p id="pageGreeting"></p>
+        <h1>
+          <span data-ar="تتبع " data-fr="Suivi de vos ">تتبع </span><span class="text-hl" data-ar="مواعيدك" data-fr="rendez-vous">مواعيدك</span>
+        </h1>
+        <p data-ar="إدارة ومتابعة جميع حجوزاتك في مكان واحد بكل سهولة." data-fr="Gérez et suivez tous vos rendez-vous en un seul endroit en toute simplicité.">
+          إدارة ومتابعة جميع حجوزاتك في مكان واحد بكل سهولة.
+        </p>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="tracking-wrapper">
+
+      <div id="skeletonLoader">
+        <div class="apt-loading">
+          <div class="apt-spinner"></div>
+          <p data-ar="جاري تحميل مواعيدك..." data-fr="Chargement de vos rendez-vous...">جاري تحميل مواعيدك...</p>
+        </div>
       </div>
 
-      <div class="glass-card" style="max-width: 900px; margin: 0 auto; padding: 40px;">
-        <!-- SKELETON LOADER -->
-        <div id="skeletonLoader">
-          <div class="skeleton-item">
-            <div class="sk-icon"></div>
-            <div class="sk-lines">
-              <div class="sk-line sk-w60"></div>
-              <div class="sk-line sk-w90"></div>
-            </div>
-          </div>
-          <div class="skeleton-item">
-            <div class="sk-icon"></div>
-            <div class="sk-lines">
-              <div class="sk-line sk-w40"></div>
-              <div class="sk-line sk-w80"></div>
-            </div>
-          </div>
-        </div>
-
-        <div id="noAppointments" style="display: none; text-align: center; padding: 40px;">
-          <div style="font-size: 4rem; margin-bottom: 20px; opacity: 0.5;">📅</div>
-          <h3 style="margin-bottom: 12px; font-size: 1.5rem;" data-ar="لا توجد مواعيد حالياً"
-            data-fr="Aucun rendez-vous pour le moment">لا توجد مواعيد حالياً</h3>
-          <p style="color: var(--text-muted); margin-bottom: 24px;" data-ar="يبدو أنك لم تقم بحجز أي موعد بعد."
-            data-fr="Il semble que vous n'ayez pas encore pris de rendez-vous.">يبدو أنك لم تقم بحجز أي موعد بعد.</p>
-          <a href="#" onclick="goToBooking(); return false;" class="btn btn-primary" style="display: inline-flex;" data-ar="احجز موعدك الأول الآن"
-            data-fr="Réservez votre premier rendez-vous">احجز موعدك الأول
-            الآن</a>
-        </div>
-
-        <div id="appointmentsList" class="appointments-grid" style="display: grid; gap: 20px;">
-          <!-- Population will happen via JavaScript -->
+      <div id="noAppointments" style="display:none;">
+        <div class="apt-empty">
+          <div style="font-size:3.5rem; margin-bottom:16px;">📅</div>
+          <h3 data-ar="لا توجد مواعيد حالياً" data-fr="Aucun rendez-vous pour le moment">لا توجد مواعيد حالياً</h3>
+          <p data-ar="لم تقم بحجز أي موعد بعد." data-fr="Vous n'avez pas encore pris de rendez-vous.">لم تقم بحجز أي موعد بعد.</p>
+          <a href="#" onclick="goToBooking(); return false;" class="apt-login-cta" data-ar="🗓 احجز موعدك الأول" data-fr="🗓 Réservez votre premier RDV">🗓 احجز موعدك الأول</a>
         </div>
       </div>
+
+      <div id="appointmentsList" style="display:none;"></div>
+
+      <!-- CTA STRIP -->
+      <div class="tracking-cta-strip" id="ctaStrip" style="display:none;">
+        <div>
+          <h3 data-ar="هل تريد حجز موعد جديد؟" data-fr="Besoin d'un nouveau rendez-vous ?">هل تريد حجز موعد جديد؟</h3>
+          <p data-ar="احجز بضع خطوات فقط" data-fr="Réservez en quelques étapes seulement">احجز بضع خطوات فقط</p>
+        </div>
+        <a href="#" onclick="goToBooking(); return false;" class="tracking-cta-btn" data-ar="🗓 حجز موعد جديد" data-fr="🗓 Nouveau rendez-vous">🗓 حجز موعد جديد</a>
+      </div>
+
     </div>
   </main>
 
@@ -309,119 +609,45 @@
         var phone = apt.phone || '';
         var cancelled = s === 'cancelled';
         return `
-          <div data-ref="${ref}" data-apt-id="${aptId}" style="
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 20px 24px;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-          " onmouseover="this.style.borderColor='rgba(13,242,242,0.3)';this.style.background='rgba(255,255,255,0.06)'"
-             onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.background='rgba(255,255,255,0.04)'">
+          <div class="apt-card" data-ref="${ref}" data-apt-id="${aptId}">
+            <div class="apt-card-top-bar" style="background:${sColor};"></div>
+            <div class="apt-card-body">
 
-            <div style="
-              position: absolute;
-              top: 0; left: 0; right: 0;
-              height: 3px;
-              background: ${sColor};
-              border-radius: 20px 20px 0 0;
-            "></div>
-
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-              <div style="display:flex; align-items:center; gap:12px;">
-                <div style="
-                  width: 44px; height: 44px;
-                  background: rgba(13,242,242,0.1);
-                  border: 1px solid rgba(13,242,242,0.2);
-                  border-radius: 12px;
-                  display: flex; align-items: center; justify-content: center;
-                  font-size: 1.4rem;
-                ">🦷</div>
-                <div>
-                  <div style="font-weight:800; font-size:1rem; color:#fff; margin-bottom:3px;">${svc}</div>
-                  <div style="font-size:0.78rem; color:rgba(255,255,255,0.4);">
-                    ${isAr ? 'الرقم المرجعي:' : 'Réf:'} <span style="color:#0df2f2;">${ref}</span>
+              <div class="apt-card-header">
+                <div class="apt-card-left">
+                  <div class="apt-card-icon">🦷</div>
+                  <div>
+                    <div class="apt-service-name">${svc}</div>
+                    <div class="apt-ref">${isAr ? 'الرقم المرجعي:' : 'Réf :'} <span>${ref}</span></div>
                   </div>
                 </div>
+                <span class="apt-status-badge" style="background:${sColor}18; border:1.5px solid ${sColor}55; color:${sColor};">${sLabel}</span>
               </div>
-              <span style="
-                background: ${sColor}22;
-                border: 1px solid ${sColor}66;
-                color: ${sColor};
-                padding: 5px 14px;
-                border-radius: 50px;
-                font-size: 0.78rem;
-                font-weight: 700;
-              ">${sLabel}</span>
-            </div>
 
-            <div style="
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              gap: 10px;
-              margin-bottom: 16px;
-            ">
-              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 10px 14px;">
-                <div style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-bottom:3px;">
-                  📅 ${isAr ? 'التاريخ والوقت' : 'Date et heure'}
+              <div class="apt-info-grid">
+                <div class="apt-info-cell">
+                  <div class="apt-info-label">📅 ${isAr ? 'التاريخ والوقت' : 'Date et heure'}</div>
+                  <div class="apt-info-value">${date}${time ? ' — ' + time : ''}</div>
                 </div>
-                <div style="font-size:0.9rem; color:#fff; font-weight:600;">${date} ${time}</div>
+                <div class="apt-info-cell">
+                  <div class="apt-info-label">👤 ${isAr ? 'الاسم' : 'Nom'}</div>
+                  <div class="apt-info-value">${name}</div>
+                </div>
+                ${phone ? `<div class="apt-info-cell full">
+                  <div class="apt-info-label">📞 ${isAr ? 'رقم الهاتف' : 'Téléphone'}</div>
+                  <div class="apt-info-value">${phone}</div>
+                </div>` : ''}
               </div>
-              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 10px 14px;">
-                <div style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-bottom:3px;">
-                  👤 ${isAr ? 'الاسم' : 'Nom'}
-                </div>
-                <div style="font-size:0.9rem; color:#fff; font-weight:600;">${name}</div>
-              </div>
-              ${phone ? `
-              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 10px 14px; grid-column: span 2;">
-                <div style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-bottom:3px;">
-                  📞 ${isAr ? 'رقم الهاتف' : 'Téléphone'}
-                </div>
-                <div style="font-size:0.9rem; color:#fff; font-weight:600;">${phone}</div>
-              </div>` : ''}
-            </div>
 
-            <div style="display:flex; justify-content:flex-end; gap:10px;">
-              <button
-                onclick="editAppointment('${ref}', '${aptId}', '${aptTable}')"
-                style="
-                  padding: 8px 20px;
-                  font-size: 0.82rem;
-                  color: #0df2f2;
-                  border: 1px solid rgba(13,242,242,0.4);
-                  border-radius: 10px;
-                  cursor: pointer;
-                  background: transparent;
-                  font-family: Cairo, sans-serif;
-                  transition: all 0.2s;
-                  display: flex; align-items: center; gap: 6px;
-                "
-                onmouseover="this.style.background='rgba(13,242,242,0.1)'"
-                onmouseout="this.style.background='transparent'">
-                ✏️ ${isAr ? 'تعديل' : 'Modifier'}
-              </button>
-              <button
-                onclick="cancelAppointment('${ref}', '${aptId}', '${aptTable}')"
-                ${cancelled ? 'disabled' : ''}
-                style="
-                  padding: 8px 20px;
-                  font-size: 0.82rem;
-                  color: ${cancelled ? 'rgba(239,68,68,0.4)' : '#EF4444'};
-                  border: 1px solid ${cancelled ? 'rgba(239,68,68,0.2)' : 'rgba(239,68,68,0.4)'};
-                  border-radius: 10px;
-                  cursor: ${cancelled ? 'not-allowed' : 'pointer'};
-                  background: transparent;
-                  font-family: Cairo, sans-serif;
-                  transition: all 0.2s;
-                  display: flex; align-items: center; gap: 6px;
-                "
-                onmouseover="${cancelled ? '' : "this.style.background='rgba(239,68,68,0.1)'"}"
-                onmouseout="${cancelled ? '' : "this.style.background='transparent'"}">
-                🗑️ ${isAr ? 'إلغاء' : 'Annuler'}
-              </button>
+              <div class="apt-actions">
+                <button class="apt-btn-edit" onclick="editAppointment('${ref}', '${aptId}', '${aptTable}')">
+                  ✏️ ${isAr ? 'تعديل' : 'Modifier'}
+                </button>
+                <button class="apt-btn-cancel" onclick="cancelAppointment('${ref}', '${aptId}', '${aptTable}')" ${cancelled ? 'disabled' : ''}>
+                  🗑️ ${isAr ? 'إلغاء' : 'Annuler'}
+                </button>
+              </div>
+
             </div>
           </div>
         `;
@@ -435,23 +661,20 @@
         if (!list) return;
 
         /* Loading state */
-        list.style.display = 'block';
-        list.innerHTML =
-          '<div style="text-align:center;padding:40px 20px;color:rgba(255,255,255,0.5);">' +
-          '<p style="margin:0;">⏳ جاري التحميل...</p></div>';
+        list.style.display = 'none';
 
         /* Auth */
         var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
         if (!user) {
           if (skeleton) skeleton.style.display = 'none';
           if (empty)    empty.style.display    = 'none';
+          list.style.display = 'block';
           list.innerHTML =
-            '<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,0.7);">' +
+            '<div class="apt-empty">' +
             '<div style="font-size:3rem;margin-bottom:16px;">🔒</div>' +
-            '<h3 style="color:#fff;margin:0 0 8px 0;">سجل دخولك أولاً</h3>' +
-            '<p style="color:rgba(255,255,255,0.5);margin:0 0 24px 0;">يجب تسجيل الدخول لعرض مواعيدك</p>' +
-            '<a href="./login.html" style="display:inline-block;background:#0D9488;color:#fff;' +
-            'padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">تسجيل الدخول →</a>' +
+            '<h3>سجل دخولك أولاً</h3>' +
+            '<p>يجب تسجيل الدخول لعرض مواعيدك</p>' +
+            '<a href="./login.html" class="apt-login-cta">تسجيل الدخول →</a>' +
             '</div>';
           return;
         }
@@ -501,10 +724,12 @@
 
         if (empty) empty.style.display = 'none';
         var isAr = (localStorage.getItem('siteLang') || 'ar') === 'ar';
-        list.style.display = 'grid';
+        list.style.display = 'block';
         list.innerHTML = appointments.map(function (apt) {
           return buildCard(apt, isAr);
         }).join('');
+        var ctaStrip = document.getElementById('ctaStrip');
+        if (ctaStrip) ctaStrip.style.display = 'flex';
       };
 
     }());
