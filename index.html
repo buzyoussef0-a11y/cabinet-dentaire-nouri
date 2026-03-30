@@ -233,115 +233,142 @@
        TESTIMONIALS GRID — redesign with site colors
        ═══════════════════════════════════════════════ */
 
+    /* ══════════════════════════════════════════════
+       TESTIMONIALS — Google Reviews Slider Style
+       ══════════════════════════════════════════════ */
     .testimonials-grid-section {
-      background:
-        linear-gradient(135deg, rgba(10,22,40,0.96) 0%, rgba(10,22,40,0.92) 100%),
-        url('assets/pict/clinic-interior.png') !important;
-      background-size: cover !important;
-      background-position: center !important;
-      background-attachment: scroll !important;
+      background: linear-gradient(120deg, #fef7ff 0%, #f5f0fc 25%, #edfafa 70%, #ddf4f2 100%) !important;
+      background-image: none !important;
       padding: 90px 5% !important;
       overflow: hidden !important;
       position: relative !important;
     }
-    .testimonials-grid-section::before {
-      content: '' !important; display: block !important; position: absolute !important;
-      top: 0 !important; left: 0 !important; right: 0 !important; height: 130px !important;
-      background: linear-gradient(to bottom, #0A1628 0%, transparent 100%) !important;
-      z-index: 1 !important; pointer-events: none !important;
-    }
-    .testimonials-grid-section::after {
-      content: '' !important; display: block !important; position: absolute !important;
-      bottom: 0 !important; left: 0 !important; right: 0 !important; height: 130px !important;
-      background: linear-gradient(to top, #0A1628 0%, transparent 100%) !important;
-      z-index: 1 !important; pointer-events: none !important;
-    }
-    .testimonials-grid-section .container { position: relative !important; z-index: 2 !important; }
+    .testimonials-grid-section::before,
+    .testimonials-grid-section::after { display: none !important; }
+    .testimonials-grid-section .container { position: relative; z-index: 2; }
 
-    .testimonials-grid-section .t-section-head { margin-bottom: 52px; }
-    .testimonials-grid-section .t-header-eyebrow { color: #0df2f2 !important; }
-    .testimonials-grid-section .t-header-title { color: #ffffff !important; }
-
-    /* Rating pill — cyan */
-    .testimonials-grid-section .t-rating-pill {
-      background: rgba(13,242,242,0.08) !important;
-      border: 1px solid rgba(13,242,242,0.3) !important;
+    /* Header */
+    .t-section-head { text-align: center; margin-bottom: 40px; }
+    .t-header-eyebrow {
+      display: inline-block;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: #006a67 !important; margin-bottom: 12px;
     }
-    .testimonials-grid-section .t-pill-score { color: #ffffff !important; }
-    .testimonials-grid-section .t-pill-stars { color: #FBBF24 !important; }
-    .testimonials-grid-section .t-pill-dot { color: rgba(255,255,255,0.2) !important; }
-    .testimonials-grid-section .t-pill-count { color: rgba(255,255,255,0.55) !important; }
+    .t-header-title {
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 900; color: #001133 !important;
+      margin: 0 0 24px; line-height: 1.2;
+    }
 
-    /* Grid */
+    /* Rating summary */
+    .t-rating-pill { display: none !important; }
+    .t-rating-summary {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    .t-rating-excellent {
+      font-family: 'Cairo', sans-serif; font-size: 0.82rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase; color: #001133;
+    }
+    .t-rating-stars-big { font-size: 1.65rem; color: #FBBF24; letter-spacing: 3px; line-height: 1; }
+    .t-rating-based { font-family: 'Cairo', sans-serif; font-size: 0.78rem; color: #64748b; }
+    .t-rating-based strong { color: #001133; font-weight: 800; }
+
+    /* Carousel */
+    .tg-carousel-wrap { position: relative; margin-top: 44px; padding: 0 28px; }
+    .tg-carousel { overflow: hidden; }
     .tg-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      align-items: stretch;
-    }
-    @media (max-width: 1024px) { .tg-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) {
-      .tg-grid { grid-template-columns: 1fr; }
-      .testimonials-grid-section { padding: 60px 5% !important; }
+      display: flex !important;
+      gap: 18px;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
     }
 
-    /* Card — glassmorphism + gradient top border */
+    /* Card */
     .tg-card {
-      position: relative;
-      background: rgba(15, 30, 53, 0.80);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(13,242,242,0.12);
-      border-top: 2px solid transparent;
-      border-radius: 20px;
-      padding: 28px 24px 22px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-      overflow: hidden;
-    }
-    /* Gradient top line via pseudo */
-    .tg-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #0df2f2, #0D9488);
-      border-radius: 20px 20px 0 0;
+      flex: 0 0 calc((100% - 36px) / 3) !important;
+      min-width: 0;
+      background: #ffffff !important;
+      backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+      border: 1px solid #e8edf2 !important;
+      border-radius: 14px !important;
+      padding: 20px !important;
+      display: flex !important; flex-direction: column !important;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.06) !important;
+      transition: box-shadow 0.25s ease, transform 0.25s ease !important;
     }
     .tg-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(13,242,242,0.18), 0 4px 16px rgba(0,0,0,0.4);
-      border-color: rgba(13,242,242,0.28);
+      box-shadow: 0 8px 28px rgba(0,106,103,0.13) !important;
+      transform: translateY(-3px) !important;
+      border-color: rgba(0,106,103,0.22) !important;
+    }
+    .tg-card::before { display: none !important; }
+
+    /* Card head: avatar + name/date + G icon */
+    .tg-card-head {
+      display: flex; align-items: flex-start; gap: 11px; margin-bottom: 13px;
+    }
+    .tg-card-head .t-avatar-v3 {
+      width: 40px !important; height: 40px !important; min-width: 40px;
+      border-radius: 50% !important; border: none !important;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 800; color: #fff;
+      flex-shrink: 0;
+    }
+    .tg-card-head-info { flex: 1; min-width: 0; }
+    .tg-name {
+      font-family: 'Cairo', sans-serif; font-size: 0.88rem; font-weight: 800;
+      color: #001133 !important; display: block;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .tg-date {
+      font-family: 'Cairo', sans-serif; font-size: 0.73rem;
+      color: #94a3b8; display: block; margin-top: 1px;
     }
 
-    /* Decorative quote */
-    .tg-deco-quote {
-      position: absolute;
-      top: 8px; right: 14px;
-      font-family: Georgia, serif;
-      font-size: 5rem; line-height: 1;
-      color: rgba(13,242,242,0.08);
-      pointer-events: none; user-select: none;
+    /* Stars + verify */
+    .tg-stars-row { display: flex; align-items: center; gap: 7px; margin-bottom: 11px; }
+    .tg-stars { color: #FBBF24; font-size: 0.82rem; letter-spacing: 1px; }
+    .tg-verify {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 15px; height: 15px; border-radius: 50%; background: #4285F4; flex-shrink: 0;
     }
 
-    .tg-stars { color: #FBBF24; font-size: 0.84rem; letter-spacing: 2px; margin-bottom: 12px; flex-shrink: 0; }
-
+    /* Text */
     .tg-text {
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.87rem;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.85;
-      margin: 0; flex: 1;
+      font-family: 'Cairo', sans-serif; font-size: 0.84rem;
+      color: #4a5568 !important; line-height: 1.78;
+      margin: 0 0 10px; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
     }
+    .tg-read-more {
+      font-family: 'Cairo', sans-serif; font-size: 0.78rem; font-weight: 700;
+      color: #006a67; text-decoration: none; display: inline-block;
+    }
+    .tg-read-more:hover { text-decoration: underline; }
+    .tg-deco-quote { display: none !important; }
+    .tg-foot { display: none !important; }
 
-    .tg-foot { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-shrink: 0; }
-    .tg-name { font-family: 'Cairo', sans-serif; font-size: 0.82rem; font-weight: 800; color: #ffffff; flex: 1; }
-    .tg-card .t-avatar-v3 { border-radius: 50% !important; flex-shrink: 0; border: 2px solid rgba(13,242,242,0.3) !important; }
-    .tg-card .t-google-pill {
-      background: rgba(13,242,242,0.06) !important;
-      border: 1px solid rgba(13,242,242,0.15) !important;
-      color: rgba(13,242,242,0.7) !important;
+    /* Arrow buttons */
+    .tg-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #ffffff; border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease; z-index: 10; color: #001133;
+      font-size: 1rem; line-height: 1;
+    }
+    .tg-arrow:hover { background: #006a67; color: #ffffff; border-color: #006a67; box-shadow: 0 4px 16px rgba(0,106,103,0.3); }
+    .tg-arrow-prev { left: -2px; }
+    .tg-arrow-next { right: -2px; }
+
+    @media (max-width: 1024px) { .tg-card { flex: 0 0 calc((100% - 18px) / 2) !important; } }
+    @media (max-width: 640px) {
+      .tg-card { flex: 0 0 100% !important; }
+      .testimonials-grid-section { padding: 60px 5% !important; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -1103,53 +1130,7 @@
       color: #0A1628 !important;
     }
 
-    /* ── 6. TESTIMONIALS ── */
-    .testimonials-new.testimonials-grid-section {
-      background: #F0F4FF !important;
-      background-image: none !important;
-    }
-    .testimonials-grid-section::before,
-    .testimonials-grid-section::after {
-      display: none !important;
-    }
-    .t-header-eyebrow {
-      color: #0D9488 !important;
-    }
-    .t-header-title {
-      color: #1a2332 !important;
-    }
-    .t-rating-pill {
-      background: rgba(13,148,136,0.08) !important;
-      border: 1px solid rgba(13,148,136,0.2) !important;
-    }
-    .t-pill-score { color: #1a2332 !important; }
-    .t-pill-count { color: #64748b !important; }
-    .t-pill-dot   { color: #94a3b8 !important; }
-    .tg-card {
-      background: #ffffff !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-      border: 1px solid rgba(13,148,136,0.12) !important;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
-    }
-    .tg-card:hover {
-      box-shadow: 0 12px 32px rgba(13,148,136,0.14), 0 4px 16px rgba(0,0,0,0.05) !important;
-      border-color: rgba(13,148,136,0.28) !important;
-    }
-    .tg-text {
-      color: #475569 !important;
-    }
-    .tg-name {
-      color: #1a2332 !important;
-    }
-    .tg-deco-quote {
-      color: rgba(13,148,136,0.07) !important;
-    }
-    .tg-card .t-google-pill {
-      background: rgba(13,148,136,0.06) !important;
-      border: 1px solid rgba(13,148,136,0.15) !important;
-      color: rgba(13,148,136,0.75) !important;
-    }
+    /* ── 6. TESTIMONIALS — already handled above ── */
 
     /* ── 7. DOCTOR SECTION — stays dark (DESIGN.md palette) ── */
     .doctor-new.doctor-redesign {
@@ -1761,95 +1742,173 @@
     <!-- TESTIMONIALS SECTION -->
     <section class="testimonials-new testimonials-grid-section section-reveal reveal-up">
       <div class="container">
+
+        <!-- Header -->
         <div class="t-section-head reveal-up">
-          <span class="t-header-eyebrow" data-ar="آراء عملائنا" data-fr="Avis de nos patients">آراء عملائنا</span>
-          <h2 class="t-header-title" data-ar="ماذا يقول مرضانا؟" data-fr="Ce que disent nos patients">ماذا يقول مرضانا؟</h2>
-          <div class="t-rating-pill">
-            <span class="t-pill-stars">★★★★★</span>
-            <span class="t-pill-dot">·</span>
-            <span class="t-pill-score">4.8</span>
-            <span class="t-pill-dot">·</span>
-            <span class="t-pill-count" data-ar="+31 تقييم على Google" data-fr="+31 avis sur Google">+31 تقييم على Google</span>
+          <span class="t-header-eyebrow" data-ar="آراء عملائنا" data-fr="NOTRE TÉMOIGNAGE">آراء عملائنا</span>
+          <h2 class="t-header-title" data-ar="ماذا يقول مرضانا؟" data-fr="Ce Qu'ils Disent De Nous">ماذا يقول مرضانا؟</h2>
+          <div class="t-rating-summary">
+            <div class="t-rating-excellent">EXCELLENT</div>
+            <div class="t-rating-stars-big">★★★★★</div>
+            <div class="t-rating-based" data-ar="بناءً على <strong>85 تقييم</strong>" data-fr="Based on <strong>85 reviews</strong>">بناءً على <strong>85 تقييم</strong></div>
+            <!-- Google logo -->
+            <div class="t-google-logo" style="margin-top:6px;">
+              <svg width="72" height="24" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg"><path d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#EA4335"/><path d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#FBBC05"/><path d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" fill="#4285F4"/><path d="M225 3v65h-9.5V3h9.5z" fill="#34A853"/><path d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" fill="#EA4335"/><path d="M35.29 41.41V32h31.86c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z" fill="#4285F4"/></svg>
+            </div>
           </div>
         </div>
 
-        <div class="tg-grid">
+        <!-- Carousel -->
+        <div class="tg-carousel-wrap">
+          <button class="tg-arrow tg-arrow-prev" onclick="tgSlide(-1)" aria-label="Previous">&#8249;</button>
+          <div class="tg-carousel">
+            <div class="tg-grid" id="tgTrack">
 
-          <!-- 1 -->
-          <div class="tg-card">
-            <span class="tg-deco-quote">"</span>
-            <div class="tg-stars">★★★★★</div>
-            <p class="tg-text">"خدمة ممتازة ودكتور نوري محترف جداً. أجريت زراعة سن وكانت التجربة أفضل مما توقعت. أنصح به بشدة!"</p>
-            <div class="tg-foot">
-              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#0D9488,#0df2f2)">ي</div>
-              <span class="tg-name">Youssef Alami</span>
-              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
-            </div>
-          </div>
+              <!-- 1 -->
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">ي</div>
+                  <div class="tg-card-head-info">
+                    <span class="tg-name">Youssef Alami</span>
+                    <span class="tg-date">2025-03-05</span>
+                  </div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row">
+                  <span class="tg-stars">★★★★★</span>
+                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <p class="tg-text">خدمة ممتازة ودكتور نوري محترف جداً. أجريت زراعة سن وكانت التجربة أفضل مما توقعت. أنصح به بشدة!</p>
+                <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
+              </div>
 
-          <!-- 2 -->
-          <div class="tg-card">
-            <span class="tg-deco-quote">"</span>
-            <div class="tg-stars">★★★★★</div>
-            <p class="tg-text">"كنت خائفة من طبيب الأسنان لكن الدكتور نوري جعل التجربة مريحة جداً. التنظيف والتبييض أعطى نتائج رائعة."</p>
-            <div class="tg-foot">
-              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">ن</div>
-              <span class="tg-name">Nadia Benali</span>
-              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
-            </div>
-          </div>
+              <!-- 2 -->
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#0891b2,#006a67)">ن</div>
+                  <div class="tg-card-head-info">
+                    <span class="tg-name">Nadia Benali</span>
+                    <span class="tg-date">2025-02-28</span>
+                  </div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row">
+                  <span class="tg-stars">★★★★★</span>
+                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <p class="tg-text">كنت خائفة من طبيب الأسنان لكن الدكتور نوري جعل التجربة مريحة جداً. التنظيف والتبييض أعطى نتائج رائعة.</p>
+                <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
+              </div>
 
-          <!-- 3 -->
-          <div class="tg-card">
-            <span class="tg-deco-quote">"</span>
-            <div class="tg-stars">★★★★★</div>
-            <p class="tg-text">"حجزت أونلاين وكان الأمر سهلاً جداً. العيادة نظيفة ومجهزة بأحدث الأجهزة. فريق ودود ومحترف."</p>
-            <div class="tg-foot">
-              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">ك</div>
-              <span class="tg-name">Karim Tahiri</span>
-              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
-            </div>
-          </div>
+              <!-- 3 -->
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#10b981,#006a67)">ك</div>
+                  <div class="tg-card-head-info">
+                    <span class="tg-name">Karim Tahiri</span>
+                    <span class="tg-date">2025-02-22</span>
+                  </div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row">
+                  <span class="tg-stars">★★★★★</span>
+                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <p class="tg-text">حجزت أونلاين وكان الأمر سهلاً جداً. العيادة نظيفة ومجهزة بأحدث الأجهزة. فريق ودود ومحترف.</p>
+                <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
+              </div>
 
-          <!-- 4 -->
-          <div class="tg-card">
-            <span class="tg-deco-quote">"</span>
-            <div class="tg-stars">★★★★★</div>
-            <p class="tg-text">"أجريت تقويم أسنان لابنتي عند الدكتور نوري والنتيجة مذهلة. الأسعار معقولة والتعامل إنساني بامتياز."</p>
-            <div class="tg-foot">
-              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#10b981,#0D9488)">س</div>
-              <span class="tg-name">Sara Mansouri</span>
-              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
-            </div>
-          </div>
+              <!-- 4 -->
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">س</div>
+                  <div class="tg-card-head-info">
+                    <span class="tg-name">Sara Mansouri</span>
+                    <span class="tg-date">2025-02-15</span>
+                  </div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row">
+                  <span class="tg-stars">★★★★★</span>
+                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <p class="tg-text">أجريت تقويم أسنان لابنتي عند الدكتور نوري والنتيجة مذهلة. الأسعار معقولة والتعامل إنساني بامتياز.</p>
+                <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
+              </div>
 
-          <!-- 5 -->
-          <div class="tg-card">
-            <span class="tg-deco-quote">"</span>
-            <div class="tg-stars">★★★★★</div>
-            <p class="tg-text">"علاج عصب سريع وبدون ألم تقريباً! التخدير ممتاز والدكتور نوري يتعامل باحترافية عالية جداً."</p>
-            <div class="tg-foot">
-              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ef4444,#f97316)">ع</div>
-              <span class="tg-name">Omar Filali</span>
-              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
-            </div>
-          </div>
+              <!-- 5 -->
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ef4444,#f97316)">ع</div>
+                  <div class="tg-card-head-info">
+                    <span class="tg-name">Omar Filali</span>
+                    <span class="tg-date">2025-01-30</span>
+                  </div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row">
+                  <span class="tg-stars">★★★★★</span>
+                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <p class="tg-text">علاج عصب سريع وبدون ألم تقريباً! التخدير ممتاز والدكتور نوري يتعامل باحترافية عالية جداً.</p>
+                <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
+              </div>
 
-          <!-- 6 -->
-          <div class="tg-card">
-            <span class="tg-deco-quote">"</span>
-            <div class="tg-stars">★★★★★</div>
-            <p class="tg-text">"الدكتور نوري ممتاز في التعامل مع الأطفال. ابني كان يخاف من طبيب الأسنان وأصبح الآن يطلب الذهاب!"</p>
-            <div class="tg-foot">
-              <div class="t-avatar-v3" style="background:linear-gradient(135deg,#0D9488,#0891b2)">ح</div>
-              <span class="tg-name">Hamid Berrada</span>
-              <span class="t-google-pill"><svg viewBox="0 0 24 24" width="11" height="11"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg> Google</span>
-            </div>
-          </div>
+              <!-- 6 -->
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#006a67,#0891b2)">ح</div>
+                  <div class="tg-card-head-info">
+                    <span class="tg-name">Hamid Berrada</span>
+                    <span class="tg-date">2025-01-20</span>
+                  </div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row">
+                  <span class="tg-stars">★★★★★</span>
+                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <p class="tg-text">الدكتور نوري ممتاز في التعامل مع الأطفال. ابني كان يخاف من طبيب الأسنان وأصبح الآن يطلب الذهاب!</p>
+                <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
+              </div>
 
-        </div>
+            </div><!-- end tg-grid -->
+          </div><!-- end tg-carousel -->
+          <button class="tg-arrow tg-arrow-next" onclick="tgSlide(1)" aria-label="Next">&#8250;</button>
+        </div><!-- end tg-carousel-wrap -->
+
       </div>
     </section>
+
+    <script>
+    (function(){
+      var track = document.getElementById('tgTrack');
+      var idx = 0;
+      function getVisible() {
+        var w = window.innerWidth;
+        return w <= 640 ? 1 : w <= 1024 ? 2 : 3;
+      }
+      function getTotal() { return track ? track.children.length : 6; }
+      window.tgSlide = function(dir) {
+        if (!track) return;
+        var vis = getVisible();
+        var max = getTotal() - vis;
+        idx = Math.max(0, Math.min(idx + dir, max));
+        var cardW = track.children[0] ? track.children[0].offsetWidth : 0;
+        var gap = 18;
+        track.style.transform = 'translateX(' + (idx * (cardW + gap) * -1) + 'px)';
+      };
+      /* Auto-advance every 5s */
+      setInterval(function(){
+        var vis = getVisible();
+        var max = getTotal() - vis;
+        idx = idx >= max ? 0 : idx + 1;
+        var cardW = track && track.children[0] ? track.children[0].offsetWidth : 0;
+        var gap = 18;
+        if (track) track.style.transform = 'translateX(' + (idx * (cardW + gap) * -1) + 'px)';
+      }, 5000);
+    })();
+    </script>
 
     <!-- DOCTOR SECTION -->
     <section class="doctor-new doctor-redesign section-reveal reveal-up" id="team">
