@@ -101,6 +101,13 @@ footer h1, footer h2, footer h3, footer h4,
 }
 .page-hero-banner h1 { color: #ffffff !important; }
 .page-hero-banner p  { color: rgba(255,255,255,0.8) !important; }
+/* text-gradient inside dark hero → white/light so it's visible */
+.page-hero-banner .text-gradient {
+  background: linear-gradient(135deg, #b7ecea, #ffffff) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
 .page-hero-banner .page-breadcrumb { color: rgba(255,255,255,0.6) !important; }
 .page-hero-banner .page-breadcrumb a { color: #b7ecea !important; }
 .ph-stat-num   { color: #ffffff !important; }
