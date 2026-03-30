@@ -265,6 +265,16 @@ async function sendWithText(msg) {
         appendMsg(reply, 'bot');
         chatHistory.push({ role: 'assistant', content: reply });
 
+        /* If reply or user message suggests booking intent, show booking button */
+        var bookingKeywords = ['احجز', 'حجز', 'موعد', 'réserver', 'rendez-vous', 'prendre', 'booking'];
+        var combinedText = (reply + ' ' + msg).toLowerCase();
+        var hasBookingIntent = bookingKeywords.some(function(kw) {
+          return combinedText.includes(kw.toLowerCase());
+        });
+        if (hasBookingIntent) {
+          appendBookingBtn();
+        }
+
     } catch (e) {
         if (typing) typing.remove();
         if (e.name === 'AbortError') {
@@ -273,4 +283,31 @@ async function sendWithText(msg) {
             appendMsg(fallback, 'bot');
         }
     }
+}
+
+/* ── Booking button in chat ── */
+function appendBookingBtn() {
+    var msgs = document.getElementById('chatMessages');
+    if (!msgs) return;
+
+    var root = window._ROOT || '';
+    var lang = localStorage.getItem('siteLang') || 'ar';
+    var label = lang === 'fr' ? '📅 Réserver maintenant' : '📅 احجز موعدك الآن';
+
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'text-align:center; margin:10px 0 4px;';
+    wrap.innerHTML = '<a href="' + root + 'booking.html" style="' +
+        'display:inline-block;' +
+        'background:linear-gradient(135deg,#0df2f2,#0D9488);' +
+        'color:#0A1628;' +
+        'padding:11px 24px;' +
+        'border-radius:50px;' +
+        'font-weight:800;' +
+        'text-decoration:none;' +
+        'font-family:Cairo,sans-serif;' +
+        'font-size:0.88rem;' +
+        'box-shadow:0 4px 16px rgba(13,242,242,0.35);' +
+    '">' + label + '</a>';
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
 }
