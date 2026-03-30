@@ -49,8 +49,9 @@ footer h1, footer h2, footer h3, footer h4,
 .doctor-redesign p, .doctor-redesign span, .doctor-redesign li {
   color: rgba(255,255,255,0.85) !important;
 }
-/* Hero is now light — dark text */
-.hero-new h1, .hero-new h2, .hero-new p, .hero-new span { color: inherit !important; }
+/* Hero has dark bg image — keep text white */
+.hero-new h1, .hero-new h2 { color: #ffffff !important; }
+.hero-new p { color: rgba(255,255,255,0.82) !important; }
 
 /* ── 2. NAVBAR ── */
 #mainNav, nav {
