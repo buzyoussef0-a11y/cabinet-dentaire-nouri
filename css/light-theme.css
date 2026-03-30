@@ -35,13 +35,11 @@ body::before { opacity: 0.012 !important; }
 h1, h2, h3, h4, h5, h6 { color: #001133 !important; }
 p { color: #475569 !important; }
 
-/* ── Restore white text inside DARK sections ── */
+/* ── Restore white text inside DARK sections (hero is now light — excluded) ── */
 .doctor-new h1, .doctor-new h2, .doctor-new h3, .doctor-new h4,
 .doctor-new h5, .doctor-new h6,
 .doctor-redesign h1, .doctor-redesign h2, .doctor-redesign h3,
 .doctor-redesign h4, .doctor-redesign h5, .doctor-redesign h6,
-.hero-new h1, .hero-new h2, .hero-new h3,
-.hero-new h4, .hero-new h5, .hero-new h6,
 .page-hero-banner h1, .page-hero-banner h2, .page-hero-banner h3,
 footer h1, footer h2, footer h3, footer h4,
 .footer-new h1, .footer-new h2, .footer-new h3, .footer-new h4 {
@@ -51,7 +49,8 @@ footer h1, footer h2, footer h3, footer h4,
 .doctor-redesign p, .doctor-redesign span, .doctor-redesign li {
   color: rgba(255,255,255,0.85) !important;
 }
-.hero-new p, .hero-new span { color: rgba(255,255,255,0.85) !important; }
+/* Hero is now light — dark text */
+.hero-new h1, .hero-new h2, .hero-new p, .hero-new span { color: inherit !important; }
 
 /* ── 2. NAVBAR ── */
 #mainNav, nav {

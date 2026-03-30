@@ -74,159 +74,136 @@
        ══════════════════════════════════════════════════ -->
   <style>
     /* 1 — Base: deep navy for hero */
+    /* ═══ HERO — Light theme (white bg, dark text) ═══ */
     .hero-new {
-      background: #0A1628 !important;
+      background: #fef7ff !important;
     }
 
-    /* 2 — Background image layer (replaces video) */
-    .hero-bg-image {
-      position: absolute !important;
-      inset: 0;
-      z-index: 1 !important;
-      background-image: url('./assets/pict/hero-room.png');
-      background-size: cover;
-      background-position: center 25%;
-      background-repeat: no-repeat;
-      pointer-events: none;
+    /* Hide dark bg layers */
+    .hero-bg-image,
+    .hero-bg-overlay,
+    .ambient-glow,
+    .ambient-bg { display: none !important; }
+
+    /* Hide left floating deco images */
+    .hero-left-deco { display: none !important; }
+
+    /* ── Text colors → dark ── */
+    .hero-tag {
+      color: #006a67 !important;
+      background: rgba(0,106,103,0.09) !important;
+      border-color: rgba(0,106,103,0.25) !important;
+    }
+    .hero-title-new {
+      color: #001133 !important;
+      text-shadow: none !important;
+    }
+    .hero-desc {
+      color: #475569 !important;
+    }
+    .hero-title-new .text-gradient,
+    .hero-title-new span {
+      color: #006a67 !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      -webkit-text-fill-color: #006a67 !important;
     }
 
-    /* 3 — Dark gradient overlay for text readability */
-    .hero-bg-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          120deg,
-          rgba(10, 22, 40, 0.97) 0%,
-          rgba(10, 22, 40, 0.84) 42%,
-          rgba(10, 22, 40, 0.50) 100%
-        ),
-        linear-gradient(
-          to bottom,
-          rgba(10, 22, 40, 0.25) 0%,
-          transparent 55%,
-          rgba(10, 22, 40, 0.55) 100%
-        );
+    /* Metrics */
+    .m-val { color: #001133 !important; }
+    .m-label { color: #64748b !important; }
+    .hero-metrics-new {
+      border-color: rgba(0,106,103,0.15) !important;
+    }
+    .hero-metrics-new .metric-block + .metric-block {
+      border-color: rgba(0,106,103,0.15) !important;
     }
 
-    /* 4 — Prevent the existing :not(.hero-video-bg) rule from
-            making hero-bg-image position:relative */
-    .hero-new > .hero-bg-image {
-      position: absolute !important;
-      z-index: 1 !important;
+    /* Buttons */
+    .btn-primary-new {
+      background: linear-gradient(135deg, #006a67, #b7ecea) !important;
+      color: #001133 !important;
+      box-shadow: 0 6px 24px rgba(0,106,103,0.3) !important;
+    }
+    .btn-secondary-new {
+      color: #001133 !important;
+      border-color: rgba(0,106,103,0.3) !important;
+      background: rgba(0,106,103,0.06) !important;
     }
 
-    /* 5 — Floating card wrapper: gentle continuous float */
-    .hero-float-wrap {
-      position: relative;
-      display: block;
-      animation: heroCardFloat 7s 1.4s ease-in-out infinite;
+    /* Main image box — clean border on white bg */
+    .hero-img-box {
+      box-shadow: 0 16px 56px rgba(0,17,51,0.12), 0 4px 16px rgba(0,0,0,0.08) !important;
+      border: 1px solid rgba(0,106,103,0.15) !important;
     }
 
-    @keyframes heroCardFloat {
-      0%,  100% { transform: translateY(0px); }
-      40%        { transform: translateY(-13px); }
-      70%        { transform: translateY(-7px); }
-    }
-
-    /* 6 — Glassmorphism Google rating pill
-            Sits below the image, right-aligned
-            (card-appt is at bottom:40px right:-30px — no conflict) */
-    .hero-glass-rating {
-      position: absolute;
-      bottom: -20px;
-      right: 28px;
-      background: rgba(255, 255, 255, 0.10);
-      backdrop-filter: blur(28px) saturate(1.8);
-      -webkit-backdrop-filter: blur(28px) saturate(1.8);
-      border: 1px solid rgba(255, 255, 255, 0.20);
-      border-radius: 100px;
-      padding: 11px 22px;
-      color: rgba(255, 255, 255, 0.96);
-      font-size: 0.88rem;
-      font-family: 'Cairo', sans-serif;
-      font-weight: 700;
-      white-space: nowrap;
-      box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.10);
-      animation: heroReveal 0.9s 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
-      z-index: 12;
-      letter-spacing: 0.01em;
-    }
-
-    /* 7 — Availability pulse badge
-            Sits above the image, left-aligned
-            (card-rating is at top:40px left:-30px — no conflict) */
+    /* Availability badge → light style */
     .hero-avail-badge {
-      position: absolute;
-      top: -18px;
-      left: 28px;
-      background: rgba(8, 24, 44, 0.80);
-      backdrop-filter: blur(22px) saturate(1.5);
-      -webkit-backdrop-filter: blur(22px) saturate(1.5);
-      border: 1px solid rgba(34, 197, 94, 0.45);
-      border-radius: 100px;
-      padding: 9px 18px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255, 255, 255, 0.96);
-      font-size: 0.82rem;
-      font-family: 'Cairo', sans-serif;
-      font-weight: 700;
+      position: absolute; top: -18px; left: 28px;
+      background: #ffffff;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(34,197,94,0.4) !important;
+      border-radius: 100px; padding: 9px 18px;
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #1a2f1e !important;
+      font-size: 0.82rem; font-family: 'Cairo',sans-serif; font-weight: 700;
       white-space: nowrap;
-      box-shadow:
-        0 6px 28px rgba(34, 197, 94, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      animation: heroReveal 0.9s 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(34,197,94,0.15);
+      animation: heroReveal 0.9s 0.65s cubic-bezier(0.22,1,0.36,1) both;
       z-index: 12;
     }
 
-    /* 8 — Animated green pulse dot */
+    /* Google rating pill → light style */
+    .hero-glass-rating {
+      position: absolute; bottom: -20px; right: 28px;
+      background: #ffffff;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,106,103,0.2) !important;
+      border-radius: 100px; padding: 11px 22px;
+      color: #001133 !important;
+      font-size: 0.88rem; font-family: 'Cairo',sans-serif; font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.09);
+      animation: heroReveal 0.9s 0.85s cubic-bezier(0.22,1,0.36,1) both;
+      z-index: 12;
+    }
+
+    /* Pulse dot */
     .hero-pulse-dot {
-      width: 9px;
-      height: 9px;
-      min-width: 9px;
-      border-radius: 50%;
-      background: #22c55e;
-      display: inline-block;
+      width: 9px; height: 9px; min-width: 9px; border-radius: 50%;
+      background: #22c55e; display: inline-block;
       animation: heroPulseDot 2.4s ease-in-out infinite;
     }
-
     @keyframes heroPulseDot {
-      0%,  100% {
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.65);
-        transform: scale(1);
-      }
-      55% {
-        box-shadow: 0 0 0 9px rgba(34, 197, 94, 0);
-        transform: scale(1.15);
-      }
+      0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.65); transform: scale(1); }
+      55%      { box-shadow: 0 0 0 9px rgba(34,197,94,0); transform: scale(1.15); }
     }
 
-    /* 9 — Mobile: reposition badges inside visible image bounds
-            (hero-img-box gets overflow:hidden on mobile) */
+    /* Float animation */
+    .hero-float-wrap { animation: heroCardFloat 7s 1.4s ease-in-out infinite; }
+    @keyframes heroCardFloat {
+      0%,100% { transform: translateY(0px); }
+      40%     { transform: translateY(-13px); }
+      70%     { transform: translateY(-7px); }
+    }
+
+    /* Overlay cards on image → light */
+    .hero-overlay-card {
+      background: rgba(255,255,255,0.92) !important;
+      border-color: rgba(0,106,103,0.18) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    }
+    .card-label { color: #64748b !important; }
+    .card-value { color: #001133 !important; }
+
+    /* Scroll indicator */
+    .scroll-indicator .scroll-text { color: #64748b !important; }
+    .scroll-line { background: rgba(0,106,103,0.4) !important; }
+
     @media (max-width: 768px) {
-      .hero-float-wrap {
-        animation: none;
-      }
-      .hero-glass-rating {
-        bottom: 14px;
-        right: 10px;
-        font-size: 0.74rem;
-        padding: 8px 13px;
-      }
-      .hero-avail-badge {
-        top: 12px;
-        left: 10px;
-        font-size: 0.72rem;
-        padding: 7px 11px;
-        gap: 6px;
-      }
-      .hero-bg-image {
-        background-position: 68% center;
-      }
+      .hero-float-wrap { animation: none; }
+      .hero-glass-rating { bottom: 14px; right: 10px; font-size: 0.74rem; padding: 8px 13px; }
+      .hero-avail-badge  { top: 12px;   left: 10px;  font-size: 0.72rem; padding: 7px 11px; gap: 6px; }
     }
 
     /* ═══════════════════════════════════════════════
