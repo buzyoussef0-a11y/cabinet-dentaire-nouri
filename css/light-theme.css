@@ -104,20 +104,67 @@ footer h1, footer h2, footer h3, footer h4,
 
 /* index.html hero — stays dark (has bg image + overlay) */
 
-/* ── Service bento cards — dark green overlay, dark text ── */
-.svc-bento-content h3 { color: #ffffff !important; }
-.svc-bento-content p  { color: rgba(255,255,255,0.80) !important; }
+/* ── Service bento cards — image top, white content bottom (no overlay) ── */
+.svc-bento-card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+  border: 1px solid rgba(0,106,103,0.12) !important;
+}
+/* Image: fixed height at top, not absolute */
+.svc-bento-img {
+  position: relative !important;
+  inset: unset !important;
+  height: 200px !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+}
+.svc-featured .svc-bento-img { height: 240px !important; }
+/* Hide the dark overlay entirely */
+.svc-bento-overlay { display: none !important; }
+/* Content: white area at bottom */
+.svc-bento-content {
+  position: relative !important;
+  inset: unset !important;
+  background: #ffffff !important;
+  flex: 1 !important;
+  padding: 18px 22px 20px !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+}
+.svc-bento-content h3 {
+  color: #001133 !important;
+  text-shadow: none !important;
+  font-size: 1.05rem !important;
+}
+.svc-bento-content p { color: #64748b !important; }
+/* Tag stays on the image */
 .svc-bento-tag {
-  background: rgba(0,106,103,0.25) !important;
-  border-color: rgba(183,236,234,0.4) !important;
-  color: #b7ecea !important;
+  background: rgba(0,106,103,0.1) !important;
+  border-color: rgba(0,106,103,0.25) !important;
+  color: #006a67 !important;
+  backdrop-filter: none !important;
 }
 .svc-bento-price {
-  color: #b7ecea !important;
-  background: rgba(0,106,103,0.2) !important;
-  border-color: rgba(183,236,234,0.3) !important;
+  color: #006a67 !important;
+  background: rgba(0,106,103,0.08) !important;
+  border-color: rgba(0,106,103,0.2) !important;
 }
-.svc-bento-btn { background: rgba(255,255,255,0.15) !important; color: #ffffff !important; }
+.svc-bento-btn {
+  background: rgba(0,106,103,0.1) !important;
+  border-color: rgba(0,106,103,0.3) !important;
+  color: #006a67 !important;
+}
+.svc-bento-card:hover {
+  box-shadow: 0 12px 40px rgba(0,106,103,0.15) !important;
+  border-color: rgba(0,106,103,0.28) !important;
+  transform: translateY(-5px) scale(1.01) !important;
+}
+.svc-bento-card:hover .svc-bento-btn {
+  background: #006a67 !important;
+  color: #ffffff !important;
+}
 
 /* ── 5. SECTION BACKGROUNDS ── */
 .services-new, .services-section { background: #f9f1fd !important; }
