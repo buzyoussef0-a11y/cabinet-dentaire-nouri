@@ -67,8 +67,22 @@ footer h1, footer h2, footer h3, footer h4,
 .nav-links a:hover, .nav-links a.active { color: #006a67 !important; }
 .nav-logo, .logo-word-top, .logo-word-bottom { color: #001133 !important; }
 .mobile-burger span { background-color: #001133 !important; }
-.lang-btn { color: #374151 !important; border-color: rgba(0,106,103,0.25) !important; }
-#langLabel { color: #374151 !important; }
+/* ── Lang button — clear, visible design ── */
+.lang-btn {
+  color: #001133 !important;
+  background: #ffffff !important;
+  border: 1.5px solid rgba(0,106,103,0.35) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07) !important;
+  font-weight: 700 !important;
+}
+.lang-btn:hover {
+  background: #006a67 !important;
+  color: #ffffff !important;
+  border-color: #006a67 !important;
+}
+.lang-btn svg { color: #006a67 !important; }
+.lang-btn:hover svg { color: #ffffff !important; }
+#langLabel { color: #001133 !important; }
 
 /* ── 3. INFO BAR ── */
 #clinicInfoBar {
@@ -339,11 +353,20 @@ button.btn-primary,
 .btn-primary-new,
 .why-cta-btn,
 .dr-redesign-cta {
-  background: linear-gradient(135deg, #006a67, #b7ecea) !important;
-  color: #0A1628 !important;
+  background: linear-gradient(135deg, #006a67, #009e99) !important;
+  color: #ffffff !important;
   font-weight: 800 !important;
-  box-shadow: 0 4px 20px rgba(0,106,103,0.3) !important;
+  box-shadow: 0 4px 20px rgba(0,106,103,0.35) !important;
   border: none !important;
+}
+/* Hover: darker + text stays white */
+.btn-primary:hover,
+a.btn-primary:hover,
+button.btn-primary:hover,
+.btn-primary-new:hover {
+  background: linear-gradient(135deg, #004d4b, #006a67) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 28px rgba(0,106,103,0.45) !important;
 }
 .btn-outline, .btn-ghost, .btn-secondary-new {
   border-color: rgba(0,106,103,0.35) !important;
