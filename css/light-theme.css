@@ -379,6 +379,11 @@ button.btn-primary,
   box-shadow: 0 4px 20px rgba(0,106,103,0.35) !important;
   border: none !important;
 }
+/* Force white text on nav booking button (overrides .nav-links a color rule) */
+.nav-links a.btn-primary,
+.nav-links li a.btn-primary {
+  color: #ffffff !important;
+}
 /* Hover: darker + text stays white */
 .btn-primary:hover,
 a.btn-primary:hover,
