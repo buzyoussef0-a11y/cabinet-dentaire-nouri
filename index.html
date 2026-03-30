@@ -988,6 +988,261 @@
       background: #0A1628 !important;
     }
   </style>
+
+  <!-- ════════════════════════════════════════════════
+       LIGHT THEME OVERRIDE — added last, wins cascade
+       Changes ONLY: colors, backgrounds, shadows, borders
+       Does NOT touch: structure, JS, animations, keyframes
+  ════════════════════════════════════════════════ -->
+  <style>
+
+    /* ── 1. GLOBAL ── */
+    body {
+      background-color: #F8FAFF !important;
+      color: #1a2332 !important;
+    }
+    body::before {
+      opacity: 0.015 !important;
+    }
+    .blob-bg { opacity: 0.25 !important; }
+
+    /* ── 2. NAVBAR ── */
+    #mainNav {
+      background: rgba(255,255,255,0.97) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(0,0,0,0.07) !important;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06) !important;
+    }
+    .nav-links a {
+      color: #374151 !important;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #0D9488 !important;
+    }
+    .logo-word-top,
+    .logo-word-bottom {
+      color: #1a2332 !important;
+    }
+    .mobile-burger span {
+      background-color: #1a2332 !important;
+    }
+    #clinicInfoBar {
+      background: rgba(13,148,136,0.04) !important;
+      color: #64748b !important;
+    }
+
+    /* ── 3. HERO — stays dark, no changes ── */
+
+    /* ── 4. SERVICES SECTION ── */
+    .services-new {
+      background: #F0F4FF !important;
+    }
+    .services-new .section-title-new {
+      color: #1a2332 !important;
+    }
+    .services-new .section-desc-new {
+      color: #64748b !important;
+    }
+    .all-services-link {
+      color: #0D9488 !important;
+    }
+    /* Service bento cards — keep image overlays but lighten border */
+    .svc-bento-card:hover {
+      box-shadow: 0 24px 64px rgba(13,148,136,0.18), 0 4px 20px rgba(0,0,0,0.15) !important;
+    }
+
+    /* ── 5. WHY CHOOSE US ── */
+    .why-us-new {
+      background: #ffffff !important;
+    }
+    .why-bg-photo img {
+      opacity: 0.03 !important;
+    }
+    .why-us-new .section-title-new {
+      color: #1a2332 !important;
+    }
+    .why-us-new .section-desc-new {
+      color: #64748b !important;
+    }
+    .why-item-text h4 {
+      color: #1a2332 !important;
+    }
+    .why-item-text p {
+      color: #64748b !important;
+    }
+    .why-item-num {
+      color: rgba(13,148,136,0.18) !important;
+    }
+    .why-item-row:hover {
+      background: rgba(13,148,136,0.06) !important;
+    }
+    .why-img-badge,
+    .why-img-badge2 {
+      background: rgba(255,255,255,0.96) !important;
+      border: 1px solid rgba(13,148,136,0.2) !important;
+      color: #1a2332 !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
+    }
+    .wib-num { color: #0D9488 !important; }
+    .wib-text { color: #64748b !important; }
+    .why-cta-btn {
+      color: #0A1628 !important;
+    }
+
+    /* ── 6. TESTIMONIALS ── */
+    .testimonials-new.testimonials-grid-section {
+      background: #F0F4FF !important;
+      background-image: none !important;
+    }
+    .testimonials-grid-section::before,
+    .testimonials-grid-section::after {
+      display: none !important;
+    }
+    .t-header-eyebrow {
+      color: #0D9488 !important;
+    }
+    .t-header-title {
+      color: #1a2332 !important;
+    }
+    .t-rating-pill {
+      background: rgba(13,148,136,0.08) !important;
+      border: 1px solid rgba(13,148,136,0.2) !important;
+    }
+    .t-pill-score { color: #1a2332 !important; }
+    .t-pill-count { color: #64748b !important; }
+    .t-pill-dot   { color: #94a3b8 !important; }
+    .tg-card {
+      background: #ffffff !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: 1px solid rgba(13,148,136,0.12) !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
+    }
+    .tg-card:hover {
+      box-shadow: 0 12px 32px rgba(13,148,136,0.14), 0 4px 16px rgba(0,0,0,0.05) !important;
+      border-color: rgba(13,148,136,0.28) !important;
+    }
+    .tg-text {
+      color: #475569 !important;
+    }
+    .tg-name {
+      color: #1a2332 !important;
+    }
+    .tg-deco-quote {
+      color: rgba(13,148,136,0.07) !important;
+    }
+    .tg-card .t-google-pill {
+      background: rgba(13,148,136,0.06) !important;
+      border: 1px solid rgba(13,148,136,0.15) !important;
+      color: rgba(13,148,136,0.75) !important;
+    }
+
+    /* ── 7. DOCTOR SECTION — stays dark ── */
+    .doctor-new.doctor-redesign {
+      background: linear-gradient(135deg, #0A1628 0%, #0D9488 100%) !important;
+      background-image: none !important;
+    }
+    .doctor-redesign::before,
+    .doctor-redesign::after {
+      background: transparent !important;
+      display: none !important;
+    }
+
+    /* ── 8. CONTACT SECTION ── */
+    .contact-v3 {
+      background: #F8FAFF !important;
+      background-image: none !important;
+    }
+    .contact-v3::before,
+    .contact-v3::after {
+      display: none !important;
+    }
+    .cv3-h2 { color: #1a2332 !important; }
+    .cv3-subtitle { color: #64748b !important; }
+    .cv3-pill {
+      background: rgba(13,148,136,0.1) !important;
+      color: #0D9488 !important;
+      border: 1px solid rgba(13,148,136,0.2) !important;
+    }
+    .cv3-col-title { color: #1a2332 !important; }
+    .cv3-col-sub   { color: #64748b !important; }
+    .cv3-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(13,148,136,0.12) !important;
+      backdrop-filter: none !important;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05) !important;
+    }
+    .cv3-card:hover {
+      border-color: rgba(13,148,136,0.3) !important;
+      background: #f5fffe !important;
+    }
+    .cv3-card-label { color: #94a3b8 !important; }
+    .cv3-card-val   { color: #1a2332 !important; }
+    .cv3-card-sub-text { color: #64748b !important; }
+    .cv3-dir-link   { color: #0D9488 !important; }
+    .cv3-day        { color: #64748b !important; }
+    .cv3-time       { color: #1a2332 !important; }
+    .cv3-closed     { color: #ef4444 !important; }
+    .cv3-outline-btn {
+      color: #0D9488 !important;
+      border-color: rgba(13,148,136,0.35) !important;
+      background: transparent !important;
+    }
+    .cv3-outline-btn:hover {
+      background: rgba(13,148,136,0.07) !important;
+    }
+    /* Map: no dark filter on light bg */
+    .cv3-map-wrap iframe,
+    .cv3-map-wrap:hover iframe {
+      filter: none !important;
+    }
+    .cv3-map-wrap {
+      border-color: rgba(13,148,136,0.22) !important;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+    }
+    .cv3-email-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(13,148,136,0.12) !important;
+    }
+    .cv3-email-title { color: #1a2332 !important; }
+    .cv3-email-addr  { color: #64748b !important; }
+    .cv3-tour-label  { color: #1a2332 !important; }
+
+    /* ── 9. FOOTER — dark stays as-is ── */
+    .footer-new {
+      background: #1a2332 !important;
+    }
+
+    /* ── 10. SHARED: section title/desc on light sections ── */
+    .section-title-new {
+      color: #1a2332 !important;
+    }
+    .section-desc-new {
+      color: #64748b !important;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #0D9488, #0df2f2) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    /* ── 11. GLASS CARDS (generic) ── */
+    .glass-card {
+      background: #ffffff !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: 1px solid rgba(13,148,136,0.12) !important;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important;
+    }
+
+    /* ── 12. Scroll progress bar ── */
+    #scrollFill {
+      background: linear-gradient(90deg, #0D9488, #0df2f2) !important;
+    }
+
+  </style>
 </head>
 
 <body>
