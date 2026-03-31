@@ -775,12 +775,13 @@
         var targetTable = aptTable || 'appointments';
 
         if (aptId) {
-          // Direct update by primary key + table (most reliable)
+          // Direct update by primary key + user_id (RLS requires user_id filter)
           console.log('Cancelling via id:', aptId, 'table:', targetTable);
           const { data: updated, error: updateErr } = await supabase
             .from(targetTable)
             .update({ status: 'cancelled' })
             .eq('id', aptId)
+            .eq('user_id', user.id)
             .select();
           console.log('Update by id:', { rows: updated?.length, error: updateErr });
           rowsUpdated = updated?.length || 0;
