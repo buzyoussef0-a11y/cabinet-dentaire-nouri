@@ -239,21 +239,32 @@
     .t-rating-based { font-family: 'Cairo', sans-serif; font-size: 0.78rem; color: #64748b; margin-top: 2px; }
     .t-rating-based strong { color: #001133; font-weight: 800; }
 
-    /* ── Slider row: [arrow] [overflow:hidden track] [arrow] ── */
-    .tg-slider-row {
-      display: flex; align-items: center; gap: 12px;
-      margin-top: 44px; direction: ltr; /* force LTR for carousel */
+    /* ── Infinite marquee ── */
+    @keyframes tg-scroll { to { transform: translateX(-50%); } }
+
+    .tg-marquee-wrap {
+      overflow: hidden;
+      margin-top: 44px;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     }
-    .tg-carousel { flex: 1; overflow: hidden; min-width: 0; }
-    .tg-grid {
-      display: flex !important; gap: 18px;
-      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
-      will-change: transform;
+    .tg-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: tg-scroll 28s linear infinite;
+    }
+    .tg-marquee-wrap:hover .tg-marquee-track {
+      animation-play-state: paused;
+    }
+    .tg-marquee-set {
+      display: flex;
+      gap: 18px;
+      padding-right: 18px; /* gap between sets = gap between cards for seamless loop */
     }
 
     /* Card */
     .tg-card {
-      flex: 0 0 calc((100% - 36px) / 3) !important; min-width: 0;
+      flex: 0 0 300px !important; width: 300px !important; min-width: 0;
       background: #ffffff !important;
       backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
       border: 1px solid #e2e8f0 !important; border-radius: 14px !important;
@@ -295,22 +306,10 @@
     .tg-read-more:hover { text-decoration: underline; }
     .tg-deco-quote, .tg-foot { display: none !important; }
 
-    /* Arrow buttons — inline with flex row */
-    .tg-arrow {
-      flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
-      background: #ffffff; border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s ease; color: #001133; font-size: 1.1rem; line-height: 1;
-      user-select: none;
-    }
-    .tg-arrow:hover { background: #006a67; color: #ffffff; border-color: #006a67; box-shadow: 0 4px 16px rgba(0,106,103,0.3); }
-
-    @media (max-width: 1024px) { .tg-card { flex: 0 0 calc((100% - 18px) / 2) !important; } }
     @media (max-width: 640px) {
-      .tg-card { flex: 0 0 100% !important; }
+      .tg-card { flex: 0 0 260px !important; width: 260px !important; }
       .testimonials-grid-section { padding: 60px 5% !important; }
-      .tg-slider-row { gap: 8px; }
+      .tg-marquee-track { animation-duration: 22s; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -1674,171 +1673,143 @@
           </div>
         </div>
 
-        <!-- Carousel: [←] [track] [→] inline flex -->
-        <div class="tg-slider-row">
-          <button class="tg-arrow" onclick="tgSlide(-1)" aria-label="Previous">&#8249;</button>
-          <div class="tg-carousel">
-            <div class="tg-grid" id="tgTrack">
+        <!-- Infinite marquee -->
+        <div class="tg-marquee-wrap">
+          <div class="tg-marquee-track">
 
-              <!-- 1 -->
+            <!-- Set 1 (original) -->
+            <div class="tg-marquee-set">
               <div class="tg-card">
                 <div class="tg-card-head">
                   <div class="t-avatar-v3" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">ي</div>
-                  <div class="tg-card-head-info">
-                    <span class="tg-name">Youssef Alami</span>
-                    <span class="tg-date">2025-03-05</span>
-                  </div>
+                  <div class="tg-card-head-info"><span class="tg-name">Youssef Alami</span><span class="tg-date">2025-03-05</span></div>
                   <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
                 </div>
-                <div class="tg-stars-row">
-                  <span class="tg-stars">★★★★★</span>
-                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                 <p class="tg-text" data-ar="خدمة ممتازة ودكتور نوري محترف جداً. أجريت زراعة سن وكانت التجربة أفضل مما توقعت. أنصح به بشدة!" data-fr="Excellent service et Dr. Nouri est très professionnel. J'ai eu un implant et l'expérience a dépassé mes attentes. Je le recommande vivement !">خدمة ممتازة ودكتور نوري محترف جداً. أجريت زراعة سن وكانت التجربة أفضل مما توقعت. أنصح به بشدة!</p>
                 <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
               </div>
-
-              <!-- 2 -->
               <div class="tg-card">
                 <div class="tg-card-head">
                   <div class="t-avatar-v3" style="background:linear-gradient(135deg,#0891b2,#006a67)">ن</div>
-                  <div class="tg-card-head-info">
-                    <span class="tg-name">Nadia Benali</span>
-                    <span class="tg-date">2025-02-28</span>
-                  </div>
+                  <div class="tg-card-head-info"><span class="tg-name">Nadia Benali</span><span class="tg-date">2025-02-28</span></div>
                   <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
                 </div>
-                <div class="tg-stars-row">
-                  <span class="tg-stars">★★★★★</span>
-                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                 <p class="tg-text" data-ar="كنت خائفة من طبيب الأسنان لكن الدكتور نوري جعل التجربة مريحة جداً. التنظيف والتبييض أعطى نتائج رائعة." data-fr="J'avais peur du dentiste mais Dr. Nouri a rendu l'expérience très confortable. Le nettoyage et blanchiment ont donné d'excellents résultats.">كنت خائفة من طبيب الأسنان لكن الدكتور نوري جعل التجربة مريحة جداً. التنظيف والتبييض أعطى نتائج رائعة.</p>
                 <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
               </div>
-
-              <!-- 3 -->
               <div class="tg-card">
                 <div class="tg-card-head">
                   <div class="t-avatar-v3" style="background:linear-gradient(135deg,#10b981,#006a67)">ك</div>
-                  <div class="tg-card-head-info">
-                    <span class="tg-name">Karim Tahiri</span>
-                    <span class="tg-date">2025-02-22</span>
-                  </div>
+                  <div class="tg-card-head-info"><span class="tg-name">Karim Tahiri</span><span class="tg-date">2025-02-22</span></div>
                   <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
                 </div>
-                <div class="tg-stars-row">
-                  <span class="tg-stars">★★★★★</span>
-                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                 <p class="tg-text" data-ar="حجزت أونلاين وكان الأمر سهلاً جداً. العيادة نظيفة ومجهزة بأحدث الأجهزة. فريق ودود ومحترف." data-fr="J'ai réservé en ligne et c'était très facile. La clinique est propre et équipée des derniers équipements. Une équipe conviviale et professionnelle.">حجزت أونلاين وكان الأمر سهلاً جداً. العيادة نظيفة ومجهزة بأحدث الأجهزة. فريق ودود ومحترف.</p>
                 <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
               </div>
-
-              <!-- 4 -->
               <div class="tg-card">
                 <div class="tg-card-head">
                   <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">س</div>
-                  <div class="tg-card-head-info">
-                    <span class="tg-name">Sara Mansouri</span>
-                    <span class="tg-date">2025-02-15</span>
-                  </div>
+                  <div class="tg-card-head-info"><span class="tg-name">Sara Mansouri</span><span class="tg-date">2025-02-15</span></div>
                   <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
                 </div>
-                <div class="tg-stars-row">
-                  <span class="tg-stars">★★★★★</span>
-                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                 <p class="tg-text" data-ar="أجريت تقويم أسنان لابنتي عند الدكتور نوري والنتيجة مذهلة. الأسعار معقولة والتعامل إنساني بامتياز." data-fr="J'ai fait un traitement orthodontique pour ma fille chez Dr. Nouri et le résultat est remarquable. Les prix sont raisonnables et le traitement est humain.">أجريت تقويم أسنان لابنتي عند الدكتور نوري والنتيجة مذهلة. الأسعار معقولة والتعامل إنساني بامتياز.</p>
                 <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
               </div>
-
-              <!-- 5 -->
               <div class="tg-card">
                 <div class="tg-card-head">
                   <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ef4444,#f97316)">ع</div>
-                  <div class="tg-card-head-info">
-                    <span class="tg-name">Omar Filali</span>
-                    <span class="tg-date">2025-01-30</span>
-                  </div>
+                  <div class="tg-card-head-info"><span class="tg-name">Omar Filali</span><span class="tg-date">2025-01-30</span></div>
                   <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
                 </div>
-                <div class="tg-stars-row">
-                  <span class="tg-stars">★★★★★</span>
-                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                 <p class="tg-text" data-ar="علاج عصب سريع وبدون ألم تقريباً! التخدير ممتاز والدكتور نوري يتعامل باحترافية عالية جداً." data-fr="Traitement de canal rapide et presque sans douleur ! L'anesthésie est excellente et Dr. Nouri traite avec un très haut niveau de professionnalisme.">علاج عصب سريع وبدون ألم تقريباً! التخدير ممتاز والدكتور نوري يتعامل باحترافية عالية جداً.</p>
                 <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
               </div>
-
-              <!-- 6 -->
               <div class="tg-card">
                 <div class="tg-card-head">
                   <div class="t-avatar-v3" style="background:linear-gradient(135deg,#006a67,#0891b2)">ح</div>
-                  <div class="tg-card-head-info">
-                    <span class="tg-name">Hamid Berrada</span>
-                    <span class="tg-date">2025-01-20</span>
-                  </div>
+                  <div class="tg-card-head-info"><span class="tg-name">Hamid Berrada</span><span class="tg-date">2025-01-20</span></div>
                   <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
                 </div>
-                <div class="tg-stars-row">
-                  <span class="tg-stars">★★★★★</span>
-                  <span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                 <p class="tg-text" data-ar="الدكتور نوري ممتاز في التعامل مع الأطفال. ابني كان يخاف من طبيب الأسنان وأصبح الآن يطلب الذهاب!" data-fr="Dr. Nouri est excellent avec les enfants. Mon fils avait peur du dentiste et maintenant il demande à y aller !">الدكتور نوري ممتاز في التعامل مع الأطفال. ابني كان يخاف من طبيب الأسنان وأصبح الآن يطلب الذهاب!</p>
                 <a href="#" class="tg-read-more" data-ar="اقرأ المزيد" data-fr="Read more">اقرأ المزيد</a>
               </div>
+            </div><!-- end set 1 -->
 
-            </div><!-- end tg-grid -->
-          </div><!-- end tg-carousel -->
-          <button class="tg-arrow" onclick="tgSlide(1)" aria-label="Next">&#8250;</button>
-        </div><!-- end tg-slider-row -->
+            <!-- Set 2 (duplicate for seamless loop) -->
+            <div class="tg-marquee-set" aria-hidden="true">
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">ي</div>
+                  <div class="tg-card-head-info"><span class="tg-name">Youssef Alami</span><span class="tg-date">2025-03-05</span></div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+                <p class="tg-text">خدمة ممتازة ودكتور نوري محترف جداً. أجريت زراعة سن وكانت التجربة أفضل مما توقعت. أنصح به بشدة!</p>
+                <a href="#" class="tg-read-more">اقرأ المزيد</a>
+              </div>
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#0891b2,#006a67)">ن</div>
+                  <div class="tg-card-head-info"><span class="tg-name">Nadia Benali</span><span class="tg-date">2025-02-28</span></div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+                <p class="tg-text">كنت خائفة من طبيب الأسنان لكن الدكتور نوري جعل التجربة مريحة جداً. التنظيف والتبييض أعطى نتائج رائعة.</p>
+                <a href="#" class="tg-read-more">اقرأ المزيد</a>
+              </div>
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#10b981,#006a67)">ك</div>
+                  <div class="tg-card-head-info"><span class="tg-name">Karim Tahiri</span><span class="tg-date">2025-02-22</span></div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+                <p class="tg-text">حجزت أونلاين وكان الأمر سهلاً جداً. العيادة نظيفة ومجهزة بأحدث الأجهزة. فريق ودود ومحترف.</p>
+                <a href="#" class="tg-read-more">اقرأ المزيد</a>
+              </div>
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">س</div>
+                  <div class="tg-card-head-info"><span class="tg-name">Sara Mansouri</span><span class="tg-date">2025-02-15</span></div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+                <p class="tg-text">أجريت تقويم أسنان لابنتي عند الدكتور نوري والنتيجة مذهلة. الأسعار معقولة والتعامل إنساني بامتياز.</p>
+                <a href="#" class="tg-read-more">اقرأ المزيد</a>
+              </div>
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#ef4444,#f97316)">ع</div>
+                  <div class="tg-card-head-info"><span class="tg-name">Omar Filali</span><span class="tg-date">2025-01-30</span></div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+                <p class="tg-text">علاج عصب سريع وبدون ألم تقريباً! التخدير ممتاز والدكتور نوري يتعامل باحترافية عالية جداً.</p>
+                <a href="#" class="tg-read-more">اقرأ المزيد</a>
+              </div>
+              <div class="tg-card">
+                <div class="tg-card-head">
+                  <div class="t-avatar-v3" style="background:linear-gradient(135deg,#006a67,#0891b2)">ح</div>
+                  <div class="tg-card-head-info"><span class="tg-name">Hamid Berrada</span><span class="tg-date">2025-01-20</span></div>
+                  <svg class="tg-card-g-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-1 7.28-2.69l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.07c-.22-.66-.35-1.36-.35-2.07s.13-1.41.35-2.07V7.09H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.91l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.46 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.09l3.66 2.84c.87-2.6 3.3-4.55 6.16-4.55z" fill="#EA4335"/></svg>
+                </div>
+                <div class="tg-stars-row"><span class="tg-stars">★★★★★</span><span class="tg-verify"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+                <p class="tg-text">الدكتور نوري ممتاز في التعامل مع الأطفال. ابني كان يخاف من طبيب الأسنان وأصبح الآن يطلب الذهاب!</p>
+                <a href="#" class="tg-read-more">اقرأ المزيد</a>
+              </div>
+            </div><!-- end set 2 -->
+
+          </div><!-- end tg-marquee-track -->
+        </div><!-- end tg-marquee-wrap -->
 
       </div>
     </section>
-
-    <script>
-    (function(){
-      var track  = document.getElementById('tgTrack');
-      var idx    = 0;
-      var autoTimer = null;
-
-      function visibleCount() {
-        return window.innerWidth <= 640 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
-      }
-      function totalCards() { return track ? track.children.length : 6; }
-
-      function goTo(i) {
-        if (!track || !track.children.length) return;
-        var vis  = visibleCount();
-        var max  = totalCards() - vis;
-        idx      = Math.max(0, Math.min(i, max));
-        /* offsetWidth gives actual rendered card width */
-        var cardW = track.children[0].offsetWidth;
-        var gap   = 18;
-        track.style.transform = 'translateX(' + (-(idx * (cardW + gap))) + 'px)';
-      }
-
-      window.tgSlide = function(dir) {
-        goTo(idx + dir);
-        /* Reset auto-advance on manual interaction */
-        clearInterval(autoTimer);
-        autoTimer = setInterval(autoAdvance, 5000);
-      };
-
-      function autoAdvance() {
-        var vis = visibleCount();
-        var max = totalCards() - vis;
-        goTo(idx >= max ? 0 : idx + 1);
-      }
-
-      /* Start auto-advance after page load */
-      window.addEventListener('load', function() {
-        autoTimer = setInterval(autoAdvance, 5000);
-      });
-      /* Recalculate on resize */
-      window.addEventListener('resize', function() { goTo(0); });
-    })();
-    </script>
 
     <!-- DOCTOR SECTION -->
     <section class="doctor-new doctor-redesign section-reveal reveal-up" id="team">
