@@ -245,11 +245,13 @@
     .tg-marquee-wrap {
       overflow: hidden;
       margin-top: 44px;
+      direction: ltr !important;
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
       mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     }
     .tg-marquee-track {
       display: flex;
+      direction: ltr !important;
       width: max-content;
       animation: tg-scroll 28s linear infinite;
     }
@@ -258,6 +260,7 @@
     }
     .tg-marquee-set {
       display: flex;
+      direction: ltr !important;
       gap: 18px;
       padding-right: 18px; /* gap between sets = gap between cards for seamless loop */
     }
