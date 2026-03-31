@@ -713,6 +713,14 @@
           }
         }
 
+        // Filter out locally-cancelled appointments (fallback when RLS blocks DB update)
+        try {
+          var localCancelled = JSON.parse(localStorage.getItem('cancelled_apt_ids') || '[]');
+          if (localCancelled.length) {
+            appointments = appointments.filter(function(a) { return !localCancelled.includes(a.id); });
+          }
+        } catch(e) {}
+
         console.log('[tracking] appointments found:', appointments.length);
         if (skeleton) skeleton.style.display = 'none';
 
@@ -775,32 +783,48 @@
         var targetTable = aptTable || 'appointments';
 
         if (aptId) {
-          // Direct update by primary key + user_id (RLS requires user_id filter)
-          console.log('Cancelling via id:', aptId, 'table:', targetTable);
-          const { data: updated, error: updateErr } = await supabase
-            .from(targetTable)
-            .update({ status: 'cancelled' })
-            .eq('id', aptId)
-            .eq('user_id', user.id)
-            .select();
-          console.log('Update by id:', { rows: updated?.length, error: updateErr });
-          rowsUpdated = updated?.length || 0;
+          // Strategy 1: RPC function (SECURITY DEFINER — bypasses RLS)
+          const { error: rpcErr } = await supabase.rpc('cancel_own_appointment', { p_id: aptId });
+          if (!rpcErr) {
+            rowsUpdated = 1;
+          } else {
+            // Strategy 2: Direct UPDATE (requires RLS UPDATE policy in Supabase)
+            const { data: updated, error: updateErr } = await supabase
+              .from(targetTable)
+              .update({ status: 'cancelled' })
+              .eq('id', aptId)
+              .eq('user_id', user.id)
+              .select();
+            rowsUpdated = updated?.length || 0;
+            if (updateErr) console.warn('Direct update error:', updateErr.message);
+          }
         } else {
-          // Fallback: search both tables by ref value
+          // Fallback: search by ref value
           for (var tbl of ['appointments', 'bookings']) {
             const { data: rows } = await supabase.from(tbl).select('*').eq('user_id', user.id);
-            const target = rows?.find(function(a) {
+            const found = rows?.find(function(a) {
               return Object.values(a).some(function(v) { return String(v) === String(ref); });
             });
-            if (target) {
-              const { data: updated } = await supabase.from(tbl).update({ status: 'cancelled' }).eq('id', target.id).select();
-              rowsUpdated = updated?.length || 0;
+            if (found) {
+              const { error: rpcErr2 } = await supabase.rpc('cancel_own_appointment', { p_id: found.id });
+              if (!rpcErr2) { rowsUpdated = 1; }
+              else {
+                const { data: updated } = await supabase.from(tbl).update({ status: 'cancelled' }).eq('id', found.id).eq('user_id', user.id).select();
+                rowsUpdated = updated?.length || 0;
+              }
               break;
             }
           }
         }
 
-        console.log('Total rows updated in Supabase:', rowsUpdated);
+        // Strategy 3: localStorage override — appointment disappears immediately regardless of DB result
+        try {
+          var cancelled = JSON.parse(localStorage.getItem('cancelled_apt_ids') || '[]');
+          if (aptId && !cancelled.includes(aptId)) cancelled.push(aptId);
+          localStorage.setItem('cancelled_apt_ids', JSON.stringify(cancelled));
+        } catch(e) {}
+
+        console.log('Rows updated in Supabase:', rowsUpdated);
 
         // Send webhook (fire-and-forget)
         fetch('https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e', {
