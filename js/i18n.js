@@ -4,12 +4,24 @@
   function updateNavDirection(lang) {
     var navLinks = document.querySelector('.nav-links');
     if (!navLinks) return;
+    var items = Array.from(navLinks.querySelectorAll(':scope > li'));
+    var n = items.length;
+
     if (lang === 'fr') {
+      // LTR: page links go left→right (Accueil first)
+      // Buttons (last 3 items: booking, auth, lang) get negative order to stay on the left
       navLinks.style.flexDirection = 'row';
       navLinks.style.direction = 'ltr';
+      if (n >= 3) {
+        items[n - 1].style.order = '-3'; // lang → far left
+        items[n - 2].style.order = '-2'; // auth
+        items[n - 3].style.order = '-1'; // booking
+      }
     } else {
+      // RTL: items flow right→left naturally (الرئيسية on far right)
       navLinks.style.flexDirection = 'row';
       navLinks.style.direction = 'rtl';
+      items.forEach(function(li) { li.style.order = ''; });
     }
   }
 
