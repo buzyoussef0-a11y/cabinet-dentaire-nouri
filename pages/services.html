@@ -15,6 +15,210 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#0D9488">
+    <style>
+      /* ═══════════════════════════════════════════
+         SERVICES PAGE — LIGHT THEME REDESIGN
+      ═══════════════════════════════════════════ */
+
+      /* ── Main section background ── */
+      .svc-main-section {
+        background: linear-gradient(180deg, #f0f8f8 0%, #fef7ff 100%);
+        padding: 80px 0 100px;
+      }
+      .svc-main-section .section-title-new {
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem) !important;
+        color: #001133 !important;
+        font-weight: 900 !important;
+        margin-bottom: 12px !important;
+      }
+      .svc-main-section .section-desc-new {
+        color: #64748b !important;
+        font-size: 1rem !important;
+        margin-bottom: 0 !important;
+      }
+
+      /* ── Card grid ── */
+      .services-page-grid {
+        gap: 28px !important;
+        margin-top: 52px !important;
+      }
+
+      /* ── Card base ── */
+      .svc-page-card {
+        background: #ffffff !important;
+        border: 1px solid rgba(0,106,103,0.1) !important;
+        border-radius: 18px !important;
+        overflow: hidden !important;
+        box-shadow: 0 2px 16px rgba(0,17,51,0.06) !important;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+        cursor: pointer !important;
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      .svc-page-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #006a67, #009e99);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 2;
+      }
+      .svc-page-card:hover {
+        transform: translateY(-7px) !important;
+        box-shadow: 0 18px 52px rgba(0,106,103,0.18) !important;
+        border-color: rgba(0,106,103,0.28) !important;
+      }
+      .svc-page-card:hover::before { opacity: 1; }
+
+      /* ── Card Image ── */
+      .svc-page-card-img {
+        height: 210px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        background: #e8f5f5 !important;
+        flex-shrink: 0 !important;
+      }
+      .svc-page-card-img img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transition: transform 0.55s ease !important;
+        display: block !important;
+      }
+      .svc-page-card:hover .svc-page-card-img img {
+        transform: scale(1.08) !important;
+      }
+      .svc-page-card-img::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 55%, rgba(0,17,51,0.18) 100%);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* ── Card body ── */
+      .svc-page-card-body {
+        padding: 22px 24px 26px !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: #ffffff !important;
+      }
+
+      /* ── Icon ── */
+      .svc-page-card-icon {
+        width: 50px !important;
+        height: 50px !important;
+        background: linear-gradient(135deg, #e0f7f6, #b7ecea) !important;
+        border-radius: 14px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.3rem !important;
+        margin-bottom: 14px !important;
+        box-shadow: 0 4px 14px rgba(0,106,103,0.14) !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* ── Title ── */
+      .svc-page-card-body h3 {
+        color: #001133 !important;
+        font-size: 1.05rem !important;
+        font-weight: 800 !important;
+        margin: 0 0 10px !important;
+        line-height: 1.45 !important;
+        text-shadow: none !important;
+      }
+
+      /* ── Description ── */
+      .svc-page-card-body p {
+        color: #5a7184 !important;
+        font-size: 0.84rem !important;
+        line-height: 1.75 !important;
+        margin: 0 0 18px !important;
+        flex: 1 !important;
+      }
+
+      /* ── CTA link ── */
+      .svc-page-card-cta {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        font-size: 0.84rem !important;
+        font-weight: 700 !important;
+        font-family: 'Cairo', sans-serif !important;
+        color: #006a67 !important;
+        background: rgba(0,106,103,0.08) !important;
+        border: 1.5px solid rgba(0,106,103,0.2) !important;
+        padding: 8px 16px !important;
+        border-radius: 50px !important;
+        transition: background 0.25s ease, color 0.25s ease, gap 0.2s ease, border-color 0.25s ease !important;
+        align-self: flex-start !important;
+        cursor: pointer !important;
+      }
+      .svc-page-card:hover .svc-page-card-cta {
+        background: linear-gradient(135deg, #006a67, #009e99) !important;
+        color: #ffffff !important;
+        border-color: transparent !important;
+        gap: 10px !important;
+      }
+
+      /* ═══════════════════════════════════════════
+         FAQ SECTION (services page) — DARK GRADIENT
+      ═══════════════════════════════════════════ */
+      .svc-faq-section {
+        background: linear-gradient(135deg, #001133 0%, #0F2650 55%, #006a67 100%) !important;
+        border-top: none !important;
+        padding: 80px 0 90px !important;
+      }
+      .svc-faq-section h2 {
+        color: #ffffff !important;
+        font-size: clamp(1.5rem, 3vw, 2.2rem) !important;
+        font-weight: 900 !important;
+        margin-bottom: 40px !important;
+        text-align: center !important;
+      }
+      .svc-faq-item {
+        background: rgba(255,255,255,0.07) !important;
+        border: 1px solid rgba(255,255,255,0.13) !important;
+        border-radius: 16px !important;
+        margin-bottom: 12px !important;
+        overflow: hidden !important;
+        backdrop-filter: blur(10px) !important;
+        transition: border-color 0.3s ease, background 0.3s ease !important;
+      }
+      .svc-faq-item.open {
+        background: rgba(255,255,255,0.11) !important;
+        border-color: rgba(183,236,234,0.45) !important;
+      }
+      .svc-faq-q {
+        color: rgba(255,255,255,0.92) !important;
+        font-family: 'Cairo', sans-serif !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        padding: 18px 24px !important;
+        cursor: pointer !important;
+      }
+      .svc-faq-q::after {
+        color: #b7ecea !important;
+        font-size: 1.5rem !important;
+      }
+      .svc-faq-a {
+        color: rgba(255,255,255,0.72) !important;
+        font-family: 'Cairo', sans-serif !important;
+        font-size: 0.88rem !important;
+        line-height: 1.8 !important;
+        padding: 0 24px !important;
+      }
+      .svc-faq-item.open .svc-faq-a {
+        max-height: 300px !important;
+        padding: 0 24px 22px !important;
+      }
+    </style>
 </head>
 
 <body>
@@ -119,7 +323,7 @@
     </div>
 
     <!-- SERVICES GRID SECTION -->
-    <section style="padding: 80px 0;">
+    <section class="svc-main-section">
       <div class="container">
         <div class="section-top reveal-up" style="text-align:center; margin-bottom:0;">
           <h2 class="section-title-new" data-ar="جميع خدماتنا" data-fr="Tous nos services">جميع خدماتنا</h2>
