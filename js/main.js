@@ -225,32 +225,64 @@ function copyPhone() {
     });
 }
 
-// ── Stats Counter Animation
+// ── Stats Counter Animation (universal: .stat-number, .ph-stat-num, .about-stat-num)
 (function () {
-    const statEls = document.querySelectorAll('.stat-number');
+    var selectors = '.stat-number, .ph-stat-num, .about-stat-num';
+    var statEls = document.querySelectorAll(selectors);
     if (!statEls.length) return;
-    const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
+
+    function parseEl(el) {
+        // Already parsed?
+        if (el.dataset.counterReady) return;
+        el.dataset.counterReady = '1';
+        var text = el.textContent.trim();
+        // Match optional prefix + number (int or decimal) + optional suffix
+        // e.g. "+12", "450+", "4.8★", "12+"
+        var m = text.match(/^([^0-9]*)(\d+\.?\d*)([^0-9]*)$/);
+        if (m) {
+            el.dataset.prefix = m[1];
+            el.dataset.numval  = m[2];
+            el.dataset.suffix  = m[3];
+        } else {
+            el.dataset.prefix = '';
+            el.dataset.numval  = parseFloat(text) || 0;
+            el.dataset.suffix  = '';
+        }
+    }
+
+    function animateCounter(el) {
+        parseEl(el);
+        var target   = parseFloat(el.dataset.numval) || 0;
+        var prefix   = el.dataset.prefix || '';
+        var suffix   = el.dataset.suffix || '';
+        var isFloat  = target % 1 !== 0;
+        var duration = 1800;
+        var startTs  = null;
+        function step(ts) {
+            if (!startTs) startTs = ts;
+            var progress = Math.min((ts - startTs) / duration, 1);
+            var ease     = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            var current  = target * ease;
+            var display  = isFloat ? current.toFixed(1) : Math.floor(current);
+            el.textContent = prefix + display + suffix;
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = prefix + (isFloat ? target.toFixed(1) : target) + suffix;
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
             if (!e.isIntersecting) return;
-            const el = e.target;
-            const target = parseInt(el.dataset.target);
-            let current = 0;
-            const duration = 2000;
-            const stepTime = 20;
-            const increment = target / (duration / stepTime);
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    el.textContent = target.toLocaleString('ar');
-                    clearInterval(timer);
-                } else {
-                    el.textContent = Math.floor(current).toLocaleString('ar');
-                }
-            }, stepTime);
-            obs.unobserve(el);
+            animateCounter(e.target);
+            obs.unobserve(e.target);
         });
-    }, { threshold: 1 });
-    statEls.forEach(el => obs.observe(el));
+    }, { threshold: 0.5 });
+
+    statEls.forEach(function (el) { obs.observe(el); });
 })();
 
 // ── Chat Toggle
