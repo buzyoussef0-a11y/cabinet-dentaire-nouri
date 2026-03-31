@@ -68,6 +68,60 @@ footer h1, footer h2, footer h3, footer h4,
   box-shadow: 0 2px 20px rgba(0,0,0,0.06) !important;
 }
 
+/* ── Navbar 3-zone layout (always RTL: logo-right, center, actions-left) ── */
+#mainNav {
+  display: flex !important;
+  direction: rtl !important;  /* logo always right, actions always left */
+  align-items: center !important;
+}
+.nav-links {
+  flex: 1 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.nav-actions {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  #mainNav {
+    flex-wrap: wrap !important;
+  }
+  .nav-links {
+    display: none !important;
+    flex: unset !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 12px 0 8px !important;
+    gap: 2px !important;
+    order: 10 !important;
+  }
+  .nav-links.nav-open {
+    display: flex !important;
+  }
+  .nav-actions {
+    display: none !important;
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    padding: 8px 0 14px !important;
+    border-top: 1px solid rgba(0,106,103,0.1) !important;
+    order: 11 !important;
+  }
+  .nav-actions.nav-open {
+    display: flex !important;
+  }
+}
+
 
 .nav-links a { color: #374151 !important; }
 .nav-links a:hover, .nav-links a.active { color: #006a67 !important; }
