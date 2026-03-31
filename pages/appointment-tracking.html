@@ -643,7 +643,7 @@
                 <button class="apt-btn-edit" onclick="editAppointment('${ref}', '${aptId}', '${aptTable}')">
                   ✏️ ${isAr ? 'تعديل' : 'Modifier'}
                 </button>
-                <button class="apt-btn-cancel" onclick="cancelAppointment('${ref}', '${aptId}', '${aptTable}')" ${cancelled ? 'disabled' : ''}>
+                <button class="apt-btn-cancel" onclick="cancelAppointment('${ref}', '${aptId}', '${aptTable}', '${date}', '${time}')" ${cancelled ? 'disabled' : ''}>
                   🗑️ ${isAr ? 'إلغاء' : 'Annuler'}
                 </button>
               </div>
@@ -772,7 +772,7 @@
       window.location.href = (window._ROOT || '../') + 'booking.html?ref=' + ref;
     }
 
-    async function cancelAppointment(ref, aptId, aptTable) {
+    async function cancelAppointment(ref, aptId, aptTable, aptDate, aptTime) {
       if (!confirm('هل أنت متأكد من إلغاء هذا الموعد؟')) return;
 
       try {
@@ -822,6 +822,14 @@
           var cancelled = JSON.parse(localStorage.getItem('cancelled_apt_ids') || '[]');
           if (aptId && !cancelled.includes(aptId)) cancelled.push(aptId);
           localStorage.setItem('cancelled_apt_ids', JSON.stringify(cancelled));
+
+          // Also free the time slot locally so it appears available in booking
+          if (aptDate && aptTime) {
+            var freedSlots = JSON.parse(localStorage.getItem('freed_slots') || '[]');
+            var slotKey = aptDate + '_' + aptTime.slice(0, 5);
+            if (!freedSlots.includes(slotKey)) freedSlots.push(slotKey);
+            localStorage.setItem('freed_slots', JSON.stringify(freedSlots));
+          }
         } catch(e) {}
 
         console.log('Rows updated in Supabase:', rowsUpdated);

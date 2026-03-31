@@ -440,6 +440,15 @@ async function loadAvailableSlots() {
                     }
                     return app.preferred_time;
                 });
+                // Remove slots that were locally cancelled (fallback when Supabase RLS blocks update)
+                try {
+                    var freedSlots = JSON.parse(localStorage.getItem('freed_slots') || '[]');
+                    if (freedSlots.length) {
+                        bookedSlots = bookedSlots.filter(function(t) {
+                            return !freedSlots.includes(dateVal + '_' + t);
+                        });
+                    }
+                } catch(e) {}
                 console.log('Processed booked slots:', bookedSlots);
             }
         }
