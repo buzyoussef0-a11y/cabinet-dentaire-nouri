@@ -1212,19 +1212,6 @@
     المحتوى الرئيسي</a>
 
   <!-- ANNOUNCEMENT BANNER -->
-  <div id="announceBanner"
-    style="background: linear-gradient(90deg, #006a67, #06B6D4); color: white; text-align: center; padding: 10px 20px; font-size: 0.85rem; font-family: 'Cairo', sans-serif; position: relative; z-index: 99998; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
-    <span data-ar="🦷 أول عيادة أسنان رقمية في مكناس — احجز موعدك أونلاين الآن بدون اتصال!"
-      data-fr="🦷 1er Cabinet Numérique à Meknès — Réservez en ligne !">🦷 أول عيادة أسنان رقمية في مكناس — احجز موعدك
-      أونلاين الآن بدون اتصال!</span>
-    <a href="#" onclick="goToBooking(); return false;"
-      style="background: white; color: #006a67; padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; text-decoration: none; white-space: nowrap;"
-      data-ar="←" data-fr="←">احجز
-      الآن ←</a>
-    <button onclick="this.parentElement.style.display='none'"
-      style="background:transparent; border:none; color:rgba(255,255,255,0.8); cursor:pointer; font-size:1.1rem; line-height:1; padding: 0 4px;">✕</button>
-  </div>
-
   <div id="scrollProgress">
     <div id="scrollFill"></div>
   </div>
@@ -1280,35 +1267,20 @@
             الشائعة</a></li>
         <li data-ar="تتبع موعدك" data-fr="Suivi RDV"><a href="pages/appointment-tracking.html" data-ar="تتبع موعدك"
             data-fr="Suivi RDV">تتبع موعدك</a></li>
-        <li><a href="javascript:void(0)" onclick="goToBooking()" class="btn-primary" style="padding: 10px 20px;"
-            data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a></li>
-        <li id="auth-links"></li>
-        <li class="lang-switcher-wrap">
-          <button class="lang-btn" id="langToggle" onclick="toggleLanguage()" aria-label="تغيير اللغة">
-            <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
-              <path
-                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                stroke="currentColor" stroke-width="1.8"></path>
-              <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z"
-                stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-            </svg>
-            <span id="langLabel">FR</span>
-          </button>
-        </li>
       </ul>
+      <div class="nav-actions">
+        <a href="javascript:void(0)" onclick="goToBooking()" class="btn-primary" style="padding: 10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a>
+        <div id="auth-links"></div>
+        <button class="lang-btn" id="langToggle" onclick="toggleLanguage()" aria-label="تغيير اللغة">
+          <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <span id="langLabel">FR</span>
+        </button>
+      </div>
     </nav>
 
-    <!-- CLINIC INFO BAR -->
-    <div id="clinicInfoBar"
-      style="background: rgba(0,106,103,0.06); border-bottom: 1px solid rgba(0,106,103,0.12); padding: 8px 24px; display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; font-size: 0.8rem; color: #94a3b8; font-family: 'Cairo', sans-serif; position: relative; z-index: 100;">
-      <span data-ar="📍 شارع الحسن الثاني 209، الطابق 2، مكناس" data-fr="📍 209 Av Hassan II, 2ème étage, Meknès">📍 شارع الحسن الثاني 209، الطابق 2، مكناس</span>
-      <span>|</span>
-      <span>📞 <a href="tel:+212535402211" style="color:#0df2f2; text-decoration:none; font-weight:600;">0535 40 22 11</a></span>
-      <span>|</span>
-      <span data-ar="الاثنين—السبت:" data-fr="Lundi—Samedi:">🕐 الاثنين—السبت: 09:00 — 19:00</span>
-      <span>|</span>
-      <span style="color:#0df2f2; font-weight:700;">⭐ 4.8/5 Google</span>
-    </div>
   </header>
 
   <main>
