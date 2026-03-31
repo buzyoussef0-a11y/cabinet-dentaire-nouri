@@ -79,7 +79,7 @@ footer h1, footer h2, footer h3, footer h4,
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  gap: 4px !important;
+  gap: 32px !important;
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
