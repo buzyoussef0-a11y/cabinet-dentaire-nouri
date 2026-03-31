@@ -272,18 +272,18 @@
         <li><a href="about.html" data-ar="من نحن" data-fr="À propos">من نحن</a></li>
         <li><a href="faq.html" data-ar="الأسئلة الشائعة" data-fr="FAQ">الأسئلة الشائعة</a></li>
         <li><a href="appointment-tracking.html" data-ar="تتبع موعدك" data-fr="Suivi RDV">تتبع موعدك</a></li>
+        <li><a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding: 10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a></li>
+        <li id="auth-links"></li>
+        <li class="lang-switcher-wrap">
+          <button class="lang-btn" id="langToggle" onclick="toggleLanguage()" aria-label="تغيير اللغة">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <span id="langLabel">FR</span>
+          </button>
+        </li>
       </ul>
-      <div class="nav-actions">
-        <a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding: 10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a>
-        <div id="auth-links"></div>
-        <button class="lang-btn" id="langToggle" onclick="toggleLanguage()" aria-label="تغيير اللغة">
-          <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
-            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-          <span id="langLabel">FR</span>
-        </button>
-      </div>
     </nav>
   </header>
 

@@ -71,14 +71,14 @@ async function populateNavUser() {
     }
 
     // Fallback for pages without auth-links slot
-    var navActions = document.querySelector('.nav-actions');
-    if (navActions) {
-        var existing = navActions.querySelector('.nav-user-info');
+    var navLinks = document.querySelector('.nav-links');
+    if (navLinks) {
+        var existing = navLinks.querySelector('.nav-user-info');
         if (!existing) {
-            var div = document.createElement('div');
-            div.className = 'nav-user-info';
-            div.innerHTML = dropdownHTML;
-            navActions.insertBefore(div, navActions.firstElementChild);
+            var li = document.createElement('li');
+            li.className = 'nav-user-info';
+            li.innerHTML = dropdownHTML;
+            navLinks.insertBefore(li, navLinks.lastElementChild);
         }
     }
 }
@@ -204,10 +204,8 @@ function togglePasswordVisibility(inputId, toggleIcon) {
 // ── Mobile Menu Toggle
 function toggleMobileMenu() {
     const navLinks = document.querySelector('.nav-links');
-    const navActions = document.querySelector('.nav-actions');
     const burger = document.querySelector('.mobile-burger');
     if (navLinks) navLinks.classList.toggle('nav-open');
-    if (navActions) navActions.classList.toggle('nav-open');
     if (burger) burger.classList.toggle('active');
 }
 

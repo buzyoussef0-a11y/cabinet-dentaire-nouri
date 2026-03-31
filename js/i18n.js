@@ -2,12 +2,14 @@
   var currentLang = localStorage.getItem('siteLang') || 'ar';
 
   function updateNavDirection(lang) {
-    // Document dir (rtl/ltr) set by applyLang handles nav link order automatically.
-    // Clear any previously set inline styles to avoid overriding CSS.
     var navLinks = document.querySelector('.nav-links');
-    if (navLinks) {
-      navLinks.style.flexDirection = '';
-      navLinks.style.direction = '';
+    if (!navLinks) return;
+    if (lang === 'fr') {
+      navLinks.style.flexDirection = 'row';
+      navLinks.style.direction = 'ltr';
+    } else {
+      navLinks.style.flexDirection = 'row';
+      navLinks.style.direction = 'rtl';
     }
   }
 

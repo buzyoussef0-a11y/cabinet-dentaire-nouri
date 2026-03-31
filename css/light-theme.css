@@ -68,65 +68,6 @@ footer h1, footer h2, footer h3, footer h4,
   box-shadow: 0 2px 20px rgba(0,0,0,0.06) !important;
 }
 
-/* ── Navbar: 3-zone centered layout ── */
-#mainNav {
-  display: grid !important;
-  grid-template-columns: auto 1fr auto !important;
-  align-items: center !important;
-  gap: 0 !important;
-}
-.nav-links {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 4px !important;
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  flex-wrap: nowrap !important;
-}
-.nav-actions {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  justify-content: flex-end !important;
-}
-
-/* ── Mobile menu ── */
-@media (max-width: 768px) {
-  #mainNav {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    position: relative !important;
-  }
-  .nav-links {
-    display: none !important;
-    width: 100% !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important;
-    padding: 16px 0 8px !important;
-    order: 99 !important;
-  }
-  .nav-links.nav-open {
-    display: flex !important;
-  }
-  .nav-actions {
-    display: none !important;
-    width: 100% !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    padding: 8px 0 16px !important;
-    order: 100 !important;
-    border-top: 1px solid rgba(0,106,103,0.1) !important;
-  }
-  .nav-actions.nav-open {
-    display: flex !important;
-  }
-}
 
 .nav-links a { color: #374151 !important; }
 .nav-links a:hover, .nav-links a.active { color: #006a67 !important; }
