@@ -456,13 +456,27 @@
     <div class="nav-actions">
       <a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding: 10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a>
       <div id="auth-links"></div>
-      <button class="lang-btn" id="langToggle" onclick="toggleLanguage()" aria-label="تغيير اللغة">
-        <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">
-          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-        <span id="langLabel">FR</span>
-      </button>
+      <div class="lang-dropdown-wrap" id="langDropdownWrap">
+        <button class="lang-btn" id="langToggle" onclick="toggleLangDropdown()" aria-label="تغيير اللغة" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" aria-hidden="true">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <span id="langLabel">عربي</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" width="12" height="12" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdownMenu" style="display:none;">
+          <button class="lang-dropdown-item" id="langDropdownItem" onclick="switchLangFromDropdown()">
+            <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <span id="langDropdownLabel">FR</span>
+          </button>
+        </div>
+      </div>
     </div>
   </nav>
 

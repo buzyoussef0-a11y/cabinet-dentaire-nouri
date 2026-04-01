@@ -127,6 +127,14 @@ footer h1, footer h2, footer h3, footer h4,
 .nav-links a:hover, .nav-links a.active { color: #006a67 !important; }
 .nav-logo, .logo-word-top, .logo-word-bottom { color: #001133 !important; }
 .mobile-burger span { background-color: #001133 !important; }
+/* ── Lang dropdown wrapper ── */
+.lang-dropdown-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 /* ── Lang button — clear, visible design ── */
 .lang-btn {
   color: #001133 !important;
@@ -134,6 +142,11 @@ footer h1, footer h2, footer h3, footer h4,
   border: 1.5px solid rgba(0,106,103,0.35) !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07) !important;
   font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
 }
 .lang-btn:hover {
   background: #006a67 !important;
@@ -142,7 +155,70 @@ footer h1, footer h2, footer h3, footer h4,
 }
 .lang-btn svg { color: #006a67 !important; }
 .lang-btn:hover svg { color: #ffffff !important; }
-#langLabel { color: #001133 !important; }
+#langLabel { color: inherit !important; font-size: 0.82rem !important; }
+
+/* Chevron rotates on open */
+.lang-chevron {
+  transition: transform 0.22s ease !important;
+  flex-shrink: 0 !important;
+  color: rgba(0,106,103,0.7) !important;
+}
+.lang-btn:hover .lang-chevron { color: #ffffff !important; }
+
+/* ── Dropdown menu ── */
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: auto;
+  min-width: 100%;
+  background: #ffffff !important;
+  border: 1.5px solid rgba(0,106,103,0.22) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1), 0 2px 8px rgba(0,106,103,0.08) !important;
+  z-index: 10000;
+  overflow: hidden;
+  animation: langDropIn 0.18s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes langDropIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* RTL page: dropdown opens to the left */
+html[dir="rtl"] .lang-dropdown {
+  right: 0;
+  left: auto;
+}
+html[dir="ltr"] .lang-dropdown {
+  left: 0;
+  right: auto;
+}
+
+.lang-dropdown-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 10px 14px !important;
+  background: transparent !important;
+  border: none !important;
+  color: #001133 !important;
+  font-family: 'Cairo', sans-serif !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  transition: background 0.15s ease !important;
+  text-align: right !important;
+  box-shadow: none !important;
+}
+.lang-dropdown-item:hover {
+  background: rgba(0,106,103,0.08) !important;
+  color: #006a67 !important;
+}
+.lang-dropdown-item svg { color: #006a67 !important; flex-shrink: 0 !important; }
+.lang-dropdown-item:hover svg { color: #006a67 !important; }
 
 /* ── 3. INFO BAR ── */
 #clinicInfoBar {
