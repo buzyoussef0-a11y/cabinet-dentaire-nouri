@@ -1,6 +1,6 @@
 /* ── BOOKING.JS ── */
 window.submitBooking = submitBooking;
-var WEBHOOK_URL = 'https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e';
+var WEBHOOK_URL = 'https://n8n-vortex.vivanco.work/webhook/39c27c32-3be0-4f7a-ad54-2247d341035b';
 var currentStep = 1;
 
 document.addEventListener('DOMContentLoaded', async () => {
