@@ -7,7 +7,7 @@
   <title>ملفي الشخصي | Cabinet Dentaire Nouri</title>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/light-theme.css">
+  <link rel="stylesheet" href="../css/light-theme.css">
   <link rel="stylesheet" href="../css/chat.css">
   <link rel="stylesheet" href="../css/widgets.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,381 +20,370 @@
   <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
 
   <style>
-    /* ── Base ── */
+    /* ══ RESET & BASE ══ */
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
-      background:
-        linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.92) 100%),
-        url('https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1400&q=60') center / cover no-repeat fixed;
+      background: #060f1e;
       min-height: 100vh;
       font-family: 'Cairo', sans-serif;
+      overflow-x: hidden;
     }
 
-    /* ── Layout ── */
-    .profile-main {
-      padding: 110px 28px 80px;
-      max-width: 1140px;
-      margin: 0 auto;
-    }
-
-    /* Grid: RIGHT=profile card (35%), LEFT=stats+info (65%) in RTL */
-    .profile-grid {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-    @media (max-width: 860px) {
-      .profile-grid {
-        grid-template-columns: 1fr;
-      }
-      .profile-card { order: -1; }
-    }
-
-    /* ════════════════════════════════
-       RIGHT COLUMN — Profile Card
-    ════════════════════════════════ */
-    .profile-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(13,242,242,0.3);
-      border-radius: 20px;
-      padding: 32px 28px;
-      text-align: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    /* Avatar */
-    .profile-avatar {
-      width: 120px;
-      height: 120px;
+    /* ══ AMBIENT BLOBS ══ */
+    .prof-blob {
+      position: fixed;
       border-radius: 50%;
-      background: linear-gradient(135deg, #0df2f2, #4A6CF7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: white;
-      margin: 0 auto 16px;
-      box-shadow: 0 0 40px rgba(13,242,242,0.4);
-      overflow: hidden;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+      animation: blobFloat 12s ease-in-out infinite;
+    }
+    .prof-blob-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(13,148,136,0.18) 0%, transparent 70%);
+      top: -120px; right: -100px;
+      animation-duration: 14s;
+    }
+    .prof-blob-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
+      bottom: 100px; left: -80px;
+      animation-duration: 18s; animation-delay: -6s;
+    }
+    .prof-blob-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+      top: 40%; right: 30%;
+      animation-duration: 22s; animation-delay: -3s;
+    }
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(20px, -30px) scale(1.05); }
+      66%       { transform: translate(-15px, 20px) scale(0.97); }
+    }
+
+    /* ══ LAYOUT ══ */
+    .prof-page {
       position: relative;
+      z-index: 1;
+      padding-top: 80px;
     }
-    .profile-avatar img {
+
+    /* ══ PROFILE BANNER ══ */
+    .prof-banner {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: 220px;
+      background: linear-gradient(135deg, #001133 0%, #003d3b 40%, #006a67 70%, #0d9488 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .prof-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(13,242,242,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(6,182,212,0.1) 0%, transparent 40%);
+    }
+    /* dot grid overlay */
+    .prof-banner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .prof-banner-wave {
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+    }
+    .prof-banner-wave svg {
+      width: 100%; height: 60px; display: block;
     }
 
-    .profile-display-name {
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: white;
-      margin: 0 0 6px;
-      line-height: 1.3;
-    }
-    .profile-display-email {
-      color: rgba(255,255,255,0.6);
-      font-size: 0.9rem;
-      margin: 0 0 12px;
-      word-break: break-all;
-    }
-
-    .profile-membership {
-      display: inline-block;
-      background: rgba(13,242,242,0.1);
-      border: 1px solid rgba(13,242,242,0.3);
-      color: #0df2f2;
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 28px;
-    }
-
-    /* Action buttons */
-    .profile-actions { display: flex; flex-direction: column; gap: 12px; }
-
-    .prof-btn {
-      width: 100%;
-      padding: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: 'Cairo', sans-serif;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
-      text-decoration: none;
+    /* ══ AVATAR LIFT ══ */
+    .prof-avatar-wrap {
+      position: relative;
+      z-index: 2;
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-sizing: border-box;
-    }
-    .prof-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-    .prof-btn:active { transform: scale(0.98); }
-
-    .prof-btn-primary {
-      background: linear-gradient(135deg, #0D9488, #0df2f2);
-      color: white;
-      border: none;
-    }
-    .prof-btn-outline-teal {
-      background: transparent;
-      border: 2px solid #0df2f2;
-      color: #0df2f2;
-    }
-    .prof-btn-outline-red {
-      background: transparent;
-      border: 2px solid #EF4444;
-      color: #EF4444;
-    }
-
-    /* ════════════════════════════════
-       LEFT COLUMN — Stats + Info
-    ════════════════════════════════ */
-    .profile-left { display: flex; flex-direction: column; gap: 24px; }
-
-    /* Stats row */
-    .stats-row {
-      display: flex;
-      gap: 20px;
-    }
-    @media (max-width: 480px) {
-      .stats-row { flex-direction: column; }
-    }
-
-    .stat-card {
-      flex: 1;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(13,242,242,0.4);
-      border-radius: 16px;
-      padding: 32px;
-      text-align: right;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: border-color 0.2s, transform 0.2s;
-      min-height: 180px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .stat-card:hover {
-      border-color: rgba(13,242,242,0.7);
-      transform: translateY(-2px);
-    }
-    .stat-title {
-      font-size: 1.3rem;
-      color: white;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    .profile-stat-num {
-      font-size: 4rem;
-      font-weight: 900;
-      color: #0df2f2;
-      line-height: 1;
+      margin-top: -64px;
       margin-bottom: 8px;
     }
-    .stat-subtitle {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
+    .prof-avatar-ring {
+      width: 128px; height: 128px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #0df2f2, #0D9488, #4A6CF7);
+      box-shadow: 0 0 0 4px #060f1e, 0 0 40px rgba(13,242,242,0.35);
+    }
+    .prof-avatar-inner {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0D9488, #0df2f2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; font-weight: 900; color: #060f1e;
+      overflow: hidden;
+    }
+    .prof-avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ══ MAIN CONTENT ══ */
+    .prof-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
     }
 
-    /* Info card */
-    .info-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(13,242,242,0.4);
-      border-radius: 16px;
-      padding: 32px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+    /* ══ PROFILE HEADER CARD ══ */
+    .prof-header-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 32px 36px 28px;
+      text-align: center;
+      margin-bottom: 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeSlideUp 0.5s ease both;
+    }
+    .prof-name {
+      font-size: 1.8rem; font-weight: 900; color: #ffffff;
+      margin: 0 0 6px; letter-spacing: -0.02em;
+    }
+    .prof-email {
+      color: rgba(255,255,255,0.45); font-size: 0.9rem;
+      margin: 0 0 14px; word-break: break-all;
+    }
+    .prof-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(13,242,242,0.08);
+      border: 1px solid rgba(13,242,242,0.25);
+      color: #0df2f2;
+      border-radius: 50px;
+      padding: 5px 16px;
+      font-size: 0.78rem; font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .prof-badge::before { content: '🆔'; font-size: 0.75rem; }
+
+    /* ══ ACTION BUTTONS ROW ══ */
+    .prof-actions-row {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .prof-action-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px;
+      font-family: 'Cairo', sans-serif; font-size: 0.9rem; font-weight: 700;
+      border-radius: 50px; cursor: pointer; text-decoration: none;
+      transition: transform 0.18s, box-shadow 0.18s, opacity 0.18s;
+      border: none; white-space: nowrap;
+    }
+    .prof-action-btn:hover { transform: translateY(-2px); }
+    .prof-action-btn:active { transform: scale(0.97); }
+
+    .prof-action-primary {
+      background: linear-gradient(135deg, #0D9488, #0df2f2);
+      color: #060f1e;
+      box-shadow: 0 4px 20px rgba(13,242,242,0.3);
+    }
+    .prof-action-primary:hover { box-shadow: 0 6px 28px rgba(13,242,242,0.45); }
+
+    .prof-action-outline {
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(13,242,242,0.4) !important;
+      color: #0df2f2;
+    }
+    .prof-action-outline:hover { background: rgba(13,242,242,0.08); }
+
+    .prof-action-danger {
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(239,68,68,0.35) !important;
+      color: #f87171;
+    }
+    .prof-action-danger:hover { background: rgba(239,68,68,0.1); }
+
+    /* ══ GRID ══ */
+    .prof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 700px) {
+      .prof-grid { grid-template-columns: 1fr; }
+      .prof-actions-row { flex-direction: column; }
+      .prof-action-btn { justify-content: center; }
+    }
+
+    /* ══ STAT CARDS ══ */
+    .stat-card-v2 {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px 24px;
+      display: flex; align-items: center; gap: 20px;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.25s, transform 0.25s, background 0.25s;
+      animation: fadeSlideUp 0.5s ease both;
+      position: relative; overflow: hidden;
+    }
+    .stat-card-v2::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(13,242,242,0.5), transparent);
+      border-radius: 20px 20px 0 0;
+    }
+    .stat-card-v2:hover {
+      border-color: rgba(13,242,242,0.3);
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.06);
+    }
+    .stat-icon-wrap {
+      width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .stat-icon-teal { background: rgba(13,148,136,0.2); }
+    .stat-icon-blue { background: rgba(6,182,212,0.2); }
+    .stat-text-wrap { flex: 1; text-align: right; }
+    .stat-label {
+      font-size: 0.82rem; color: rgba(255,255,255,0.5);
+      font-weight: 600; margin-bottom: 6px;
+    }
+    .stat-num-v2 {
+      font-size: 2.4rem; font-weight: 900; line-height: 1;
+      color: #0df2f2; margin-bottom: 4px;
+    }
+    .stat-sub {
+      font-size: 0.75rem; color: rgba(255,255,255,0.3);
+    }
+
+    /* ══ INFO CARD ══ */
+    .info-card-v2 {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      animation: fadeSlideUp 0.5s ease both;
+      grid-column: span 2;
+    }
+    @media (max-width: 700px) {
+      .info-card-v2 { grid-column: span 1; }
+    }
+    .info-card-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .info-card-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: rgba(13,148,136,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
     }
     .info-card-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: white;
-      text-align: right;
-      margin: 0 0 24px;
+      font-size: 1.1rem; font-weight: 700; color: #ffffff;
     }
 
-    /* Field rows */
-    .profile-field { margin-bottom: 16px; }
+    /* ── Field rows ── */
+    .profile-field { margin-bottom: 14px; }
     .profile-field:last-child { margin-bottom: 0; }
 
     .field-view-row {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      transition: border-color 0.2s;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .field-view-row:hover { border-color: rgba(255,255,255,0.18); }
-
-    .field-info {
-      text-align: right;
-      flex: 1;
+    .field-view-row:hover {
+      border-color: rgba(13,242,242,0.2);
+      background: rgba(13,242,242,0.02);
     }
+    .field-info { text-align: right; flex: 1; }
     .field-label {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.45);
-      font-weight: 600;
-      margin-bottom: 4px;
+      font-size: 0.74rem; color: rgba(255,255,255,0.38);
+      font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;
     }
-    .field-value-text {
-      color: white;
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
+    .field-value-text { color: white; font-size: 0.95rem; font-weight: 700; }
 
     .field-edit-btn {
-      background: rgba(13,242,242,0.15);
-      border: 1px solid #0df2f2;
+      background: rgba(13,242,242,0.1);
+      border: 1px solid rgba(13,242,242,0.3);
       color: #0df2f2;
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-family: 'Cairo', sans-serif; font-size: 0.78rem; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
       transition: background 0.2s;
       flex-shrink: 0;
     }
-    .field-edit-btn:hover { background: rgba(13,242,242,0.28); }
+    .field-edit-btn:hover { background: rgba(13,242,242,0.2); }
 
     .field-protected-badge {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.3);
-      padding: 6px 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 8px;
+      font-size: 0.72rem; color: rgba(255,255,255,0.25);
+      padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 50px;
       flex-shrink: 0;
     }
 
-    /* Edit row */
     .field-edit-row { display: none; gap: 10px; margin-top: 10px; }
     .field-edit-row.active { display: flex; }
+
     .field-input {
       flex: 1;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(13,242,242,0.35);
-      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(13,242,242,0.3);
+      border-radius: 12px;
       padding: 10px 14px;
       color: white;
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.9rem;
-      outline: none;
-      direction: rtl;
+      font-family: 'Cairo', sans-serif; font-size: 0.9rem;
+      outline: none; direction: rtl;
+      transition: border-color 0.2s;
     }
-    .field-input:focus { border-color: rgba(13,242,242,0.65); }
+    .field-input:focus { border-color: rgba(13,242,242,0.6); }
+
     .field-save-btn {
       background: linear-gradient(135deg, #0D9488, #06B6D4);
-      border: none;
-      border-radius: 10px;
+      border: none; border-radius: 12px;
       padding: 10px 18px;
-      color: white;
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
+      color: white; font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap;
       transition: opacity 0.2s;
     }
     .field-save-btn:hover:not(:disabled) { opacity: 0.85; }
     .field-save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
     .field-cancel-btn {
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
-      padding: 10px 12px;
-      color: rgba(255,255,255,0.6);
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.85rem;
-      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 10px 12px;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Cairo', sans-serif; font-size: 0.85rem; cursor: pointer;
+      transition: background 0.2s;
     }
     .field-cancel-btn:hover { background: rgba(255,255,255,0.1); }
 
-    /* Fade in */
-    .fade-in { animation: fadeInUp 0.45s ease both; }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(14px); }
+    /* ══ ANIMATIONS ══ */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── Navbar auth pills override ── */
+    .delay-1 { animation-delay: 0.05s; }
+    .delay-2 { animation-delay: 0.12s; }
+    .delay-3 { animation-delay: 0.19s; }
+    .delay-4 { animation-delay: 0.26s; }
+    .delay-5 { animation-delay: 0.33s; }
+
+    /* ══ NAVBAR OVERRIDES ══ */
     #auth-links {
-      display: flex !important;
-      align-items: center;
-      gap: 8px;
-      padding: 0;
-      list-style: none;
+      display: flex !important; align-items: center; gap: 8px;
+      padding: 0; list-style: none;
     }
-    .user-welcome-pill {
-      display: inline-flex !important;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.07) !important;
-      border: 1px solid rgba(255,255,255,0.12) !important;
-      border-radius: 50px !important;
-      padding: 5px 14px 5px 8px !important;
-      color: #F1F5F9 !important;
-      font-size: 0.85rem !important;
-      font-weight: 600 !important;
-      cursor: default;
-      position: relative;
-    }
-    .user-welcome-pill::before {
-      content: attr(data-initial);
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0df2f2, #4A6CF7);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.78rem;
-      font-weight: 900;
-      color: white;
-      flex-shrink: 0;
-    }
-    .nav-user-avatar {
-      width: 32px !important;
-      height: 32px !important;
-      background: linear-gradient(135deg, #0df2f2, #4A6CF7) !important;
-      border-radius: 50% !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      color: white !important;
-      text-decoration: none !important;
-      border: none !important;
-      flex-shrink: 0;
-    }
-    .nav-user-avatar svg { stroke: white; }
-    .nav-signout-btn {
-      display: inline-flex !important;
-      align-items: center;
-      gap: 6px;
-      background: transparent !important;
-      border: 1px solid rgba(239,68,68,0.35) !important;
-      color: #f87171 !important;
-      border-radius: 50px !important;
-      padding: 5px 14px !important;
-      font-family: 'Cairo', sans-serif !important;
-      font-size: 0.82rem !important;
-      font-weight: 700 !important;
-      text-decoration: none !important;
-      cursor: pointer;
-      transition: background 0.2s !important;
-    }
-    .nav-signout-btn:hover { background: rgba(239,68,68,0.1) !important; }
-    /* Lang btn */
     .lang-btn {
       background: rgba(255,255,255,0.07) !important;
       border: 1px solid rgba(255,255,255,0.12) !important;
@@ -402,10 +391,8 @@
       color: #F1F5F9 !important;
       padding: 5px 12px !important;
       gap: 6px !important;
-      font-size: 0.82rem !important;
-      font-weight: 700 !important;
-      cursor: pointer;
-      transition: background 0.2s !important;
+      font-size: 0.82rem !important; font-weight: 700 !important;
+      cursor: pointer; transition: background 0.2s !important;
     }
     .lang-btn:hover { background: rgba(255,255,255,0.12) !important; }
   </style>
@@ -413,8 +400,14 @@
 
 <body>
 
+  <!-- Ambient blobs -->
+  <div class="prof-blob prof-blob-1"></div>
+  <div class="prof-blob prof-blob-2"></div>
+  <div class="prof-blob prof-blob-3"></div>
+
   <div id="scrollProgress"><div id="scrollFill"></div></div>
 
+  <!-- ══ NAVBAR ══ -->
   <nav id="mainNav">
     <a href="../index.html" class="nav-logo nav-logo-v2">
       <div class="logo-mark">
@@ -480,70 +473,95 @@
     </div>
   </nav>
 
-  <main class="profile-main">
-    <div class="profile-grid">
+  <!-- ══ PAGE ══ -->
+  <div class="prof-page">
 
-      <!-- ══ RIGHT COLUMN — Profile Card (visually on right in RTL) ══ -->
-      <div class="profile-card fade-in" style="animation-delay:0.06s">
+    <!-- Banner -->
+    <div class="prof-banner">
+      <div class="prof-banner-wave">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#060f1e"/>
+        </svg>
+      </div>
+    </div>
 
-        <div class="profile-avatar" id="profAvatarInner">
+    <!-- Avatar lifted from banner -->
+    <div class="prof-avatar-wrap">
+      <div class="prof-avatar-ring">
+        <div class="prof-avatar-inner" id="profAvatarInner">
           <span id="profileAvatar">?</span>
         </div>
+      </div>
+    </div>
 
-        <h2 class="profile-display-name" id="profileDisplayName">---</h2>
-        <p class="profile-display-email" id="profEmail">---</p>
+    <div class="prof-content">
 
-        <div class="profile-membership">
+      <!-- ══ HEADER CARD ══ -->
+      <div class="prof-header-card delay-1">
+        <h2 class="prof-name" id="profileDisplayName">---</h2>
+        <p class="prof-email" id="profEmail">---</p>
+        <div class="prof-badge">
           رقم العضوية: <span id="profIdShort">----</span>
         </div>
 
-        <div class="profile-actions">
-          <a href="appointment-tracking.html" class="prof-btn prof-btn-primary">
-            📅 تتبع مواعيدي
+        <div class="prof-actions-row">
+          <a href="appointment-tracking.html" class="prof-action-btn prof-action-primary">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span data-ar="تتبع مواعيدي" data-fr="Mes RDV">تتبع مواعيدي</span>
           </a>
-          <a href="javascript:void(0)" onclick="goToBooking()" class="prof-btn prof-btn-outline-teal">
-            ⊕ أحجز موعد جديد
+          <a href="javascript:void(0)" onclick="goToBooking()" class="prof-action-btn prof-action-outline">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span data-ar="حجز موعد جديد" data-fr="Nouveau RDV">حجز موعد جديد</span>
           </a>
-          <button onclick="logoutUser()" class="prof-btn prof-btn-outline-red">
-            → تسجيل الخروج
+          <button onclick="logoutUser()" class="prof-action-btn prof-action-danger">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-ar="تسجيل الخروج" data-fr="Se déconnecter">تسجيل الخروج</span>
           </button>
         </div>
-
       </div>
 
-      <!-- ══ LEFT COLUMN — Stats + Info (visually on left in RTL) ══ -->
-      <div class="profile-left">
+      <!-- ══ GRID ══ -->
+      <div class="prof-grid">
 
-        <!-- Stats -->
-        <div class="stats-row fade-in" style="animation-delay:0.1s">
-          <div class="stat-card">
-            <div class="stat-title">إجمالي المواعيد</div>
-            <div class="profile-stat-num" id="totalAppointments">—</div>
-            <div class="stat-subtitle">المواعيد المكتملة</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-title">المواعيد النشطة</div>
-            <div class="profile-stat-num" id="activeAppointments">—</div>
-            <div class="stat-subtitle">المواعيد المجدولة</div>
+        <!-- Stat 1 -->
+        <div class="stat-card-v2 delay-2">
+          <div class="stat-icon-wrap stat-icon-teal">📅</div>
+          <div class="stat-text-wrap">
+            <div class="stat-label" data-ar="إجمالي المواعيد" data-fr="Total RDV">إجمالي المواعيد</div>
+            <div class="stat-num-v2" id="totalAppointments">—</div>
+            <div class="stat-sub" data-ar="موعد مسجّل" data-fr="rendez-vous enregistrés">موعد مسجّل</div>
           </div>
         </div>
 
-        <!-- Personal Info -->
-        <div class="info-card fade-in" style="animation-delay:0.15s">
-          <div class="info-card-title">المعلومات الشخصية</div>
+        <!-- Stat 2 -->
+        <div class="stat-card-v2 delay-3">
+          <div class="stat-icon-wrap stat-icon-blue">✅</div>
+          <div class="stat-text-wrap">
+            <div class="stat-label" data-ar="المواعيد النشطة" data-fr="RDV actifs">المواعيد النشطة</div>
+            <div class="stat-num-v2" id="activeAppointments">—</div>
+            <div class="stat-sub" data-ar="موعد مجدوَل" data-fr="rendez-vous planifiés">موعد مجدوَل</div>
+          </div>
+        </div>
+
+        <!-- Info card spanning full width -->
+        <div class="info-card-v2 delay-4">
+          <div class="info-card-header">
+            <div class="info-card-icon">👤</div>
+            <div class="info-card-title" data-ar="المعلومات الشخصية" data-fr="Informations personnelles">المعلومات الشخصية</div>
+          </div>
 
           <!-- Full Name -->
           <div class="profile-field">
             <div class="field-view-row" id="nameViewRow">
               <div class="field-info">
-                <div class="field-label">الاسم الكامل</div>
+                <div class="field-label" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</div>
                 <div class="field-value-text" id="displayName">---</div>
               </div>
-              <button class="field-edit-btn" onclick="editField('Name')">✏️ تعديل</button>
+              <button class="field-edit-btn" onclick="editField('Name')" data-ar="✏️ تعديل" data-fr="✏️ Modifier">✏️ تعديل</button>
             </div>
             <div class="field-edit-row" id="nameEditRow">
-              <input class="field-input" type="text" id="editName" placeholder="أدخل اسمك الكامل">
-              <button class="field-save-btn" id="nameSaveBtn" onclick="saveField('name')">حفظ</button>
+              <input class="field-input" type="text" id="editName" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet">
+              <button class="field-save-btn" id="nameSaveBtn" onclick="saveField('name')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
               <button class="field-cancel-btn" onclick="cancelEdit('Name')">✕</button>
             </div>
           </div>
@@ -552,14 +570,14 @@
           <div class="profile-field">
             <div class="field-view-row" id="phoneViewRow">
               <div class="field-info">
-                <div class="field-label">رقم الهاتف</div>
+                <div class="field-label" data-ar="رقم الهاتف" data-fr="Téléphone">رقم الهاتف</div>
                 <div class="field-value-text" id="displayPhone">---</div>
               </div>
-              <button class="field-edit-btn" onclick="editField('Phone')">✏️ تعديل</button>
+              <button class="field-edit-btn" onclick="editField('Phone')" data-ar="✏️ تعديل" data-fr="✏️ Modifier">✏️ تعديل</button>
             </div>
             <div class="field-edit-row" id="phoneEditRow">
               <input class="field-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
-              <button class="field-save-btn" id="phoneSaveBtn" onclick="saveField('phone')">حفظ</button>
+              <button class="field-save-btn" id="phoneSaveBtn" onclick="saveField('phone')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
               <button class="field-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
             </div>
           </div>
@@ -568,10 +586,10 @@
           <div class="profile-field">
             <div class="field-view-row">
               <div class="field-info">
-                <div class="field-label">البريد الإلكتروني</div>
+                <div class="field-label" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</div>
                 <div class="field-value-text" id="displayEmail">---</div>
               </div>
-              <span class="field-protected-badge">محمي</span>
+              <span class="field-protected-badge" data-ar="محمي 🔒" data-fr="Protégé 🔒">محمي 🔒</span>
             </div>
           </div>
 
@@ -579,11 +597,12 @@
         <!-- /info-card -->
 
       </div>
-      <!-- /profile-left -->
+      <!-- /prof-grid -->
 
     </div>
-    <!-- /profile-grid -->
-  </main>
+    <!-- /prof-content -->
+  </div>
+  <!-- /prof-page -->
 
   <div id="toastContainer"></div>
   <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
@@ -793,14 +812,6 @@
         if (saveBtn) { saveBtn.textContent = 'حفظ'; saveBtn.disabled = false; }
       }
     }
-
-    /* ── Force equal stat card heights after render ── */
-    window.addEventListener('load', function () {
-      var cards = document.querySelectorAll('.stats-row .stat-card');
-      var max = 0;
-      cards.forEach(function (c) { if (c.offsetHeight > max) max = c.offsetHeight; });
-      if (max > 0) cards.forEach(function (c) { c.style.height = max + 'px'; });
-    });
   </script>
 
 </body>
