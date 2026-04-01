@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,283 +14,323 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="manifest" href="../manifest.json">
   <meta name="theme-color" content="#006a67">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
 
   <style>
-    /* ══ BASE ══ */
-    *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: 'Cairo', sans-serif; min-height: 100vh; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ══ HERO BANNER ══ */
-    .prf-hero {
-      position: relative;
-      height: 200px;
-      background: linear-gradient(135deg, #001a33 0%, #003a38 40%, #006a67 70%, #009e99 100%);
-      overflow: hidden;
+    /* ── HERO ── */
+    .p-hero {
       margin-top: 72px;
+      height: 180px;
+      background: linear-gradient(120deg, #001a33 0%, #003a38 35%, #006a67 65%, #00b5ad 100%);
+      position: relative;
+      overflow: hidden;
     }
-    .prf-hero::before {
+    .p-hero::before {
       content: '';
       position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 60%, rgba(13,242,242,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(0,180,160,0.1) 0%, transparent 45%);
+      background: radial-gradient(ellipse at 30% 50%, rgba(0,230,210,0.18) 0%, transparent 55%),
+                  radial-gradient(ellipse at 75% 20%, rgba(255,255,255,0.06) 0%, transparent 40%);
     }
-    .prf-hero::after {
-      content: '';
+    .p-hero-dots {
       position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(255,255,255,0.09) 1.5px, transparent 1.5px);
       background-size: 28px 28px;
     }
-    .prf-hero-deco {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .prf-hero-deco-1 { width: 280px; height: 280px; top: -100px; left: 10%; }
-    .prf-hero-deco-2 { width: 160px; height: 160px; top: 20px; right: 15%; opacity: 0.6; }
-    .prf-hero-wave {
-      position: absolute; bottom: -1px; left: 0; right: 0; z-index: 2;
+    .p-hero-wave {
+      position: absolute; bottom: -1px; left: 0; right: 0;
     }
 
-    /* ══ AVATAR ══ */
-    .prf-avatar-section {
-      display: flex; flex-direction: column; align-items: center;
-      margin-top: -56px; position: relative; z-index: 3;
+    /* ── MAIN LAYOUT ── */
+    .p-wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
     }
-    .prf-avatar-ring {
-      width: 112px; height: 112px; border-radius: 50%;
-      background: linear-gradient(135deg, #006a67, #0df2f2, #006a67);
-      padding: 3px;
-      box-shadow: 0 0 0 4px #fef7ff, 0 8px 32px rgba(0,106,103,0.25);
+
+    /* ── PROFILE TOP: avatar + name centered ── */
+    .p-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: -56px;
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 5;
     }
-    .prf-avatar-inner {
-      width: 100%; height: 100%; border-radius: 50%;
-      background: linear-gradient(135deg, #004d4b 0%, #009e99 100%);
+
+    .p-avatar-shell {
+      width: 112px; height: 112px;
+      border-radius: 50%;
+      padding: 3.5px;
+      background: linear-gradient(135deg, #006a67, #00e5d4, #006a67);
+      box-shadow: 0 0 0 5px #fef7ff, 0 8px 40px rgba(0,106,103,0.22);
+      flex-shrink: 0;
+    }
+    .p-avatar-core {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #004d4b, #009e99);
       display: flex; align-items: center; justify-content: center;
-      font-size: 2.4rem; font-weight: 900; color: #ffffff;
+      font-size: 2.5rem; font-weight: 900; color: #ffffff;
       overflow: hidden;
+      font-family: 'Cairo', sans-serif;
     }
-    .prf-avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+    .p-avatar-core img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ══ PROFILE INFO ══ */
-    .prf-name {
-      margin: 14px 0 4px;
-      font-size: 1.65rem; font-weight: 900;
-      color: #001133 !important;
+    .p-top-name {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.7rem; font-weight: 900;
+      color: #0d1f2d;
+      margin-top: 14px; margin-bottom: 4px;
       letter-spacing: -0.02em;
     }
-    .prf-email {
-      color: #64748b !important;
-      font-size: 0.88rem; margin: 0 0 12px;
+    .p-top-email {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.87rem; color: #6b7280;
+      margin-bottom: 12px;
     }
-    .prf-member-badge {
+    .p-top-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(0,106,103,0.08);
-      border: 1px solid rgba(0,106,103,0.2);
-      color: #006a67 !important;
+      background: #f0faf9;
+      border: 1.5px solid #b7ecea;
+      color: #006a67;
       border-radius: 50px; padding: 5px 18px;
-      font-size: 0.78rem; font-weight: 700; margin-bottom: 20px;
+      font-size: 0.77rem; font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+      margin-bottom: 20px;
     }
 
-    /* ══ ACTION BUTTONS ══ */
-    .prf-actions {
-      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px;
+    /* ── ACTION BUTTONS ── */
+    .p-actions {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
     }
-    .prf-btn {
+    .p-btn {
       display: inline-flex; align-items: center; gap: 7px;
-      padding: 10px 22px;
-      font-family: 'Cairo', sans-serif; font-size: 0.88rem; font-weight: 700;
+      padding: 10px 20px;
+      font-family: 'Cairo', sans-serif; font-size: 0.87rem; font-weight: 700;
       border-radius: 50px; cursor: pointer; text-decoration: none;
-      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
       border: none; white-space: nowrap;
+      transition: transform 0.16s, box-shadow 0.16s;
     }
-    .prf-btn:hover { transform: translateY(-2px); }
-    .prf-btn:active { transform: scale(0.97); }
-    .prf-btn-primary {
-      background: linear-gradient(135deg, #006a67 0%, #009e99 100%);
-      color: #ffffff !important;
-      box-shadow: 0 4px 18px rgba(0,106,103,0.28);
+    .p-btn:hover { transform: translateY(-2px); }
+    .p-btn-green {
+      background: linear-gradient(135deg, #006a67, #009e99);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(0,106,103,0.3);
     }
-    .prf-btn-primary:hover { box-shadow: 0 6px 24px rgba(0,106,103,0.4); }
-    .prf-btn-ghost {
+    .p-btn-green:hover { box-shadow: 0 6px 22px rgba(0,106,103,0.42); color: #ffffff; }
+    .p-btn-outline {
       background: #ffffff;
-      border: 1.5px solid rgba(0,106,103,0.3) !important;
-      color: #006a67 !important;
+      border: 1.5px solid #b7ecea !important;
+      color: #006a67;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-    .prf-btn-ghost:hover { background: rgba(0,106,103,0.05); }
-    .prf-btn-danger {
+    .p-btn-outline:hover { background: #f0faf9; color: #006a67; }
+    .p-btn-red {
       background: #ffffff;
-      border: 1.5px solid rgba(220,38,38,0.25) !important;
-      color: #dc2626 !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1.5px solid #fca5a5 !important;
+      color: #dc2626;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    .prf-btn-danger:hover { background: rgba(220,38,38,0.05); }
+    .p-btn-red:hover { background: #fef2f2; color: #dc2626; }
 
-    /* ══ DIVIDER ══ */
-    .prf-divider {
-      width: 100%; max-width: 600px; margin: 0 auto 32px;
+    /* ── SEPARATOR ── */
+    .p-sep {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0,106,103,0.2), transparent);
+      background: linear-gradient(90deg, transparent, #b7ecea 30%, #b7ecea 70%, transparent);
+      margin: 0 auto 32px;
+      max-width: 500px;
     }
 
-    /* ══ CONTENT ══ */
-    .prf-content { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; }
+    /* ── DASHBOARD GRID ── */
+    .p-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 18px;
+    }
+    @media (max-width: 600px) {
+      .p-grid { grid-template-columns: 1fr; }
+      .p-info-card { grid-column: span 1; }
+    }
 
-    /* ══ STATS ══ */
-    .prf-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-    @media (max-width: 520px) { .prf-stats { grid-template-columns: 1fr; } }
-
-    .prf-stat {
+    /* ── STAT CARD ── */
+    .p-stat {
       background: #ffffff;
-      border: 1px solid rgba(0,106,103,0.12);
-      border-radius: 18px;
-      padding: 22px 22px;
-      display: flex; align-items: center; gap: 16px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-      transition: box-shadow 0.25s, transform 0.25s;
-      animation: slideUp 0.45s ease both;
-      position: relative; overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid #e9f5f4;
+      box-shadow: 0 2px 20px rgba(0,106,103,0.07), 0 1px 4px rgba(0,0,0,0.04);
+      padding: 28px 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .prf-stat::before {
-      content: '';
-      position: absolute; top: 0; right: 0; left: 0; height: 3px;
+    .p-stat:hover {
+      box-shadow: 0 8px 32px rgba(0,106,103,0.13);
+      transform: translateY(-2px);
+    }
+    .p-stat-accent {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
       background: linear-gradient(90deg, #006a67, #009e99, #b7ecea);
     }
-    .prf-stat:hover { box-shadow: 0 6px 28px rgba(0,106,103,0.14); transform: translateY(-2px); }
-
-    .prf-stat-icon {
-      width: 50px; height: 50px; border-radius: 14px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center; font-size: 1.35rem;
+    .p-stat-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
     }
-    .si-teal { background: rgba(0,106,103,0.08); }
-    .si-blue { background: rgba(6,182,212,0.08); }
+    .p-stat-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem; font-weight: 700;
+      color: #374151;
+    }
+    .p-stat-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+    }
+    .p-stat-icon-green { background: #f0faf9; }
+    .p-stat-icon-teal  { background: #e0f7f7; }
+    .p-stat-num {
+      font-family: 'Cairo', sans-serif;
+      font-size: 3rem; font-weight: 900;
+      color: #006a67;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .p-stat-sub {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.78rem; color: #9ca3af;
+    }
 
-    .prf-stat-body { flex: 1; text-align: right; }
-    .prf-stat-label { font-size: 0.78rem; color: #64748b !important; font-weight: 600; margin-bottom: 5px; }
-    .prf-stat-num { font-size: 2.2rem; font-weight: 900; color: #006a67 !important; line-height: 1; margin-bottom: 3px; }
-    .prf-stat-sub { font-size: 0.72rem; color: #94a3b8 !important; }
-
-    /* ══ INFO CARD ══ */
-    .prf-info-card {
+    /* ── INFO CARD ── */
+    .p-info-card {
+      grid-column: span 2;
       background: #ffffff;
-      border: 1px solid rgba(0,106,103,0.12);
-      border-radius: 18px;
+      border-radius: 20px;
+      border: 1px solid #e9f5f4;
+      box-shadow: 0 2px 20px rgba(0,106,103,0.07), 0 1px 4px rgba(0,0,0,0.04);
       overflow: hidden;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-      animation: slideUp 0.45s ease 0.12s both;
     }
-    .prf-info-head {
-      padding: 18px 22px 16px;
-      border-bottom: 1px solid rgba(0,106,103,0.08);
+    @media (max-width: 600px) {
+      .p-info-card { grid-column: span 1; }
+    }
+    .p-info-head {
       display: flex; align-items: center; gap: 12px;
-      background: rgba(0,106,103,0.025);
+      padding: 20px 28px 18px;
+      border-bottom: 1px solid #f0faf9;
+      background: linear-gradient(90deg, #f8fffd, #ffffff);
     }
-    .prf-info-head-icon {
-      width: 36px; height: 36px; border-radius: 10px;
-      background: rgba(0,106,103,0.1);
-      display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+    .p-info-head-icon {
+      width: 38px; height: 38px; border-radius: 11px;
+      background: #f0faf9; border: 1px solid #b7ecea;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
     }
-    .prf-info-head-title { font-size: 1rem; font-weight: 700; color: #001133 !important; }
-    .prf-info-body { padding: 4px 22px 18px; }
+    .p-info-head-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem; font-weight: 700; color: #0d1f2d;
+    }
 
-    /* ── Field ── */
-    .prf-field { border-bottom: 1px solid rgba(0,106,103,0.06); }
-    .prf-field:last-child { border-bottom: none; }
-    .prf-field-row {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      padding: 14px 10px;
+    /* ── FIELD ── */
+    .p-field {
+      padding: 0 20px;
+      border-bottom: 1px solid #f5f9f8;
+    }
+    .p-field:last-child { border-bottom: none; }
+    .p-field-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 8px;
       border-radius: 10px;
-      transition: background 0.2s;
+      transition: background 0.15s;
     }
-    .prf-field-row:hover { background: rgba(0,106,103,0.03); }
-    .prf-field-info { text-align: right; flex: 1; }
-    .prf-field-label {
-      font-size: 0.72rem; color: #94a3b8 !important; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;
+    .p-field-row:hover { background: #fafffe; }
+    .p-field-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: #f5f9f8;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; flex-shrink: 0;
     }
-    .prf-field-value { font-size: 0.95rem; font-weight: 700; color: #001133 !important; }
-
-    .prf-edit-btn {
-      background: rgba(0,106,103,0.07);
-      border: 1px solid rgba(0,106,103,0.22) !important;
-      color: #006a67 !important;
-      border-radius: 50px;
-      padding: 5px 16px;
+    .p-field-body { flex: 1; text-align: right; }
+    .p-field-label {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.71rem; font-weight: 700;
+      color: #9ca3af;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      margin-bottom: 3px;
+    }
+    .p-field-value {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem; font-weight: 700; color: #1e293b;
+    }
+    .p-field-action { flex-shrink: 0; }
+    .p-edit-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #f0faf9;
+      border: 1px solid #b7ecea;
+      color: #006a67;
+      border-radius: 50px; padding: 6px 16px;
       font-family: 'Cairo', sans-serif; font-size: 0.76rem; font-weight: 700;
-      cursor: pointer; white-space: nowrap; flex-shrink: 0;
-      transition: background 0.2s;
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.15s;
     }
-    .prf-edit-btn:hover { background: rgba(0,106,103,0.13); }
-
-    .prf-protected {
-      font-size: 0.72rem; color: #94a3b8 !important;
-      padding: 5px 12px;
-      border: 1px solid rgba(0,0,0,0.08) !important;
-      border-radius: 50px; flex-shrink: 0;
-      background: rgba(0,0,0,0.02);
+    .p-edit-btn:hover { background: #daf5f3; }
+    .p-lock-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.74rem; color: #9ca3af;
+      background: #f8f9fa; border: 1px solid #e5e7eb;
+      border-radius: 50px; padding: 5px 13px;
     }
 
-    .prf-field-edit { display: none; gap: 10px; padding: 0 10px 14px; }
-    .prf-field-edit.active { display: flex; }
-    .prf-input {
-      flex: 1;
-      background: #f8fafc;
-      border: 1px solid rgba(0,106,103,0.25) !important;
+    /* edit row */
+    .p-edit-row { display: none; gap: 10px; padding: 0 8px 14px; }
+    .p-edit-row.open { display: flex; }
+    .p-input {
+      flex: 1; background: #f8fafc;
+      border: 1.5px solid #b7ecea;
       border-radius: 12px; padding: 10px 14px;
-      color: #001133 !important; font-family: 'Cairo', sans-serif; font-size: 0.9rem;
+      color: #1e293b; font-family: 'Cairo', sans-serif; font-size: 0.9rem;
       outline: none; direction: rtl;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .prf-input:focus { border-color: #006a67 !important; box-shadow: 0 0 0 3px rgba(0,106,103,0.1); }
-    .prf-save-btn {
+    .p-input:focus { border-color: #006a67; box-shadow: 0 0 0 3px rgba(0,106,103,0.12); }
+    .p-save-btn {
       background: linear-gradient(135deg, #006a67, #009e99);
-      border: none; border-radius: 12px; padding: 10px 18px;
-      color: #ffffff !important; font-family: 'Cairo', sans-serif;
+      border: none; border-radius: 12px; padding: 10px 20px;
+      color: #ffffff; font-family: 'Cairo', sans-serif;
       font-size: 0.85rem; font-weight: 700; cursor: pointer;
-      transition: opacity 0.2s;
+      transition: opacity 0.15s;
     }
-    .prf-save-btn:hover:not(:disabled) { opacity: 0.88; }
-    .prf-save-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-    .prf-cancel-btn {
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0 !important;
-      border-radius: 12px; padding: 10px 12px;
-      color: #64748b !important; font-family: 'Cairo', sans-serif; font-size: 0.85rem; cursor: pointer;
-      transition: background 0.2s;
+    .p-save-btn:hover:not(:disabled) { opacity: 0.88; }
+    .p-save-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .p-cancel-btn {
+      background: #f1f5f9; border: 1px solid #e2e8f0;
+      border-radius: 12px; padding: 10px 13px;
+      color: #64748b; font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem; cursor: pointer;
     }
-    .prf-cancel-btn:hover { background: #e2e8f0; }
+    .p-cancel-btn:hover { background: #e8edf2; }
 
-    /* ══ LANG BTN FIX ══ */
-    .lang-btn {
-      color: inherit !important;
-    }
-    .lang-btn span, #langLabel {
-      color: inherit !important;
-    }
-
-    /* ══ ANIMATIONS ══ */
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(16px); }
+    /* ── ANIMATIONS ── */
+    .p-fade { animation: pFadeUp 0.45s ease both; }
+    .d1 { animation-delay: 0.04s; }
+    .d2 { animation-delay: 0.1s; }
+    .d3 { animation-delay: 0.16s; }
+    .d4 { animation-delay: 0.22s; }
+    @keyframes pFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .d1 { animation-delay: 0.05s; }
-    .d2 { animation-delay: 0.1s; }
-    .d3 { animation-delay: 0.15s; }
 
     @media (max-width: 480px) {
-      .prf-actions { flex-direction: column; }
-      .prf-btn { justify-content: center; }
+      .p-actions { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
-
 <body>
 
   <div id="scrollProgress"><div id="scrollFill"></div></div>
 
-  <!-- ══ NAVBAR ══ -->
   <nav id="mainNav">
     <a href="../index.html" class="nav-logo nav-logo-v2">
       <div class="logo-mark">
@@ -329,21 +368,13 @@
       <div id="auth-links"></div>
       <div class="lang-dropdown-wrap" id="langDropdownWrap">
         <button class="lang-btn" id="langToggle" onclick="toggleLangDropdown()" aria-label="تغيير اللغة" aria-haspopup="true" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" width="15" height="15">
-            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/><path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <span id="langLabel">عربي</span>
-          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" width="12" height="12">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="lang-dropdown" id="langDropdownMenu" style="display:none;">
           <button class="lang-dropdown-item" id="langDropdownItem" onclick="switchLangFromDropdown()">
-            <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
-              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
-              <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/><path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
             <span id="langDropdownLabel">FR</span>
           </button>
         </div>
@@ -351,140 +382,150 @@
     </div>
   </nav>
 
-  <!-- ══ HERO ══ -->
-  <div class="prf-hero">
-    <div class="prf-hero-deco prf-hero-deco-1"></div>
-    <div class="prf-hero-deco prf-hero-deco-2"></div>
-    <div class="prf-hero-wave">
-      <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,35 C360,75 720,5 1080,45 C1260,65 1380,15 1440,35 L1440,70 L0,70 Z" fill="#fef7ff"/>
+  <!-- HERO -->
+  <div class="p-hero">
+    <div class="p-hero-dots"></div>
+    <div class="p-hero-wave">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C480,65 960,0 1440,35 L1440,60 L0,60 Z" fill="#fef7ff"/>
       </svg>
     </div>
   </div>
 
-  <!-- ══ AVATAR + INFO ══ -->
-  <div class="prf-avatar-section">
-    <div class="prf-avatar-ring">
-      <div class="prf-avatar-inner" id="profAvatarInner">
-        <span id="profileAvatar">?</span>
-      </div>
-    </div>
-    <h2 class="prf-name" id="profileDisplayName">---</h2>
-    <p class="prf-email" id="profEmail">---</p>
-    <div class="prf-member-badge">
-      🆔 رقم العضوية: <span id="profIdShort">----</span>
-    </div>
-    <div class="prf-actions">
-      <a href="appointment-tracking.html" class="prf-btn prf-btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <span data-ar="مواعيدي" data-fr="Mes RDV">مواعيدي</span>
-      </a>
-      <a href="javascript:void(0)" onclick="goToBooking()" class="prf-btn prf-btn-ghost">
-        <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <span data-ar="حجز جديد" data-fr="Nouveau RDV">حجز جديد</span>
-      </a>
-      <button onclick="logoutUser()" class="prf-btn prf-btn-danger">
-        <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span data-ar="تسجيل الخروج" data-fr="Se déconnecter">تسجيل الخروج</span>
-      </button>
-    </div>
-    <div class="prf-divider"></div>
-  </div>
+  <div class="p-wrap">
 
-  <!-- ══ CONTENT ══ -->
-  <div class="prf-content">
-
-    <!-- Stats -->
-    <div class="prf-stats">
-      <div class="prf-stat d1">
-        <div class="prf-stat-icon si-teal">📅</div>
-        <div class="prf-stat-body">
-          <div class="prf-stat-label" data-ar="إجمالي المواعيد" data-fr="Total RDV">إجمالي المواعيد</div>
-          <div class="prf-stat-num" id="totalAppointments">—</div>
-          <div class="prf-stat-sub" data-ar="موعد مسجّل" data-fr="enregistrés">موعد مسجّل</div>
+    <!-- PROFILE TOP -->
+    <div class="p-top p-fade d1">
+      <div class="p-avatar-shell">
+        <div class="p-avatar-core" id="profAvatarInner">
+          <span id="profileAvatar">?</span>
         </div>
       </div>
-      <div class="prf-stat d2">
-        <div class="prf-stat-icon si-blue">✅</div>
-        <div class="prf-stat-body">
-          <div class="prf-stat-label" data-ar="المواعيد النشطة" data-fr="RDV actifs">المواعيد النشطة</div>
-          <div class="prf-stat-num" id="activeAppointments">—</div>
-          <div class="prf-stat-sub" data-ar="موعد مجدوَل" data-fr="planifiés">موعد مجدوَل</div>
-        </div>
+      <div class="p-top-name" id="profileDisplayName">---</div>
+      <div class="p-top-email" id="profEmail">---</div>
+      <div class="p-top-badge">
+        🆔&nbsp;<span data-ar="رقم العضوية" data-fr="N° membre">رقم العضوية</span>:&nbsp;<span id="profIdShort">----</span>
+      </div>
+      <div class="p-actions">
+        <a href="appointment-tracking.html" class="p-btn p-btn-green">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#fff" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+          <span data-ar="مواعيدي" data-fr="Mes RDV">مواعيدي</span>
+        </a>
+        <a href="javascript:void(0)" onclick="goToBooking()" class="p-btn p-btn-outline">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#006a67" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8" stroke-linecap="round"/></svg>
+          <span data-ar="حجز جديد" data-fr="Nouveau RDV">حجز جديد</span>
+        </a>
+        <button onclick="logoutUser()" class="p-btn p-btn-red">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#dc2626" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-ar="تسجيل الخروج" data-fr="Se déconnecter">تسجيل الخروج</span>
+        </button>
       </div>
     </div>
 
-    <!-- Info Card -->
-    <div class="prf-info-card d3">
-      <div class="prf-info-head">
-        <div class="prf-info-head-icon">👤</div>
-        <div class="prf-info-head-title" data-ar="المعلومات الشخصية" data-fr="Informations personnelles">المعلومات الشخصية</div>
-      </div>
-      <div class="prf-info-body">
+    <div class="p-sep"></div>
 
-        <!-- Full Name -->
-        <div class="prf-field">
-          <div class="prf-field-row" id="nameViewRow">
-            <div class="prf-field-info">
-              <div class="prf-field-label" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</div>
-              <div class="prf-field-value" id="displayName">---</div>
+    <!-- DASHBOARD GRID -->
+    <div class="p-grid">
+
+      <!-- Stat 1 -->
+      <div class="p-stat p-fade d2">
+        <div class="p-stat-accent"></div>
+        <div class="p-stat-top">
+          <div class="p-stat-title" data-ar="إجمالي المواعيد" data-fr="Total des RDV">إجمالي المواعيد</div>
+          <div class="p-stat-icon p-stat-icon-green">📅</div>
+        </div>
+        <div class="p-stat-num" id="totalAppointments">—</div>
+        <div class="p-stat-sub" data-ar="موعد مسجّل في نظامنا" data-fr="rendez-vous enregistrés">موعد مسجّل في نظامنا</div>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="p-stat p-fade d3">
+        <div class="p-stat-accent" style="background: linear-gradient(90deg,#0ea5e9,#38bdf8,#bae6fd);"></div>
+        <div class="p-stat-top">
+          <div class="p-stat-title" data-ar="المواعيد النشطة" data-fr="RDV actifs">المواعيد النشطة</div>
+          <div class="p-stat-icon p-stat-icon-teal">✅</div>
+        </div>
+        <div class="p-stat-num" id="activeAppointments" style="color:#0ea5e9;">—</div>
+        <div class="p-stat-sub" data-ar="موعد قادم مجدوَل" data-fr="rendez-vous planifiés">موعد قادم مجدوَل</div>
+      </div>
+
+      <!-- Info Card -->
+      <div class="p-info-card p-fade d4">
+        <div class="p-info-head">
+          <div class="p-info-head-icon">👤</div>
+          <div class="p-info-head-title" data-ar="المعلومات الشخصية" data-fr="Informations personnelles">المعلومات الشخصية</div>
+        </div>
+
+        <!-- Name -->
+        <div class="p-field">
+          <div class="p-field-row" id="nameViewRow">
+            <div class="p-field-icon">✏️</div>
+            <div class="p-field-body">
+              <div class="p-field-label" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</div>
+              <div class="p-field-value" id="displayName">---</div>
             </div>
-            <button class="prf-edit-btn" onclick="editField('Name')" data-ar="✏️ تعديل" data-fr="✏️ Modifier">✏️ تعديل</button>
+            <div class="p-field-action">
+              <button class="p-edit-btn" onclick="editField('Name')" data-ar="تعديل" data-fr="Modifier">✏️ تعديل</button>
+            </div>
           </div>
-          <div class="prf-field-edit" id="nameEditRow">
-            <input class="prf-input" type="text" id="editName" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet">
-            <button class="prf-save-btn" id="nameSaveBtn" onclick="saveField('name')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
-            <button class="prf-cancel-btn" onclick="cancelEdit('Name')">✕</button>
+          <div class="p-edit-row" id="nameEditRow">
+            <input class="p-input" type="text" id="editName" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet">
+            <button class="p-save-btn" id="nameSaveBtn" onclick="saveField('name')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
+            <button class="p-cancel-btn" onclick="cancelEdit('Name')">✕</button>
           </div>
         </div>
 
         <!-- Phone -->
-        <div class="prf-field">
-          <div class="prf-field-row" id="phoneViewRow">
-            <div class="prf-field-info">
-              <div class="prf-field-label" data-ar="رقم الهاتف" data-fr="Téléphone">رقم الهاتف</div>
-              <div class="prf-field-value" id="displayPhone">---</div>
+        <div class="p-field">
+          <div class="p-field-row" id="phoneViewRow">
+            <div class="p-field-icon">📱</div>
+            <div class="p-field-body">
+              <div class="p-field-label" data-ar="رقم الهاتف" data-fr="Téléphone">رقم الهاتف</div>
+              <div class="p-field-value" id="displayPhone">---</div>
             </div>
-            <button class="prf-edit-btn" onclick="editField('Phone')" data-ar="✏️ تعديل" data-fr="✏️ Modifier">✏️ تعديل</button>
+            <div class="p-field-action">
+              <button class="p-edit-btn" onclick="editField('Phone')" data-ar="تعديل" data-fr="Modifier">✏️ تعديل</button>
+            </div>
           </div>
-          <div class="prf-field-edit" id="phoneEditRow">
-            <input class="prf-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
-            <button class="prf-save-btn" id="phoneSaveBtn" onclick="saveField('phone')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
-            <button class="prf-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
+          <div class="p-edit-row" id="phoneEditRow">
+            <input class="p-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
+            <button class="p-save-btn" id="phoneSaveBtn" onclick="saveField('phone')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
+            <button class="p-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
           </div>
         </div>
 
-        <!-- Email (read-only) -->
-        <div class="prf-field">
-          <div class="prf-field-row">
-            <div class="prf-field-info">
-              <div class="prf-field-label" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</div>
-              <div class="prf-field-value" id="displayEmail">---</div>
+        <!-- Email -->
+        <div class="p-field">
+          <div class="p-field-row">
+            <div class="p-field-icon">📧</div>
+            <div class="p-field-body">
+              <div class="p-field-label" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</div>
+              <div class="p-field-value" id="displayEmail">---</div>
             </div>
-            <span class="prf-protected" data-ar="🔒 محمي" data-fr="🔒 Protégé">🔒 محمي</span>
+            <div class="p-field-action">
+              <span class="p-lock-badge">🔒 <span data-ar="محمي" data-fr="Protégé">محمي</span></span>
+            </div>
           </div>
         </div>
 
       </div>
-    </div>
+      <!-- /info card -->
 
+    </div>
+    <!-- /grid -->
   </div>
 
   <div id="toastContainer"></div>
-  <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-  <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد" target="_blank" aria-label="تواصل عبر واتساب">
-    <svg viewBox="0 0 24 24" fill="white" width="26" height="26">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/>
-    </svg>
+  <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد" target="_blank" aria-label="واتساب">
+    <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/></svg>
   </a>
 
   <div id="chatWidget">
-    <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي"
-      style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#006a67,#009e99);border:none;cursor:pointer;color:#ffffff;box-shadow:0 4px 24px rgba(0,106,103,0.35);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
+    <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#006a67,#009e99);border:none;cursor:pointer;color:#fff;box-shadow:0 4px 20px rgba(0,106,103,0.35);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform .3s;">
       <span style="font-size:1.3rem;line-height:1;">💬</span>
-      <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد" data-fr="Assistant">مساعد</span>
+      <span style="font-size:.55rem;font-weight:800;letter-spacing:.5px;line-height:1;" data-ar="مساعد" data-fr="Assistant">مساعد</span>
     </button>
     <div id="chatWindow" class="chat-hidden">
       <div class="chat-header">
@@ -533,83 +574,80 @@
       var googleAvatar = user.user_metadata && user.user_metadata.avatar_url;
       if (googleAvatar) {
         var img = document.createElement('img');
-        img.src = googleAvatar; img.alt = 'صورة الحساب';
+        img.src = googleAvatar; img.alt = '';
         avatarInner.innerHTML = ''; avatarInner.appendChild(img);
       }
 
       var fullName = '', phone = '';
       try {
-        var res = await supabase.from('profiles').select('full_name, phone').eq('id', user.id).single();
-        if (!res.error && res.data) { fullName = res.data.full_name || ''; phone = res.data.phone || ''; }
-      } catch (e) {}
+        var r = await supabase.from('profiles').select('full_name, phone').eq('id', user.id).single();
+        if (!r.error && r.data) { fullName = r.data.full_name || ''; phone = r.data.phone || ''; }
+      } catch(e) {}
       if (!fullName) fullName = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || '';
 
-      var displayName = fullName || email.split('@')[0] || 'مستخدم';
-      document.getElementById('profileDisplayName').textContent = displayName;
+      var dname = fullName || email.split('@')[0] || 'مستخدم';
+      document.getElementById('profileDisplayName').textContent = dname;
       document.getElementById('displayName').textContent = fullName || '---';
       document.getElementById('displayPhone').textContent = phone || '---';
       document.getElementById('editName').value = fullName;
       document.getElementById('editPhone').value = phone;
-      if (!googleAvatar) avatarLetter.textContent = displayName.charAt(0).toUpperCase();
+      if (!googleAvatar) avatarLetter.textContent = dname.charAt(0).toUpperCase();
 
       try {
-        var safeNum = function(v) { return (!v || isNaN(v)) ? 0 : v; };
-        var orFilter = 'user_id.eq.' + user.id + (email ? ',email.eq.' + email : '');
-        var totalRes = await supabase.from('bookings').select('*', { count: 'exact', head: true }).or(orFilter);
-        var activeRes = await supabase.from('bookings').select('*', { count: 'exact', head: true }).or(orFilter).neq('status', 'cancelled');
-        document.getElementById('totalAppointments').textContent = safeNum(totalRes.count);
-        document.getElementById('activeAppointments').textContent = safeNum(activeRes.count);
-      } catch (e) {
+        var orF = 'user_id.eq.' + user.id + (email ? ',email.eq.' + email : '');
+        var tr = await supabase.from('bookings').select('*', {count:'exact',head:true}).or(orF);
+        var ar = await supabase.from('bookings').select('*', {count:'exact',head:true}).or(orF).neq('status','cancelled');
+        document.getElementById('totalAppointments').textContent = (tr.count || 0);
+        document.getElementById('activeAppointments').textContent = (ar.count || 0);
+      } catch(e) {
         document.getElementById('totalAppointments').textContent = '0';
         document.getElementById('activeAppointments').textContent = '0';
       }
     });
 
-    function editField(fieldCap) {
-      var vr = document.getElementById(fieldCap.toLowerCase() + 'ViewRow');
-      var er = document.getElementById(fieldCap.toLowerCase() + 'EditRow');
+    function editField(f) {
+      var vr = document.getElementById(f.toLowerCase()+'ViewRow');
+      var er = document.getElementById(f.toLowerCase()+'EditRow');
       if (vr) vr.style.display = 'none';
-      if (er) er.classList.add('active');
-      var inp = document.getElementById('edit' + fieldCap);
-      if (inp) { inp.focus(); inp.select(); }
+      if (er) er.classList.add('open');
+      var inp = document.getElementById('edit'+f); if (inp) { inp.focus(); inp.select(); }
     }
-    function cancelEdit(fieldCap) {
-      var vr = document.getElementById(fieldCap.toLowerCase() + 'ViewRow');
-      var er = document.getElementById(fieldCap.toLowerCase() + 'EditRow');
+    function cancelEdit(f) {
+      var vr = document.getElementById(f.toLowerCase()+'ViewRow');
+      var er = document.getElementById(f.toLowerCase()+'EditRow');
       if (vr) vr.style.display = '';
-      if (er) er.classList.remove('active');
+      if (er) er.classList.remove('open');
     }
     async function saveField(field) {
-      var fieldCap = field.charAt(0).toUpperCase() + field.slice(1);
-      var input = document.getElementById('edit' + fieldCap);
-      var value = input ? input.value.trim() : '';
-      if (!value) { if (typeof showToast === 'function') showToast('لا يمكن ترك الحقل فارغاً', 'error'); return; }
-      var saveBtn = document.getElementById(field.toLowerCase() + 'SaveBtn');
-      if (saveBtn) { saveBtn.textContent = 'جاري...'; saveBtn.disabled = true; }
+      var fc = field.charAt(0).toUpperCase()+field.slice(1);
+      var inp = document.getElementById('edit'+fc);
+      var val = inp ? inp.value.trim() : '';
+      if (!val) { if(typeof showToast==='function') showToast('لا يمكن ترك الحقل فارغاً','error'); return; }
+      var btn = document.getElementById(field+'SaveBtn');
+      if (btn) { btn.textContent='جاري...'; btn.disabled=true; }
       try {
-        var { data: { user } } = await supabase.auth.getUser();
-        if (!user) throw new Error('غير مسجل الدخول');
-        var updateData = { updated_at: new Date().toISOString() };
-        if (field === 'name')  updateData.full_name = value;
-        if (field === 'phone') updateData.phone = value;
-        var { error } = await supabase.from('profiles').update(updateData).eq('id', user.id);
+        var {data:{user}} = await supabase.auth.getUser();
+        if (!user) throw new Error('غير مسجل');
+        var upd = {updated_at: new Date().toISOString()};
+        if (field==='name') upd.full_name = val;
+        if (field==='phone') upd.phone = val;
+        var {error} = await supabase.from('profiles').update(upd).eq('id',user.id);
         if (error) throw error;
-        if (typeof showToast === 'function') showToast('تم الحفظ بنجاح ✅', 'success');
-        if (field === 'name') {
-          document.getElementById('displayName').textContent = value;
-          document.getElementById('profileDisplayName').textContent = value;
-          var letter = document.getElementById('profileAvatar');
-          if (letter && !letter.parentElement.querySelector('img')) letter.textContent = value.charAt(0).toUpperCase();
+        if(typeof showToast==='function') showToast('تم الحفظ ✅','success');
+        if (field==='name') {
+          document.getElementById('displayName').textContent = val;
+          document.getElementById('profileDisplayName').textContent = val;
+          var l = document.getElementById('profileAvatar');
+          if (l && !l.parentElement.querySelector('img')) l.textContent = val.charAt(0).toUpperCase();
         }
-        if (field === 'phone') document.getElementById('displayPhone').textContent = value;
-        cancelEdit(fieldCap);
-      } catch (e) {
-        if (typeof showToast === 'function') showToast('خطأ في الحفظ: ' + e.message, 'error');
+        if (field==='phone') document.getElementById('displayPhone').textContent = val;
+        cancelEdit(fc);
+      } catch(e) {
+        if(typeof showToast==='function') showToast('خطأ: '+e.message,'error');
       } finally {
-        if (saveBtn) { saveBtn.textContent = 'حفظ'; saveBtn.disabled = false; }
+        if (btn) { btn.textContent='حفظ'; btn.disabled=false; }
       }
     }
   </script>
-
 </body>
 </html>
