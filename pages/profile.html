@@ -16,314 +16,339 @@
   <meta name="theme-color" content="#006a67">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; }
 
-    /* ── HERO ── */
-    .p-hero {
-      margin-top: 72px;
-      height: 180px;
-      background: linear-gradient(120deg, #001a33 0%, #003a38 35%, #006a67 65%, #00b5ad 100%);
+    body { background: #f4f9f9; }
+
+    /* ══════════════════════════
+       HERO BANNER
+    ══════════════════════════ */
+    .prf-hero {
+      background: linear-gradient(135deg, #001a33 0%, #003a38 40%, #006a67 70%, #00b5ad 100%);
+      padding: 60px 20px 80px;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .p-hero::before {
+    .prf-hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(0,230,210,0.18) 0%, transparent 55%),
-                  radial-gradient(ellipse at 75% 20%, rgba(255,255,255,0.06) 0%, transparent 40%);
+      background: radial-gradient(ellipse at 25% 60%, rgba(13,242,242,0.12) 0%, transparent 55%),
+                  radial-gradient(ellipse at 75% 25%, rgba(255,255,255,0.05) 0%, transparent 40%);
+      pointer-events: none;
     }
-    .p-hero-dots {
+    .prf-hero-dots {
       position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.09) 1.5px, transparent 1.5px);
+      background-image: radial-gradient(rgba(255,255,255,0.07) 1.5px, transparent 1.5px);
       background-size: 28px 28px;
+      pointer-events: none;
     }
-    .p-hero-wave {
-      position: absolute; bottom: -1px; left: 0; right: 0;
+    .prf-hero-deco {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      pointer-events: none;
     }
+    .prf-hero-deco-1 { width: 260px; height: 260px; top: -100px; left: 8%; }
+    .prf-hero-deco-2 { width: 150px; height: 150px; top: 10px; right: 12%; opacity: 0.5; }
 
-    /* ── MAIN LAYOUT ── */
-    .p-wrap {
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-    }
-
-    /* ── PROFILE TOP: avatar + name centered ── */
-    .p-top {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: -56px;
-      margin-bottom: 36px;
+    /* ══════════════════════════
+       AVATAR — overlaps hero
+    ══════════════════════════ */
+    .prf-avatar-wrap {
+      text-align: center;
+      margin-top: -60px;
       position: relative;
-      z-index: 5;
+      z-index: 4;
     }
-
-    .p-avatar-shell {
-      width: 112px; height: 112px;
+    .prf-avatar-ring {
+      display: inline-block;
+      width: 120px; height: 120px;
       border-radius: 50%;
-      padding: 3.5px;
-      background: linear-gradient(135deg, #006a67, #00e5d4, #006a67);
-      box-shadow: 0 0 0 5px #fef7ff, 0 8px 40px rgba(0,106,103,0.22);
-      flex-shrink: 0;
+      background: linear-gradient(135deg, #006a67, #00e0d3, #006a67);
+      padding: 4px;
+      box-shadow: 0 0 0 5px #f4f9f9, 0 8px 32px rgba(0,106,103,0.25);
     }
-    .p-avatar-core {
+    .prf-avatar-core {
       width: 100%; height: 100%;
       border-radius: 50%;
       background: linear-gradient(135deg, #004d4b, #009e99);
       display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem; font-weight: 900; color: #ffffff;
+      font-size: 2.6rem; font-weight: 900; color: #fff;
+      font-family: 'Cairo', sans-serif;
       overflow: hidden;
-      font-family: 'Cairo', sans-serif;
     }
-    .p-avatar-core img { width: 100%; height: 100%; object-fit: cover; }
+    .prf-avatar-core img { width: 100%; height: 100%; object-fit: cover; }
 
-    .p-top-name {
+    /* ══════════════════════════
+       PROFILE NAME CARD
+    ══════════════════════════ */
+    .prf-name-card {
+      text-align: center;
+      padding: 20px 24px 28px;
+      margin-bottom: 0;
+    }
+    .prf-name-card .prf-name {
       font-family: 'Cairo', sans-serif;
-      font-size: 1.7rem; font-weight: 900;
+      font-size: 1.75rem; font-weight: 900;
       color: #0d1f2d;
-      margin-top: 14px; margin-bottom: 4px;
+      margin: 0 0 5px;
       letter-spacing: -0.02em;
+      display: block;
     }
-    .p-top-email {
+    .prf-name-card .prf-email {
       font-family: 'Cairo', sans-serif;
-      font-size: 0.87rem; color: #6b7280;
-      margin-bottom: 12px;
+      font-size: 0.88rem; color: #6b7280;
+      margin: 0 0 14px; display: block;
     }
-    .p-top-badge {
+    .prf-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      background: #f0faf9;
+      background: #edfafa;
       border: 1.5px solid #b7ecea;
       color: #006a67;
       border-radius: 50px; padding: 5px 18px;
-      font-size: 0.77rem; font-weight: 700;
+      font-size: 0.78rem; font-weight: 700;
       font-family: 'Cairo', sans-serif;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
-    /* ── ACTION BUTTONS ── */
-    .p-actions {
+    /* ══════════════════════════
+       ACTION BUTTONS
+    ══════════════════════════ */
+    .prf-actions {
       display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
     }
-    .p-btn {
+    .prf-btn {
       display: inline-flex; align-items: center; gap: 7px;
-      padding: 10px 20px;
-      font-family: 'Cairo', sans-serif; font-size: 0.87rem; font-weight: 700;
+      padding: 11px 22px;
+      font-family: 'Cairo', sans-serif; font-size: 0.88rem; font-weight: 700;
       border-radius: 50px; cursor: pointer; text-decoration: none;
       border: none; white-space: nowrap;
-      transition: transform 0.16s, box-shadow 0.16s;
+      transition: transform 0.16s, box-shadow 0.16s, background 0.16s;
     }
-    .p-btn:hover { transform: translateY(-2px); }
-    .p-btn-green {
+    .prf-btn:hover { transform: translateY(-2px); }
+    .prf-btn-green {
       background: linear-gradient(135deg, #006a67, #009e99);
-      color: #ffffff;
-      box-shadow: 0 4px 16px rgba(0,106,103,0.3);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,106,103,0.28);
     }
-    .p-btn-green:hover { box-shadow: 0 6px 22px rgba(0,106,103,0.42); color: #ffffff; }
-    .p-btn-outline {
-      background: #ffffff;
+    .prf-btn-green:hover { box-shadow: 0 6px 22px rgba(0,106,103,0.4); color: #fff; }
+    .prf-btn-outline {
+      background: #fff;
       border: 1.5px solid #b7ecea !important;
       color: #006a67;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-    .p-btn-outline:hover { background: #f0faf9; color: #006a67; }
-    .p-btn-red {
-      background: #ffffff;
+    .prf-btn-outline:hover { background: #edfafa; color: #006a67; }
+    .prf-btn-red {
+      background: #fff;
       border: 1.5px solid #fca5a5 !important;
       color: #dc2626;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    .p-btn-red:hover { background: #fef2f2; color: #dc2626; }
+    .prf-btn-red:hover { background: #fff5f5; color: #dc2626; }
 
-    /* ── SEPARATOR ── */
-    .p-sep {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #b7ecea 30%, #b7ecea 70%, transparent);
-      margin: 0 auto 32px;
-      max-width: 500px;
+    /* ══════════════════════════
+       MAIN WRAPPER (like .tracking-wrapper)
+    ══════════════════════════ */
+    .prf-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 28px 20px 80px;
+      position: relative;
+      z-index: 2;
     }
 
-    /* ── DASHBOARD GRID ── */
-    .p-grid {
+    /* ══════════════════════════
+       STATS ROW
+    ══════════════════════════ */
+    .prf-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 18px;
+      gap: 16px;
+      margin-bottom: 20px;
     }
-    @media (max-width: 600px) {
-      .p-grid { grid-template-columns: 1fr; }
-      .p-info-card { grid-column: span 1; }
-    }
+    @media (max-width: 520px) { .prf-stats { grid-template-columns: 1fr; } }
 
-    /* ── STAT CARD ── */
-    .p-stat {
-      background: #ffffff;
+    .prf-stat {
+      background: #fff;
       border-radius: 20px;
-      border: 1px solid #e9f5f4;
-      box-shadow: 0 2px 20px rgba(0,106,103,0.07), 0 1px 4px rgba(0,0,0,0.04);
-      padding: 28px 28px 24px;
-      position: relative;
-      overflow: hidden;
+      border: 1.5px solid rgba(0,106,103,0.1);
+      box-shadow: 0 4px 20px rgba(0,106,103,0.07);
+      padding: 26px 24px 22px;
+      position: relative; overflow: hidden;
       transition: box-shadow 0.2s, transform 0.2s;
     }
-    .p-stat:hover {
-      box-shadow: 0 8px 32px rgba(0,106,103,0.13);
-      transform: translateY(-2px);
-    }
-    .p-stat-accent {
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 4px;
+    .prf-stat::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      border-radius: 20px 20px 0 0;
       background: linear-gradient(90deg, #006a67, #009e99, #b7ecea);
     }
-    .p-stat-top {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px;
+    .prf-stat:hover { box-shadow: 0 8px 32px rgba(0,106,103,0.13); transform: translateY(-2px); }
+
+    .prf-stat-top {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
     }
-    .p-stat-title {
+    .prf-stat-label {
       font-family: 'Cairo', sans-serif;
-      font-size: 0.85rem; font-weight: 700;
-      color: #374151;
+      font-size: 0.85rem; font-weight: 700; color: #374151;
     }
-    .p-stat-icon {
+    .prf-stat-icon {
       width: 44px; height: 44px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
     }
-    .p-stat-icon-green { background: #f0faf9; }
-    .p-stat-icon-teal  { background: #e0f7f7; }
-    .p-stat-num {
+    .si-g { background: #edfafa; }
+    .si-b { background: #eff6ff; }
+    .prf-stat-num {
       font-family: 'Cairo', sans-serif;
-      font-size: 3rem; font-weight: 900;
-      color: #006a67;
-      line-height: 1; margin-bottom: 6px;
+      font-size: 3.2rem; font-weight: 900; line-height: 1;
+      color: #006a67; margin-bottom: 6px;
+      display: block;
     }
-    .p-stat-sub {
+    .prf-stat-num-b { color: #0ea5e9; }
+    .prf-stat-sub {
       font-family: 'Cairo', sans-serif;
       font-size: 0.78rem; color: #9ca3af;
+      display: block;
     }
 
-    /* ── INFO CARD ── */
-    .p-info-card {
-      grid-column: span 2;
-      background: #ffffff;
+    /* ══════════════════════════
+       INFO CARD
+    ══════════════════════════ */
+    .prf-info {
+      background: #fff;
       border-radius: 20px;
-      border: 1px solid #e9f5f4;
-      box-shadow: 0 2px 20px rgba(0,106,103,0.07), 0 1px 4px rgba(0,0,0,0.04);
+      border: 1.5px solid rgba(0,106,103,0.1);
+      box-shadow: 0 4px 20px rgba(0,106,103,0.07);
       overflow: hidden;
     }
-    @media (max-width: 600px) {
-      .p-info-card { grid-column: span 1; }
-    }
-    .p-info-head {
+    .prf-info-head {
       display: flex; align-items: center; gap: 12px;
-      padding: 20px 28px 18px;
+      padding: 20px 24px 18px;
       border-bottom: 1px solid #f0faf9;
-      background: linear-gradient(90deg, #f8fffd, #ffffff);
+      background: linear-gradient(to left, #f8fffd, #fff);
     }
-    .p-info-head-icon {
+    .prf-info-icon {
       width: 38px; height: 38px; border-radius: 11px;
-      background: #f0faf9; border: 1px solid #b7ecea;
+      background: #edfafa; border: 1px solid #b7ecea;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
+      font-size: 1rem; flex-shrink: 0;
     }
-    .p-info-head-title {
+    .prf-info-title {
       font-family: 'Cairo', sans-serif;
       font-size: 1rem; font-weight: 700; color: #0d1f2d;
+      display: block;
     }
 
-    /* ── FIELD ── */
-    .p-field {
+    /* ── Field ── */
+    .prf-field {
       padding: 0 20px;
-      border-bottom: 1px solid #f5f9f8;
+      border-bottom: 1px solid #f5faf9;
     }
-    .p-field:last-child { border-bottom: none; }
-    .p-field-row {
+    .prf-field:last-child { border-bottom: none; }
+
+    .prf-field-row {
       display: flex; align-items: center; gap: 14px;
       padding: 16px 8px;
       border-radius: 10px;
       transition: background 0.15s;
     }
-    .p-field-row:hover { background: #fafffe; }
-    .p-field-icon {
-      width: 36px; height: 36px; border-radius: 10px;
+    .prf-field-row:hover { background: #fafffe; }
+
+    .prf-field-icon {
+      width: 38px; height: 38px; border-radius: 10px;
       background: #f5f9f8;
       display: flex; align-items: center; justify-content: center;
       font-size: 0.95rem; flex-shrink: 0;
     }
-    .p-field-body { flex: 1; text-align: right; }
-    .p-field-label {
+    .prf-field-body { flex: 1; text-align: right; }
+    .prf-field-label {
       font-family: 'Cairo', sans-serif;
-      font-size: 0.71rem; font-weight: 700;
+      font-size: 0.7rem; font-weight: 700;
       color: #9ca3af;
       text-transform: uppercase; letter-spacing: 0.07em;
-      margin-bottom: 3px;
+      margin-bottom: 3px; display: block;
     }
-    .p-field-value {
+    .prf-field-value {
       font-family: 'Cairo', sans-serif;
       font-size: 0.95rem; font-weight: 700; color: #1e293b;
+      display: block;
     }
-    .p-field-action { flex-shrink: 0; }
-    .p-edit-btn {
+
+    .prf-edit-btn {
       display: inline-flex; align-items: center; gap: 5px;
-      background: #f0faf9;
+      background: #edfafa;
       border: 1px solid #b7ecea;
       color: #006a67;
       border-radius: 50px; padding: 6px 16px;
       font-family: 'Cairo', sans-serif; font-size: 0.76rem; font-weight: 700;
       cursor: pointer; white-space: nowrap;
       transition: background 0.15s;
+      flex-shrink: 0;
     }
-    .p-edit-btn:hover { background: #daf5f3; }
-    .p-lock-badge {
+    .prf-edit-btn:hover { background: #d4f5f3; }
+
+    .prf-lock {
       display: inline-flex; align-items: center; gap: 5px;
       font-family: 'Cairo', sans-serif;
       font-size: 0.74rem; color: #9ca3af;
       background: #f8f9fa; border: 1px solid #e5e7eb;
       border-radius: 50px; padding: 5px 13px;
+      flex-shrink: 0;
     }
 
-    /* edit row */
-    .p-edit-row { display: none; gap: 10px; padding: 0 8px 14px; }
-    .p-edit-row.open { display: flex; }
-    .p-input {
+    .prf-edit-row { display: none; gap: 10px; padding: 0 8px 16px; }
+    .prf-edit-row.open { display: flex; }
+
+    .prf-input {
       flex: 1; background: #f8fafc;
       border: 1.5px solid #b7ecea;
       border-radius: 12px; padding: 10px 14px;
-      color: #1e293b; font-family: 'Cairo', sans-serif; font-size: 0.9rem;
+      color: #1e293b;
+      font-family: 'Cairo', sans-serif; font-size: 0.9rem;
       outline: none; direction: rtl;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .p-input:focus { border-color: #006a67; box-shadow: 0 0 0 3px rgba(0,106,103,0.12); }
-    .p-save-btn {
+    .prf-input:focus { border-color: #006a67; box-shadow: 0 0 0 3px rgba(0,106,103,0.1); }
+
+    .prf-save-btn {
       background: linear-gradient(135deg, #006a67, #009e99);
       border: none; border-radius: 12px; padding: 10px 20px;
-      color: #ffffff; font-family: 'Cairo', sans-serif;
+      color: #fff; font-family: 'Cairo', sans-serif;
       font-size: 0.85rem; font-weight: 700; cursor: pointer;
       transition: opacity 0.15s;
     }
-    .p-save-btn:hover:not(:disabled) { opacity: 0.88; }
-    .p-save-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-    .p-cancel-btn {
+    .prf-save-btn:hover:not(:disabled) { opacity: 0.88; }
+    .prf-save-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .prf-cancel-btn {
       background: #f1f5f9; border: 1px solid #e2e8f0;
       border-radius: 12px; padding: 10px 13px;
       color: #64748b; font-family: 'Cairo', sans-serif;
       font-size: 0.85rem; cursor: pointer;
+      transition: background 0.15s;
     }
-    .p-cancel-btn:hover { background: #e8edf2; }
+    .prf-cancel-btn:hover { background: #e2e8f0; }
 
-    /* ── ANIMATIONS ── */
-    .p-fade { animation: pFadeUp 0.45s ease both; }
+    /* ══════════════════════════
+       ANIMATIONS
+    ══════════════════════════ */
+    .prf-fade { animation: pUp 0.45s ease both; }
     .d1 { animation-delay: 0.04s; }
     .d2 { animation-delay: 0.1s; }
     .d3 { animation-delay: 0.16s; }
     .d4 { animation-delay: 0.22s; }
-    @keyframes pFadeUp {
-      from { opacity: 0; transform: translateY(18px); }
+    @keyframes pUp {
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 480px) {
-      .p-actions { flex-direction: column; align-items: center; }
+      .prf-actions { flex-direction: column; align-items: center; }
+      .prf-btn { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -331,6 +356,7 @@
 
   <div id="scrollProgress"><div id="scrollFill"></div></div>
 
+  <!-- NAVBAR -->
   <nav id="mainNav">
     <a href="../index.html" class="nav-logo nav-logo-v2">
       <div class="logo-mark">
@@ -383,137 +409,124 @@
   </nav>
 
   <!-- HERO -->
-  <div class="p-hero">
-    <div class="p-hero-dots"></div>
-    <div class="p-hero-wave">
-      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,30 C480,65 960,0 1440,35 L1440,60 L0,60 Z" fill="#fef7ff"/>
-      </svg>
+  <div class="prf-hero">
+    <div class="prf-hero-dots"></div>
+    <div class="prf-hero-deco prf-hero-deco-1"></div>
+    <div class="prf-hero-deco prf-hero-deco-2"></div>
+  </div>
+
+  <!-- AVATAR (overlaps hero/page boundary) -->
+  <div class="prf-avatar-wrap prf-fade d1">
+    <div class="prf-avatar-ring">
+      <div class="prf-avatar-core" id="profAvatarInner">
+        <span id="profileAvatar">?</span>
+      </div>
     </div>
   </div>
 
-  <div class="p-wrap">
-
-    <!-- PROFILE TOP -->
-    <div class="p-top p-fade d1">
-      <div class="p-avatar-shell">
-        <div class="p-avatar-core" id="profAvatarInner">
-          <span id="profileAvatar">?</span>
-        </div>
-      </div>
-      <div class="p-top-name" id="profileDisplayName">---</div>
-      <div class="p-top-email" id="profEmail">---</div>
-      <div class="p-top-badge">
-        🆔&nbsp;<span data-ar="رقم العضوية" data-fr="N° membre">رقم العضوية</span>:&nbsp;<span id="profIdShort">----</span>
-      </div>
-      <div class="p-actions">
-        <a href="appointment-tracking.html" class="p-btn p-btn-green">
-          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#fff" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
-          <span data-ar="مواعيدي" data-fr="Mes RDV">مواعيدي</span>
-        </a>
-        <a href="javascript:void(0)" onclick="goToBooking()" class="p-btn p-btn-outline">
-          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#006a67" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8" stroke-linecap="round"/></svg>
-          <span data-ar="حجز جديد" data-fr="Nouveau RDV">حجز جديد</span>
-        </a>
-        <button onclick="logoutUser()" class="p-btn p-btn-red">
-          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#dc2626" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span data-ar="تسجيل الخروج" data-fr="Se déconnecter">تسجيل الخروج</span>
-        </button>
-      </div>
+  <!-- NAME CARD (centered text block) -->
+  <div class="prf-name-card prf-fade d2">
+    <span class="prf-name" id="profileDisplayName">---</span>
+    <span class="prf-email" id="profEmail">---</span>
+    <div class="prf-badge">
+      🆔&nbsp;<span data-ar="رقم العضوية" data-fr="N° membre">رقم العضوية</span>:&nbsp;<span id="profIdShort">----</span>
     </div>
-
-    <div class="p-sep"></div>
-
-    <!-- DASHBOARD GRID -->
-    <div class="p-grid">
-
-      <!-- Stat 1 -->
-      <div class="p-stat p-fade d2">
-        <div class="p-stat-accent"></div>
-        <div class="p-stat-top">
-          <div class="p-stat-title" data-ar="إجمالي المواعيد" data-fr="Total des RDV">إجمالي المواعيد</div>
-          <div class="p-stat-icon p-stat-icon-green">📅</div>
-        </div>
-        <div class="p-stat-num" id="totalAppointments">—</div>
-        <div class="p-stat-sub" data-ar="موعد مسجّل في نظامنا" data-fr="rendez-vous enregistrés">موعد مسجّل في نظامنا</div>
-      </div>
-
-      <!-- Stat 2 -->
-      <div class="p-stat p-fade d3">
-        <div class="p-stat-accent" style="background: linear-gradient(90deg,#0ea5e9,#38bdf8,#bae6fd);"></div>
-        <div class="p-stat-top">
-          <div class="p-stat-title" data-ar="المواعيد النشطة" data-fr="RDV actifs">المواعيد النشطة</div>
-          <div class="p-stat-icon p-stat-icon-teal">✅</div>
-        </div>
-        <div class="p-stat-num" id="activeAppointments" style="color:#0ea5e9;">—</div>
-        <div class="p-stat-sub" data-ar="موعد قادم مجدوَل" data-fr="rendez-vous planifiés">موعد قادم مجدوَل</div>
-      </div>
-
-      <!-- Info Card -->
-      <div class="p-info-card p-fade d4">
-        <div class="p-info-head">
-          <div class="p-info-head-icon">👤</div>
-          <div class="p-info-head-title" data-ar="المعلومات الشخصية" data-fr="Informations personnelles">المعلومات الشخصية</div>
-        </div>
-
-        <!-- Name -->
-        <div class="p-field">
-          <div class="p-field-row" id="nameViewRow">
-            <div class="p-field-icon">✏️</div>
-            <div class="p-field-body">
-              <div class="p-field-label" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</div>
-              <div class="p-field-value" id="displayName">---</div>
-            </div>
-            <div class="p-field-action">
-              <button class="p-edit-btn" onclick="editField('Name')" data-ar="تعديل" data-fr="Modifier">✏️ تعديل</button>
-            </div>
-          </div>
-          <div class="p-edit-row" id="nameEditRow">
-            <input class="p-input" type="text" id="editName" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet">
-            <button class="p-save-btn" id="nameSaveBtn" onclick="saveField('name')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
-            <button class="p-cancel-btn" onclick="cancelEdit('Name')">✕</button>
-          </div>
-        </div>
-
-        <!-- Phone -->
-        <div class="p-field">
-          <div class="p-field-row" id="phoneViewRow">
-            <div class="p-field-icon">📱</div>
-            <div class="p-field-body">
-              <div class="p-field-label" data-ar="رقم الهاتف" data-fr="Téléphone">رقم الهاتف</div>
-              <div class="p-field-value" id="displayPhone">---</div>
-            </div>
-            <div class="p-field-action">
-              <button class="p-edit-btn" onclick="editField('Phone')" data-ar="تعديل" data-fr="Modifier">✏️ تعديل</button>
-            </div>
-          </div>
-          <div class="p-edit-row" id="phoneEditRow">
-            <input class="p-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
-            <button class="p-save-btn" id="phoneSaveBtn" onclick="saveField('phone')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
-            <button class="p-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
-          </div>
-        </div>
-
-        <!-- Email -->
-        <div class="p-field">
-          <div class="p-field-row">
-            <div class="p-field-icon">📧</div>
-            <div class="p-field-body">
-              <div class="p-field-label" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</div>
-              <div class="p-field-value" id="displayEmail">---</div>
-            </div>
-            <div class="p-field-action">
-              <span class="p-lock-badge">🔒 <span data-ar="محمي" data-fr="Protégé">محمي</span></span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <!-- /info card -->
-
+    <div class="prf-actions">
+      <a href="appointment-tracking.html" class="prf-btn prf-btn-green">
+        <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#fff" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+        <span data-ar="مواعيدي" data-fr="Mes RDV">مواعيدي</span>
+      </a>
+      <a href="javascript:void(0)" onclick="goToBooking()" class="prf-btn prf-btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#006a67" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8" stroke-linecap="round"/></svg>
+        <span data-ar="حجز جديد" data-fr="Nouveau RDV">حجز جديد</span>
+      </a>
+      <button onclick="logoutUser()" class="prf-btn prf-btn-red">
+        <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#dc2626" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-ar="تسجيل الخروج" data-fr="Se déconnecter">تسجيل الخروج</span>
+      </button>
     </div>
-    <!-- /grid -->
   </div>
+
+  <!-- MAIN CONTENT — same centering pattern as tracking page -->
+  <div class="prf-wrapper">
+
+    <!-- Stats -->
+    <div class="prf-stats prf-fade d3">
+      <div class="prf-stat">
+        <div class="prf-stat-top">
+          <span class="prf-stat-label" data-ar="إجمالي المواعيد" data-fr="Total des RDV">إجمالي المواعيد</span>
+          <div class="prf-stat-icon si-g">📅</div>
+        </div>
+        <span class="prf-stat-num" id="totalAppointments">—</span>
+        <span class="prf-stat-sub" data-ar="موعد مسجّل في النظام" data-fr="rendez-vous enregistrés">موعد مسجّل في النظام</span>
+      </div>
+      <div class="prf-stat">
+        <div class="prf-stat-top">
+          <span class="prf-stat-label" data-ar="المواعيد النشطة" data-fr="RDV actifs">المواعيد النشطة</span>
+          <div class="prf-stat-icon si-b">✅</div>
+        </div>
+        <span class="prf-stat-num prf-stat-num-b" id="activeAppointments">—</span>
+        <span class="prf-stat-sub" data-ar="موعد قادم مجدوَل" data-fr="rendez-vous planifiés">موعد قادم مجدوَل</span>
+      </div>
+    </div>
+
+    <!-- Info Card -->
+    <div class="prf-info prf-fade d4">
+      <div class="prf-info-head">
+        <div class="prf-info-icon">👤</div>
+        <span class="prf-info-title" data-ar="المعلومات الشخصية" data-fr="Informations personnelles">المعلومات الشخصية</span>
+      </div>
+
+      <!-- Name -->
+      <div class="prf-field">
+        <div class="prf-field-row" id="nameViewRow">
+          <div class="prf-field-icon">✏️</div>
+          <div class="prf-field-body">
+            <span class="prf-field-label" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</span>
+            <span class="prf-field-value" id="displayName">---</span>
+          </div>
+          <button class="prf-edit-btn" onclick="editField('Name')" data-ar="تعديل" data-fr="Modifier">✏️ تعديل</button>
+        </div>
+        <div class="prf-edit-row" id="nameEditRow">
+          <input class="prf-input" type="text" id="editName" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet">
+          <button class="prf-save-btn" id="nameSaveBtn" onclick="saveField('name')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
+          <button class="prf-cancel-btn" onclick="cancelEdit('Name')">✕</button>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="prf-field">
+        <div class="prf-field-row" id="phoneViewRow">
+          <div class="prf-field-icon">📱</div>
+          <div class="prf-field-body">
+            <span class="prf-field-label" data-ar="رقم الهاتف" data-fr="Téléphone">رقم الهاتف</span>
+            <span class="prf-field-value" id="displayPhone">---</span>
+          </div>
+          <button class="prf-edit-btn" onclick="editField('Phone')" data-ar="تعديل" data-fr="Modifier">✏️ تعديل</button>
+        </div>
+        <div class="prf-edit-row" id="phoneEditRow">
+          <input class="prf-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
+          <button class="prf-save-btn" id="phoneSaveBtn" onclick="saveField('phone')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
+          <button class="prf-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="prf-field">
+        <div class="prf-field-row">
+          <div class="prf-field-icon">📧</div>
+          <div class="prf-field-body">
+            <span class="prf-field-label" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</span>
+            <span class="prf-field-value" id="displayEmail">---</span>
+          </div>
+          <span class="prf-lock">🔒 <span data-ar="محمي" data-fr="Protégé">محمي</span></span>
+        </div>
+      </div>
+
+    </div>
+    <!-- /info -->
+  </div>
+  <!-- /wrapper -->
 
   <div id="toastContainer"></div>
   <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
