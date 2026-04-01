@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -19,248 +19,548 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
     <style>
-      #google-signup-btn {
-        background: white;
-        border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 50px;
-        width: 100%;
-        padding: 14px;
-        color: #0A1628;
-        font-size: 16px;
-        font-family: 'Cairo', sans-serif;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        cursor: pointer;
-        transition: background 0.2s;
-        margin-bottom: 4px;
-      }
-      #google-signup-btn:hover { background: #f5f5f5; }
-      .divider {
-        text-align: center;
-        color: var(--text-muted);
-        font-size: 0.85rem;
-        margin: 18px 0;
-        position: relative;
-      }
-      .divider::before, .divider::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        width: 38%;
-        height: 1px;
-        background: rgba(255,255,255,0.09);
-      }
-      .divider::before { right: 0; }
-      .divider::after  { left: 0; }
+/* ══════════════════════════════════════════
+   AUTH SPLIT LAYOUT — Cabinet Dentaire Nouri
+══════════════════════════════════════════ */
+body.auth-split-page {
+  background: #f8fafc !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 100vh !important;
+  display: block !important;
+  overflow-x: hidden;
+}
+body.auth-split-page #mainNav        { display: none !important; }
+body.auth-split-page #scrollProgress { display: none !important; }
+body.auth-split-page #backToTop      { display: none !important; }
+body.auth-split-page #whatsappBtn    { display: none !important; }
+body.auth-split-page #chatWidget     { display: none !important; }
+
+.asp-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── LEFT BRAND PANEL ── */
+.asp-brand {
+  width: 42%;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #001133 0%, #0A2040 35%, #003d3b 70%, #006a67 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 44px;
+  flex-shrink: 0;
+}
+.asp-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  animation: aspBlobFloat 9s ease-in-out infinite;
+  pointer-events: none;
+}
+.asp-blob-1 { width: 280px; height: 280px; background: rgba(0,106,103,0.45); top: -60px; right: -50px; animation-delay: 0s; }
+.asp-blob-2 { width: 200px; height: 200px; background: rgba(183,236,234,0.1);  bottom: 15%; left: -40px; animation-delay: -3.5s; }
+.asp-blob-3 { width: 130px; height: 130px; background: rgba(0,180,160,0.18);   bottom: -30px; right: 28%; animation-delay: -6s; }
+@keyframes aspBlobFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-18px) scale(1.05); }
+}
+.asp-fi {
+  position: absolute;
+  opacity: 0.11;
+  animation: aspFiFloat linear infinite;
+  pointer-events: none;
+  user-select: none;
+  font-size: 1.6rem;
+}
+.asp-fi-1 { top: 11%; left: 7%;   animation-duration: 7s;  animation-delay: 0s; }
+.asp-fi-2 { top: 28%; right: 5%;  animation-duration: 9s;  animation-delay: -2s;  font-size: 1rem; }
+.asp-fi-3 { top: 61%; left: 5%;   animation-duration: 8s;  animation-delay: -4s; }
+.asp-fi-4 { bottom: 16%; right: 9%; animation-duration: 11s; animation-delay: -1.5s; font-size: 1.1rem; }
+@keyframes aspFiFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-14px) rotate(8deg); }
+}
+.asp-brand::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 1;
+}
+.asp-brand-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 290px;
+  width: 100%;
+}
+.asp-logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.asp-logo-wordmark { display: flex; flex-direction: column; font-family: 'Cairo', sans-serif; }
+.asp-logo-wordmark span:first-child { font-size: 0.6rem; font-weight: 700; letter-spacing: 3px; color: rgba(183,236,234,0.6); }
+.asp-logo-wordmark span:last-child  { font-size: 1.05rem; font-weight: 900; letter-spacing: 2px; color: #b7ecea; }
+.asp-brand-text h2 {
+  font-family: 'Cairo', sans-serif !important;
+  font-size: 1.7rem !important;
+  font-weight: 900 !important;
+  color: white !important;
+  line-height: 1.35 !important;
+  margin: 0 0 10px 0 !important;
+}
+.asp-brand-text p {
+  font-family: 'Cairo', sans-serif !important;
+  color: rgba(183,236,234,0.68) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+}
+.asp-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.asp-stat {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 14px;
+  padding: 13px 6px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.3s;
+}
+.asp-stat:hover { border-color: rgba(183,236,234,0.3); }
+.asp-stat-num { display: block; font-family: 'Cairo', sans-serif; font-size: 1.05rem; font-weight: 900; color: #b7ecea !important; }
+.asp-stat-lbl { display: block; font-family: 'Cairo', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.42) !important; margin-top: 3px; }
+.asp-trust { display: flex; gap: 8px; flex-wrap: wrap; }
+.asp-trust-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(0,106,103,0.22);
+  border: 1px solid rgba(183,236,234,0.16);
+  border-radius: 20px; padding: 6px 12px;
+  font-family: 'Cairo', sans-serif; font-size: 0.75rem; color: #b7ecea !important;
+}
+/* Feature list */
+.asp-features { display: flex; flex-direction: column; gap: 10px; }
+.asp-feature-item {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 10px 14px;
+  font-family: 'Cairo', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.78) !important;
+}
+.asp-feature-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: linear-gradient(135deg, #006a67, #009e99);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; flex-shrink: 0;
+}
+.asp-deco-tooth {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  z-index: 1; opacity: 0.05;
+}
+
+/* ── RIGHT FORM PANEL ── */
+.asp-form-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 52px;
+  background: #ffffff;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+.asp-mobile-logo {
+  display: none;
+  align-items: center; gap: 10px;
+  text-decoration: none; color: #001133;
+  font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 1rem;
+  margin-bottom: 28px; letter-spacing: 1px;
+}
+.asp-form-wrap { width: 100%; max-width: 400px; }
+.asp-form-header { margin-bottom: 24px; }
+.asp-form-header h1 {
+  font-family: 'Cairo', sans-serif !important;
+  font-size: 1.65rem !important;
+  font-weight: 900 !important;
+  color: #001133 !important;
+  -webkit-text-fill-color: #001133 !important;
+  margin: 0 0 6px 0 !important;
+}
+.asp-form-header p { color: #64748b !important; font-family: 'Cairo', sans-serif !important; font-size: 0.86rem !important; margin: 0 !important; }
+
+/* Google button */
+#google-signup-btn {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  width: 100% !important;
+  padding: 13px 20px !important;
+  color: #001133 !important;
+  font-size: 15px !important;
+  font-family: 'Cairo', sans-serif !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  margin-bottom: 0 !important;
+  transition: all 0.25s ease !important;
+}
+#google-signup-btn:hover {
+  border-color: rgba(0,106,103,0.4) !important;
+  box-shadow: 0 4px 18px rgba(0,106,103,0.1) !important;
+  transform: translateY(-1px) !important;
+  background: #f8fffe !important;
+}
+
+/* Divider */
+.divider {
+  display: flex !important;
+  align-items: center !important;
+  color: #94a3b8 !important;
+  font-size: 0.83rem !important;
+  font-family: 'Cairo', sans-serif !important;
+  margin: 18px 0 !important;
+  position: static !important;
+}
+.divider::before, .divider::after {
+  content: '' !important;
+  flex: 1 !important;
+  height: 1px !important;
+  background: #e9edf2 !important;
+  border: none !important;
+  width: auto !important;
+  position: static !important;
+  top: auto !important;
+  transform: none !important;
+}
+.divider::before { margin-left: 12px !important; }
+.divider::after  { margin-right: 12px !important; }
+
+/* Form fields */
+.asp-form-wrap .form-group { margin-bottom: 14px !important; }
+.asp-form-wrap .form-group label {
+  color: #374151 !important; font-weight: 600 !important;
+  font-size: 0.81rem !important; margin-bottom: 6px !important;
+  display: block !important;
+}
+.asp-form-wrap .form-input {
+  background: #f8fafc !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #001133 !important;
+  border-radius: 10px !important;
+  padding: 11px 14px !important;
+  font-size: 0.91rem !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+.asp-form-wrap .form-input:focus {
+  border-color: #006a67 !important;
+  box-shadow: 0 0 0 3px rgba(0,106,103,0.09) !important;
+  outline: none !important;
+  background: #ffffff !important;
+}
+.asp-form-wrap .form-input::placeholder { color: #94a3b8 !important; }
+
+/* Submit button */
+.asp-form-wrap .btn-primary {
+  border-radius: 10px !important;
+  font-size: 0.97rem !important;
+  font-weight: 800 !important;
+  padding: 13px !important;
+}
+
+/* Footer links */
+.asp-form-footer { margin-top: 20px; text-align: center; }
+.asp-form-footer p { color: #64748b !important; font-size: 0.86rem !important; font-family: 'Cairo', sans-serif !important; margin: 0 0 8px 0 !important; }
+.asp-form-footer a { color: #006a67 !important; font-weight: 700 !important; text-decoration: none !important; }
+.asp-form-footer a:hover { text-decoration: underline !important; }
+.asp-back-home { color: #94a3b8 !important; font-size: 0.76rem !important; font-weight: 400 !important; display: block; margin-top: 10px; text-decoration: none; }
+.asp-back-home:hover { color: #64748b !important; }
+
+/* Alert error */
+.alert-error:not(:empty) {
+  background: rgba(239,68,68,0.08) !important;
+  border: 1px solid rgba(239,68,68,0.25) !important;
+  color: #dc2626 !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  margin-bottom: 14px !important;
+  font-family: 'Cairo', sans-serif !important;
+  font-size: 0.86rem !important;
+}
+
+/* Success screen */
+.success-screen { text-align: center; padding: 20px 0; }
+.user-id-badge {
+  background: linear-gradient(135deg, rgba(0,106,103,0.1), rgba(0,160,150,0.08)) !important;
+  border: 2px solid rgba(0,106,103,0.3) !important;
+  border-radius: 12px !important;
+  color: #006a67 !important;
+  padding: 14px 20px !important;
+  font-weight: 900 !important;
+  font-size: 1.05rem !important;
+  margin: 12px 0 !important;
+  letter-spacing: 1px !important;
+}
+
+/* Password grid */
+.asp-pw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ── MOBILE ── */
+@media (max-width: 800px) {
+  .asp-layout { flex-direction: column; }
+  .asp-brand { display: none !important; }
+  .asp-form-panel { padding: 44px 28px; justify-content: flex-start; padding-top: 52px; }
+  .asp-mobile-logo { display: flex; }
+  .asp-form-wrap { max-width: 100%; }
+  .asp-form-header h1 { font-size: 1.45rem !important; }
+  .asp-pw-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .asp-form-panel { padding: 32px 18px; }
+}
     </style>
 </head>
 
-<body>
+<body class="auth-split-page">
 
-    <div id="scrollProgress">
-        <div id="scrollFill"></div>
-    </div>
+<div id="scrollProgress"><div id="scrollFill"></div></div>
 
-    <nav id="mainNav" style="background:transparent; border:none; box-shadow:none;">
-        <a href="../index.html" class="nav-logo nav-logo-v2">
-  <div class="logo-mark">
-    <svg width="36" height="36" viewBox="0 0 36 36"
-         fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Hexagon background -->
-      <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z"
-        fill="url(#hexFill)" opacity="0.15"/>
-      <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z"
-        stroke="url(#hexStroke)" stroke-width="1"
-        fill="none"/>
-      <!-- Cross/Plus medical symbol -->
-      <rect x="16" y="9" width="4" height="18"
-        rx="2" fill="url(#crossFill)"/>
-      <rect x="9" y="16" width="18" height="4"
-        rx="2" fill="url(#crossFill)"/>
-      <!-- Center dot -->
-      <circle cx="18" cy="18" r="2.5"
-        fill="white" opacity="0.9"/>
-      <defs>
-        <linearGradient id="hexFill"
-          x1="4" y1="2" x2="32" y2="34"
-          gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#0df2f2"/>
-          <stop offset="100%" stop-color="#0D9488"/>
-        </linearGradient>
-        <linearGradient id="hexStroke"
-          x1="4" y1="2" x2="32" y2="34"
-          gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#0df2f2"/>
-          <stop offset="100%" stop-color="#0D9488"/>
-        </linearGradient>
-        <linearGradient id="crossFill"
-          x1="9" y1="9" x2="27" y2="27"
-          gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#0df2f2"/>
-          <stop offset="100%" stop-color="white"
-            stop-opacity="0.9"/>
-        </linearGradient>
-      </defs>
+<div class="asp-layout">
+
+  <!-- ══ LEFT BRAND PANEL ══ -->
+  <div class="asp-brand">
+    <div class="asp-blob asp-blob-1"></div>
+    <div class="asp-blob asp-blob-2"></div>
+    <div class="asp-blob asp-blob-3"></div>
+    <div class="asp-fi asp-fi-1">🦷</div>
+    <div class="asp-fi asp-fi-2">✦</div>
+    <div class="asp-fi asp-fi-3">⬡</div>
+    <div class="asp-fi asp-fi-4">+</div>
+
+    <svg class="asp-deco-tooth" width="170" height="170" viewBox="0 0 100 100" fill="white">
+      <path d="M50 5 C35 5 20 15 20 32 C20 42 22 52 26 62 C30 72 34 85 38 85 C41 85 42 78 43 72 C44 66 46 62 50 62 C54 62 56 66 57 72 C58 78 59 85 62 85 C66 85 70 72 74 62 C78 52 80 42 80 32 C80 15 65 5 50 5Z"/>
     </svg>
-  </div>
-  <div class="logo-wordmark">
-    <span class="logo-word-top">CABINET</span>
-    <span class="logo-word-bottom">NOURI</span>
-  </div>
-</a>
-    </nav>
-    <div class="auth-container">
-        <div class="glass-card auth-card animate-fadeInUp">
-            <div id="registerFormContainer">
-                <h1 style="text-align: center; margin-bottom: 0.5rem;" data-ar="إنشاء حساب جديد" data-fr="Créer un nouveau compte">إنشاء حساب جديد</h1>
-                <p class="auth-subtitle" data-ar="سجّل وابدأ حجز مواعيدك بسهولة تامة" data-fr="Inscrivez-vous et réservez facilement">سجّل وابدأ حجز مواعيدك بسهولة تامة</p>
 
-                <div id="errorBox" class="alert-error"></div>
-
-                <!-- Google OAuth -->
-                <button id="google-signup-btn" type="button">
-                  <svg width="20" height="20" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                  </svg>
-                  تسجيل بحساب Google
-                </button>
-
-                <div class="divider">— أو —</div>
-
-                <form id="registerForm">
-                    <div class="form-group">
-                        <label data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</label>
-                        <input type="text" id="regFullName" class="form-input" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet" required
-                            minlength="3">
-                    </div>
-                    <div class="form-group">
-                        <label data-ar="رقم الهاتف" data-fr="Numéro de téléphone">رقم الهاتف</label>
-                        <input type="tel" id="regPhone" class="form-input" placeholder="06XXXXXXXX" required>
-                    </div>
-                    <div class="form-group">
-                        <label data-ar="البريد الإلكتروني" data-fr="E-mail">البريد الإلكتروني</label>
-                        <input type="email" id="regEmail" class="form-input" placeholder="example@mail.com" required>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <div class="form-group">
-                            <label data-ar="كلمة المرور" data-fr="Mot de passe">كلمة المرور</label>
-                            <div class="form-group-password">
-                                <input type="password" id="regPassword" class="form-input" placeholder="••••••••"
-                                    required minlength="6">
-                                <span class="password-toggle"
-                                    onclick="togglePasswordVisibility('regPassword', this)">👁️</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label data-ar="تأكيد كلمة المرور" data-fr="Confirmer mot de passe">تأكيد كلمة المرور</label>
-                            <div class="form-group-password">
-                                <input type="password" id="regConfirmPassword" class="form-input" placeholder="••••••••"
-                                    required minlength="6">
-                                <span class="password-toggle"
-                                    onclick="togglePasswordVisibility('regConfirmPassword', this)">👁️</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary"
-                        style="width: 100%; justify-content: center; margin-top: 10px;" data-ar="إنشاء الحساب" data-fr="Créer le compte">إنشاء الحساب</button>
-                </form>
-
-                <p style="text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
-                    لديك حساب بالفعل؟ <a href="login.html" style="color: var(--accent); font-weight: 700;" data-ar="دخول" data-fr="Se connecter">دخول</a>
-                </p>
-            </div>
-
-            <!-- Success Screen -->
-            <div id="successScreen" style="display:none" class="success-screen">
-                <div class="conf-icon">✅</div>
-                <h2 style="margin-bottom: 0.5rem;" data-ar="تم إنشاء حسابك بنجاح!" data-fr="Compte créé !">تم إنشاء حسابك بنجاح!</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">مرحباً بك يا <span id="successName"
-                        style="color:var(--text); font-weight:700;"></span> في عائلتنا.</p>
-
-                <p style="font-size: 0.85rem; color: var(--text-muted);" data-ar="معرّفك الشخصي الدائم هو:" data-fr="Votre identifiant permanent :">معرّفك الشخصي الدائم هو:</p>
-                <div class="user-id-badge" id="userIdDisplay"></div>
-
-                <p style="font-size: 0.75rem; color: var(--error); margin-bottom: 24px;">⚠️ يرجى تصوير الشاشة أو حفظ هذا
-                    الرقم</p>
-
-                <p style="font-size: 0.88rem; color: var(--text-muted);">
-                    سيتم تحويلك لصفحة الدخول خلال <span id="redirectCountdown"
-                        style="color:var(--accent); font-weight:900;">4</span> ثوانٍ...
-                </p>
-            </div>
-
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <a href="../index.html" style="color: var(--text-muted); font-size: 0.8rem;" data-ar="← العودة للرئيسية" data-fr="← Revenir à l'accueil">← العودة للرئيسية</a>
-            </div>
-        </div>
-    </div>
-    <div id="toastContainer"></div>
-    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
-    <script>window._ROOT = '../';</script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../js/supabase-client.js"></script>
-    <script src="../js/auth.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/i18n.js"></script>
-    <script src="../js/register.js"></script>
-    <script>
-      document.getElementById('google-signup-btn').addEventListener('click', async () => {
-        const { error } = await window.supabase.auth.signInWithOAuth({
-          provider: 'google',
-          options: {
-            redirectTo: 'https://cabinet-dentaire-nouri.vercel.app/pages/complete-profile.html'
-          }
-        });
-        if (error) {
-          console.error(error);
-          alert('حدث خطأ: ' + error.message);
-        }
-      });
-    </script>
-    <script src="../js/chat.js"></script>
-    <script src="../js/toasts.js"></script>
-
-    <!-- Floating Widgets -->
-    <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد"
-        target="_blank" aria-label="تواصل عبر واتساب">
-        <svg viewBox="0 0 24 24" fill="white" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    <div class="asp-brand-inner">
+      <!-- Logo -->
+      <a href="../index.html" class="asp-logo-link">
+        <svg width="38" height="38" viewBox="0 0 36 36" fill="none">
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#aspHexR)" opacity="0.25"/>
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#aspHexR)" stroke-width="1" fill="none"/>
+          <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#aspCrossR)"/>
+          <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#aspCrossR)"/>
+          <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"/>
+          <defs>
+            <linearGradient id="aspHexR" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#006a67"/>
+            </linearGradient>
+            <linearGradient id="aspCrossR" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#b7ecea"/><stop offset="100%" stop-color="white" stop-opacity="0.9"/>
+            </linearGradient>
+          </defs>
         </svg>
+        <div class="asp-logo-wordmark">
+          <span>CABINET</span>
+          <span>NOURI</span>
+        </div>
+      </a>
+
+      <!-- Brand text -->
+      <div class="asp-brand-text">
+        <h2 data-ar="انضم إلى عائلتنا 🌟" data-fr="Rejoignez notre famille 🌟">انضم إلى عائلتنا 🌟</h2>
+        <p data-ar="سجّل حساباً مجانياً وابدأ رحلتك نحو ابتسامة مثالية" data-fr="Créez un compte gratuit et commencez votre voyage vers un sourire parfait">سجّل حساباً مجانياً وابدأ رحلتك نحو ابتسامة مثالية</p>
+      </div>
+
+      <!-- Features list -->
+      <div class="asp-features">
+        <div class="asp-feature-item">
+          <div class="asp-feature-icon">📅</div>
+          <span data-ar="تتبع مواعيدك بسهولة" data-fr="Suivez vos rendez-vous">تتبع مواعيدك بسهولة</span>
+        </div>
+        <div class="asp-feature-item">
+          <div class="asp-feature-icon">🔔</div>
+          <span data-ar="إشعارات تذكير فورية" data-fr="Notifications instantanées">إشعارات تذكير فورية</span>
+        </div>
+        <div class="asp-feature-item">
+          <div class="asp-feature-icon">🔒</div>
+          <span data-ar="بياناتك محمية ومشفرة" data-fr="Données protégées et chiffrées">بياناتك محمية ومشفرة</span>
+        </div>
+      </div>
+
+      <!-- Trust pills -->
+      <div class="asp-trust">
+        <div class="asp-trust-pill">✅ <span data-ar="مجاني تماماً" data-fr="100% gratuit">مجاني تماماً</span></div>
+        <div class="asp-trust-pill">⚡ <span data-ar="إنشاء فوري" data-fr="Instantané">إنشاء فوري</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RIGHT FORM PANEL ══ -->
+  <div class="asp-form-panel">
+
+    <!-- Mobile logo -->
+    <a href="../index.html" class="asp-mobile-logo">
+      <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
+        <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#aspMobR)" opacity="0.2"/>
+        <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#aspMobR)" stroke-width="1.5" fill="none"/>
+        <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#aspMobRC)"/>
+        <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#aspMobRC)"/>
+        <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"/>
+        <defs>
+          <linearGradient id="aspMobR" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#006a67"/><stop offset="100%" stop-color="#009e99"/>
+          </linearGradient>
+          <linearGradient id="aspMobRC" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#006a67"/><stop offset="100%" stop-color="#009e99"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      CABINET NOURI
     </a>
 
-    <div id="chatWidget">
-        <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي"
-            style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
-            <span style="font-size:1.3rem;line-height:1;">💬</span>
-            <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد" data-fr="Assistant">مساعد</span>
-        </button>
-        <div id="chatWindow" class="chat-hidden">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <div class="chat-avatar">🦷</div>
-                    <div>
-                        <div class="chat-title" data-ar="مساعد Cabinet Nouri" data-fr="Assistant Cabinet Nouri">مساعد Cabinet Nouri</div>
-                        <div class="chat-status" data-ar="متاح الآن" data-fr="Disponible">متاح الآن</div>
-                    </div>
-                </div>
-                <button class="chat-close" onclick="toggleChat()">✕</button>
-            </div>
-            <div id="chatMessages" class="chat-messages"></div>
-            <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="اكتب رسالتك..." data-placeholder-ar="اكتب رسالتك..." data-placeholder-fr="Écrivez votre message..." onkeypress="handleChatKey(event)">
-                <button id="chatSendBtn" onclick="sendChatMessage()">➤</button>
-            </div>
+    <div class="asp-form-wrap">
+      <div id="registerFormContainer">
+        <!-- Header -->
+        <div class="asp-form-header">
+          <h1 data-ar="إنشاء حساب جديد" data-fr="Créer un nouveau compte">إنشاء حساب جديد</h1>
+          <p data-ar="سجّل وابدأ حجز مواعيدك بسهولة تامة" data-fr="Inscrivez-vous et réservez facilement">سجّل وابدأ حجز مواعيدك بسهولة تامة</p>
         </div>
-    </div>
 
+        <div id="errorBox" class="alert-error"></div>
+
+        <!-- Google OAuth -->
+        <button id="google-signup-btn" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          <span data-ar="تسجيل بحساب Google" data-fr="S'inscrire avec Google">تسجيل بحساب Google</span>
+        </button>
+
+        <div class="divider">— أو —</div>
+
+        <form id="registerForm">
+          <div class="form-group">
+            <label data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</label>
+            <input type="text" id="regFullName" class="form-input" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet" required minlength="3">
+          </div>
+          <div class="form-group">
+            <label data-ar="رقم الهاتف" data-fr="Numéro de téléphone">رقم الهاتف</label>
+            <input type="tel" id="regPhone" class="form-input" placeholder="06XXXXXXXX" required>
+          </div>
+          <div class="form-group">
+            <label data-ar="البريد الإلكتروني" data-fr="E-mail">البريد الإلكتروني</label>
+            <input type="email" id="regEmail" class="form-input" placeholder="example@mail.com" required>
+          </div>
+          <div class="asp-pw-grid">
+            <div class="form-group">
+              <label data-ar="كلمة المرور" data-fr="Mot de passe">كلمة المرور</label>
+              <div class="form-group-password">
+                <input type="password" id="regPassword" class="form-input" placeholder="••••••••" required minlength="6">
+                <span class="password-toggle" onclick="togglePasswordVisibility('regPassword', this)">👁️</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label data-ar="تأكيد كلمة المرور" data-fr="Confirmer mot de passe">تأكيد كلمة المرور</label>
+              <div class="form-group-password">
+                <input type="password" id="regConfirmPassword" class="form-input" placeholder="••••••••" required minlength="6">
+                <span class="password-toggle" onclick="togglePasswordVisibility('regConfirmPassword', this)">👁️</span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;" data-ar="إنشاء الحساب" data-fr="Créer le compte">إنشاء الحساب</button>
+        </form>
+
+        <div class="asp-form-footer">
+          <p>لديك حساب بالفعل؟ <a href="login.html" data-ar="دخول" data-fr="Se connecter">دخول</a></p>
+          <a href="../index.html" class="asp-back-home" data-ar="← العودة للرئيسية" data-fr="← Revenir à l'accueil">← العودة للرئيسية</a>
+        </div>
+      </div>
+
+      <!-- Success Screen -->
+      <div id="successScreen" style="display:none" class="success-screen">
+        <div class="conf-icon">✅</div>
+        <h2 style="margin-bottom:0.5rem;" data-ar="تم إنشاء حسابك بنجاح!" data-fr="Compte créé !">تم إنشاء حسابك بنجاح!</h2>
+        <p style="color:var(--text-muted);margin-bottom:20px;">مرحباً بك يا <span id="successName" style="color:#006a67;font-weight:700;"></span> في عائلتنا.</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);" data-ar="معرّفك الشخصي الدائم هو:" data-fr="Votre identifiant permanent :">معرّفك الشخصي الدائم هو:</p>
+        <div class="user-id-badge" id="userIdDisplay"></div>
+        <p style="font-size:0.75rem;color:#ef4444;margin-bottom:24px;">⚠️ يرجى تصوير الشاشة أو حفظ هذا الرقم</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);">
+          سيتم تحويلك لصفحة الدخول خلال <span id="redirectCountdown" style="color:#006a67;font-weight:900;">4</span> ثوانٍ...
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.asp-layout -->
+
+<div id="toastContainer"></div>
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد" target="_blank" aria-label="تواصل عبر واتساب">
+  <svg viewBox="0 0 24 24" fill="white" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/>
+  </svg>
+</a>
+
+<div id="chatWidget">
+  <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
+    <span style="font-size:1.3rem;line-height:1;">💬</span>
+    <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد" data-fr="Assistant">مساعد</span>
+  </button>
+  <div id="chatWindow" class="chat-hidden">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">🦷</div>
+        <div>
+          <div class="chat-title" data-ar="مساعد Cabinet Nouri" data-fr="Assistant Cabinet Nouri">مساعد Cabinet Nouri</div>
+          <div class="chat-status" data-ar="متاح الآن" data-fr="Disponible">متاح الآن</div>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div id="chatMessages" class="chat-messages"></div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="اكتب رسالتك..." data-placeholder-ar="اكتب رسالتك..." data-placeholder-fr="Écrivez votre message..." onkeypress="handleChatKey(event)">
+      <button id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+    </div>
+  </div>
+</div>
+
+<script>window._ROOT = '../';</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-client.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/i18n.js"></script>
+<script src="../js/register.js"></script>
+<script>
+  document.getElementById('google-signup-btn').addEventListener('click', async () => {
+    const { error } = await window.supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: 'https://cabinet-dentaire-nouri.vercel.app/pages/complete-profile.html' }
+    });
+    if (error) { console.error(error); alert('حدث خطأ: ' + error.message); }
+  });
+</script>
+<script src="../js/chat.js"></script>
+<script src="../js/toasts.js"></script>
 
 </body>
-
 </html>
