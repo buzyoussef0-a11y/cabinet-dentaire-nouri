@@ -20,390 +20,351 @@
   <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
 
   <style>
-    /* ══ RESET & BASE ══ */
+    /* ══ FORCE DARK THEME — override light-theme.css ══ */
+    html, body {
+      background: #060d1a !important;
+      color: #e2e8f0 !important;
+    }
+    body::before { display: none !important; }
+
+    /* override light-theme text overrides inside .prf scope */
+    .prf h1, .prf h2, .prf h3, .prf h4,
+    .prf p, .prf span, .prf div,
+    .prf a { color: inherit !important; }
+
+    /* ══ BASE ══ */
     *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Cairo', sans-serif; min-height: 100vh; overflow-x: hidden; }
 
-    body {
-      background: #060f1e;
-      min-height: 100vh;
-      font-family: 'Cairo', sans-serif;
-      overflow-x: hidden;
+    /* ══ BLOBS ══ */
+    .prf-blob {
+      position: fixed; border-radius: 50%; filter: blur(100px);
+      pointer-events: none; z-index: 0;
     }
-
-    /* ══ AMBIENT BLOBS ══ */
-    .prof-blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(90px);
-      pointer-events: none;
-      z-index: 0;
-      animation: blobFloat 12s ease-in-out infinite;
+    .prf-blob-a {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(13,148,136,0.22) 0%, transparent 65%);
+      top: -200px; right: -150px;
+      animation: blobDrift 18s ease-in-out infinite;
     }
-    .prof-blob-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(13,148,136,0.18) 0%, transparent 70%);
-      top: -120px; right: -100px;
-      animation-duration: 14s;
-    }
-    .prof-blob-2 {
+    .prf-blob-b {
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
-      bottom: 100px; left: -80px;
-      animation-duration: 18s; animation-delay: -6s;
+      background: radial-gradient(circle, rgba(6,182,212,0.14) 0%, transparent 65%);
+      bottom: 0; left: -100px;
+      animation: blobDrift 22s ease-in-out infinite reverse;
     }
-    .prof-blob-3 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
-      top: 40%; right: 30%;
-      animation-duration: 22s; animation-delay: -3s;
-    }
-    @keyframes blobFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33%       { transform: translate(20px, -30px) scale(1.05); }
-      66%       { transform: translate(-15px, 20px) scale(0.97); }
+    @keyframes blobDrift {
+      0%,100% { transform: translate(0,0); }
+      50% { transform: translate(30px,-40px); }
     }
 
-    /* ══ LAYOUT ══ */
-    .prof-page {
-      position: relative;
-      z-index: 1;
-      padding-top: 80px;
+    /* ══ NAVBAR LANG FIX ══ */
+    .lang-btn {
+      background: rgba(255,255,255,0.08) !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+      border-radius: 50px !important;
+      color: #ffffff !important;
+      padding: 6px 14px !important;
+      gap: 6px !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      font-family: 'Cairo', sans-serif !important;
+      cursor: pointer;
+      display: inline-flex !important;
+      align-items: center !important;
+      transition: background 0.2s !important;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.14) !important; }
+    .lang-btn span, #langLabel {
+      color: #ffffff !important;
+      font-size: 0.82rem !important;
+      font-family: 'Cairo', sans-serif !important;
+    }
+    .lang-chevron { color: rgba(255,255,255,0.7) !important; stroke: rgba(255,255,255,0.7) !important; }
+    #auth-links {
+      display: flex !important; align-items: center; gap: 8px; padding: 0; list-style: none;
     }
 
-    /* ══ PROFILE BANNER ══ */
-    .prof-banner {
-      width: 100%;
-      height: 220px;
-      background: linear-gradient(135deg, #001133 0%, #003d3b 40%, #006a67 70%, #0d9488 100%);
+    /* ══ PAGE WRAPPER ══ */
+    .prf {
+      position: relative; z-index: 1;
+      padding-top: 72px;
+    }
+
+    /* ══ HERO BANNER ══ */
+    .prf-hero {
       position: relative;
+      height: 240px;
       overflow: hidden;
+      background: linear-gradient(135deg, #001a33 0%, #003a38 35%, #006a67 65%, #009e99 100%);
     }
-    .prof-banner::before {
+    .prf-hero::before {
       content: '';
       position: absolute; inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 50%, rgba(13,242,242,0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 30%, rgba(6,182,212,0.1) 0%, transparent 40%);
+      background:
+        radial-gradient(ellipse at 25% 60%, rgba(13,242,242,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 30%, rgba(0,150,136,0.12) 0%, transparent 45%);
     }
-    /* dot grid overlay */
-    .prof-banner::after {
+    /* dot pattern */
+    .prf-hero::after {
       content: '';
       position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-    .prof-banner-wave {
-      position: absolute;
-      bottom: -2px; left: 0; right: 0;
-    }
-    .prof-banner-wave svg {
-      width: 100%; height: 60px; display: block;
+      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.9) 80%, transparent 100%);
     }
 
-    /* ══ AVATAR LIFT ══ */
-    .prof-avatar-wrap {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      margin-top: -64px;
-      margin-bottom: 8px;
+    /* floating decoration circles */
+    .prf-hero-deco {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(13,242,242,0.12);
     }
-    .prof-avatar-ring {
-      width: 128px; height: 128px;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, #0df2f2, #0D9488, #4A6CF7);
-      box-shadow: 0 0 0 4px #060f1e, 0 0 40px rgba(13,242,242,0.35);
+    .prf-hero-deco-1 { width: 300px; height: 300px; top: -120px; left: 15%; opacity: 0.4; }
+    .prf-hero-deco-2 { width: 180px; height: 180px; bottom: -60px; right: 20%; opacity: 0.3; }
+
+    /* wave bottom */
+    .prf-hero-wave {
+      position: absolute; bottom: -1px; left: 0; right: 0; z-index: 2;
     }
-    .prof-avatar-inner {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0D9488, #0df2f2);
+
+    /* ══ AVATAR SECTION ══ */
+    .prf-avatar-section {
+      display: flex; flex-direction: column; align-items: center;
+      margin-top: -60px; position: relative; z-index: 3;
+      padding-bottom: 8px;
+    }
+    .prf-avatar-ring {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: conic-gradient(#0df2f2, #0D9488, #4A6CF7, #0df2f2);
+      padding: 3px;
+      box-shadow: 0 0 0 4px #060d1a, 0 8px 40px rgba(13,242,242,0.4);
+      animation: ringRotate 8s linear infinite;
+    }
+    @keyframes ringRotate {
+      from { filter: hue-rotate(0deg); }
+      to   { filter: hue-rotate(360deg); }
+    }
+    .prf-avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: linear-gradient(135deg, #0a2040 0%, #0D9488 100%);
       display: flex; align-items: center; justify-content: center;
-      font-size: 2.8rem; font-weight: 900; color: #060f1e;
+      font-size: 2.6rem; font-weight: 900; color: #0df2f2;
       overflow: hidden;
     }
-    .prof-avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+    .prf-avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ══ MAIN CONTENT ══ */
-    .prof-content {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
+    .prf-name {
+      margin: 16px 0 4px;
+      font-size: 1.7rem; font-weight: 900;
+      color: #ffffff !important;
+      letter-spacing: -0.02em;
     }
-
-    /* ══ PROFILE HEADER CARD ══ */
-    .prof-header-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 32px 36px 28px;
-      text-align: center;
-      margin-bottom: 28px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      animation: fadeSlideUp 0.5s ease both;
+    .prf-email {
+      color: rgba(255,255,255,0.45) !important;
+      font-size: 0.88rem;
+      margin: 0 0 12px;
     }
-    .prof-name {
-      font-size: 1.8rem; font-weight: 900; color: #ffffff;
-      margin: 0 0 6px; letter-spacing: -0.02em;
-    }
-    .prof-email {
-      color: rgba(255,255,255,0.45); font-size: 0.9rem;
-      margin: 0 0 14px; word-break: break-all;
-    }
-    .prof-badge {
+    .prf-member-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(13,242,242,0.08);
-      border: 1px solid rgba(13,242,242,0.25);
-      color: #0df2f2;
+      background: rgba(13,242,242,0.07);
+      border: 1px solid rgba(13,242,242,0.2);
+      color: #0df2f2 !important;
       border-radius: 50px;
-      padding: 5px 16px;
+      padding: 5px 18px;
       font-size: 0.78rem; font-weight: 700;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
-    .prof-badge::before { content: '🆔'; font-size: 0.75rem; }
 
-    /* ══ ACTION BUTTONS ROW ══ */
-    .prof-actions-row {
-      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    /* ══ ACTION BUTTONS ══ */
+    .prf-actions {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 36px;
     }
-    .prof-action-btn {
+    .prf-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 22px;
-      font-family: 'Cairo', sans-serif; font-size: 0.9rem; font-weight: 700;
+      padding: 10px 22px;
+      font-family: 'Cairo', sans-serif; font-size: 0.88rem; font-weight: 700;
       border-radius: 50px; cursor: pointer; text-decoration: none;
-      transition: transform 0.18s, box-shadow 0.18s, opacity 0.18s;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
       border: none; white-space: nowrap;
     }
-    .prof-action-btn:hover { transform: translateY(-2px); }
-    .prof-action-btn:active { transform: scale(0.97); }
+    .prf-btn:hover { transform: translateY(-2px); }
+    .prf-btn:active { transform: scale(0.97); }
 
-    .prof-action-primary {
-      background: linear-gradient(135deg, #0D9488, #0df2f2);
-      color: #060f1e;
-      box-shadow: 0 4px 20px rgba(13,242,242,0.3);
+    .prf-btn-primary {
+      background: linear-gradient(135deg, #0D9488 0%, #0df2f2 100%);
+      color: #060d1a !important;
+      box-shadow: 0 4px 18px rgba(13,242,242,0.28);
     }
-    .prof-action-primary:hover { box-shadow: 0 6px 28px rgba(13,242,242,0.45); }
+    .prf-btn-primary:hover { box-shadow: 0 6px 26px rgba(13,242,242,0.42); }
 
-    .prof-action-outline {
+    .prf-btn-ghost {
       background: rgba(255,255,255,0.05);
-      border: 1.5px solid rgba(13,242,242,0.4) !important;
-      color: #0df2f2;
+      border: 1.5px solid rgba(13,242,242,0.35) !important;
+      color: #0df2f2 !important;
     }
-    .prof-action-outline:hover { background: rgba(13,242,242,0.08); }
+    .prf-btn-ghost:hover { background: rgba(13,242,242,0.08); }
 
-    .prof-action-danger {
-      background: rgba(255,255,255,0.04);
-      border: 1.5px solid rgba(239,68,68,0.35) !important;
-      color: #f87171;
+    .prf-btn-danger {
+      background: rgba(255,255,255,0.03);
+      border: 1.5px solid rgba(239,68,68,0.3) !important;
+      color: #f87171 !important;
     }
-    .prof-action-danger:hover { background: rgba(239,68,68,0.1); }
+    .prf-btn-danger:hover { background: rgba(239,68,68,0.1); }
 
-    /* ══ GRID ══ */
-    .prof-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    @media (max-width: 700px) {
-      .prof-grid { grid-template-columns: 1fr; }
-      .prof-actions-row { flex-direction: column; }
-      .prof-action-btn { justify-content: center; }
+    /* ══ DIVIDER ══ */
+    .prf-divider {
+      width: 100%; max-width: 640px; margin: 0 auto 32px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(13,242,242,0.2), transparent);
     }
 
-    /* ══ STAT CARDS ══ */
-    .stat-card-v2 {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 28px 24px;
-      display: flex; align-items: center; gap: 20px;
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      transition: border-color 0.25s, transform 0.25s, background 0.25s;
-      animation: fadeSlideUp 0.5s ease both;
-      position: relative; overflow: hidden;
-    }
-    .stat-card-v2::before {
-      content: '';
-      position: absolute; top: 0; right: 0;
-      width: 100%; height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(13,242,242,0.5), transparent);
-      border-radius: 20px 20px 0 0;
-    }
-    .stat-card-v2:hover {
-      border-color: rgba(13,242,242,0.3);
-      transform: translateY(-3px);
-      background: rgba(255,255,255,0.06);
-    }
-    .stat-icon-wrap {
-      width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
-    }
-    .stat-icon-teal { background: rgba(13,148,136,0.2); }
-    .stat-icon-blue { background: rgba(6,182,212,0.2); }
-    .stat-text-wrap { flex: 1; text-align: right; }
-    .stat-label {
-      font-size: 0.82rem; color: rgba(255,255,255,0.5);
-      font-weight: 600; margin-bottom: 6px;
-    }
-    .stat-num-v2 {
-      font-size: 2.4rem; font-weight: 900; line-height: 1;
-      color: #0df2f2; margin-bottom: 4px;
-    }
-    .stat-sub {
-      font-size: 0.75rem; color: rgba(255,255,255,0.3);
+    /* ══ CONTENT ══ */
+    .prf-content {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 20px 80px;
     }
 
-    /* ══ INFO CARD ══ */
-    .info-card-v2 {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 28px;
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      animation: fadeSlideUp 0.5s ease both;
-      grid-column: span 2;
+    /* ══ STATS ROW ══ */
+    .prf-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-bottom: 20px;
     }
-    @media (max-width: 700px) {
-      .info-card-v2 { grid-column: span 1; }
-    }
-    .info-card-header {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .info-card-icon {
-      width: 40px; height: 40px; border-radius: 12px;
-      background: rgba(13,148,136,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; flex-shrink: 0;
-    }
-    .info-card-title {
-      font-size: 1.1rem; font-weight: 700; color: #ffffff;
-    }
+    @media (max-width: 560px) { .prf-stats { grid-template-columns: 1fr; } }
 
-    /* ── Field rows ── */
-    .profile-field { margin-bottom: 14px; }
-    .profile-field:last-child { margin-bottom: 0; }
-
-    .field-view-row {
+    .prf-stat {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 14px;
-      padding: 14px 18px;
-      display: flex; justify-content: space-between; align-items: center; gap: 12px;
-      transition: border-color 0.2s, background 0.2s;
+      border-radius: 20px;
+      padding: 22px 24px;
+      display: flex; align-items: center; gap: 18px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      animation: slideUp 0.5s ease both;
     }
-    .field-view-row:hover {
-      border-color: rgba(13,242,242,0.2);
-      background: rgba(13,242,242,0.02);
+    .prf-stat::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(13,242,242,0.4), transparent);
     }
-    .field-info { text-align: right; flex: 1; }
-    .field-label {
-      font-size: 0.74rem; color: rgba(255,255,255,0.38);
-      font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .field-value-text { color: white; font-size: 0.95rem; font-weight: 700; }
+    .prf-stat:hover { border-color: rgba(13,242,242,0.22); transform: translateY(-2px); }
 
-    .field-edit-btn {
-      background: rgba(13,242,242,0.1);
-      border: 1px solid rgba(13,242,242,0.3);
-      color: #0df2f2;
-      border-radius: 50px;
-      padding: 6px 16px;
-      font-family: 'Cairo', sans-serif; font-size: 0.78rem; font-weight: 700;
-      cursor: pointer; white-space: nowrap;
-      transition: background 0.2s;
-      flex-shrink: 0;
+    .prf-stat-icon {
+      width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
     }
-    .field-edit-btn:hover { background: rgba(13,242,242,0.2); }
+    .si-teal { background: rgba(13,148,136,0.15); box-shadow: inset 0 0 0 1px rgba(13,242,242,0.15); }
+    .si-blue { background: rgba(99,102,241,0.15); box-shadow: inset 0 0 0 1px rgba(99,102,241,0.15); }
 
-    .field-protected-badge {
-      font-size: 0.72rem; color: rgba(255,255,255,0.25);
-      padding: 5px 12px;
+    .prf-stat-body { flex: 1; text-align: right; }
+    .prf-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.4) !important; font-weight: 600; margin-bottom: 5px; }
+    .prf-stat-num { font-size: 2.2rem; font-weight: 900; color: #0df2f2 !important; line-height: 1; margin-bottom: 3px; }
+    .prf-stat-sub { font-size: 0.72rem; color: rgba(255,255,255,0.25) !important; }
+
+    /* ══ INFO CARD ══ */
+    .prf-info-card {
+      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      overflow: hidden;
+      animation: slideUp 0.5s ease 0.15s both;
+    }
+    .prf-info-head {
+      padding: 20px 24px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .prf-info-head-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(13,148,136,0.18);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .prf-info-head-title { font-size: 1rem; font-weight: 700; color: #ffffff !important; }
+    .prf-info-body { padding: 8px 24px 20px; }
+
+    /* ── Field ── */
+    .prf-field { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .prf-field:last-child { border-bottom: none; }
+
+    .prf-field-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+    .prf-field-row:hover { background: rgba(255,255,255,0.02); }
+
+    .prf-field-info { text-align: right; flex: 1; }
+    .prf-field-label { font-size: 0.72rem; color: rgba(255,255,255,0.35) !important; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .prf-field-value { font-size: 0.95rem; font-weight: 700; color: #f1f5f9 !important; }
+
+    .prf-edit-btn {
+      background: rgba(13,242,242,0.08);
+      border: 1px solid rgba(13,242,242,0.25) !important;
+      color: #0df2f2 !important;
       border-radius: 50px;
-      flex-shrink: 0;
+      padding: 5px 16px;
+      font-family: 'Cairo', sans-serif; font-size: 0.76rem; font-weight: 700;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .prf-edit-btn:hover { background: rgba(13,242,242,0.15); }
+
+    .prf-protected {
+      font-size: 0.72rem; color: rgba(255,255,255,0.2) !important;
+      padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,0.06) !important;
+      border-radius: 50px; flex-shrink: 0;
     }
 
-    .field-edit-row { display: none; gap: 10px; margin-top: 10px; }
-    .field-edit-row.active { display: flex; }
-
-    .field-input {
+    /* edit inline */
+    .prf-field-edit { display: none; gap: 10px; padding: 0 16px 12px; }
+    .prf-field-edit.active { display: flex; }
+    .prf-input {
       flex: 1;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(13,242,242,0.3);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(13,242,242,0.3) !important;
       border-radius: 12px;
       padding: 10px 14px;
-      color: white;
+      color: #ffffff !important;
       font-family: 'Cairo', sans-serif; font-size: 0.9rem;
       outline: none; direction: rtl;
-      transition: border-color 0.2s;
     }
-    .field-input:focus { border-color: rgba(13,242,242,0.6); }
-
-    .field-save-btn {
+    .prf-input:focus { border-color: rgba(13,242,242,0.6) !important; }
+    .prf-save-btn {
       background: linear-gradient(135deg, #0D9488, #06B6D4);
       border: none; border-radius: 12px;
       padding: 10px 18px;
-      color: white; font-family: 'Cairo', sans-serif;
-      font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap;
+      color: #060d1a !important; font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
       transition: opacity 0.2s;
     }
-    .field-save-btn:hover:not(:disabled) { opacity: 0.85; }
-    .field-save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    .field-cancel-btn {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+    .prf-save-btn:hover:not(:disabled) { opacity: 0.85; }
+    .prf-save-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .prf-cancel-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08) !important;
       border-radius: 12px; padding: 10px 12px;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.45) !important;
       font-family: 'Cairo', sans-serif; font-size: 0.85rem; cursor: pointer;
-      transition: background 0.2s;
     }
-    .field-cancel-btn:hover { background: rgba(255,255,255,0.1); }
+    .prf-cancel-btn:hover { background: rgba(255,255,255,0.08); }
 
     /* ══ ANIMATIONS ══ */
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(18px); }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    .delay-1 { animation-delay: 0.05s; }
-    .delay-2 { animation-delay: 0.12s; }
-    .delay-3 { animation-delay: 0.19s; }
-    .delay-4 { animation-delay: 0.26s; }
-    .delay-5 { animation-delay: 0.33s; }
-
-    /* ══ NAVBAR OVERRIDES ══ */
-    #auth-links {
-      display: flex !important; align-items: center; gap: 8px;
-      padding: 0; list-style: none;
-    }
-    .lang-btn {
-      background: rgba(255,255,255,0.07) !important;
-      border: 1px solid rgba(255,255,255,0.12) !important;
-      border-radius: 50px !important;
-      color: #F1F5F9 !important;
-      padding: 5px 12px !important;
-      gap: 6px !important;
-      font-size: 0.82rem !important; font-weight: 700 !important;
-      cursor: pointer; transition: background 0.2s !important;
-    }
-    .lang-btn:hover { background: rgba(255,255,255,0.12) !important; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.12s; }
+    .d3 { animation-delay: 0.19s; }
   </style>
 </head>
 
 <body>
 
-  <!-- Ambient blobs -->
-  <div class="prof-blob prof-blob-1"></div>
-  <div class="prof-blob prof-blob-2"></div>
-  <div class="prof-blob prof-blob-3"></div>
+  <div class="prf-blob prf-blob-a"></div>
+  <div class="prf-blob prf-blob-b"></div>
 
   <div id="scrollProgress"><div id="scrollFill"></div></div>
 
@@ -411,22 +372,16 @@
   <nav id="mainNav">
     <a href="../index.html" class="nav-logo nav-logo-v2">
       <div class="logo-mark">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hexFillP)" opacity="0.15"/>
-          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hexStrokeP)" stroke-width="1" fill="none"/>
-          <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#crossFillP)"/>
-          <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#crossFillP)"/>
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hfP)" opacity="0.15"/>
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hsP)" stroke-width="1" fill="none"/>
+          <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#cfP)"/>
+          <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#cfP)"/>
           <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"/>
           <defs>
-            <linearGradient id="hexFillP" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/>
-            </linearGradient>
-            <linearGradient id="hexStrokeP" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/>
-            </linearGradient>
-            <linearGradient id="crossFillP" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="white" stop-opacity="0.9"/>
-            </linearGradient>
+            <linearGradient id="hfP" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/></linearGradient>
+            <linearGradient id="hsP" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/></linearGradient>
+            <linearGradient id="cfP" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="white" stop-opacity="0.9"/></linearGradient>
           </defs>
         </svg>
       </div>
@@ -447,16 +402,16 @@
       <li><a href="appointment-tracking.html" data-ar="تتبع موعدك" data-fr="Suivi RDV">تتبع موعدك</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding: 10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a>
+      <a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding:10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a>
       <div id="auth-links"></div>
       <div class="lang-dropdown-wrap" id="langDropdownWrap">
         <button class="lang-btn" id="langToggle" onclick="toggleLangDropdown()" aria-label="تغيير اللغة" aria-haspopup="true" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15">
             <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
             <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
           <span id="langLabel">عربي</span>
-          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" width="12" height="12" aria-hidden="true">
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" width="12" height="12">
             <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
@@ -474,149 +429,141 @@
   </nav>
 
   <!-- ══ PAGE ══ -->
-  <div class="prof-page">
+  <div class="prf">
 
-    <!-- Banner -->
-    <div class="prof-banner">
-      <div class="prof-banner-wave">
-        <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#060f1e"/>
+    <!-- Hero Banner -->
+    <div class="prf-hero">
+      <div class="prf-hero-deco prf-hero-deco-1"></div>
+      <div class="prf-hero-deco prf-hero-deco-2"></div>
+      <div class="prf-hero-wave">
+        <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,40 C360,80 720,0 1080,50 C1260,72 1380,20 1440,40 L1440,70 L0,70 Z" fill="#060d1a"/>
         </svg>
       </div>
     </div>
 
-    <!-- Avatar lifted from banner -->
-    <div class="prof-avatar-wrap">
-      <div class="prof-avatar-ring">
-        <div class="prof-avatar-inner" id="profAvatarInner">
+    <!-- Avatar + name -->
+    <div class="prf-avatar-section">
+      <div class="prf-avatar-ring">
+        <div class="prf-avatar-inner" id="profAvatarInner">
           <span id="profileAvatar">?</span>
         </div>
       </div>
+      <h2 class="prf-name" id="profileDisplayName">---</h2>
+      <p class="prf-email" id="profEmail">---</p>
+      <div class="prf-member-badge">
+        🆔 رقم العضوية: <span id="profIdShort">----</span>
+      </div>
+
+      <!-- Actions -->
+      <div class="prf-actions">
+        <a href="appointment-tracking.html" class="prf-btn prf-btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span data-ar="مواعيدي" data-fr="Mes RDV">مواعيدي</span>
+        </a>
+        <a href="javascript:void(0)" onclick="goToBooking()" class="prf-btn prf-btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span data-ar="حجز جديد" data-fr="Nouveau RDV">حجز جديد</span>
+        </a>
+        <button onclick="logoutUser()" class="prf-btn prf-btn-danger">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-ar="خروج" data-fr="Déconnecter">خروج</span>
+        </button>
+      </div>
+
+      <div class="prf-divider"></div>
     </div>
 
-    <div class="prof-content">
+    <!-- Content -->
+    <div class="prf-content">
 
-      <!-- ══ HEADER CARD ══ -->
-      <div class="prof-header-card delay-1">
-        <h2 class="prof-name" id="profileDisplayName">---</h2>
-        <p class="prof-email" id="profEmail">---</p>
-        <div class="prof-badge">
-          رقم العضوية: <span id="profIdShort">----</span>
+      <!-- Stats -->
+      <div class="prf-stats">
+        <div class="prf-stat d1">
+          <div class="prf-stat-icon si-teal">📅</div>
+          <div class="prf-stat-body">
+            <div class="prf-stat-label" data-ar="إجمالي المواعيد" data-fr="Total RDV">إجمالي المواعيد</div>
+            <div class="prf-stat-num" id="totalAppointments">—</div>
+            <div class="prf-stat-sub" data-ar="موعد مسجّل" data-fr="enregistrés">موعد مسجّل</div>
+          </div>
         </div>
-
-        <div class="prof-actions-row">
-          <a href="appointment-tracking.html" class="prof-action-btn prof-action-primary">
-            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            <span data-ar="تتبع مواعيدي" data-fr="Mes RDV">تتبع مواعيدي</span>
-          </a>
-          <a href="javascript:void(0)" onclick="goToBooking()" class="prof-action-btn prof-action-outline">
-            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            <span data-ar="حجز موعد جديد" data-fr="Nouveau RDV">حجز موعد جديد</span>
-          </a>
-          <button onclick="logoutUser()" class="prof-action-btn prof-action-danger">
-            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span data-ar="تسجيل الخروج" data-fr="Se déconnecter">تسجيل الخروج</span>
-          </button>
+        <div class="prf-stat d2">
+          <div class="prf-stat-icon si-blue">✅</div>
+          <div class="prf-stat-body">
+            <div class="prf-stat-label" data-ar="المواعيد النشطة" data-fr="RDV actifs">المواعيد النشطة</div>
+            <div class="prf-stat-num" id="activeAppointments">—</div>
+            <div class="prf-stat-sub" data-ar="موعد مجدوَل" data-fr="planifiés">موعد مجدوَل</div>
+          </div>
         </div>
       </div>
 
-      <!-- ══ GRID ══ -->
-      <div class="prof-grid">
-
-        <!-- Stat 1 -->
-        <div class="stat-card-v2 delay-2">
-          <div class="stat-icon-wrap stat-icon-teal">📅</div>
-          <div class="stat-text-wrap">
-            <div class="stat-label" data-ar="إجمالي المواعيد" data-fr="Total RDV">إجمالي المواعيد</div>
-            <div class="stat-num-v2" id="totalAppointments">—</div>
-            <div class="stat-sub" data-ar="موعد مسجّل" data-fr="rendez-vous enregistrés">موعد مسجّل</div>
-          </div>
+      <!-- Info Card -->
+      <div class="prf-info-card d3">
+        <div class="prf-info-head">
+          <div class="prf-info-head-icon">👤</div>
+          <div class="prf-info-head-title" data-ar="المعلومات الشخصية" data-fr="Informations personnelles">المعلومات الشخصية</div>
         </div>
-
-        <!-- Stat 2 -->
-        <div class="stat-card-v2 delay-3">
-          <div class="stat-icon-wrap stat-icon-blue">✅</div>
-          <div class="stat-text-wrap">
-            <div class="stat-label" data-ar="المواعيد النشطة" data-fr="RDV actifs">المواعيد النشطة</div>
-            <div class="stat-num-v2" id="activeAppointments">—</div>
-            <div class="stat-sub" data-ar="موعد مجدوَل" data-fr="rendez-vous planifiés">موعد مجدوَل</div>
-          </div>
-        </div>
-
-        <!-- Info card spanning full width -->
-        <div class="info-card-v2 delay-4">
-          <div class="info-card-header">
-            <div class="info-card-icon">👤</div>
-            <div class="info-card-title" data-ar="المعلومات الشخصية" data-fr="Informations personnelles">المعلومات الشخصية</div>
-          </div>
+        <div class="prf-info-body">
 
           <!-- Full Name -->
-          <div class="profile-field">
-            <div class="field-view-row" id="nameViewRow">
-              <div class="field-info">
-                <div class="field-label" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</div>
-                <div class="field-value-text" id="displayName">---</div>
+          <div class="prf-field">
+            <div class="prf-field-row" id="nameViewRow">
+              <div class="prf-field-info">
+                <div class="prf-field-label" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</div>
+                <div class="prf-field-value" id="displayName">---</div>
               </div>
-              <button class="field-edit-btn" onclick="editField('Name')" data-ar="✏️ تعديل" data-fr="✏️ Modifier">✏️ تعديل</button>
+              <button class="prf-edit-btn" onclick="editField('Name')" data-ar="✏️ تعديل" data-fr="✏️ Modifier">✏️ تعديل</button>
             </div>
-            <div class="field-edit-row" id="nameEditRow">
-              <input class="field-input" type="text" id="editName" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet">
-              <button class="field-save-btn" id="nameSaveBtn" onclick="saveField('name')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
-              <button class="field-cancel-btn" onclick="cancelEdit('Name')">✕</button>
+            <div class="prf-field-edit" id="nameEditRow">
+              <input class="prf-input" type="text" id="editName" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet">
+              <button class="prf-save-btn" id="nameSaveBtn" onclick="saveField('name')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
+              <button class="prf-cancel-btn" onclick="cancelEdit('Name')">✕</button>
             </div>
           </div>
 
           <!-- Phone -->
-          <div class="profile-field">
-            <div class="field-view-row" id="phoneViewRow">
-              <div class="field-info">
-                <div class="field-label" data-ar="رقم الهاتف" data-fr="Téléphone">رقم الهاتف</div>
-                <div class="field-value-text" id="displayPhone">---</div>
+          <div class="prf-field">
+            <div class="prf-field-row" id="phoneViewRow">
+              <div class="prf-field-info">
+                <div class="prf-field-label" data-ar="رقم الهاتف" data-fr="Téléphone">رقم الهاتف</div>
+                <div class="prf-field-value" id="displayPhone">---</div>
               </div>
-              <button class="field-edit-btn" onclick="editField('Phone')" data-ar="✏️ تعديل" data-fr="✏️ Modifier">✏️ تعديل</button>
+              <button class="prf-edit-btn" onclick="editField('Phone')" data-ar="✏️ تعديل" data-fr="✏️ Modifier">✏️ تعديل</button>
             </div>
-            <div class="field-edit-row" id="phoneEditRow">
-              <input class="field-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
-              <button class="field-save-btn" id="phoneSaveBtn" onclick="saveField('phone')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
-              <button class="field-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
+            <div class="prf-field-edit" id="phoneEditRow">
+              <input class="prf-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
+              <button class="prf-save-btn" id="phoneSaveBtn" onclick="saveField('phone')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
+              <button class="prf-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
             </div>
           </div>
 
           <!-- Email (read-only) -->
-          <div class="profile-field">
-            <div class="field-view-row">
-              <div class="field-info">
-                <div class="field-label" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</div>
-                <div class="field-value-text" id="displayEmail">---</div>
+          <div class="prf-field">
+            <div class="prf-field-row">
+              <div class="prf-field-info">
+                <div class="prf-field-label" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</div>
+                <div class="prf-field-value" id="displayEmail">---</div>
               </div>
-              <span class="field-protected-badge" data-ar="محمي 🔒" data-fr="Protégé 🔒">محمي 🔒</span>
+              <span class="prf-protected" data-ar="🔒 محمي" data-fr="🔒 Protégé">🔒 محمي</span>
             </div>
           </div>
 
         </div>
-        <!-- /info-card -->
-
       </div>
-      <!-- /prof-grid -->
 
     </div>
-    <!-- /prof-content -->
   </div>
-  <!-- /prof-page -->
 
   <div id="toastContainer"></div>
   <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
 
-  <!-- WhatsApp Button -->
-  <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد"
-     target="_blank" aria-label="تواصل عبر واتساب">
+  <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد" target="_blank" aria-label="تواصل عبر واتساب">
     <svg viewBox="0 0 24 24" fill="white" width="26" height="26">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
       <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/>
     </svg>
   </a>
 
-  <!-- Chat Widget -->
   <div id="chatWidget">
     <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي"
       style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
@@ -654,7 +601,6 @@
   <script>
     document.addEventListener('DOMContentLoaded', async function () {
 
-      // Auth guard
       var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
       if (!user) {
         localStorage.setItem('dental_redirect_after_login', window.location.href);
@@ -662,47 +608,29 @@
         return;
       }
 
-      // Membership ID
       document.getElementById('profIdShort').textContent = user.id.substring(0, 8).toUpperCase();
 
-      // Email
       var email = user.email || '';
       document.getElementById('profEmail').textContent = email;
       document.getElementById('displayEmail').textContent = email;
 
-      // Avatar: Google photo or initial letter
       var avatarInner = document.getElementById('profAvatarInner');
       var avatarLetter = document.getElementById('profileAvatar');
       var googleAvatar = user.user_metadata && user.user_metadata.avatar_url;
       if (googleAvatar) {
         var img = document.createElement('img');
-        img.src = googleAvatar;
-        img.alt = 'صورة الحساب';
-        avatarInner.innerHTML = '';
-        avatarInner.appendChild(img);
+        img.src = googleAvatar; img.alt = 'صورة الحساب';
+        avatarInner.innerHTML = ''; avatarInner.appendChild(img);
       }
 
-      // Load profile from Supabase
-      var fullName = '';
-      var phone = '';
+      var fullName = '', phone = '';
       try {
-        var res = await supabase
-          .from('profiles')
-          .select('full_name, phone')
-          .eq('id', user.id)
-          .single();
-        if (!res.error && res.data) {
-          fullName = res.data.full_name || '';
-          phone = res.data.phone || '';
-        }
-      } catch (e) { /* ignore */ }
+        var res = await supabase.from('profiles').select('full_name, phone').eq('id', user.id).single();
+        if (!res.error && res.data) { fullName = res.data.full_name || ''; phone = res.data.phone || ''; }
+      } catch (e) {}
 
-      // Fallback to user_metadata
-      if (!fullName) {
-        fullName = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || '';
-      }
+      if (!fullName) fullName = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || '';
 
-      // Populate display
       var displayName = fullName || email.split('@')[0] || 'مستخدم';
       document.getElementById('profileDisplayName').textContent = displayName;
       document.getElementById('displayName').textContent = fullName || '---';
@@ -710,32 +638,17 @@
       document.getElementById('editName').value = fullName;
       document.getElementById('editPhone').value = phone;
 
-      if (!googleAvatar) {
-        avatarLetter.textContent = displayName.charAt(0).toUpperCase();
-      }
+      if (!googleAvatar) avatarLetter.textContent = displayName.charAt(0).toUpperCase();
 
-      // Set initial letter on nav welcome pill circle
       var pill = document.querySelector('.user-welcome-pill');
       if (pill) pill.setAttribute('data-initial', displayName.charAt(0).toUpperCase());
 
-      // Appointment stats
-      const safeNum = (v) => (!v || isNaN(v)) ? 0 : v;
       try {
-        var userId = user.id;
-        var userEmail = user.email || '';
+        var safeNum = function(v) { return (!v || isNaN(v)) ? 0 : v; };
+        var userId = user.id, userEmail = user.email || '';
         var orFilter = 'user_id.eq.' + userId + (userEmail ? ',email.eq.' + userEmail : '');
-
-        var totalRes = await supabase
-          .from('bookings')
-          .select('*', { count: 'exact', head: true })
-          .or(orFilter);
-
-        var activeRes = await supabase
-          .from('bookings')
-          .select('*', { count: 'exact', head: true })
-          .or(orFilter)
-          .neq('status', 'cancelled');
-
+        var totalRes = await supabase.from('bookings').select('*', { count: 'exact', head: true }).or(orFilter);
+        var activeRes = await supabase.from('bookings').select('*', { count: 'exact', head: true }).or(orFilter).neq('status', 'cancelled');
         document.getElementById('totalAppointments').textContent = safeNum(totalRes.count);
         document.getElementById('activeAppointments').textContent = safeNum(activeRes.count);
       } catch (e) {
@@ -744,68 +657,46 @@
       }
     });
 
-    // ── Edit field ──
     function editField(fieldCap) {
-      var viewRow = document.getElementById(fieldCap.toLowerCase() + 'ViewRow');
-      var editRow = document.getElementById(fieldCap.toLowerCase() + 'EditRow');
-      if (viewRow) viewRow.style.display = 'none';
-      if (editRow) editRow.classList.add('active');
-      var input = document.getElementById('edit' + fieldCap);
-      if (input) { input.focus(); input.select(); }
+      var vr = document.getElementById(fieldCap.toLowerCase() + 'ViewRow');
+      var er = document.getElementById(fieldCap.toLowerCase() + 'EditRow');
+      if (vr) vr.style.display = 'none';
+      if (er) er.classList.add('active');
+      var inp = document.getElementById('edit' + fieldCap);
+      if (inp) { inp.focus(); inp.select(); }
     }
 
     function cancelEdit(fieldCap) {
-      var viewRow = document.getElementById(fieldCap.toLowerCase() + 'ViewRow');
-      var editRow = document.getElementById(fieldCap.toLowerCase() + 'EditRow');
-      if (viewRow) viewRow.style.display = '';
-      if (editRow) editRow.classList.remove('active');
+      var vr = document.getElementById(fieldCap.toLowerCase() + 'ViewRow');
+      var er = document.getElementById(fieldCap.toLowerCase() + 'EditRow');
+      if (vr) vr.style.display = '';
+      if (er) er.classList.remove('active');
     }
 
-    // ── Save field to Supabase profiles ──
     async function saveField(field) {
       var fieldCap = field.charAt(0).toUpperCase() + field.slice(1);
       var input = document.getElementById('edit' + fieldCap);
       var value = input ? input.value.trim() : '';
-
-      if (!value) {
-        if (typeof showToast === 'function') showToast('لا يمكن ترك الحقل فارغاً', 'error');
-        return;
-      }
-
+      if (!value) { if (typeof showToast === 'function') showToast('لا يمكن ترك الحقل فارغاً', 'error'); return; }
       var saveBtn = document.getElementById(field.toLowerCase() + 'SaveBtn');
       if (saveBtn) { saveBtn.textContent = 'جاري...'; saveBtn.disabled = true; }
-
       try {
         var { data: { user } } = await supabase.auth.getUser();
         if (!user) throw new Error('غير مسجل الدخول');
-
         var updateData = { updated_at: new Date().toISOString() };
         if (field === 'name')  updateData.full_name = value;
         if (field === 'phone') updateData.phone = value;
-
-        var { error } = await supabase
-          .from('profiles')
-          .update(updateData)
-          .eq('id', user.id);
-
+        var { error } = await supabase.from('profiles').update(updateData).eq('id', user.id);
         if (error) throw error;
-
         if (typeof showToast === 'function') showToast('تم الحفظ بنجاح ✅', 'success');
-
         if (field === 'name') {
           document.getElementById('displayName').textContent = value;
           document.getElementById('profileDisplayName').textContent = value;
           var letter = document.getElementById('profileAvatar');
-          if (letter && letter.parentElement.querySelector('img') === null) {
-            letter.textContent = value.charAt(0).toUpperCase();
-          }
+          if (letter && !letter.parentElement.querySelector('img')) letter.textContent = value.charAt(0).toUpperCase();
         }
-        if (field === 'phone') {
-          document.getElementById('displayPhone').textContent = value;
-        }
-
+        if (field === 'phone') document.getElementById('displayPhone').textContent = value;
         cancelEdit(fieldCap);
-
       } catch (e) {
         if (typeof showToast === 'function') showToast('خطأ في الحفظ: ' + e.message, 'error');
       } finally {
