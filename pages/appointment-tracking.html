@@ -866,7 +866,17 @@
             card.style.transition = 'all 0.3s ease';
             card.style.opacity = '0';
             card.style.transform = 'translateY(-10px)';
-            setTimeout(function() { card.remove(); }, 300);
+            setTimeout(function() {
+              card.remove();
+              // After removal, check if list is now empty
+              var list  = document.getElementById('appointmentsList');
+              var empty = document.getElementById('noAppointments');
+              var remaining = list ? list.querySelectorAll('[data-ref],[data-apt-id]').length : 0;
+              if (remaining === 0) {
+                if (list)  list.style.display  = 'none';
+                if (empty) empty.style.display = 'block';
+              }
+            }, 300);
             removed = true;
           }
         });
