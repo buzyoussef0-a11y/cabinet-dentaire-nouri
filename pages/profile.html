@@ -1,375 +1,439 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ملفي الشخصي | Cabinet Dentaire Nouri</title>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="../css/light-theme.css">
+    <link rel="stylesheet" href="../css/light-theme.css">
   <link rel="stylesheet" href="../css/chat.css">
   <link rel="stylesheet" href="../css/widgets.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="manifest" href="../manifest.json">
-  <meta name="theme-color" content="#006a67">
+  <meta name="theme-color" content="#0D9488">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cabinet Nouri">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-
-    body { background: #f4f9f9; }
-
-    /* ══════════════════════════
-       HERO BANNER
-    ══════════════════════════ */
-    .prf-hero {
-      background: linear-gradient(135deg, #001a33 0%, #003a38 40%, #006a67 70%, #00b5ad 100%);
-      padding: 60px 20px 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .prf-hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 25% 60%, rgba(13,242,242,0.12) 0%, transparent 55%),
-                  radial-gradient(ellipse at 75% 25%, rgba(255,255,255,0.05) 0%, transparent 40%);
-      pointer-events: none;
-    }
-    .prf-hero-dots {
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.07) 1.5px, transparent 1.5px);
-      background-size: 28px 28px;
-      pointer-events: none;
-    }
-    .prf-hero-deco {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.08);
-      pointer-events: none;
-    }
-    .prf-hero-deco-1 { width: 260px; height: 260px; top: -100px; left: 8%; }
-    .prf-hero-deco-2 { width: 150px; height: 150px; top: 10px; right: 12%; opacity: 0.5; }
-
-    /* ══════════════════════════
-       AVATAR — overlaps hero
-    ══════════════════════════ */
-    .prf-avatar-wrap {
-      text-align: center;
-      margin-top: -60px;
-      position: relative;
-      z-index: 4;
-    }
-    .prf-avatar-ring {
-      display: inline-block;
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #006a67, #00e0d3, #006a67);
-      padding: 4px;
-      box-shadow: 0 0 0 5px #f4f9f9, 0 8px 32px rgba(0,106,103,0.25);
-    }
-    .prf-avatar-core {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #004d4b, #009e99);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.6rem; font-weight: 900; color: #fff;
+    /* ── Base ── */
+    body {
+      background:
+        linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.92) 100%),
+        url('https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1400&q=60') center / cover no-repeat fixed;
+      min-height: 100vh;
       font-family: 'Cairo', sans-serif;
-      overflow: hidden;
-    }
-    .prf-avatar-core img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* ══════════════════════════
-       PROFILE NAME CARD
-    ══════════════════════════ */
-    .prf-name-card {
-      text-align: center;
-      padding: 20px 24px 28px;
-      margin-bottom: 0;
-    }
-    .prf-name-card .prf-name {
-      font-family: 'Cairo', sans-serif;
-      font-size: 1.75rem; font-weight: 900;
-      color: #0d1f2d;
-      margin: 0 0 5px;
-      letter-spacing: -0.02em;
-      display: block;
-    }
-    .prf-name-card .prf-email {
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.88rem; color: #6b7280;
-      margin: 0 0 14px; display: block;
-    }
-    .prf-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: #edfafa;
-      border: 1.5px solid #b7ecea;
-      color: #006a67;
-      border-radius: 50px; padding: 5px 18px;
-      font-size: 0.78rem; font-weight: 700;
-      font-family: 'Cairo', sans-serif;
-      margin-bottom: 22px;
     }
 
-    /* ══════════════════════════
-       ACTION BUTTONS
-    ══════════════════════════ */
-    .prf-actions {
-      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
-    }
-    .prf-btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 11px 22px;
-      font-family: 'Cairo', sans-serif; font-size: 0.88rem; font-weight: 700;
-      border-radius: 50px; cursor: pointer; text-decoration: none;
-      border: none; white-space: nowrap;
-      transition: transform 0.16s, box-shadow 0.16s, background 0.16s;
-    }
-    .prf-btn:hover { transform: translateY(-2px); }
-    .prf-btn-green {
-      background: linear-gradient(135deg, #006a67, #009e99);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(0,106,103,0.28);
-    }
-    .prf-btn-green:hover { box-shadow: 0 6px 22px rgba(0,106,103,0.4); color: #fff; }
-    .prf-btn-outline {
-      background: #fff;
-      border: 1.5px solid #b7ecea !important;
-      color: #006a67;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    .prf-btn-outline:hover { background: #edfafa; color: #006a67; }
-    .prf-btn-red {
-      background: #fff;
-      border: 1.5px solid #fca5a5 !important;
-      color: #dc2626;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .prf-btn-red:hover { background: #fff5f5; color: #dc2626; }
-
-    /* ══════════════════════════
-       MAIN WRAPPER (like .tracking-wrapper)
-    ══════════════════════════ */
-    .prf-wrapper {
-      max-width: 900px;
+    /* ── Layout ── */
+    .profile-main {
+      padding: 110px 28px 80px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: 28px 20px 80px;
-      position: relative;
-      z-index: 2;
     }
 
-    /* ══════════════════════════
-       STATS ROW
-    ══════════════════════════ */
-    .prf-stats {
+    /* Grid: RIGHT=profile card (35%), LEFT=stats+info (65%) in RTL */
+    .profile-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 20px;
+      grid-template-columns: 300px 1fr;
+      gap: 28px;
+      align-items: start;
     }
-    @media (max-width: 520px) { .prf-stats { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-card { order: -1; }
+    }
 
-    .prf-stat {
-      background: #fff;
+    /* ════════════════════════════════
+       RIGHT COLUMN — Profile Card
+    ════════════════════════════════ */
+    .profile-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(13,242,242,0.3);
       border-radius: 20px;
-      border: 1.5px solid rgba(0,106,103,0.1);
-      box-shadow: 0 4px 20px rgba(0,106,103,0.07);
-      padding: 26px 24px 22px;
-      position: relative; overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .prf-stat::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      border-radius: 20px 20px 0 0;
-      background: linear-gradient(90deg, #006a67, #009e99, #b7ecea);
-    }
-    .prf-stat:hover { box-shadow: 0 8px 32px rgba(0,106,103,0.13); transform: translateY(-2px); }
-
-    .prf-stat-top {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-    .prf-stat-label {
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.85rem; font-weight: 700; color: #374151;
-    }
-    .prf-stat-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-    }
-    .si-g { background: #edfafa; }
-    .si-b { background: #eff6ff; }
-    .prf-stat-num {
-      font-family: 'Cairo', sans-serif;
-      font-size: 3.2rem; font-weight: 900; line-height: 1;
-      color: #006a67; margin-bottom: 6px;
-      display: block;
-    }
-    .prf-stat-num-b { color: #0ea5e9; }
-    .prf-stat-sub {
-      font-family: 'Cairo', sans-serif;
-      font-size: 0.78rem; color: #9ca3af;
-      display: block;
+      padding: 32px 28px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
-    /* ══════════════════════════
-       INFO CARD
-    ══════════════════════════ */
-    .prf-info {
-      background: #fff;
-      border-radius: 20px;
-      border: 1.5px solid rgba(0,106,103,0.1);
-      box-shadow: 0 4px 20px rgba(0,106,103,0.07);
+    /* Avatar */
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0df2f2, #4A6CF7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: white;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 40px rgba(13,242,242,0.4);
       overflow: hidden;
+      position: relative;
     }
-    .prf-info-head {
-      display: flex; align-items: center; gap: 12px;
-      padding: 20px 24px 18px;
-      border-bottom: 1px solid #f0faf9;
-      background: linear-gradient(to left, #f8fffd, #fff);
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-    .prf-info-icon {
-      width: 38px; height: 38px; border-radius: 11px;
-      background: #edfafa; border: 1px solid #b7ecea;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
+
+    .profile-display-name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: white;
+      margin: 0 0 6px;
+      line-height: 1.3;
     }
-    .prf-info-title {
+    .profile-display-email {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      margin: 0 0 12px;
+      word-break: break-all;
+    }
+
+    .profile-membership {
+      display: inline-block;
+      background: rgba(13,242,242,0.1);
+      border: 1px solid rgba(13,242,242,0.3);
+      color: #0df2f2;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+
+    /* Action buttons */
+    .profile-actions { display: flex; flex-direction: column; gap: 12px; }
+
+    .prof-btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
       font-family: 'Cairo', sans-serif;
-      font-size: 1rem; font-weight: 700; color: #0d1f2d;
-      display: block;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-sizing: border-box;
+    }
+    .prof-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .prof-btn:active { transform: scale(0.98); }
+
+    .prof-btn-primary {
+      background: linear-gradient(135deg, #0D9488, #0df2f2);
+      color: white;
+      border: none;
+    }
+    .prof-btn-outline-teal {
+      background: transparent;
+      border: 2px solid #0df2f2;
+      color: #0df2f2;
+    }
+    .prof-btn-outline-red {
+      background: transparent;
+      border: 2px solid #EF4444;
+      color: #EF4444;
     }
 
-    /* ── Field ── */
-    .prf-field {
-      padding: 0 20px;
-      border-bottom: 1px solid #f5faf9;
-    }
-    .prf-field:last-child { border-bottom: none; }
+    /* ════════════════════════════════
+       LEFT COLUMN — Stats + Info
+    ════════════════════════════════ */
+    .profile-left { display: flex; flex-direction: column; gap: 24px; }
 
-    .prf-field-row {
-      display: flex; align-items: center; gap: 14px;
-      padding: 16px 8px;
+    /* Stats row */
+    .stats-row {
+      display: flex;
+      gap: 20px;
+    }
+    @media (max-width: 480px) {
+      .stats-row { flex-direction: column; }
+    }
+
+    .stat-card {
+      flex: 1;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(13,242,242,0.4);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: right;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: border-color 0.2s, transform 0.2s;
+      min-height: 180px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .stat-card:hover {
+      border-color: rgba(13,242,242,0.7);
+      transform: translateY(-2px);
+    }
+    .stat-title {
+      font-size: 1.3rem;
+      color: white;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .profile-stat-num {
+      font-size: 4rem;
+      font-weight: 900;
+      color: #0df2f2;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-subtitle {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Info card */
+    .info-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(13,242,242,0.4);
+      border-radius: 16px;
+      padding: 32px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .info-card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      text-align: right;
+      margin: 0 0 24px;
+    }
+
+    /* Field rows */
+    .profile-field { margin-bottom: 16px; }
+    .profile-field:last-child { margin-bottom: 0; }
+
+    .field-view-row {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.2s;
+    }
+    .field-view-row:hover { border-color: rgba(255,255,255,0.18); }
+
+    .field-info {
+      text-align: right;
+      flex: 1;
+    }
+    .field-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .field-value-text {
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .field-edit-btn {
+      background: rgba(13,242,242,0.15);
+      border: 1px solid #0df2f2;
+      color: #0df2f2;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .field-edit-btn:hover { background: rgba(13,242,242,0.28); }
+
+    .field-protected-badge {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    /* Edit row */
+    .field-edit-row { display: none; gap: 10px; margin-top: 10px; }
+    .field-edit-row.active { display: flex; }
+    .field-input {
+      flex: 1;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(13,242,242,0.35);
       border-radius: 10px;
-      transition: background 0.15s;
-    }
-    .prf-field-row:hover { background: #fafffe; }
-
-    .prf-field-icon {
-      width: 38px; height: 38px; border-radius: 10px;
-      background: #f5f9f8;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem; flex-shrink: 0;
-    }
-    .prf-field-body { flex: 1; text-align: right; }
-    .prf-field-label {
+      padding: 10px 14px;
+      color: white;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.7rem; font-weight: 700;
-      color: #9ca3af;
-      text-transform: uppercase; letter-spacing: 0.07em;
-      margin-bottom: 3px; display: block;
+      font-size: 0.9rem;
+      outline: none;
+      direction: rtl;
     }
-    .prf-field-value {
+    .field-input:focus { border-color: rgba(13,242,242,0.65); }
+    .field-save-btn {
+      background: linear-gradient(135deg, #0D9488, #06B6D4);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      color: white;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.95rem; font-weight: 700; color: #1e293b;
-      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
     }
-
-    .prf-edit-btn {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: #edfafa;
-      border: 1px solid #b7ecea;
-      color: #006a67;
-      border-radius: 50px; padding: 6px 16px;
-      font-family: 'Cairo', sans-serif; font-size: 0.76rem; font-weight: 700;
-      cursor: pointer; white-space: nowrap;
-      transition: background 0.15s;
-      flex-shrink: 0;
-    }
-    .prf-edit-btn:hover { background: #d4f5f3; }
-
-    .prf-lock {
-      display: inline-flex; align-items: center; gap: 5px;
+    .field-save-btn:hover:not(:disabled) { opacity: 0.85; }
+    .field-save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .field-cancel-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: rgba(255,255,255,0.6);
       font-family: 'Cairo', sans-serif;
-      font-size: 0.74rem; color: #9ca3af;
-      background: #f8f9fa; border: 1px solid #e5e7eb;
-      border-radius: 50px; padding: 5px 13px;
-      flex-shrink: 0;
+      font-size: 0.85rem;
+      cursor: pointer;
     }
+    .field-cancel-btn:hover { background: rgba(255,255,255,0.1); }
 
-    .prf-edit-row { display: none; gap: 10px; padding: 0 8px 16px; }
-    .prf-edit-row.open { display: flex; }
-
-    .prf-input {
-      flex: 1; background: #f8fafc;
-      border: 1.5px solid #b7ecea;
-      border-radius: 12px; padding: 10px 14px;
-      color: #1e293b;
-      font-family: 'Cairo', sans-serif; font-size: 0.9rem;
-      outline: none; direction: rtl;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .prf-input:focus { border-color: #006a67; box-shadow: 0 0 0 3px rgba(0,106,103,0.1); }
-
-    .prf-save-btn {
-      background: linear-gradient(135deg, #006a67, #009e99);
-      border: none; border-radius: 12px; padding: 10px 20px;
-      color: #fff; font-family: 'Cairo', sans-serif;
-      font-size: 0.85rem; font-weight: 700; cursor: pointer;
-      transition: opacity 0.15s;
-    }
-    .prf-save-btn:hover:not(:disabled) { opacity: 0.88; }
-    .prf-save-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-
-    .prf-cancel-btn {
-      background: #f1f5f9; border: 1px solid #e2e8f0;
-      border-radius: 12px; padding: 10px 13px;
-      color: #64748b; font-family: 'Cairo', sans-serif;
-      font-size: 0.85rem; cursor: pointer;
-      transition: background 0.15s;
-    }
-    .prf-cancel-btn:hover { background: #e2e8f0; }
-
-    /* ══════════════════════════
-       ANIMATIONS
-    ══════════════════════════ */
-    .prf-fade { animation: pUp 0.45s ease both; }
-    .d1 { animation-delay: 0.04s; }
-    .d2 { animation-delay: 0.1s; }
-    .d3 { animation-delay: 0.16s; }
-    .d4 { animation-delay: 0.22s; }
-    @keyframes pUp {
-      from { opacity: 0; transform: translateY(20px); }
+    /* Fade in */
+    .fade-in { animation: fadeInUp 0.45s ease both; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 480px) {
-      .prf-actions { flex-direction: column; align-items: center; }
-      .prf-btn { width: 100%; justify-content: center; }
+    /* ── Navbar auth pills override ── */
+    #auth-links {
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+      list-style: none;
     }
+    .user-welcome-pill {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.07) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 50px !important;
+      padding: 5px 14px 5px 8px !important;
+      color: #F1F5F9 !important;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      cursor: default;
+      position: relative;
+    }
+    .user-welcome-pill::before {
+      content: attr(data-initial);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0df2f2, #4A6CF7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: white;
+      flex-shrink: 0;
+    }
+    .nav-user-avatar {
+      width: 32px !important;
+      height: 32px !important;
+      background: linear-gradient(135deg, #0df2f2, #4A6CF7) !important;
+      border-radius: 50% !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: white !important;
+      text-decoration: none !important;
+      border: none !important;
+      flex-shrink: 0;
+    }
+    .nav-user-avatar svg { stroke: white; }
+    .nav-signout-btn {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 6px;
+      background: transparent !important;
+      border: 1px solid rgba(239,68,68,0.35) !important;
+      color: #f87171 !important;
+      border-radius: 50px !important;
+      padding: 5px 14px !important;
+      font-family: 'Cairo', sans-serif !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background 0.2s !important;
+    }
+    .nav-signout-btn:hover { background: rgba(239,68,68,0.1) !important; }
+    /* Lang btn */
+    .lang-btn {
+      background: rgba(255,255,255,0.07) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 50px !important;
+      color: #F1F5F9 !important;
+      padding: 5px 12px !important;
+      gap: 6px !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      cursor: pointer;
+      transition: background 0.2s !important;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.12) !important; }
   </style>
 </head>
+
 <body>
 
   <div id="scrollProgress"><div id="scrollFill"></div></div>
 
-  <!-- NAVBAR -->
   <nav id="mainNav">
     <a href="../index.html" class="nav-logo nav-logo-v2">
       <div class="logo-mark">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hfP)" opacity="0.15"/>
-          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hsP)" stroke-width="1" fill="none"/>
-          <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#cfP)"/>
-          <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#cfP)"/>
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="url(#hexFillP)" opacity="0.15"/>
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="url(#hexStrokeP)" stroke-width="1" fill="none"/>
+          <rect x="16" y="9" width="4" height="18" rx="2" fill="url(#crossFillP)"/>
+          <rect x="9" y="16" width="18" height="4" rx="2" fill="url(#crossFillP)"/>
           <circle cx="18" cy="18" r="2.5" fill="white" opacity="0.9"/>
           <defs>
-            <linearGradient id="hfP" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/></linearGradient>
-            <linearGradient id="hsP" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/></linearGradient>
-            <linearGradient id="cfP" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="white" stop-opacity="0.9"/></linearGradient>
+            <linearGradient id="hexFillP" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/>
+            </linearGradient>
+            <linearGradient id="hexStrokeP" x1="4" y1="2" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="#0D9488"/>
+            </linearGradient>
+            <linearGradient id="crossFillP" x1="9" y1="9" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0df2f2"/><stop offset="100%" stop-color="white" stop-opacity="0.9"/>
+            </linearGradient>
           </defs>
         </svg>
       </div>
@@ -390,17 +454,25 @@
       <li><a href="appointment-tracking.html" data-ar="تتبع موعدك" data-fr="Suivi RDV">تتبع موعدك</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding:10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a>
+      <a href="#" onclick="goToBooking(); return false;" class="btn-primary" style="padding: 10px 20px;" data-ar="احجز الآن" data-fr="Réserver">احجز الآن</a>
       <div id="auth-links"></div>
       <div class="lang-dropdown-wrap" id="langDropdownWrap">
         <button class="lang-btn" id="langToggle" onclick="toggleLangDropdown()" aria-label="تغيير اللغة" aria-haspopup="true" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/><path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15" aria-hidden="true">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
           <span id="langLabel">عربي</span>
-          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" width="12" height="12" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
         <div class="lang-dropdown" id="langDropdownMenu" style="display:none;">
           <button class="lang-dropdown-item" id="langDropdownItem" onclick="switchLangFromDropdown()">
-            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/><path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M2 12H22M12 2C9.5 6 8 9 8 12C8 15 9.5 18 12 22C14.5 18 16 15 16 12C16 9 14.5 6 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
             <span id="langDropdownLabel">FR</span>
           </button>
         </div>
@@ -408,137 +480,129 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <div class="prf-hero">
-    <div class="prf-hero-dots"></div>
-    <div class="prf-hero-deco prf-hero-deco-1"></div>
-    <div class="prf-hero-deco prf-hero-deco-2"></div>
-  </div>
+  <main class="profile-main">
+    <div class="profile-grid">
 
-  <!-- AVATAR (overlaps hero/page boundary) -->
-  <div class="prf-avatar-wrap prf-fade d1">
-    <div class="prf-avatar-ring">
-      <div class="prf-avatar-core" id="profAvatarInner">
-        <span id="profileAvatar">?</span>
-      </div>
-    </div>
-  </div>
+      <!-- ══ RIGHT COLUMN — Profile Card (visually on right in RTL) ══ -->
+      <div class="profile-card fade-in" style="animation-delay:0.06s">
 
-  <!-- NAME CARD (centered text block) -->
-  <div class="prf-name-card prf-fade d2">
-    <span class="prf-name" id="profileDisplayName">---</span>
-    <span class="prf-email" id="profEmail">---</span>
-    <div class="prf-badge">
-      🆔&nbsp;<span data-ar="رقم العضوية" data-fr="N° membre">رقم العضوية</span>:&nbsp;<span id="profIdShort">----</span>
-    </div>
-    <div class="prf-actions">
-      <a href="appointment-tracking.html" class="prf-btn prf-btn-green">
-        <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#fff" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
-        <span data-ar="مواعيدي" data-fr="Mes RDV">مواعيدي</span>
-      </a>
-      <a href="javascript:void(0)" onclick="goToBooking()" class="prf-btn prf-btn-outline">
-        <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#006a67" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8" stroke-linecap="round"/></svg>
-        <span data-ar="حجز جديد" data-fr="Nouveau RDV">حجز جديد</span>
-      </a>
-      <button onclick="logoutUser()" class="prf-btn prf-btn-red">
-        <svg viewBox="0 0 24 24" fill="none" width="15" height="15" stroke="#dc2626" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span data-ar="تسجيل الخروج" data-fr="Se déconnecter">تسجيل الخروج</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT — same centering pattern as tracking page -->
-  <div class="prf-wrapper">
-
-    <!-- Stats -->
-    <div class="prf-stats prf-fade d3">
-      <div class="prf-stat">
-        <div class="prf-stat-top">
-          <span class="prf-stat-label" data-ar="إجمالي المواعيد" data-fr="Total des RDV">إجمالي المواعيد</span>
-          <div class="prf-stat-icon si-g">📅</div>
+        <div class="profile-avatar" id="profAvatarInner">
+          <span id="profileAvatar">?</span>
         </div>
-        <span class="prf-stat-num" id="totalAppointments">—</span>
-        <span class="prf-stat-sub" data-ar="موعد مسجّل في النظام" data-fr="rendez-vous enregistrés">موعد مسجّل في النظام</span>
-      </div>
-      <div class="prf-stat">
-        <div class="prf-stat-top">
-          <span class="prf-stat-label" data-ar="المواعيد النشطة" data-fr="RDV actifs">المواعيد النشطة</span>
-          <div class="prf-stat-icon si-b">✅</div>
+
+        <h2 class="profile-display-name" id="profileDisplayName">---</h2>
+        <p class="profile-display-email" id="profEmail">---</p>
+
+        <div class="profile-membership">
+          رقم العضوية: <span id="profIdShort">----</span>
         </div>
-        <span class="prf-stat-num prf-stat-num-b" id="activeAppointments">—</span>
-        <span class="prf-stat-sub" data-ar="موعد قادم مجدوَل" data-fr="rendez-vous planifiés">موعد قادم مجدوَل</span>
-      </div>
-    </div>
 
-    <!-- Info Card -->
-    <div class="prf-info prf-fade d4">
-      <div class="prf-info-head">
-        <div class="prf-info-icon">👤</div>
-        <span class="prf-info-title" data-ar="المعلومات الشخصية" data-fr="Informations personnelles">المعلومات الشخصية</span>
+        <div class="profile-actions">
+          <a href="appointment-tracking.html" class="prof-btn prof-btn-primary">
+            📅 تتبع مواعيدي
+          </a>
+          <a href="javascript:void(0)" onclick="goToBooking()" class="prof-btn prof-btn-outline-teal">
+            ⊕ أحجز موعد جديد
+          </a>
+          <button onclick="logoutUser()" class="prof-btn prof-btn-outline-red">
+            → تسجيل الخروج
+          </button>
+        </div>
+
       </div>
 
-      <!-- Name -->
-      <div class="prf-field">
-        <div class="prf-field-row" id="nameViewRow">
-          <div class="prf-field-icon">✏️</div>
-          <div class="prf-field-body">
-            <span class="prf-field-label" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</span>
-            <span class="prf-field-value" id="displayName">---</span>
+      <!-- ══ LEFT COLUMN — Stats + Info (visually on left in RTL) ══ -->
+      <div class="profile-left">
+
+        <!-- Stats -->
+        <div class="stats-row fade-in" style="animation-delay:0.1s">
+          <div class="stat-card">
+            <div class="stat-title">إجمالي المواعيد</div>
+            <div class="profile-stat-num" id="totalAppointments">—</div>
+            <div class="stat-subtitle">المواعيد المكتملة</div>
           </div>
-          <button class="prf-edit-btn" onclick="editField('Name')" data-ar="تعديل" data-fr="Modifier">✏️ تعديل</button>
-        </div>
-        <div class="prf-edit-row" id="nameEditRow">
-          <input class="prf-input" type="text" id="editName" placeholder="أدخل اسمك الكامل" data-placeholder-ar="أدخل اسمك الكامل" data-placeholder-fr="Entrez votre nom complet">
-          <button class="prf-save-btn" id="nameSaveBtn" onclick="saveField('name')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
-          <button class="prf-cancel-btn" onclick="cancelEdit('Name')">✕</button>
-        </div>
-      </div>
-
-      <!-- Phone -->
-      <div class="prf-field">
-        <div class="prf-field-row" id="phoneViewRow">
-          <div class="prf-field-icon">📱</div>
-          <div class="prf-field-body">
-            <span class="prf-field-label" data-ar="رقم الهاتف" data-fr="Téléphone">رقم الهاتف</span>
-            <span class="prf-field-value" id="displayPhone">---</span>
+          <div class="stat-card">
+            <div class="stat-title">المواعيد النشطة</div>
+            <div class="profile-stat-num" id="activeAppointments">—</div>
+            <div class="stat-subtitle">المواعيد المجدولة</div>
           </div>
-          <button class="prf-edit-btn" onclick="editField('Phone')" data-ar="تعديل" data-fr="Modifier">✏️ تعديل</button>
         </div>
-        <div class="prf-edit-row" id="phoneEditRow">
-          <input class="prf-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
-          <button class="prf-save-btn" id="phoneSaveBtn" onclick="saveField('phone')" data-ar="حفظ" data-fr="Enregistrer">حفظ</button>
-          <button class="prf-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
-        </div>
-      </div>
 
-      <!-- Email -->
-      <div class="prf-field">
-        <div class="prf-field-row">
-          <div class="prf-field-icon">📧</div>
-          <div class="prf-field-body">
-            <span class="prf-field-label" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</span>
-            <span class="prf-field-value" id="displayEmail">---</span>
+        <!-- Personal Info -->
+        <div class="info-card fade-in" style="animation-delay:0.15s">
+          <div class="info-card-title">المعلومات الشخصية</div>
+
+          <!-- Full Name -->
+          <div class="profile-field">
+            <div class="field-view-row" id="nameViewRow">
+              <div class="field-info">
+                <div class="field-label">الاسم الكامل</div>
+                <div class="field-value-text" id="displayName">---</div>
+              </div>
+              <button class="field-edit-btn" onclick="editField('Name')">✏️ تعديل</button>
+            </div>
+            <div class="field-edit-row" id="nameEditRow">
+              <input class="field-input" type="text" id="editName" placeholder="أدخل اسمك الكامل">
+              <button class="field-save-btn" id="nameSaveBtn" onclick="saveField('name')">حفظ</button>
+              <button class="field-cancel-btn" onclick="cancelEdit('Name')">✕</button>
+            </div>
           </div>
-          <span class="prf-lock">🔒 <span data-ar="محمي" data-fr="Protégé">محمي</span></span>
+
+          <!-- Phone -->
+          <div class="profile-field">
+            <div class="field-view-row" id="phoneViewRow">
+              <div class="field-info">
+                <div class="field-label">رقم الهاتف</div>
+                <div class="field-value-text" id="displayPhone">---</div>
+              </div>
+              <button class="field-edit-btn" onclick="editField('Phone')">✏️ تعديل</button>
+            </div>
+            <div class="field-edit-row" id="phoneEditRow">
+              <input class="field-input" type="tel" id="editPhone" placeholder="06XXXXXXXX">
+              <button class="field-save-btn" id="phoneSaveBtn" onclick="saveField('phone')">حفظ</button>
+              <button class="field-cancel-btn" onclick="cancelEdit('Phone')">✕</button>
+            </div>
+          </div>
+
+          <!-- Email (read-only) -->
+          <div class="profile-field">
+            <div class="field-view-row">
+              <div class="field-info">
+                <div class="field-label">البريد الإلكتروني</div>
+                <div class="field-value-text" id="displayEmail">---</div>
+              </div>
+              <span class="field-protected-badge">محمي</span>
+            </div>
+          </div>
+
         </div>
+        <!-- /info-card -->
+
       </div>
+      <!-- /profile-left -->
 
     </div>
-    <!-- /info -->
-  </div>
-  <!-- /wrapper -->
+    <!-- /profile-grid -->
+  </main>
 
   <div id="toastContainer"></div>
-  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
 
-  <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد" target="_blank" aria-label="واتساب">
-    <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/></svg>
+  <!-- WhatsApp Button -->
+  <a id="whatsappBtn" href="https://wa.me/212535402211?text=مرحباً%20دكتور%20نوري%2C%20أريد%20حجز%20موعد"
+     target="_blank" aria-label="تواصل عبر واتساب">
+    <svg viewBox="0 0 24 24" fill="white" width="26" height="26">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.532 5.855L.057 23.985l6.274-1.648A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.004-1.37l-.36-.213-3.724.977.994-3.634-.234-.374A9.818 9.818 0 1112 21.818z"/>
+    </svg>
   </a>
 
+  <!-- Chat Widget -->
   <div id="chatWidget">
-    <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#006a67,#009e99);border:none;cursor:pointer;color:#fff;box-shadow:0 4px 20px rgba(0,106,103,0.35);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform .3s;">
+    <button id="chatToggle" onclick="toggleChat()" aria-label="المساعد الذكي"
+      style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0D9488,#0df2f2);border:none;cursor:pointer;color:#0a1628;box-shadow:0 4px 24px rgba(13,242,242,0.4);font-size:1.4rem;font-family:'Cairo',sans-serif;transition:transform 0.3s ease;">
       <span style="font-size:1.3rem;line-height:1;">💬</span>
-      <span style="font-size:.55rem;font-weight:800;letter-spacing:.5px;line-height:1;" data-ar="مساعد" data-fr="Assistant">مساعد</span>
+      <span style="font-size:0.55rem;font-weight:800;letter-spacing:0.5px;line-height:1;" data-ar="مساعد" data-fr="Assistant">مساعد</span>
     </button>
     <div id="chatWindow" class="chat-hidden">
       <div class="chat-header">
@@ -570,6 +634,8 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', async function () {
+
+      // Auth guard
       var user = (typeof getCurrentUser === 'function') ? await getCurrentUser() : null;
       if (!user) {
         localStorage.setItem('dental_redirect_after_login', window.location.href);
@@ -577,90 +643,165 @@
         return;
       }
 
+      // Membership ID
       document.getElementById('profIdShort').textContent = user.id.substring(0, 8).toUpperCase();
+
+      // Email
       var email = user.email || '';
       document.getElementById('profEmail').textContent = email;
       document.getElementById('displayEmail').textContent = email;
 
+      // Avatar: Google photo or initial letter
       var avatarInner = document.getElementById('profAvatarInner');
       var avatarLetter = document.getElementById('profileAvatar');
       var googleAvatar = user.user_metadata && user.user_metadata.avatar_url;
       if (googleAvatar) {
         var img = document.createElement('img');
-        img.src = googleAvatar; img.alt = '';
-        avatarInner.innerHTML = ''; avatarInner.appendChild(img);
+        img.src = googleAvatar;
+        img.alt = 'صورة الحساب';
+        avatarInner.innerHTML = '';
+        avatarInner.appendChild(img);
       }
 
-      var fullName = '', phone = '';
+      // Load profile from Supabase
+      var fullName = '';
+      var phone = '';
       try {
-        var r = await supabase.from('profiles').select('full_name, phone').eq('id', user.id).single();
-        if (!r.error && r.data) { fullName = r.data.full_name || ''; phone = r.data.phone || ''; }
-      } catch(e) {}
-      if (!fullName) fullName = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || '';
+        var res = await supabase
+          .from('profiles')
+          .select('full_name, phone')
+          .eq('id', user.id)
+          .single();
+        if (!res.error && res.data) {
+          fullName = res.data.full_name || '';
+          phone = res.data.phone || '';
+        }
+      } catch (e) { /* ignore */ }
 
-      var dname = fullName || email.split('@')[0] || 'مستخدم';
-      document.getElementById('profileDisplayName').textContent = dname;
+      // Fallback to user_metadata
+      if (!fullName) {
+        fullName = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || '';
+      }
+
+      // Populate display
+      var displayName = fullName || email.split('@')[0] || 'مستخدم';
+      document.getElementById('profileDisplayName').textContent = displayName;
       document.getElementById('displayName').textContent = fullName || '---';
       document.getElementById('displayPhone').textContent = phone || '---';
       document.getElementById('editName').value = fullName;
       document.getElementById('editPhone').value = phone;
-      if (!googleAvatar) avatarLetter.textContent = dname.charAt(0).toUpperCase();
 
+      if (!googleAvatar) {
+        avatarLetter.textContent = displayName.charAt(0).toUpperCase();
+      }
+
+      // Set initial letter on nav welcome pill circle
+      var pill = document.querySelector('.user-welcome-pill');
+      if (pill) pill.setAttribute('data-initial', displayName.charAt(0).toUpperCase());
+
+      // Appointment stats
+      const safeNum = (v) => (!v || isNaN(v)) ? 0 : v;
       try {
-        var orF = 'user_id.eq.' + user.id + (email ? ',email.eq.' + email : '');
-        var tr = await supabase.from('bookings').select('*', {count:'exact',head:true}).or(orF);
-        var ar = await supabase.from('bookings').select('*', {count:'exact',head:true}).or(orF).neq('status','cancelled');
-        document.getElementById('totalAppointments').textContent = (tr.count || 0);
-        document.getElementById('activeAppointments').textContent = (ar.count || 0);
-      } catch(e) {
+        var userId = user.id;
+        var userEmail = user.email || '';
+        var orFilter = 'user_id.eq.' + userId + (userEmail ? ',email.eq.' + userEmail : '');
+
+        var totalRes = await supabase
+          .from('bookings')
+          .select('*', { count: 'exact', head: true })
+          .or(orFilter);
+
+        var activeRes = await supabase
+          .from('bookings')
+          .select('*', { count: 'exact', head: true })
+          .or(orFilter)
+          .neq('status', 'cancelled');
+
+        document.getElementById('totalAppointments').textContent = safeNum(totalRes.count);
+        document.getElementById('activeAppointments').textContent = safeNum(activeRes.count);
+      } catch (e) {
         document.getElementById('totalAppointments').textContent = '0';
         document.getElementById('activeAppointments').textContent = '0';
       }
     });
 
-    function editField(f) {
-      var vr = document.getElementById(f.toLowerCase()+'ViewRow');
-      var er = document.getElementById(f.toLowerCase()+'EditRow');
-      if (vr) vr.style.display = 'none';
-      if (er) er.classList.add('open');
-      var inp = document.getElementById('edit'+f); if (inp) { inp.focus(); inp.select(); }
+    // ── Edit field ──
+    function editField(fieldCap) {
+      var viewRow = document.getElementById(fieldCap.toLowerCase() + 'ViewRow');
+      var editRow = document.getElementById(fieldCap.toLowerCase() + 'EditRow');
+      if (viewRow) viewRow.style.display = 'none';
+      if (editRow) editRow.classList.add('active');
+      var input = document.getElementById('edit' + fieldCap);
+      if (input) { input.focus(); input.select(); }
     }
-    function cancelEdit(f) {
-      var vr = document.getElementById(f.toLowerCase()+'ViewRow');
-      var er = document.getElementById(f.toLowerCase()+'EditRow');
-      if (vr) vr.style.display = '';
-      if (er) er.classList.remove('open');
+
+    function cancelEdit(fieldCap) {
+      var viewRow = document.getElementById(fieldCap.toLowerCase() + 'ViewRow');
+      var editRow = document.getElementById(fieldCap.toLowerCase() + 'EditRow');
+      if (viewRow) viewRow.style.display = '';
+      if (editRow) editRow.classList.remove('active');
     }
+
+    // ── Save field to Supabase profiles ──
     async function saveField(field) {
-      var fc = field.charAt(0).toUpperCase()+field.slice(1);
-      var inp = document.getElementById('edit'+fc);
-      var val = inp ? inp.value.trim() : '';
-      if (!val) { if(typeof showToast==='function') showToast('لا يمكن ترك الحقل فارغاً','error'); return; }
-      var btn = document.getElementById(field+'SaveBtn');
-      if (btn) { btn.textContent='جاري...'; btn.disabled=true; }
+      var fieldCap = field.charAt(0).toUpperCase() + field.slice(1);
+      var input = document.getElementById('edit' + fieldCap);
+      var value = input ? input.value.trim() : '';
+
+      if (!value) {
+        if (typeof showToast === 'function') showToast('لا يمكن ترك الحقل فارغاً', 'error');
+        return;
+      }
+
+      var saveBtn = document.getElementById(field.toLowerCase() + 'SaveBtn');
+      if (saveBtn) { saveBtn.textContent = 'جاري...'; saveBtn.disabled = true; }
+
       try {
-        var {data:{user}} = await supabase.auth.getUser();
-        if (!user) throw new Error('غير مسجل');
-        var upd = {updated_at: new Date().toISOString()};
-        if (field==='name') upd.full_name = val;
-        if (field==='phone') upd.phone = val;
-        var {error} = await supabase.from('profiles').update(upd).eq('id',user.id);
+        var { data: { user } } = await supabase.auth.getUser();
+        if (!user) throw new Error('غير مسجل الدخول');
+
+        var updateData = { updated_at: new Date().toISOString() };
+        if (field === 'name')  updateData.full_name = value;
+        if (field === 'phone') updateData.phone = value;
+
+        var { error } = await supabase
+          .from('profiles')
+          .update(updateData)
+          .eq('id', user.id);
+
         if (error) throw error;
-        if(typeof showToast==='function') showToast('تم الحفظ ✅','success');
-        if (field==='name') {
-          document.getElementById('displayName').textContent = val;
-          document.getElementById('profileDisplayName').textContent = val;
-          var l = document.getElementById('profileAvatar');
-          if (l && !l.parentElement.querySelector('img')) l.textContent = val.charAt(0).toUpperCase();
+
+        if (typeof showToast === 'function') showToast('تم الحفظ بنجاح ✅', 'success');
+
+        if (field === 'name') {
+          document.getElementById('displayName').textContent = value;
+          document.getElementById('profileDisplayName').textContent = value;
+          var letter = document.getElementById('profileAvatar');
+          if (letter && letter.parentElement.querySelector('img') === null) {
+            letter.textContent = value.charAt(0).toUpperCase();
+          }
         }
-        if (field==='phone') document.getElementById('displayPhone').textContent = val;
-        cancelEdit(fc);
-      } catch(e) {
-        if(typeof showToast==='function') showToast('خطأ: '+e.message,'error');
+        if (field === 'phone') {
+          document.getElementById('displayPhone').textContent = value;
+        }
+
+        cancelEdit(fieldCap);
+
+      } catch (e) {
+        if (typeof showToast === 'function') showToast('خطأ في الحفظ: ' + e.message, 'error');
       } finally {
-        if (btn) { btn.textContent='حفظ'; btn.disabled=false; }
+        if (saveBtn) { saveBtn.textContent = 'حفظ'; saveBtn.disabled = false; }
       }
     }
+
+    /* ── Force equal stat card heights after render ── */
+    window.addEventListener('load', function () {
+      var cards = document.querySelectorAll('.stats-row .stat-card');
+      var max = 0;
+      cards.forEach(function (c) { if (c.offsetHeight > max) max = c.offsetHeight; });
+      if (max > 0) cards.forEach(function (c) { c.style.height = max + 'px'; });
+    });
   </script>
+
 </body>
 </html>

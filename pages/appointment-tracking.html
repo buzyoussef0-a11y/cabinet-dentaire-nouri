@@ -771,7 +771,7 @@
     async function editAppointment(ref) {
       try {
         const { data: { user } } = await supabase.auth.getUser();
-        await fetch('https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e', {
+        await fetch('https://n8n-vortex.vivanco.work/webhook/39c27c32-3be0-4f7a-ad54-2247d341035b', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -849,7 +849,7 @@
         console.log('Rows updated in Supabase:', rowsUpdated);
 
         // Send webhook (fire-and-forget)
-        fetch('https://n8n.srv1521649.hstgr.cloud/webhook/6ed7b45e-9620-40bc-9b69-a69664e75f5e', {
+        fetch('https://n8n-vortex.vivanco.work/webhook/39c27c32-3be0-4f7a-ad54-2247d341035b', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
