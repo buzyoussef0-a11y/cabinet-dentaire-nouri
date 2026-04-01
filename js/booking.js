@@ -337,13 +337,15 @@ async function submitBooking() {
             return; // STOP HERE if DB fails
         }
 
-        const webResponse = await fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        if (!webResponse.ok) throw new Error('Webhook error');
+        try {
+            await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        } catch (webhookErr) {
+            console.warn('Webhook warning (non-blocking):', webhookErr);
+        }
 
         sessionStorage.removeItem('guestBooking');
         showNotification('success', isAr ? 'تم الحجز' : 'Réservé', isAr ? 'تم استلام طلبك بنجاح!' : 'Demande reçue avec succès !');
