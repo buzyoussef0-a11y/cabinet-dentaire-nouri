@@ -256,12 +256,13 @@ function copyPhone() {
         var prefix   = el.dataset.prefix || '';
         var suffix   = el.dataset.suffix || '';
         var isFloat  = target % 1 !== 0;
-        var duration = 1800;
+        var duration = 3200;
         var startTs  = null;
         function step(ts) {
             if (!startTs) startTs = ts;
             var progress = Math.min((ts - startTs) / duration, 1);
-            var ease     = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            // ease-out quint: slow start, fast middle, gentle stop
+            var ease     = 1 - Math.pow(1 - progress, 5);
             var current  = target * ease;
             var display  = isFloat ? current.toFixed(1) : Math.floor(current);
             el.textContent = prefix + display + suffix;

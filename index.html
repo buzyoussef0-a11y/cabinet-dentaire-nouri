@@ -2263,12 +2263,13 @@
         }
         var target = parseFloat(targetValue);
         var isDecimal = target % 1 !== 0;
-        var duration = 1800;
+        var duration = 3200;
         var start = null;
         function step(ts) {
           if (!start) start = ts;
           var progress = Math.min((ts - start) / duration, 1);
-          var ease = 1 - Math.pow(1 - progress, 3);
+          // ease-out quint: slow start, fast middle, gentle stop
+          var ease = 1 - Math.pow(1 - progress, 5);
           var current = target * ease;
           el.textContent = isDecimal
             ? current.toFixed(1)
