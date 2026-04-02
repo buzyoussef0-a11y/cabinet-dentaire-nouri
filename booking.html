@@ -699,51 +699,6 @@
         </div>
     </div>
 
-    <script>
-        // ═══════════════════════════════════
-        // FULL PAGE TRANSLATION ENGINE
-        // ═══════════════════════════════════
-        (function () {
-            var currentLang = localStorage.getItem('siteLang') || 'ar';
-
-            function applyLang(lang) {
-                var isAr = lang === 'ar';
-                document.documentElement.lang = isAr ? 'ar' : 'fr';
-                document.documentElement.dir = isAr ? 'rtl' : 'ltr';
-
-                document.querySelectorAll('[data-ar][data-fr]').forEach(function (el) {
-                    var text = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-fr');
-                    if (!text) return;
-
-                    var hasImportantChildren = el.querySelector('svg, img, button, a, input, div, span');
-                    if (hasImportantChildren) {
-                        Array.from(el.childNodes).forEach(function (node) {
-                            if (node.nodeType === 3 && node.textContent.trim()) {
-                                node.textContent = (isAr ? '' : ' ') + text + (isAr ? '' : ' ');
-                            }
-                        });
-                    } else {
-                        el.textContent = text;
-                    }
-                });
-
-                document.querySelectorAll('[data-placeholder-ar]').forEach(function (inp) {
-                    inp.placeholder = isAr ? inp.getAttribute('data-placeholder-ar') : inp.getAttribute('data-placeholder-fr');
-                });
-
-                var label = document.getElementById('langLabel');
-                if (label) label.textContent = isAr ? 'FR' : 'عر';
-
-                localStorage.setItem('siteLang', lang);
-                currentLang = lang;
-                document.dispatchEvent(new CustomEvent('languageChanged', { detail: lang }));
-            }
-
-            window.toggleLanguage = function () { applyLang(currentLang === 'ar' ? 'fr' : 'ar'); };
-            document.addEventListener('DOMContentLoaded', function () { applyLang(currentLang); });
-            if (document.readyState !== 'loading') applyLang(currentLang);
-        })();
-    </script>
 </body>
 
 </html>
