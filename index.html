@@ -330,6 +330,12 @@
         transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
         gap: 0 !important;
       }
+      /* Zero out the set's CSS gap/padding so JS-applied margin-right is the only spacing */
+      .tg-marquee-set {
+        gap: 0 !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+      }
       /* Hide the loop-duplicate set — not needed for carousel */
       .tg-marquee-set:last-child { display: none !important; }
       /* Dot indicators */
