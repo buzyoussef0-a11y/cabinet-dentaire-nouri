@@ -2834,34 +2834,37 @@
       var track = document.querySelector('.tg-marquee-track');
       if (!wrap || !track) return;
 
-      // Kill CSS animation; hide the loop-duplicate set
+      // Stop CSS animation; hide duplicate set
       track.style.animation = 'none';
       var dup = track.querySelector('.tg-marquee-set[aria-hidden]');
       if (dup) dup.style.display = 'none';
 
-      var cards = Array.from(track.querySelectorAll('.tg-card'));
-      var total = cards.length;
+      // *** Only count cards in the FIRST (real) set — not the hidden duplicate ***
+      var firstSet = track.querySelector('.tg-marquee-set:not([aria-hidden])');
+      if (!firstSet) return;
+      var cards = Array.from(firstSet.querySelectorAll('.tg-card'));
+      var total = cards.length;   // 6 real cards
       if (!total) return;
 
-      // Append a clone of the first card so last→first transition is smooth
+      // Append a clone of card[0] at the end of firstSet for seamless last→first loop
       var clone = cards[0].cloneNode(true);
-      cards[0].parentNode.appendChild(clone);
+      firstSet.appendChild(clone);
 
-      // Card = 82% of wrap width; gap = 6%
+      // Card = 82% of wrap width; gap = 6% → edge of next card visible
       var wW    = wrap.offsetWidth;
       var cardW = Math.round(wW * 0.82);
       var gap   = Math.round(wW * 0.06);
       var step  = cardW + gap;
 
-      // Apply dimensions to all cards including the clone
-      track.querySelectorAll('.tg-card').forEach(function(c) {
+      // Apply dimensions to real cards + clone only
+      firstSet.querySelectorAll('.tg-card').forEach(function(c) {
         c.style.setProperty('flex',         '0 0 ' + cardW + 'px', 'important');
         c.style.setProperty('width',        cardW + 'px',           'important');
         c.style.setProperty('margin-right', gap + 'px',             'important');
         c.style.setProperty('margin-left',  '0px',                  'important');
       });
 
-      // Inject dot indicators (one per real card)
+      // Inject dot indicators (one per REAL card, not the clone)
       var dotsEl = document.createElement('div');
       dotsEl.className = 'tg-dots';
       var dots = cards.map(function(_, i) {
@@ -2879,19 +2882,19 @@
       function setPos(idx, animated) {
         if (!animated) track.style.transition = 'none';
         track.style.transform = 'translateX(-' + (idx * step) + 'px)';
-        if (!animated) track.offsetWidth; // force reflow
+        if (!animated) track.offsetWidth; // force reflow to apply instantly
         if (!animated) track.style.transition = '';
       }
 
       function go(idx) {
-        // Clamp negatives; allow idx = total (the clone of card 0)
         if (idx < 0) idx = total - 1;
-        cur = idx <= total ? idx : 0;
+        // Allow idx = total (the clone); anything beyond wraps to 0
+        cur = (idx <= total) ? idx : 0;
         setPos(cur, true);
         dots.forEach(function(d, i) { d.classList.toggle('active', i === (cur % total)); });
       }
 
-      // When the transition to the clone ends, silently snap to real card 0
+      // After sliding to clone (idx = total), silently snap back to real card 0
       track.addEventListener('transitionend', function() {
         if (cur === total) {
           cur = 0;
@@ -2902,24 +2905,19 @@
 
       function startAuto() {
         clearTimeout(timer);
-        timer = setTimeout(function() {
-          go(cur + 1);
-          startAuto();
-        }, 2200);
+        timer = setTimeout(function() { go(cur + 1); startAuto(); }, 2200);
       }
 
-      // Touch swipe with live drag
+      // Live drag during swipe
       wrap.addEventListener('touchstart', function(e) {
         startX = e.touches[0].clientX;
         clearTimeout(timer);
         track.style.transition = 'none';
       }, { passive: true });
-
       wrap.addEventListener('touchmove', function(e) {
         var dx = e.touches[0].clientX - startX;
         track.style.transform = 'translateX(' + (-cur * step + dx) + 'px)';
       }, { passive: true });
-
       wrap.addEventListener('touchend', function(e) {
         track.style.transition = '';
         var dx = startX - e.changedTouches[0].clientX;
@@ -2927,7 +2925,9 @@
         startAuto();
       });
 
-      go(0);
+      // Initial position: no animation to avoid startup shift
+      setPos(0, false);
+      dots[0].classList.add('active');
       startAuto();
     })();
   </script>
