@@ -2826,7 +2826,7 @@
     })();
   </script>
   <script>
-    // Mobile testimonials carousel (≤640px)
+    // Mobile testimonials carousel (≤640px) — infinite loop via clone trick
     (function() {
       if (window.innerWidth > 640) return;
 
@@ -2843,20 +2843,25 @@
       var total = cards.length;
       if (!total) return;
 
-      // Card = 82% of wrap width; gap = 6% → next card edge is visible
+      // Append a clone of the first card so last→first transition is smooth
+      var clone = cards[0].cloneNode(true);
+      cards[0].parentNode.appendChild(clone);
+
+      // Card = 82% of wrap width; gap = 6%
       var wW    = wrap.offsetWidth;
       var cardW = Math.round(wW * 0.82);
       var gap   = Math.round(wW * 0.06);
       var step  = cardW + gap;
 
-      cards.forEach(function(c) {
+      // Apply dimensions to all cards including the clone
+      track.querySelectorAll('.tg-card').forEach(function(c) {
         c.style.setProperty('flex',         '0 0 ' + cardW + 'px', 'important');
         c.style.setProperty('width',        cardW + 'px',           'important');
         c.style.setProperty('margin-right', gap + 'px',             'important');
         c.style.setProperty('margin-left',  '0px',                  'important');
       });
 
-      // Inject dot indicators below the wrap
+      // Inject dot indicators (one per real card)
       var dotsEl = document.createElement('div');
       dotsEl.className = 'tg-dots';
       var dots = cards.map(function(_, i) {
@@ -2871,18 +2876,39 @@
 
       var cur = 0, timer, startX = 0;
 
-      function go(idx) {
-        cur = ((idx % total) + total) % total;
-        track.style.transform = 'translateX(-' + (cur * step) + 'px)';
-        dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+      function setPos(idx, animated) {
+        if (!animated) track.style.transition = 'none';
+        track.style.transform = 'translateX(-' + (idx * step) + 'px)';
+        if (!animated) track.offsetWidth; // force reflow
+        if (!animated) track.style.transition = '';
       }
+
+      function go(idx) {
+        // Clamp negatives; allow idx = total (the clone of card 0)
+        if (idx < 0) idx = total - 1;
+        cur = idx <= total ? idx : 0;
+        setPos(cur, true);
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === (cur % total)); });
+      }
+
+      // When the transition to the clone ends, silently snap to real card 0
+      track.addEventListener('transitionend', function() {
+        if (cur === total) {
+          cur = 0;
+          setPos(0, false);
+          dots.forEach(function(d, i) { d.classList.toggle('active', i === 0); });
+        }
+      });
 
       function startAuto() {
         clearTimeout(timer);
-        timer = setTimeout(function() { go(cur + 1); startAuto(); }, 3500);
+        timer = setTimeout(function() {
+          go(cur + 1);
+          startAuto();
+        }, 2200);
       }
 
-      // Live drag feedback during swipe
+      // Touch swipe with live drag
       wrap.addEventListener('touchstart', function(e) {
         startX = e.touches[0].clientX;
         clearTimeout(timer);
