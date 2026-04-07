@@ -319,26 +319,12 @@
     }
     @media (max-width: 640px) {
       .testimonials-grid-section { padding: 60px 5% !important; }
-      /* On mobile: disable auto-scroll animation, use touch-swipe instead */
-      .tg-marquee-wrap {
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        -webkit-mask-image: none !important;
-        mask-image: none !important;
-      }
-      .tg-marquee-track {
-        animation: none !important;
-        width: max-content !important;
-      }
-      /* Hide duplicate card set used only for seamless loop */
-      .tg-marquee-set:last-child { display: none !important; }
-      .tg-card {
-        flex: 0 0 82vw !important;
-        width: 82vw !important;
-        scroll-snap-align: start;
-      }
+      /* Slightly faster animation on mobile */
+      .tg-marquee-track { animation-duration: 24s !important; }
+      /* Narrower cards so edge of next card is visible */
+      .tg-card { flex: 0 0 72vw !important; width: 72vw !important; }
+      /* JS adds .touch-paused class on touchstart, removes it after touchend delay */
+      .tg-marquee-track.touch-paused { animation-play-state: paused !important; }
     }
 
     /* ═══════════════════════════════════════════════
@@ -2810,6 +2796,24 @@
       if (t1) t1.innerHTML = t1.innerHTML + t1.innerHTML;
       var t2 = document.getElementById('tMarqueeTrack2');
       if (t2) t2.innerHTML = t2.innerHTML + t2.innerHTML;
+    })();
+  </script>
+  <script>
+    // Testimonials marquee: pause animation on touch, resume 800ms after lift
+    (function() {
+      var wrap  = document.querySelector('.tg-marquee-wrap');
+      var track = document.querySelector('.tg-marquee-track');
+      if (!wrap || !track) return;
+      var timer;
+      wrap.addEventListener('touchstart', function() {
+        clearTimeout(timer);
+        track.classList.add('touch-paused');
+      }, { passive: true });
+      function resume() {
+        timer = setTimeout(function() { track.classList.remove('touch-paused'); }, 800);
+      }
+      wrap.addEventListener('touchend',    resume);
+      wrap.addEventListener('touchcancel', resume);
     })();
   </script>
 </body>
