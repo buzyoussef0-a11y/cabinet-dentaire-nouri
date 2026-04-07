@@ -613,17 +613,21 @@
     <script>
         function toggleMobileMenu() {
             var nav = document.querySelector('.nav-links');
+            var actions = document.querySelector('.nav-actions');
             var btn = document.querySelector('.mobile-burger');
             if (!nav || !btn) return;
             var isOpen = nav.classList.toggle('nav-open');
+            if (actions) actions.classList.toggle('nav-open', isOpen);
             btn.setAttribute('aria-expanded', isOpen);
             btn.classList.toggle('burger-active', isOpen);
         }
         document.addEventListener('click', function (e) {
             if (!e.target.closest('#mainNav')) {
                 var nav = document.querySelector('.nav-links');
+                var actions = document.querySelector('.nav-actions');
                 var btn = document.querySelector('.mobile-burger');
                 if (nav) nav.classList.remove('nav-open');
+                if (actions) actions.classList.remove('nav-open');
                 if (btn) btn.setAttribute('aria-expanded', 'false');
                 if (btn) btn.classList.remove('burger-active');
             }

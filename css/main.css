@@ -4090,7 +4090,7 @@ button[onclick="logoutUser()"]:hover {
   /* ── WIDGETS ── */
   /* WhatsApp button */
   #whatsappBtn {
-    bottom: 90px !important;
+    bottom: 14px !important;
     left: 14px !important;
     width: 50px !important;
     height: 50px !important;
@@ -4099,7 +4099,8 @@ button[onclick="logoutUser()"]:hover {
   /* Chat widget */
   #chatWidget {
     bottom: 14px !important;
-    left: 14px !important;
+    right: 14px !important;
+    left: auto !important;
   }
 
   #chatToggle {
@@ -4634,7 +4635,7 @@ button[onclick="logoutUser()"]:hover {
 
   /* 12 — FLOATING WIDGETS */
   #whatsappBtn {
-    bottom: 85px !important;
+    bottom: 12px !important;
     left: 12px !important;
     width: 48px !important;
     height: 48px !important;
@@ -4642,7 +4643,8 @@ button[onclick="logoutUser()"]:hover {
 
   #chatWidget {
     bottom: 12px !important;
-    left: 12px !important;
+    right: 12px !important;
+    left: auto !important;
   }
 
   #chatToggle {
@@ -9237,8 +9239,33 @@ FIX 4 — GLOBAL: Prevent word-by-word breaking
   margin-bottom: 40px;
 }
 @media (max-width: 640px) {
-  .timeline-item { grid-template-columns: 40px 1fr; }
-  .timeline-item .tl-left { display: none; }
+  .timeline-item {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  /* Unwrap tl-left so its .tl-card child participates directly in flex */
+  .timeline-item .tl-left {
+    display: contents !important;
+  }
+  /* Hide the empty placeholder divs used to push content left/right on desktop */
+  .timeline-item > div:empty {
+    display: none !important;
+  }
+  /* Dot always first, card always second regardless of HTML order */
+  .timeline-item .tl-dot {
+    order: 0 !important;
+    flex-shrink: 0 !important;
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .timeline-item .tl-card {
+    order: 1 !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
 }
 .tl-dot {
   width: 40px;

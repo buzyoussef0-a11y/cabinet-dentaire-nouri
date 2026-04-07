@@ -309,8 +309,16 @@
     .tg-read-more:hover { text-decoration: underline; }
     .tg-deco-quote, .tg-foot { display: none !important; }
 
+    @media (max-width: 768px) {
+      /* Fix: main.css turns [class*="testimonial"] into flex-row which breaks layout */
+      .testimonials-new,
+      .testimonials-grid-section { display: block !important; flex-direction: unset !important; overflow-x: visible !important; }
+      /* Fix: map iframe collapses because main.css sets height:auto !important on all iframes */
+      .cv3-map-wrap { height: 260px !important; }
+      .cv3-map-wrap iframe { height: 260px !important; }
+    }
     @media (max-width: 640px) {
-      .tg-card { flex: 0 0 260px !important; width: 260px !important; }
+      .tg-card { flex: 0 0 82vw !important; width: 82vw !important; }
       .testimonials-grid-section { padding: 60px 5% !important; }
       .tg-marquee-track { animation-duration: 22s; }
     }
@@ -2215,17 +2223,21 @@
   <script>
     function toggleMobileMenu() {
       var nav = document.querySelector('.nav-links');
+      var actions = document.querySelector('.nav-actions');
       var btn = document.querySelector('.mobile-burger');
       if (!nav || !btn) return;
       var isOpen = nav.classList.toggle('nav-open');
+      if (actions) actions.classList.toggle('nav-open', isOpen);
       btn.setAttribute('aria-expanded', isOpen);
       btn.classList.toggle('burger-active', isOpen);
     }
     document.addEventListener('click', function (e) {
       if (!e.target.closest('#mainNav')) {
         var nav = document.querySelector('.nav-links');
+        var actions = document.querySelector('.nav-actions');
         var btn = document.querySelector('.mobile-burger');
         if (nav) nav.classList.remove('nav-open');
+        if (actions) actions.classList.remove('nav-open');
         if (btn) btn.setAttribute('aria-expanded', 'false');
         if (btn) btn.classList.remove('burger-active');
       }
