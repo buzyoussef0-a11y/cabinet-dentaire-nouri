@@ -310,17 +310,35 @@
     .tg-deco-quote, .tg-foot { display: none !important; }
 
     @media (max-width: 768px) {
-      /* Fix: main.css turns [class*="testimonial"] into flex-row which breaks layout */
+      /* Fix: main.css turns [class*="testimonial"] into flex-row which breaks section layout */
       .testimonials-new,
-      .testimonials-grid-section { display: block !important; flex-direction: unset !important; overflow-x: visible !important; }
+      .testimonials-grid-section { display: block !important; }
       /* Fix: map iframe collapses because main.css sets height:auto !important on all iframes */
       .cv3-map-wrap { height: 260px !important; }
       .cv3-map-wrap iframe { height: 260px !important; }
     }
     @media (max-width: 640px) {
-      .tg-card { flex: 0 0 82vw !important; width: 82vw !important; }
       .testimonials-grid-section { padding: 60px 5% !important; }
-      .tg-marquee-track { animation-duration: 22s; }
+      /* On mobile: disable auto-scroll animation, use touch-swipe instead */
+      .tg-marquee-wrap {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+      }
+      .tg-marquee-track {
+        animation: none !important;
+        width: max-content !important;
+      }
+      /* Hide duplicate card set used only for seamless loop */
+      .tg-marquee-set:last-child { display: none !important; }
+      .tg-card {
+        flex: 0 0 82vw !important;
+        width: 82vw !important;
+        scroll-snap-align: start;
+      }
     }
 
     /* ═══════════════════════════════════════════════

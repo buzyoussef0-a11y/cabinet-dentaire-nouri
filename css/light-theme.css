@@ -98,6 +98,9 @@ footer h1, footer h2, footer h3, footer h4,
 @media (max-width: 768px) {
   #mainNav {
     flex-wrap: wrap !important;
+    /* Remove fixed height so menu can expand beyond 58px */
+    height: auto !important;
+    min-height: 58px !important;
   }
   .nav-links {
     display: none !important;
@@ -108,6 +111,13 @@ footer h1, footer h2, footer h3, footer h4,
     padding: 12px 0 8px !important;
     gap: 2px !important;
     order: 10 !important;
+    /* Override main.css position:fixed so nav-links expands inside the navbar */
+    position: static !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: none !important;
+    z-index: auto !important;
   }
   .nav-links.nav-open {
     display: flex !important;
@@ -117,8 +127,9 @@ footer h1, footer h2, footer h3, footer h4,
     width: 100% !important;
     flex-wrap: wrap !important;
     padding: 8px 0 14px !important;
-    border-top: 1px solid rgba(0,106,103,0.1) !important;
+    border-top: 1px solid rgba(0,106,103,0.12) !important;
     order: 11 !important;
+    gap: 8px !important;
   }
   .nav-actions.nav-open {
     display: flex !important;
