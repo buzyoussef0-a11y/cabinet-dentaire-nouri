@@ -319,12 +319,39 @@
     }
     @media (max-width: 640px) {
       .testimonials-grid-section { padding: 60px 5% !important; }
-      /* Slightly faster animation on mobile */
-      .tg-marquee-track { animation-duration: 24s !important; }
-      /* Narrower cards so edge of next card is visible */
-      .tg-card { flex: 0 0 72vw !important; width: 72vw !important; }
-      /* JS adds .touch-paused class on touchstart, removes it after touchend delay */
-      .tg-marquee-track.touch-paused { animation-play-state: paused !important; }
+      /* Carousel mode: disable marquee, track becomes a slide container */
+      .tg-marquee-wrap {
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+        overflow: hidden !important;
+      }
+      .tg-marquee-track {
+        animation: none !important;
+        transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        gap: 0 !important;
+      }
+      /* Hide the loop-duplicate set — not needed for carousel */
+      .tg-marquee-set:last-child { display: none !important; }
+      /* Dot indicators */
+      .tg-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 18px;
+      }
+      .tg-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(0,106,103,0.25);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+      }
+      .tg-dot.active {
+        background: #006a67 !important;
+        transform: scale(1.4);
+      }
     }
 
     /* ═══════════════════════════════════════════════
@@ -2799,21 +2826,83 @@
     })();
   </script>
   <script>
-    // Testimonials marquee: pause animation on touch, resume 800ms after lift
+    // Mobile testimonials carousel (≤640px)
     (function() {
+      if (window.innerWidth > 640) return;
+
       var wrap  = document.querySelector('.tg-marquee-wrap');
       var track = document.querySelector('.tg-marquee-track');
       if (!wrap || !track) return;
-      var timer;
-      wrap.addEventListener('touchstart', function() {
-        clearTimeout(timer);
-        track.classList.add('touch-paused');
-      }, { passive: true });
-      function resume() {
-        timer = setTimeout(function() { track.classList.remove('touch-paused'); }, 800);
+
+      // Kill CSS animation; hide the loop-duplicate set
+      track.style.animation = 'none';
+      var dup = track.querySelector('.tg-marquee-set[aria-hidden]');
+      if (dup) dup.style.display = 'none';
+
+      var cards = Array.from(track.querySelectorAll('.tg-card'));
+      var total = cards.length;
+      if (!total) return;
+
+      // Card = 82% of wrap width; gap = 6% → next card edge is visible
+      var wW    = wrap.offsetWidth;
+      var cardW = Math.round(wW * 0.82);
+      var gap   = Math.round(wW * 0.06);
+      var step  = cardW + gap;
+
+      cards.forEach(function(c) {
+        c.style.setProperty('flex',         '0 0 ' + cardW + 'px', 'important');
+        c.style.setProperty('width',        cardW + 'px',           'important');
+        c.style.setProperty('margin-right', gap + 'px',             'important');
+        c.style.setProperty('margin-left',  '0px',                  'important');
+      });
+
+      // Inject dot indicators below the wrap
+      var dotsEl = document.createElement('div');
+      dotsEl.className = 'tg-dots';
+      var dots = cards.map(function(_, i) {
+        var b = document.createElement('button');
+        b.className = 'tg-dot';
+        b.setAttribute('aria-label', 'تقييم ' + (i + 1));
+        b.addEventListener('click', function() { clearTimeout(timer); go(i); startAuto(); });
+        dotsEl.appendChild(b);
+        return b;
+      });
+      wrap.insertAdjacentElement('afterend', dotsEl);
+
+      var cur = 0, timer, startX = 0;
+
+      function go(idx) {
+        cur = ((idx % total) + total) % total;
+        track.style.transform = 'translateX(-' + (cur * step) + 'px)';
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
       }
-      wrap.addEventListener('touchend',    resume);
-      wrap.addEventListener('touchcancel', resume);
+
+      function startAuto() {
+        clearTimeout(timer);
+        timer = setTimeout(function() { go(cur + 1); startAuto(); }, 3500);
+      }
+
+      // Live drag feedback during swipe
+      wrap.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        clearTimeout(timer);
+        track.style.transition = 'none';
+      }, { passive: true });
+
+      wrap.addEventListener('touchmove', function(e) {
+        var dx = e.touches[0].clientX - startX;
+        track.style.transform = 'translateX(' + (-cur * step + dx) + 'px)';
+      }, { passive: true });
+
+      wrap.addEventListener('touchend', function(e) {
+        track.style.transition = '';
+        var dx = startX - e.changedTouches[0].clientX;
+        go(Math.abs(dx) > 50 ? (dx > 0 ? cur + 1 : cur - 1) : cur);
+        startAuto();
+      });
+
+      go(0);
+      startAuto();
     })();
   </script>
 </body>
